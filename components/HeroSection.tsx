@@ -50,7 +50,7 @@ export default function HeroSection() {
         clearTimeout(timeoutId);
       }
     };
-  }, []);
+  }, [words]);
 
   return (
     <section
