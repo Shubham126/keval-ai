@@ -1,0 +1,213 @@
+.counter-wrapper-3 {
+    padding-top: 115px;
+
+    @include breakpoint (max-xl){
+        padding-top: 85px;
+    }
+
+    @include breakpoint (max-lg){
+        padding-top: 65px;
+    }
+
+    .counter-box-items {
+        border-radius: 15px;
+        border: 1px solid #434343;
+        background: #222;
+        padding: 60px;
+
+        h2 {
+            color: $white;
+        }
+
+        p {
+            font-size: 18px;
+            font-weight: 500;
+            color: $white;
+            text-transform: uppercase;
+        }
+    }
+}
+
+.choose-us-section {
+    position: relative;
+
+    .choose-us-image {
+        position: absolute;
+        top: 0;
+        right: 0;
+
+        @include breakpoint (max-xl){
+            max-width: 500px;
+            height: 400px;
+        }
+
+        @include breakpoint (max-lg){
+            display: none;
+        }
+
+        img {
+            border-radius: 0px 0px 40px 40px;
+            border-bottom: 10px solid $white;
+
+            border-left: 10px solid $white;
+
+            @include breakpoint (max-xl){
+               @include imgw;
+               object-fit: cover;
+            }
+        }
+    }
+}
+
+.experiences-wrapper {
+    .experiences-box-item {
+        margin-top: 30px;
+        border-radius: 12px;
+        border: 1px solid rgba(0, 0, 0, 0.20);
+        padding: 30px;
+
+        h3 {
+            font-size: 24px;
+            font-weight: 600;
+            color: $header-color-2;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.20);;
+        }
+
+        .counter-box {
+            margin-top: 25px;
+            @include flex;
+            justify-content: space-between;
+
+            h2 {
+                font-size: 60px;
+                color: $header-color-2;
+                font-weight: 400;
+            }
+        }
+    }
+
+    .skill-list {
+        margin-top: 30px;
+        margin-left: 30px;
+
+        li {
+            padding: 35px 0;
+            font-size: 16px;
+            font-weight: 500;
+            color: $header-color-2;
+            @include flex;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.20);
+
+            &:first-child {
+                border-top: 1px solid rgba(0, 0, 0, 0.20);
+            }
+
+            .content {
+                h2 {
+                    font-size: 36px;
+                    color: $header-color-2;
+                    font-weight: 600;
+                    margin-bottom: 5px;
+                }
+
+                span {
+                    font-size: 16px;
+                    font-weight: 500;
+                    color: $header-color-2;
+                }
+            }
+        }
+    }
+}
+
+.award-wrapper-5 {
+    margin-bottom: 40px;
+
+    @include breakpoint (max-xxl){
+        margin-bottom: 0;
+    }
+
+    .award-items {
+        margin-top: 30px;
+
+        ul {
+            li {
+                border-bottom: 1px solid rgba(30, 30, 30, 0.20);
+                padding: 30px 0;
+                @include flex;
+                justify-content: space-between;
+
+                @include breakpoint (max-lg){
+                    flex-wrap: wrap;
+                    gap: 20px;
+                }
+
+                &:first-child {
+                    border-top: 1px solid rgba(30, 30, 30, 0.20);
+                }
+
+                .title-left {
+                    @include flex;
+                    gap: 20px;
+
+                    .circle-box {
+                        border-radius: 70px;
+                        border: 0.5px solid rgba(30, 30, 30, 0.70);
+                        border-radius: 70px;
+                        width: 47px;
+                        height: 47px;
+                        line-height: 47px;
+                        text-align: center;
+                        display: inline-block;
+                        font-size: 24px;
+                        font-weight: 400;
+                        font-family: $heading-font;
+                        color: $header-color-2;
+                    }
+
+                    h3 {
+                        font-size: 24px;
+                        font-weight: 500;
+                        color: $header-color-2;
+                    }
+                }
+
+                h2 {
+                    font-size: 36px;
+                    font-weight: 500;
+                    color: $header-color-2;
+                    text-align: right;
+                }
+            }
+        }
+    }
+
+    .award-image {
+        margin-top: 30px;
+        margin-right: 40px;
+        position: relative;
+
+        @include breakpoint (max-xl){
+           margin-right: 0;
+        }
+        
+        img {
+            @include imgw;
+        }
+
+        .award-image-2 {
+            position: absolute;
+            bottom: -40px;
+            right: -40px;
+            transform: rotate(21.668deg);
+
+            @include breakpoint (max-xl){
+              bottom: 0;
+              right: 0;
+              transform: rotate(0);
+            }
+        }
+    }
+}

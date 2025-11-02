@@ -1,0 +1,174 @@
+
+//>>>>> Section Title Start <<<<<//
+
+.section-title {
+	position: relative;
+	z-index: 99;
+	margin-bottom: 30px;
+	margin-top: -7px;
+
+	@include breakpoint (max-md){
+		margin-bottom: 0;
+	}
+
+	h6 {
+		font-size: 20px;
+		font-weight: 400;
+		text-transform: uppercase;
+		color: $theme-color;
+		line-height: 1;
+		font-family: $heading-font;
+		display: inline-block;
+		margin-bottom: 20px;
+	}
+
+	h2 {
+		span {
+			color: $theme-color;
+		}
+	}
+
+	img {
+		margin-top: -10px;
+		margin-right: 10px;
+	}
+
+	&.theme-color-2 {
+		h6 {
+			color: $theme-color-2;
+		}
+
+		h2 {
+			span {
+				color: $theme-color-2;
+			}
+		}
+	}
+
+	&.theme-color-3 {
+		h6 {
+			font-weight: 600;
+			font-size: 16px;
+			background: linear-gradient(90deg, #59C5F3 0%, #FF1AF0 100%);
+			background-clip: text;
+			-webkit-background-clip: text;
+			-webkit-text-fill-color: transparent;
+		}
+
+		h2 {
+			color: $black;
+			
+			span {
+				color: $theme-color-3;
+			}
+		}
+	}
+
+	&.style-4 {
+		h2 {
+			line-height: 1;
+			font-size: 90px;
+			color: $header-color-2;
+
+			@include breakpoint (max-xl){
+				font-size: 70px;
+			}
+
+			@include breakpoint (max-sm){
+				font-size: 50px;
+			}
+
+			span {
+				text-decoration: underline;
+				color: $header-color-2;
+			}
+		}
+	}
+}
+
+.section-title-area	{
+	@include flex;
+	justify-content: space-between;
+	position: relative;
+	z-index: 9;
+	margin-bottom: 30px;
+
+	@include breakpoint (max-md){
+		margin-bottom: 0;
+	}
+
+	.section-title {
+		margin-bottom: 0;
+	}
+
+	@include breakpoint (max-lg) {
+		flex-wrap: wrap;
+		// justify-content: center;
+		// text-align: center;
+		gap: 30px;
+	}
+
+	&.bor-bottom {
+		border-bottom: 1px solid $border-color;
+		padding-bottom: 40px;
+	}
+
+	&.bor-bottom-dark-style {
+		border-bottom: 1px solid rgba(226, 226, 226, 0.20);
+		padding-bottom: 40px;
+	}
+
+	.max-310 {
+		max-width: 310px;
+	}
+}
+
+
+//>>>>> Section Title End <<<<<//
+
+//>>>>> Basic Css Start <<<<<//
+
+.center {
+	text-align: center;
+	margin: 0 auto;
+}
+
+.section-bg {
+	background-color: $bg-color;
+}
+
+.section-bg-black {
+	background-color: $black;
+}
+
+.theme-bg {
+	background-color: $theme-color;
+}
+
+.footer-bg {
+	background-color: $black;
+}
+
+.dark-section-bg {
+	background-color: $black !important;
+}
+
+.dark-section-bg-2 {
+	background-color: #222222 !important;
+}
+
+.section-padding {
+	padding: 120px 0;
+
+	@include breakpoint(max-xl){
+		padding: 100px 0;
+	}
+
+	@include breakpoint(max-lg){
+		padding: 80px 0;
+	}
+}
+
+
+//>>>>> Basic Css End <<<<<//
+

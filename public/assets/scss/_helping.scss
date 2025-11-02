@@ -1,0 +1,396 @@
+
+//page scroll bar add
+::-webkit-scrollbar {
+	width: 4px;
+	height: 4px;
+}
+/* Track */
+::-webkit-scrollbar-track {
+	box-shadow: inset 0 0 5px $theme-color; 
+	border-radius: 5px;
+}
+/* Handle */
+::-webkit-scrollbar-thumb {
+	background: $theme-color;
+	border-radius: 10px;
+}
+//page scroll bar add
+
+//Basic Code Start
+.fix {
+  overflow: hidden;
+}
+
+.ralt{
+ position: relative;
+}
+
+.ml-50 {
+  margin-left: 50px;
+
+    @include breakpoint (max-xl){
+     margin-left: 0;
+    }
+}
+//Basic Code End
+
+//Video Css Start
+.ripple {
+  position: relative;
+
+  &::before,&::after {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 110px;
+      height: 110px;
+      -webkit-transform: translateX(-50%) translateY(-50%);
+      transform: translateX(-50%) translateY(-50%);
+      border-radius: 50%;
+      box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.5);
+      -webkit-animation: rippleOne 3s infinite;
+      animation: rippleOne 3s infinite;
+  }
+
+  &::before {
+      -webkit-animation-delay: 0.9s;
+      animation-delay: 0.9s;
+      content: "";
+      position: absolute;
+      right: 0;
+      bottom: 0;
+  }
+
+  &::after {
+      -webkit-animation-delay: 0.6s;
+      animation-delay: 0.6s;
+      content: "";
+      position: absolute;
+      right: 0;
+      bottom: 0;
+  }
+}
+//Video Css End
+
+//pagination default
+
+//pagination default
+.swiper-dot {
+  margin-top: 50px;
+  text-align: center;
+
+  .swiper-pagination-bullet {
+      width: 10px;
+      height: 10px;
+      transition: 0.6s;
+      background: #222222;
+      opacity: 1;
+      border-radius: 50px;
+      &:not(:last-child){
+      margin-right: 10px;
+      }
+  }
+  .swiper-pagination-bullet.swiper-pagination-bullet-active {
+      transition: 0.6s;
+      position: relative;
+      background-color: #fff;
+
+      &::before{
+      display: none;
+      }
+  }
+
+  &.dark-dot-style {
+    .swiper-pagination-bullet {
+      background: #000;
+    }
+
+    .swiper-pagination-bullet.swiper-pagination-bullet-active {
+        background-color: #fff;
+    }
+  }
+}
+
+// .array-button {
+//     @include flex;
+//     gap: 15px;
+
+//     .array-prev {
+//       width: 56px;
+//       height: 56px;
+//       line-height: 56px;
+//       text-align: center;
+//       background: $white;
+//       color: $header-color;
+//       border-radius: 50%;
+//       @include transition;
+//       box-shadow: 0px 4px 30px 0px rgba(0, 0, 0, 0.08);
+
+//       &:hover {
+//           background-color: $theme-color;
+//           color: $white;
+//       }
+//   }
+
+//   .array-next {
+//       width: 56px;
+//       height: 56px;
+//       line-height: 56px;
+//       text-align: center;
+//       background-color: $theme-color;
+//       color: $white;
+//       border-radius: 50%;
+//       @include transition;
+
+//       &:hover {
+//           background-color: $header-color;
+//       }
+//   }
+// }
+
+//pagination default
+
+.mt-10 {
+  margin-top: 10px;
+}
+
+br {
+  @include breakpoint(max-md){
+    display: none;
+  }
+}
+
+.mt-60 {
+  margin-top: 55px;
+}
+
+.mb-40 {
+  margin-bottom: 40px;
+}
+
+/* background */
+.bg-cover {
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  background-position: center;
+}
+
+
+//>>>>> Nice Select Css Start <<<<<//
+.nice-select {
+  background-color: transparent;
+  width: unset;
+  outline: none;
+  border-bottom: 2px solid $border-color !important;
+  padding-bottom: 20px !important;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+
+  &:hover {
+    border-bottom: 2px solid transparent;
+    border-color: $theme-color;
+    border-bottom: 2px solid transparent;
+    border-image-slice: 2;
+  }
+
+  span {
+    font-size: 16px;
+    color: $text-color;
+    text-transform: capitalize;
+  }
+}
+
+.nice-select .current {
+  margin-right: 12px;
+}
+
+
+
+.nice-select.open .list {
+  background: $bg-color;
+  margin-top: 16px;
+  width: 100%;
+  text-transform: capitalize;
+  color: $text-color;
+}
+
+.nice-select .option.selected.focus {
+  background: $bg-color;
+  outline: none;
+  color: $text-color;
+  text-transform: capitalize;
+  font-weight: 400;
+  font-size: 16px;
+  border: none;
+}
+
+.nice-select .option {
+  border: none;
+}
+
+.nice-select .option:hover {
+  background: transparent;
+}
+
+//>>>>> Nice Select Css End <<<<<//
+
+
+.custom-container {
+  max-width: 1680px;
+}
+
+.page-nav-wrap {
+  ul {
+      li {
+          display: inline-block;
+
+          .page-numbers {
+              &.current {
+                  background-color: $theme-color;
+                  color: $white;
+              }
+
+              display: inline-block;
+              width:50px;
+              height:50px;
+              line-height:50px;           
+              background: transparent;
+              font-weight: 600;
+              transition: all 0.3s ease-in-out;
+              margin: 0 2px;
+              border: 1px solid $border-color-3;
+              color: $header-color;
+              border-radius: 50%;
+              text-align: center;
+
+              @media (max-width: 767px) {
+                  margin-top: 10px;
+                  width: 50px;
+                  height: 50px;
+                  line-height: 50px;
+                  font-size: 14px;
+              }
+
+              i {
+                  margin-top: 2px;
+              }
+              &:hover {
+                  background-color: $theme-color;
+                  border: 1px solid transparent;
+              }
+          }
+      }
+  }
+}
+
+.sticky-style {
+  position: sticky !important;
+  top: 100px;
+}
+
+.gx-40 {
+  --bs-gutter-x: 40px;
+}
+
+.gy-40 {
+  --bs-gutter-y: 40px;
+}
+
+.custom-container {
+  max-width: 1755px;
+  margin: 0 auto;
+}
+
+.margin-left-20 {
+  margin-left: -20px;
+
+  @include breakpoint (max-xl){
+    margin-left: 0;
+  }
+}
+
+.margin-right-20 {
+  margin-right: -20px;
+
+  @include breakpoint (max-xl){
+    margin-right: 0;
+  }
+}
+
+.margin-top-40 {
+  margin-top: -40px;
+
+  // @include breakpoint (max-xl){
+  //   margin-right: 0;
+  // }
+}
+
+.custom-container-2 {
+  max-width: 1890px;
+  margin: 0 auto;
+}
+
+.brand-container {
+  max-width: 1660px;
+  margin: 0 auto;
+}
+
+
+.theme-bg-2 {
+  background-color: $theme-color-2;
+}
+
+.margin-top-10 {
+    margin-top: -10px;
+}
+
+.mt-30 {
+  margin-top: 30px;
+}
+
+.max-600 {
+  max-width: 600px;
+}
+
+.testi-bg {
+  background-color: #1E1E1E;
+}
+
+.gsap__parallax {
+	overflow: hidden;
+}
+
+.p-relative {
+  position: relative;
+}
+
+// .full-img-wrap,.full-img-wrap2,.full-img-wrap3 {
+//   height: 100vh;
+// }
+
+.full-img,.full-img2,.full-img3 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 130%;
+  background-position: top;
+  background-repeat: no-repeat;
+  object-fit: cover;
+}
+
+
+
+.border-dark-top {
+  border-top: 1px solid rgba(255, 255, 255, 0.20) !important;
+}
+
+.border-dark-bottom {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.20) !important;
+}
+
+.border-dark-style {
+  border: 1px solid rgba(255, 255, 255, 0.20) !important;
+}
