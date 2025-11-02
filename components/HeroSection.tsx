@@ -1,12 +1,12 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useMemo } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 
 export default function HeroSection() {
   const typingRef = useRef<HTMLSpanElement>(null);
-  const words = ['AI Solutions', 'Innovation', 'Technology', 'Excellence'];
+  const words = useMemo(() => ['AI Solutions', 'Innovation', 'Technology', 'Excellence'], []);
 
   useEffect(() => {
     if (!typingRef.current) return;
