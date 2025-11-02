@@ -1,0 +1,156 @@
+//>>>>> Component Button Here <<<<<//
+.theme-btn {
+    display: inline-block;
+    vertical-align: middle;
+    -webkit-appearance: none;
+    border: none;
+    outline: none !important;
+    background-color: transparent;
+    color: $header-color;
+    font-size: 18px;
+    font-weight: 500;
+    padding: 18px 35px;
+    transition: 0.5s ease-in-out;
+    text-transform: uppercase;
+    position: relative;
+    z-index: 2;
+    overflow: hidden;
+    text-align: center;
+    border-radius: 100px;
+    line-height: 1;
+     font-family: "Montserrat", sans-serif;
+    border: 1px solid $header-color;
+    min-width: 160px;
+
+    &::after {
+        content: "";
+        background-color: $theme-color;
+        position: absolute;
+        top: 0;
+        width: 100%;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        clip-path: circle(0% at 50% 50%);
+        transition: all cubic-bezier(0, 0.96, 0.58, 1.1) 0.8s;
+        z-index: -1;
+    }
+
+    i {
+        margin-left: 10px;
+    }
+
+    .icon-1 {
+        position: absolute;
+        top: 4px;
+        left: 14px;
+        @include transition;
+    }
+
+    .icon-2 {
+        position: absolute;
+        bottom: 8px;
+        right: 14px;
+        @include transition;
+    }
+
+    &:hover {
+        background-color: $theme-color;
+        color: $header-color;
+        border: 1px solid $theme-color;
+
+        &::after {
+            clip-path: circle(100% at 50% 50%);
+            transition: all cubic-bezier(0, 0.96, 0.58, 1.1) 4s;
+        }
+    }
+
+    &.border-white {
+        border: 1px solid $white;
+        color: $white;
+
+        &:hover {
+            color: $header-color;
+            border: 1px solid $theme-color !important;
+
+            .icon-1,.icon-2 {
+                filter: brightness(0);
+            }
+        }
+
+        .icon-1,.icon-2 {
+            filter: grayscale(100%) brightness(300%);
+            @include transition;
+
+            img {
+                filter: grayscale(100%) brightness(300%);
+                @include transition;
+            }
+        }
+    }
+
+    &.border-white-2 {
+        border: 1px solid $white;
+        color: $white;
+
+        &::after {
+            content: "";
+            background-color: $theme-color-2;
+        }
+
+        &:hover {
+            color: $header-color;
+            border: 1px solid $theme-color-2 !important;
+
+            .icon-1,.icon-2 {
+                filter: brightness(0);
+            }
+        }
+
+        .icon-1,.icon-2 {
+            filter: grayscale(100%) brightness(300%);
+            @include transition;
+
+            img {
+                filter: grayscale(100%) brightness(300%);
+                @include transition;
+            }
+        }
+    }
+
+    &.theme-color-2 {
+        &::after {
+            background-color: $theme-color-2;
+        }
+
+        &:hover {
+            background-color: $theme-color-2;
+        }
+    }
+
+
+    @include breakpoint (max-md){
+        padding: 20px 32px;
+    }
+
+    @include breakpoint (max-sm){
+        padding: 18px 30px;
+        font-size: 14px;
+    }
+}
+.link-btn {
+    color: $header-color;
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: uppercase;
+    display: inline-block;
+
+    i {
+        margin-left: 10px;
+    }
+
+    &:hover {
+        color: $theme-color;
+    }
+}
+//>>>>> Component Button End <<<<<//

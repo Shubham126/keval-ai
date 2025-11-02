@@ -1,0 +1,116 @@
+.contact-info-box {
+    border-radius: 20px;
+    background: #F8F8F8;
+    padding: 30px;
+    text-align: center;
+
+    .icon {
+        width: 70px;
+        height: 70px;
+        line-height: 70px;
+        border-radius: 50%;
+        background-color: #1E1E1E;
+        color: $white;
+        text-align: center;
+        margin: 0 auto;
+        @include transition;
+
+        img {
+            @include transition;
+        }
+    }
+
+    .content {
+        margin-top: 20px;
+
+        h3 {
+            font-size: 24px;
+            font-weight: 500;
+        }
+
+        p {
+            opacity: .7;
+            color: $text-color;
+
+            a {
+                opacity: .7;
+                color: $text-color;
+            }
+        }
+    }
+
+    &:hover {
+        .icon {
+            background-color: $theme-color;
+
+            img {
+                filter: brightness(0);
+            }
+        }
+    }
+}
+
+.contact-wrapper {
+    .map-items {
+        .googpemap {
+            iframe {
+                width: 100%;
+                border-radius: 20px;
+                height: 745px;
+
+                @include breakpoint (max-md){
+                    height: 550px;
+                }
+
+                @include breakpoint (max-sm){
+                    height: 450px;
+                }
+            }
+        }
+    }
+
+    .contact-content {
+        margin-left: 30px;
+        border-radius: 20px;
+        background: #F8F8F8;
+        padding: 50px 30px;
+
+        @include breakpoint (max-xl){
+           margin-left: 0;
+        }
+
+        h3 {
+            font-size: 40px;
+            font-weight: 500;
+            margin-bottom: 30px;
+        }
+
+        .form-clt {
+            span {
+                color: $header-color;
+                font-weight: 600;
+                text-transform: capitalize;
+                margin-bottom: 10px;
+                display: inline-block;
+            }
+    
+            input,textarea {
+                border: none;
+                color: rgba(30, 30, 30, .4);
+                padding: 18px 20px;
+                border-radius: 10px;
+                width: 100%;
+                outline: none;
+                background-color: $white;
+
+                &::placeholder {
+                    color: rgba(30, 30, 30, .4);
+                }
+            }
+    
+            textarea {
+                padding-bottom: 100px;
+            }
+        }
+    }
+}

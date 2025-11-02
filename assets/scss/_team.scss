@@ -1,0 +1,249 @@
+.team-card-items {
+    margin-top: 30px;
+    transform: rotate(-15deg);
+    @include transition;
+
+    @include breakpoint (max-xl){
+        transform: rotate(0);
+    }
+
+    .thumb {
+        img {
+            @include imgw;
+            border-radius: 15px;
+        }
+    }
+
+    .content {
+        text-align: center;
+        margin-top: 25px;
+
+        h3 {
+            line-height: 1;
+
+            a {
+                &:hover {
+                    color: $theme-color;
+                }
+            }
+        }
+    }
+
+    &:hover {
+        transform: rotate(0);
+        position: relative;
+        z-index: 9;
+    }
+
+    &.rotate-none {
+        transform: rotate(0);
+        position: relative;
+        z-index: 9;
+    }
+
+    &.dark-style-text {
+        .content {
+            h3 {
+                a {
+                    color: $white;
+
+                    &:hover {
+                        color: $theme-color;
+                    }
+                }
+            }
+
+            p {
+                color: $white;
+                opacity: .7;
+            }
+        }
+    }
+}
+
+.team-details-wrapper {
+    .details-image {
+        img {
+            @include imgw;
+            border-radius: 15px;
+        }
+    }
+
+    .details-content {
+        h2 {
+            color: $black;
+            margin-bottom: 5px;
+        }
+
+        h5 {
+            font-size: 20px;
+            font-weight: 500;
+            color: $black;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 18px;
+            color: $black;
+        }
+
+        .contact-list {
+            margin-top: 30px;
+
+            li {
+                font-size: 16px;
+                font-weight: 600;
+
+                &:not(:last-child){
+                    margin-bottom: 10px;
+                }
+
+                a {
+                    color: $black;
+                }
+
+                i {
+                    margin-right: 10px;
+                }
+            }
+        }
+
+        .social-icon {
+            gap: 12px;
+            margin-top: 30px;
+            margin-bottom: 70px;
+
+            a {
+                width: 40px;
+                height: 40px;
+                line-height: 40px;
+                text-align: center;
+                font-size: 16px;
+                display: block;
+                border-radius: 30px;
+                background: #F8F8F8;
+                color: $black;
+                -webkit-transition: all 0.4s ease-in-out;
+                transition: all 0.4s ease-in-out;
+                text-align: center;
+
+                &:hover {
+                    background-color: $theme-color;
+                    color: $black;
+                }
+            }
+        }
+
+        h3 {
+            font-size: 40px;
+            color: $black;
+            font-weight: 500;
+        }
+
+        .progress-wrap {
+            margin-top: 30px;
+
+            .pro-items {
+                width: 100%;
+
+                &:not(:last-child){
+                    margin-bottom: 20px;
+                }
+                .pro-head {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    margin-bottom: 10px;
+
+                    .title {
+                        font-size: 16px;
+                        color: $header-color;
+                        font-weight: 600;
+                        font-family: $body-font;
+                    }
+                    
+                    .point {
+                        font-size: 16px;
+                        color: $header-color;
+                    }
+                }
+                .progress {
+                    background: rgba(89, 210, 243, 0.50);
+                    justify-content: flex-start;
+                    border-radius: 100px;
+                    align-items: center;
+                    position: relative;
+                    display: flex;
+                    height: 10px;
+                    width: 100%;
+                }
+                
+                .progress-value {
+                    animation: load 3s normal forwards;
+                    border-radius: 0;
+                    background: $theme-color;
+                    height: 8px;
+                    width: 0;
+                }
+                .style-two{
+                    animation: load2 3s normal forwards;
+                }
+                .style-three{
+                    animation: load3 3s normal forwards;
+                }
+                @keyframes load {
+                    0% { width: 0; }
+                    100% { width: 90%; }
+                }
+                @keyframes load2 {
+                    0% { width: 0; }
+                    100% { width: 70%; }
+                }
+                @keyframes load3 {
+                    0% { width: 0; }
+                    100% { width: 55%; }
+                }
+            }
+        }
+
+        .comment-form-wrap {
+            h3 {
+                font-size: 40px;
+                font-weight: 500;
+                margin-bottom: 30px;
+    
+                @include breakpoint (max-sm){
+                    margin-bottom: 20px;
+                }
+            }
+    
+            .form-clt {
+                span {
+                    color: $header-color;
+                    display: inline-block;
+                    margin-bottom: 10px;
+                }
+    
+                input,textarea {
+                    width: 100%;
+                    outline: none;
+                    border: none;
+                    background-color: #F9F9F9;
+                    border: 1px solid rgba(254, 254, 254, 0.30);
+                    padding: 16px 20px;
+                    font-weight: 400;
+                    color: $black;
+    
+                    &::placeholder {
+                        color: $black;
+                    }
+    
+                }
+    
+                textarea {
+                    padding-bottom: 100px;
+                }
+            }
+        }
+    }
+}

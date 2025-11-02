@@ -1,0 +1,92 @@
+.faq-wrapper {
+    .faq-image {
+        img {
+            @include imgw;
+            border-radius: 20px;
+        }
+    }
+
+    .faq-content {
+        margin-left: 70px;
+
+        h2 {
+            color: $black;
+            margin-bottom: 50px;
+        }
+
+        .accordion-item {
+            border: 0;
+            background-color: $white;
+            margin-bottom: 30px;
+            border-radius: 10px;
+            overflow: hidden;
+    
+            .accordion-header { 
+                .accordion-button { 
+                    font-weight: 500;
+                    color: $header-color;
+                    letter-spacing: -.2px;
+                    border: 0;
+                    border-radius: 0;
+                    box-shadow: none;
+                    background: #F8F8F8;
+                    padding: 25px 30px 0;
+                    text-transform: capitalize;
+                    font-size: 24px;
+                    border: 1px solid $border-color;
+                    border: 1px solid transparent;
+                    font-family: $heading-font;
+    
+                    @include breakpoint (max-sm){
+                        font-size: 18px;
+                    }
+    
+                    &::after {
+                        content: "\2b";
+                        font-family: "Font Awesome 6 Pro";
+                        background: transparent;
+                        font-weight: 500;
+                        transition: all 0.3s ease-in-out !important;
+                       // background-image: url(../../assets/img/chevron-right.svg);
+                        color: $header-color;
+                    }
+                    &:not(.collapsed)::after {
+                        content: "\f068";
+                        font-family: "Font Awesome 6 Pro";
+                        background: transparent;
+                       // background-image: url(../../assets/img/chevron-down.svg);
+                        font-weight: 500;
+                        color: $header-color;
+                        transform: rotate(0);
+                    }
+    
+                    &.collapsed {
+                        background: #F8F8F8;
+                        padding: 25px 30px;
+                        color: $header-color;
+                    }
+                  
+                }
+            }
+    
+            .accordion-collapse { 
+    
+                .accordion-body {
+                    padding-right: 20px;
+                    padding-left: 30px;
+                    padding-top: 15px;
+                    color: $text-color;
+                    background: #F8F8F8;
+    
+                    @include breakpoint (max-xxl){
+                        padding-right: 50px;
+                    }
+    
+                    @include breakpoint (max-lg){
+                        padding-right: 30px;
+                    }
+                }
+            }
+        }
+    }
+}

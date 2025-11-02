@@ -1,0 +1,76 @@
+.pricing-box-items {
+    border-radius: 20px;
+    background: #F8F8F8;
+    padding: 55px;
+    
+    .pricing-header {
+        h3 {
+            font-size: 40px;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+        h2 {
+            font-size: 90px;
+            font-weight: 500;
+            margin-bottom: 10px;
+            sub {
+                font-size: 32px;
+                font-weight: 500;
+                margin-left: -15px;
+                text-transform: initial;
+            }
+        }
+    }
+
+    .pricing-list {
+        margin-top: 40px;
+
+        li {
+            font-size: 24px;
+            font-weight: 500;
+            text-transform: capitalize;
+            color: $header-color;
+            font-family: $heading-font;
+
+            svg {
+                margin-right: 10px;
+            }
+
+            &:not(:last-child){
+                margin-bottom: 10px;
+            }
+        }
+        
+    }
+
+    .pricing-button {
+        margin-top: 50px;
+
+        .pricing-btn {
+            width: 100%;
+            font-size: 16px;
+            font-weight: 500;
+            background-color: $black;
+            color: $white;
+            display: inline-block;
+            width: 100%;
+            padding: 18px 30px;
+            text-align: center;
+            line-height: 1;
+            border-radius: 10px;
+
+            &:hover {
+                background-color: $theme-color;
+                color: $black;
+            }
+        }
+    }
+
+    &.active {
+        .pricing-header {
+            h3 {
+                color: $header-color;
+            }
+        }
+    }
+}
