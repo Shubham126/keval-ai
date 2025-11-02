@@ -6,14 +6,26 @@ const challenges = [
   {
     number: '01',
     title: "Antwerp's Market Dominance",
-    description:
-      "With 84% control of the global rough diamond trade, Antwerp's dominance makes independent merchants vulnerable to market fluctuations.",
+    description: (
+      <>
+        .With 84% control of the global rough diamond trade, Antwerp's
+        dominance makes independent merchants vulnerable to market fluctuations
+      </>
+    ),
   },
   {
     number: '02',
-    title: 'Limited Digital Presence',
-    description:
-      'Many merchants lack online footprint despite 60% of B2B buyers preferring digital engagement, per McKinsey 2022.',
+    title: (
+      <>
+        Limited Digital <br /> Presence
+      </>
+    ),
+    description: (
+      <>
+        Many merchants lack online footprint despite 60% of B2B{' '}
+        <br /> buyers preferring digital engagement, <br /> per McKinsey 2022.
+      </>
+    ),
   },
 ];
 
@@ -33,7 +45,7 @@ export default function ChallengesSection() {
                 <div className="header-button">
                   <Link
                     href="/about"
-                    className="theme-btn rounded-2 text-white border-white"
+                    className="theme-btn bg-black rounded-2 text-white border-white"
                   >
                     <span className="icon-1"></span>
                     Learn more

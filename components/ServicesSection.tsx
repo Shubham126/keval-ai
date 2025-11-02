@@ -1,12 +1,13 @@
 'use client';
 
 import Link from 'next/link';
+import { useState } from 'react';
 
 const services = [
   {
     id: 1,
     number: '01',
-    title: 'HIGH CONVERSION WEBSITE',
+    titleLines: ['HIGH', 'CONVERSION', 'WEBSITE'],
     description:
       'Keval AI creates websites that look great and convert visitors into customers. Fast, user-friendly, and optimized for growth.',
     features: ['User Friendly', 'Fast Loading', 'Conversion'],
@@ -14,7 +15,7 @@ const services = [
   {
     id: 2,
     number: '02',
-    title: 'INVENTORY MANAGEMENT SYSTEMS',
+    titleLines: ['INVENTORY', 'MANAGEMENT', 'SYSTEMS'],
     description:
       'Simplify your stock operations with Keval AI\'s inventory systems. Track, manage, and optimize efficiently with minimal errors.',
     features: ['Stock Track', 'Auto Update', 'Error Free'],
@@ -22,7 +23,7 @@ const services = [
   {
     id: 3,
     number: '03',
-    title: 'MVP DEVELOPMENT',
+    titleLines: ['MVP', 'development'],
     description:
       'Turn ideas into reality quickly with Keval AI\'s MVP development. Launch scalable prototypes that validate your concept with real users.',
     features: ['Quick Launch', 'Scalable MVP', 'User Test'],
@@ -30,7 +31,7 @@ const services = [
   {
     id: 4,
     number: '04',
-    title: 'CRM AND ERP',
+    titleLines: ['CRM AND', 'ERP'],
     description:
       'Manage clients, resources, and workflows effortlessly with Keval AI\'s CRM & ERP solutions. Gain insights and automate business operations.',
     features: ['Client Data', 'Workflow', 'Insights'],
@@ -38,7 +39,7 @@ const services = [
   {
     id: 5,
     number: '05',
-    title: 'MARKETING SOLUTIONS',
+    titleLines: ['Marketing', 'solutions'],
     description:
       'Drive growth with Keval AI\'s marketing services. Plan, execute, and target the right audience for measurable results.',
     features: ['Strategy', 'Campaigns', 'Targeting'],
@@ -46,6 +47,8 @@ const services = [
 ];
 
 export default function ServicesSection() {
+  const [hoveredId, setHoveredId] = useState<number | null>(null);
+
   return (
     <section className="service-section-4 section-padding section-bg">
       <div className="container">
@@ -69,12 +72,29 @@ export default function ServicesSection() {
                             href="/service-details"
                             className="white-clr whitehover"
                           >
-                            {service.number}. {service.title}
+                            {service.number}. {service.titleLines.map((line, idx) => (
+                              <span key={idx}>
+                                {line}
+                                {idx < service.titleLines.length - 1 && <br />}
+                              </span>
+                            ))}
                           </Link>
                         </span>
                       </div>
 
-                      <div className="hover_text">
+                      <div
+                        className="hover_text"
+                        onMouseEnter={() => setHoveredId(service.id)}
+                        onMouseLeave={() => setHoveredId(null)}
+                        style={{
+                          color: hoveredId === service.id ? 'rgba(0, 0, 0, 1)' : 'transparent',
+                          flex: 1,
+                          marginLeft: '20px',
+                          padding: '10px',
+                          borderRadius: '4px',
+                          transition: 'background-color 0.3s ease'
+                        }}
+                      >
                         <p>{service.description}</p>
                       </div>
 
@@ -117,4 +137,3 @@ export default function ServicesSection() {
     </section>
   );
 }
-

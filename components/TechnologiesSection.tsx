@@ -31,7 +31,10 @@ const techLogosRow2 = [
 
 export default function TechnologiesSection() {
   return (
-    <section className="brand-section fix section-padding pt-0">
+    <section 
+      className="brand-section fix section-padding pt-0"
+      style={{ backgroundColor: '#ffffff' }}
+    >
       <div className="brand-wrapper-2 fix">
         <h3 className="heading_text">Technologies we use</h3>
 
@@ -60,13 +63,27 @@ export default function TechnologiesSection() {
           >
             {techLogosRow1.map((logo, index) => (
               <SwiperSlide key={index} className="gt-brand-slide-element">
-                <div className="gt-brand-img" style={{ width: '120px', height: '60px', position: 'relative' }}>
+                <div 
+                  className="gt-brand-img" 
+                  style={{ 
+                    minWidth: '220px',
+                    minHeight: '150px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    position: 'relative'
+                  }}
+                >
                   <Image
                     src={`/assets/logos/${logo}`}
                     alt={logo}
-                    fill
-                    style={{ objectFit: 'contain' }}
-                    sizes="(max-width: 768px) 100px, 120px"
+                    width={180}
+                    height={70}
+                    style={{ 
+                      objectFit: 'contain',
+                      maxWidth: '180px',
+                      maxHeight: '70px'
+                    }}
                   />
                 </div>
               </SwiperSlide>
@@ -97,17 +114,30 @@ export default function TechnologiesSection() {
               },
             }}
             className="brand-slider-3 gt-slide-transtion"
-            dir="rtl"
           >
             {techLogosRow2.map((logo, index) => (
               <SwiperSlide key={index} className="gt-brand-slide-element">
-                <div className="gt-brand-img" style={{ width: '120px', height: '60px', position: 'relative' }}>
+                <div 
+                  className="gt-brand-img" 
+                  style={{ 
+                    minWidth: '220px',
+                    minHeight: '150px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    position: 'relative'
+                  }}
+                >
                   <Image
                     src={`/assets/logos/${logo}`}
                     alt={logo}
-                    fill
-                    style={{ objectFit: 'contain' }}
-                    sizes="(max-width: 768px) 100px, 120px"
+                    width={180}
+                    height={70}
+                    style={{ 
+                      objectFit: 'contain',
+                      maxWidth: '180px',
+                      maxHeight: '70px'
+                    }}
                   />
                 </div>
               </SwiperSlide>
@@ -118,4 +148,3 @@ export default function TechnologiesSection() {
     </section>
   );
 }
-

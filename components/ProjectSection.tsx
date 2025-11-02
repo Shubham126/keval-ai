@@ -31,7 +31,8 @@ const projects = [
 
 export default function ProjectSection() {
   return (
-    <section className="project-section-4 fix section-padding pt-0">
+    <section className="project-section-4 fix section-padding pt-0"
+    style={{ backgroundColor: '#ffffff' }}>
       <div className="project-wrapper-4">
         <h3 className="text-center heading_text my-4">Our Recent Work</h3>
         <Swiper

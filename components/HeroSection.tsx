@@ -63,28 +63,15 @@ export default function HeroSection() {
         <div className="row align-items-center mt-5">
           <div className="col-xl-7 mt-5">
             <div className="hero-content px-5">
-              <h1 
-                className="wow fadeInUp my-2" 
-                data-wow-delay=".3s"
-                style={{ fontSize: 'clamp(3rem, 8vw, 6rem)', fontWeight: 'bold' }}
-              >
-                Empowering
-              </h1>
-              <h1 
-                className="wow fadeInUp my-2" 
-                data-wow-delay=".3s"
-                style={{ fontSize: 'clamp(3rem, 8vw, 6rem)', fontWeight: 'bold' }}
-              >
-                Diamond Trade with
-              </h1>
-              <h1 
-                className="wow fadeInUp my-2" 
-                data-wow-delay=".3s"
-                style={{ fontSize: 'clamp(3rem, 8vw, 6rem)', fontWeight: 'bold' }}
-              >
-                <strong id="typing-text" ref={typingRef}></strong>
-                <span>.</span>
-              </h1>
+              <h1 className="wow fadeInUp my-2" data-wow-delay=".3s" style={{ fontSize: 'clamp(2rem, 7vw, 4rem)', fontWeight: 'bold' }}>
+                  Empowering
+                </h1>
+                <h1 className="wow fadeInUp my-2" data-wow-delay=".3s" style={{ fontSize: 'clamp(2rem, 7vw, 4rem)', fontWeight: 'bold'}}>
+                  Diamond Trade with
+                </h1>
+                <h1 className="wow fadeInUp my-2" data-wow-delay=".3s" style={{ fontSize: 'clamp(2rem, 7vw, 4rem)', fontWeight: 'bold'}}>
+                  <strong ref={typingRef}></strong><span>.</span>
+                </h1>
             </div>
             <div className="px-5 d-flex justify-content-start align-items-center gap-3 mt-4">
               <div className="header-button">
