@@ -60,13 +60,13 @@ export default function TechnologiesSection() {
           >
             {techLogosRow1.map((logo, index) => (
               <SwiperSlide key={index} className="gt-brand-slide-element">
-                <div className="gt-brand-img">
+                <div className="gt-brand-img" style={{ width: '120px', height: '60px', position: 'relative' }}>
                   <Image
                     src={`/assets/logos/${logo}`}
                     alt={logo}
-                    width={120}
-                    height={60}
-                    className="object-contain"
+                    fill
+                    style={{ objectFit: 'contain' }}
+                    sizes="(max-width: 768px) 100px, 120px"
                   />
                 </div>
               </SwiperSlide>
@@ -101,13 +101,13 @@ export default function TechnologiesSection() {
           >
             {techLogosRow2.map((logo, index) => (
               <SwiperSlide key={index} className="gt-brand-slide-element">
-                <div className="gt-brand-img">
+                <div className="gt-brand-img" style={{ width: '120px', height: '60px', position: 'relative' }}>
                   <Image
                     src={`/assets/logos/${logo}`}
                     alt={logo}
-                    width={120}
-                    height={60}
-                    className="object-contain"
+                    fill
+                    style={{ objectFit: 'contain' }}
+                    sizes="(max-width: 768px) 100px, 120px"
                   />
                 </div>
               </SwiperSlide>

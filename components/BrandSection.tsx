@@ -19,10 +19,13 @@ const clientLogos = [
 
 export default function BrandSection() {
   return (
-    <section className="brand-section fix section-padding">
+    <section 
+      className="brand-section fix section-padding"
+      style={{ backgroundColor: '#ffffff' }}
+    >
       <div className="container">
         <div className="brand-wrapper">
-          <h4 className="fs-3">
+          <h4 className="fs-3" style={{ color: '#000000' }}>
             We worked worldwide with <span className="count">20</span>
             <span>+</span> companies
           </h4>

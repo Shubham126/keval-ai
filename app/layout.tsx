@@ -1,10 +1,16 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Script from "next/script";
+// CSS Imports
 import "../public/assets/css/bootstrap.min.css";
 import "../public/assets/css/all.min.css";
 import "../public/assets/css/animate.css";
+import "../public/assets/css/icomoon.css";
+import "../public/assets/css/magnific-popup.css";
+import "../public/assets/css/meanmenu.css";
 import "../public/assets/css/swiper-bundle.min.css";
+import "../public/assets/css/nice-select.css";
+import "../public/assets/css/color.css";
 import "../public/assets/css/main.css";
 import "./globals.css";
 
@@ -13,9 +19,15 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Keval-AI - Empowering Diamond Trade with AI",
   description: "Keval-AI - Empowering Diamond Trade with AI Solutions",
+  authors: [{ name: "Gramentheme" }],
   icons: {
     icon: "/assets/keval-image/logo/Keval AI Favicon- Blue.png",
   },
+};
+
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
 };
 
 export default function RootLayout({
@@ -26,11 +38,40 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
+        {/* jQuery Core */}
         <Script src="/assets/js/jquery-3.7.1.min.js" strategy="beforeInteractive" />
+        <Script src="/assets/js/viewport.jquery.js" strategy="afterInteractive" />
+        
+        {/* Bootstrap */}
         <Script src="/assets/js/bootstrap.bundle.min.js" strategy="afterInteractive" />
+        
+        {/* Parallax */}
+        <Script src="/assets/js/parallax.js" strategy="lazyOnload" />
+        
+        {/* GSAP Scripts */}
         <Script src="/assets/js/gsap.js" strategy="lazyOnload" />
+        <Script src="/assets/js/gsap-scroll-to-plugin.js" strategy="lazyOnload" />
+        <Script src="/assets/js/gsap-scroll-smoother.js" strategy="lazyOnload" />
         <Script src="/assets/js/gsap-scroll-trigger.js" strategy="lazyOnload" />
+        <Script src="/assets/js/gsap-split-text.js" strategy="lazyOnload" />
+        
+        {/* Chroma */}
+        <Script src="/assets/js/chroma.min.js" strategy="lazyOnload" />
+        
+        {/* jQuery Plugins */}
+        <Script src="/assets/js/jquery.nice-select.min.js" strategy="afterInteractive" />
+        <Script src="/assets/js/jquery.waypoints.js" strategy="afterInteractive" />
+        <Script src="/assets/js/jquery.counterup.min.js" strategy="afterInteractive" />
+        <Script src="/assets/js/swiper-bundle.min.js" strategy="afterInteractive" />
+        <Script src="/assets/js/jquery.meanmenu.min.js" strategy="afterInteractive" />
+        <Script src="/assets/js/jquery.magnific-popup.min.js" strategy="afterInteractive" />
+        
+        {/* Animation Scripts */}
+        <Script src="/assets/js/animation.js" strategy="lazyOnload" />
         <Script src="/assets/js/wow.min.js" strategy="lazyOnload" />
+        <Script src="/assets/js/customer-gsap-animation.js" strategy="lazyOnload" />
+        
+        {/* Main Script - Must be last */}
         <Script src="/assets/js/main.js" strategy="lazyOnload" />
         {children}
       </body>

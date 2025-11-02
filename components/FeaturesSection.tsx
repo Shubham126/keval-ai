@@ -63,18 +63,17 @@ export default function FeaturesSection() {
                       height: '375px',
                       borderRadius: '30px',
                       overflow: 'hidden',
+                      position: 'relative',
                     }}
                   >
                     <Image
                       src={feature.image}
                       alt={feature.title}
-                      width={400}
-                      height={375}
+                      fill
                       style={{
-                        width: '100%',
-                        height: '100%',
                         objectFit: 'cover',
                       }}
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     />
                   </div>
                   <div className="content pt-3 px-2">

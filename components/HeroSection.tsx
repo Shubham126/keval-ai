@@ -14,33 +14,42 @@ export default function HeroSection() {
     let wordIndex = 0;
     let charIndex = 0;
     let isDeleting = false;
+    let timeoutId: NodeJS.Timeout;
 
     const type = () => {
+      if (!typingRef.current) return;
+      
       const currentWord = words[wordIndex];
       
       if (isDeleting) {
         if (charIndex > 0) {
-          typingRef.current!.textContent = currentWord.substring(0, charIndex - 1);
+          typingRef.current.textContent = currentWord.substring(0, charIndex - 1);
           charIndex--;
-          setTimeout(type, 50);
+          timeoutId = setTimeout(type, 50); 
         } else {
           isDeleting = false;
           wordIndex = (wordIndex + 1) % words.length;
-          setTimeout(type, 500);
+          timeoutId = setTimeout(type, 500); 
         }
       } else {
         if (charIndex < currentWord.length) {
-          typingRef.current!.textContent = currentWord.substring(0, charIndex + 1);
+          typingRef.current.textContent = currentWord.substring(0, charIndex + 1);
           charIndex++;
-          setTimeout(type, 100);
+          timeoutId = setTimeout(type, 80); // Faster typing
         } else {
           isDeleting = true;
-          setTimeout(type, 2000);
+          timeoutId = setTimeout(type, 1500); // Shorter display time
         }
       }
     };
 
     type();
+
+    return () => {
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
+    };
   }, []);
 
   return (
@@ -54,13 +63,25 @@ export default function HeroSection() {
         <div className="row align-items-center mt-5">
           <div className="col-xl-7 mt-5">
             <div className="hero-content px-5">
-              <h1 className="wow fadeInUp my-2" data-wow-delay=".3s">
+              <h1 
+                className="wow fadeInUp my-2" 
+                data-wow-delay=".3s"
+                style={{ fontSize: 'clamp(3rem, 8vw, 6rem)', fontWeight: 'bold' }}
+              >
                 Empowering
               </h1>
-              <h1 className="wow fadeInUp my-2" data-wow-delay=".3s">
+              <h1 
+                className="wow fadeInUp my-2" 
+                data-wow-delay=".3s"
+                style={{ fontSize: 'clamp(3rem, 8vw, 6rem)', fontWeight: 'bold' }}
+              >
                 Diamond Trade with
               </h1>
-              <h1 className="wow fadeInUp my-2" data-wow-delay=".3s">
+              <h1 
+                className="wow fadeInUp my-2" 
+                data-wow-delay=".3s"
+                style={{ fontSize: 'clamp(3rem, 8vw, 6rem)', fontWeight: 'bold' }}
+              >
                 <strong id="typing-text" ref={typingRef}></strong>
                 <span>.</span>
               </h1>
