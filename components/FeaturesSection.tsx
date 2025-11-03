@@ -26,7 +26,7 @@ const features = [
 
 export default function FeaturesSection() {
   return (
-    <section className="service-section-5 weKnow_section fix my-5">
+    <section className="service-section-5 weKnow_section fix my-5" style={{ backgroundColor: '#ffffff' }}>
       <div className="weKnow_section_bg_image">
         <div className="container">
           <div className="row g-4 my-5">
@@ -34,12 +34,18 @@ export default function FeaturesSection() {
               <div className="service-box-items-5">
                 <div className="content text-center">
                   <h3 className="fw-bold">
-                    <Link href="#">
+                    <Link 
+                      href="#"
+                      style={{ 
+                        color: '#00072D',
+                        fontSize: 'clamp(24px, 4vw, 36px)'
+                      }}
+                    >
                       Because your unique business needs are <br /> exactly
                       that — yours.
                     </Link>
                   </h3>
-                  <p className="fs-5">
+                  <p className="fs-5" style={{ color: '#000000' }}>
                     We offer powerful, flexible solutions for every need, no
                     matter the complexity. Simply put, we're built to scale.
                     That means more growth for you.
@@ -80,7 +86,7 @@ export default function FeaturesSection() {
                     <h5>
                       <Link href="#">{feature.title}</Link>
                     </h5>
-                    <p>{feature.description}</p>
+                    <p style={{ color: '#000000' }}>{feature.description}</p>
                   </div>
                 </div>
               </div>

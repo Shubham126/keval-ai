@@ -20,6 +20,7 @@ export default function PortfolioDetailsPage() {
             className="breadcrumb-wrapper bg-cover"
             style={{
               backgroundImage: "url('/assets/keval-image/about-hero-banner.png')",
+              backgroundColor: '#ffffff'
             }}
           >
             <div className="container">
@@ -46,7 +47,7 @@ export default function PortfolioDetailsPage() {
           </div>
 
           {/* Project Section Start */}
-          <section className="project-details-section section-padding">
+          <section className="project-details-section section-padding" style={{ backgroundColor: '#ffffff' }}>
             <div className="container">
               <div className="project-details-wrapper">
                 <div className="details-image">
@@ -66,7 +67,7 @@ export default function PortfolioDetailsPage() {
                           Digital agency bring specialized knowledge and
                           experience
                         </h2>
-                        <p className="mb-3">
+                        <p className="mb-3" style={{ color: '#000000' }}>
                           Netus lorem rutrum arcu dignissim at sit morbi phasellus
                           nascetur eget potenti vestibulum is cras. Tempor nonummy
                           metus lobortis. Sociis velit etiam, dapibus.Lectus ve
@@ -74,7 +75,7 @@ export default function PortfolioDetailsPage() {
                           rutrum pede quisque hendrerit mauris ad to elementum
                           fringilla facilisi volutpat fusce pharetra.
                         </p>
-                        <p className="mb-5">
+                        <p className="mb-5" style={{ color: '#000000' }}>
                           Netus lorem rutrum arcu dignissim at sit morbi phasellus
                           nascetur eget potenti vestibulum is cras. Tempor nonummy
                           metus lobortis. Sociis velit etiam, dapibus.Lectus ve
@@ -82,7 +83,7 @@ export default function PortfolioDetailsPage() {
                           rutrum pede .
                         </p>
                         <h3>Challenge & Solution</h3>
-                        <p className="mb-5">
+                        <p className="mb-5" style={{ color: '#000000' }}>
                           Future, as it seeks to lead the industry in technological
                           innovation and sustainable building practices to deliver
                           long-lasting value for its clients. Netus lorem rutrum arcu
@@ -92,7 +93,7 @@ export default function PortfolioDetailsPage() {
                           habitant lectus rutrum pede .
                         </p>
                         <h3>Final Result</h3>
-                        <p>
+                        <p style={{ color: '#000000' }}>
                           For almost 50 years Leighton Asia, one of the region's
                           largest and most respected construc companies, has been
                           progressively building for a better future by leveraging
@@ -149,7 +150,8 @@ export default function PortfolioDetailsPage() {
           </section>
 
           {/* Cta Section Start */}
-          <section className="cta-section fix section-padding pt-0 dark-bg-style black-bg">
+          <section className="cta-section fix section-padding pt-0 dark-bg-style black-bg"
+          style={{background: "linear-gradient(to bottom, white 50%, black 50%)"}}>
             <div className="container">
               <div
                 className="cta-wrapper bg-cover"

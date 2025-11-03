@@ -21,9 +21,9 @@ export default function CalendlySection() {
   }, []);
 
   return (
-    <section>
+    <section style={{ backgroundColor: '#ffffff' }}>
       <div className="section-title style-4 title-anim">
-        <h3 className="text-center mt-5 heading_text">schedule a meet</h3>
+        <h3 className="text-center mt-5 heading_text" style={{ color: '#000000' }}>schedule a meet</h3>
       </div>
       <div
         className="calendly-inline-widget"

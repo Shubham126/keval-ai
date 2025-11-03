@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 export default function MarqueeSection() {
   return (
-    <div className="marquee-section">
+    <div className="marquee-section" style={{ backgroundColor: '#ffffff' }}>
       <div className="container custom-container">
         <div className="mycustom-marque">
           <div className="scrolling-wrap">

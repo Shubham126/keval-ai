@@ -210,7 +210,7 @@ export default function TestimonialSection() {
           display: flex;
           justify-content: center;
           align-items: center;
-          gap: 10px;
+          gap: 0;
           margin-top: 30px;
         }
         .swiper-dot .dot {
@@ -221,6 +221,8 @@ export default function TestimonialSection() {
           cursor: pointer;
           transition: all 0.3s ease;
           position: relative;
+          margin: 5px;
+          padding: 5px;
         }
         .swiper-dot .dot:hover {
           background: rgba(255, 255, 255, 0.5);

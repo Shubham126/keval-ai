@@ -61,10 +61,11 @@ export default function CounterSection() {
       className="py-5 bg-cover"
       style={{
         backgroundImage: "url('/assets/img/choous-us-bg.jpg')",
+        backgroundColor: '#ffffff',
       }}
     >
       <div className="section-title style-4 title-anim">
-        <h3 className="text-center text-white heading_text">
+        <h3 className="text-center heading_text" style={{ color: '#000000' }}>
           driven by results
         </h3>
       </div>

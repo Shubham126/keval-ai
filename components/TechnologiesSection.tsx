@@ -32,22 +32,39 @@ const techLogosRow2 = [
 export default function TechnologiesSection() {
   return (
     <section 
-      className="brand-section fix section-padding pt-0"
-      style={{ backgroundColor: '#ffffff' }}
+      style={{ 
+        backgroundColor: '#ffffff',
+        padding: '100px 0 0',
+        position: 'relative'
+      }}
     >
-      <div className="brand-wrapper-2 fix">
-        <h3 className="heading_text">Technologies we use</h3>
+      <div style={{ position: 'relative' }}>
+        <h3 style={{ 
+          fontSize: 'clamp(24px, 4vw, 36px)',
+          fontWeight: '600',
+          color: '#111',
+          marginBottom: '40px',
+          textAlign: 'center'
+        }}>
+          Technologies we use
+        </h3>
 
-        <div className="gt-brand-wrapper">
+        <div style={{ width: '100%', overflow: 'hidden' }}>
           <Swiper
             modules={[Autoplay]}
             spaceBetween={30}
             slidesPerView={5}
+            speed={5000}
             autoplay={{
-              delay: 2000,
+              delay: 100,
+              reverseDirection: false,
               disableOnInteraction: false,
+              pauseOnMouseEnter: false,
             }}
+            allowTouchMove={false}
+            watchSlidesProgress={true}
             loop={true}
+            freeMode={false}
             breakpoints={{
               320: {
                 slidesPerView: 2,
@@ -59,19 +76,20 @@ export default function TechnologiesSection() {
                 slidesPerView: 5,
               },
             }}
-            className="brand-slider-2 gt-slide-transtion"
           >
             {techLogosRow1.map((logo, index) => (
-              <SwiperSlide key={index} className="gt-brand-slide-element">
+              <SwiperSlide key={index}>
                 <div 
-                  className="gt-brand-img" 
                   style={{ 
                     minWidth: '220px',
                     minHeight: '150px',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    position: 'relative'
+                    position: 'relative',
+                    border: '1px solid #e0e0e0',
+                    borderRadius: '50%',
+                    backgroundColor: '#ffffff'
                   }}
                 >
                   <Image
@@ -91,17 +109,22 @@ export default function TechnologiesSection() {
           </Swiper>
         </div>
 
-        <div className="gt-brand-wrapper mt-30">
+        <div style={{ width: '100%', overflow: 'hidden', marginTop: '30px' }}>
           <Swiper
             modules={[Autoplay]}
             spaceBetween={30}
             slidesPerView={5}
+            speed={5000}
             autoplay={{
-              delay: 2000,
+              delay: 100,
               reverseDirection: true,
               disableOnInteraction: false,
+              pauseOnMouseEnter: false,
             }}
+            allowTouchMove={false}
+            watchSlidesProgress={true}
             loop={true}
+            freeMode={false}
             breakpoints={{
               320: {
                 slidesPerView: 2,
@@ -113,19 +136,20 @@ export default function TechnologiesSection() {
                 slidesPerView: 5,
               },
             }}
-            className="brand-slider-3 gt-slide-transtion"
           >
             {techLogosRow2.map((logo, index) => (
-              <SwiperSlide key={index} className="gt-brand-slide-element">
+              <SwiperSlide key={index}>
                 <div 
-                  className="gt-brand-img" 
                   style={{ 
                     minWidth: '220px',
                     minHeight: '150px',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    position: 'relative'
+                    position: 'relative',
+                    border: '1px solid #e0e0e0',
+                    borderRadius: '50%',
+                    backgroundColor: '#ffffff'
                   }}
                 >
                   <Image

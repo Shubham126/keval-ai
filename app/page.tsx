@@ -40,7 +40,7 @@ export default function Home() {
     <>
       <Preloader />
       <Header />
-      <main>
+      <main style={{ backgroundColor: '#ffffff' }}>
         <HeroSection />
         <BrandSection />
         <ProjectSection />
