@@ -32,8 +32,16 @@ export default function BackToTop() {
       id="back-top"
       className="back-to-top fixed bottom-8 right-8 z-50 bg-black text-white p-3 rounded-full hover:bg-gray-800 transition-colors"
       onClick={scrollToTop}
+      style={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: '50px',
+        height: '50px',
+        padding: 0,
+      }}
     >
-      <i className="fa-regular fa-arrow-up"></i>
+      <i className="fa-regular fa-arrow-up" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}></i>
     </button>
   );
 }

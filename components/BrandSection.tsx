@@ -33,8 +33,9 @@ export default function BrandSection() {
             modules={[Autoplay]}
             spaceBetween={30}
             slidesPerView={5}
+            speed={2000}
             autoplay={{
-              delay: 2000,
+              delay: 4000,
               disableOnInteraction: false,
             }}
             loop={true}

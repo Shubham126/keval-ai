@@ -101,7 +101,7 @@ export default function PortfolioPage() {
                     <div className="content">
                       <p style={{ color: '#000000' }}>MARCH 26, 2025</p>
                       <h3>
-                        <Link href="/portfolio-details" style={{ color: '#8B00FF', fontSize: 'clamp(20px, 2.5vw, 32px)' }}>
+                        <Link href="/portfolio-details" style={{ color: '#0d0670', fontSize: 'clamp(20px, 2.5vw, 32px)' }}>
                           Digital agency bring specialized <br /> knowledge and
                           experience
                         </Link>
@@ -131,7 +131,7 @@ export default function PortfolioPage() {
                     <div className="content">
                       <p style={{ color: '#000000' }}>MARCH 26, 2025</p>
                       <h3>
-                        <Link href="/portfolio-details" style={{ color: '#8B00FF', fontSize: 'clamp(20px, 2.5vw, 32px)' }}>
+                        <Link href="/portfolio-details" style={{ color: '#0d0670', fontSize: 'clamp(20px, 2.5vw, 32px)' }}>
                           Digital agency bring specialized knowledge and
                           experience
                         </Link>
@@ -163,7 +163,7 @@ export default function PortfolioPage() {
                     <div className="content">
                       <p style={{ color: '#000000' }}>MARCH 26, 2025</p>
                       <h3>
-                        <Link href="/portfolio-details" style={{ color: '#8B00FF', fontSize: 'clamp(20px, 2.5vw, 32px)' }}>
+                        <Link href="/portfolio-details" style={{ color: '#0d0670', fontSize: 'clamp(20px, 2.5vw, 32px)' }}>
                           Digital agency bring specialized <br /> knowledge and
                           experience
                         </Link>
@@ -212,7 +212,7 @@ export default function PortfolioPage() {
                     <div className="content">
                       <p style={{ color: '#000000' }}>MARCH 26, 2025</p>
                       <h3>
-                        <Link href="/portfolio-details" style={{ color: '#8B00FF', fontSize: 'clamp(20px, 2.5vw, 32px)' }}>
+                        <Link href="/portfolio-details" style={{ color: '#0d0670', fontSize: 'clamp(20px, 2.5vw, 32px)' }}>
                           Digital agency bring specialized <br /> knowledge and
                           experience
                         </Link>
