@@ -46,7 +46,7 @@ export default function PortfolioPage() {
           </div>
 
           {/* Case Study Section Start */}
-          <section className="case-study-section-2 fix section-padding">
+          <section className="case-study-section-2 fix section-padding" style={{ backgroundColor: '#ffffff' }}>
             <div className="container">
               <div className="row justify-content-between align-items-end">
                 <div className="col-xl-5 col-lg-6 wow fadeInUp" data-wow-delay=".3s">
@@ -59,7 +59,7 @@ export default function PortfolioPage() {
                         height={400}
                         style={{ width: '100%', height: 'auto' }}
                       />
-                      <Link href="/portfolio-details" className="icon">
+                      <Link href="/portfolio-details" className="icon" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                         <Image
                           src="/assets/img/icon/12.svg"
                           alt="img"
@@ -69,9 +69,9 @@ export default function PortfolioPage() {
                       </Link>
                     </div>
                     <div className="content">
-                      <p>MARCH 26, 2025</p>
+                      <p style={{ color: '#000000' }}>MARCH 26, 2025</p>
                       <h3>
-                        <Link href="/portfolio-details">
+                        <Link href="/portfolio-details" style={{ color: '#8B00FF', fontSize: 'clamp(20px, 2.5vw, 32px)' }}>
                           Digital agency bring specialized <br /> knowledge and
                           experience
                         </Link>
@@ -89,7 +89,7 @@ export default function PortfolioPage() {
                         height={400}
                         style={{ width: '100%', height: 'auto' }}
                       />
-                      <Link href="/portfolio-details" className="icon">
+                      <Link href="/portfolio-details" className="icon" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                         <Image
                           src="/assets/img/icon/12.svg"
                           alt="img"
@@ -99,9 +99,9 @@ export default function PortfolioPage() {
                       </Link>
                     </div>
                     <div className="content">
-                      <p>MARCH 26, 2025</p>
+                      <p style={{ color: '#000000' }}>MARCH 26, 2025</p>
                       <h3>
-                        <Link href="/portfolio-details">
+                        <Link href="/portfolio-details" style={{ color: '#8B00FF', fontSize: 'clamp(20px, 2.5vw, 32px)' }}>
                           Digital agency bring specialized <br /> knowledge and
                           experience
                         </Link>
@@ -119,7 +119,7 @@ export default function PortfolioPage() {
                         height={400}
                         style={{ width: '100%', height: 'auto' }}
                       />
-                      <Link href="/portfolio-details" className="icon">
+                      <Link href="/portfolio-details" className="icon" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                         <Image
                           src="/assets/img/icon/12.svg"
                           alt="img"
@@ -129,9 +129,9 @@ export default function PortfolioPage() {
                       </Link>
                     </div>
                     <div className="content">
-                      <p>MARCH 26, 2025</p>
+                      <p style={{ color: '#000000' }}>MARCH 26, 2025</p>
                       <h3>
-                        <Link href="/portfolio-details">
+                        <Link href="/portfolio-details" style={{ color: '#8B00FF', fontSize: 'clamp(20px, 2.5vw, 32px)' }}>
                           Digital agency bring specialized knowledge and
                           experience
                         </Link>
@@ -151,7 +151,7 @@ export default function PortfolioPage() {
                         height={400}
                         style={{ width: '100%', height: 'auto' }}
                       />
-                      <Link href="/portfolio-details" className="icon">
+                      <Link href="/portfolio-details" className="icon" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                         <Image
                           src="/assets/img/icon/12.svg"
                           alt="img"
@@ -161,9 +161,9 @@ export default function PortfolioPage() {
                       </Link>
                     </div>
                     <div className="content">
-                      <p>MARCH 26, 2025</p>
+                      <p style={{ color: '#000000' }}>MARCH 26, 2025</p>
                       <h3>
-                        <Link href="/portfolio-details">
+                        <Link href="/portfolio-details" style={{ color: '#8B00FF', fontSize: 'clamp(20px, 2.5vw, 32px)' }}>
                           Digital agency bring specialized <br /> knowledge and
                           experience
                         </Link>
@@ -200,7 +200,7 @@ export default function PortfolioPage() {
                         height={400}
                         style={{ width: '100%', height: 'auto' }}
                       />
-                      <Link href="/portfolio-details" className="icon">
+                      <Link href="/portfolio-details" className="icon" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                         <Image
                           src="/assets/img/icon/12.svg"
                           alt="img"
@@ -210,9 +210,9 @@ export default function PortfolioPage() {
                       </Link>
                     </div>
                     <div className="content">
-                      <p>MARCH 26, 2025</p>
+                      <p style={{ color: '#000000' }}>MARCH 26, 2025</p>
                       <h3>
-                        <Link href="/portfolio-details">
+                        <Link href="/portfolio-details" style={{ color: '#8B00FF', fontSize: 'clamp(20px, 2.5vw, 32px)' }}>
                           Digital agency bring specialized <br /> knowledge and
                           experience
                         </Link>
@@ -225,7 +225,8 @@ export default function PortfolioPage() {
           </section>
 
           {/* Cta Section Start */}
-          <section className="cta-section fix section-padding pt-0 dark-bg-style black-bg">
+          <section className="cta-section fix section-padding pt-0 dark-bg-style black-bg"
+          style={{background: "linear-gradient(to bottom, white 50%, black 50%)"}}>
             <div className="container">
               <div
                 className="cta-wrapper bg-cover"

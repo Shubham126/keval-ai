@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect } from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import Preloader from '@/components/Preloader';
@@ -8,6 +9,33 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 export default function ServiceDetailsPage() {
+  useEffect(() => {
+    // Ensure Bootstrap accordion is properly initialized
+    if (typeof window !== 'undefined') {
+      // Wait for Bootstrap to load if using CDN
+      const initAccordion = () => {
+        const accordionButtons = document.querySelectorAll('.accordion-button[data-bs-toggle="collapse"]');
+        accordionButtons.forEach((button) => {
+          button.addEventListener('shown.bs.collapse', (e) => {
+            // Ensure the accordion stays open after Bootstrap animation
+            const targetId = button.getAttribute('data-bs-target');
+            if (targetId) {
+              const targetElement = document.querySelector(targetId);
+              if (targetElement && !targetElement.classList.contains('show')) {
+                targetElement.classList.add('show');
+              }
+            }
+          });
+        });
+      };
+      
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initAccordion);
+      } else {
+        initAccordion();
+      }
+    }
+  }, []);
   return (
     <>
       <Preloader />
@@ -117,14 +145,14 @@ export default function ServiceDetailsPage() {
                   <div className="col-12 col-lg-8">
                     <div className="service-details-content">
                       <h3>HIGH CONVERSION WEBSITE</h3>
-                      <p className="mb-4">
+                      <p className="mb-4" style={{ color: '#000000' }}>
                         Keval AI creates websites that look great and convert
                         visitors into customers. Fast, user-friendly, and optimized
                         for growth.
                       </p>
 
                       <h3>What We Provide</h3>
-                      <p className="mb-5">
+                      <p className="mb-5" style={{ color: '#000000' }}>
                         Lorem ipsum dolor sit amet consectetur adipisicing elit.
                         Eveniet nesciunt earum repellendus nemo cupiditate debitis.
                         Iste voluptas corrupti repellendus quas.
@@ -139,7 +167,7 @@ export default function ServiceDetailsPage() {
                         />
                       </div>
                       <h3>The Challange</h3>
-                      <p>
+                      <p style={{ color: '#000000' }}>
                         Lorem ipsum dolor sit amet consectetur adipisicing elit.
                         Nesciunt sequi blanditiis dolor ex quas ullam dolores eum,
                         quod quasi iusto corrupti adipisci eaque impedit consequatur
@@ -181,7 +209,7 @@ export default function ServiceDetailsPage() {
                             >
                               <h5 className="accordion-header">
                                 <button
-                                  className="accordion-button collapsed"
+                                  className="accordion-button"
                                   type="button"
                                   data-bs-toggle="collapse"
                                   data-bs-target="#faq1"
@@ -193,8 +221,7 @@ export default function ServiceDetailsPage() {
                               </h5>
                               <div
                                 id="faq1"
-                                className="accordion-collapse collapse"
-                                data-bs-parent="#accordion"
+                                className="accordion-collapse collapse show"
                               >
                                 <div className="accordion-body">
                                   Lorem ipsum dolor sit amet consectetur
@@ -223,7 +250,6 @@ export default function ServiceDetailsPage() {
                               <div
                                 id="faq2"
                                 className="accordion-collapse show"
-                                data-bs-parent="#accordion"
                               >
                                 <div className="accordion-body">
                                   Lorem ipsum dolor sit amet consectetur
@@ -252,7 +278,6 @@ export default function ServiceDetailsPage() {
                               <div
                                 id="faq3"
                                 className="accordion-collapse collapse"
-                                data-bs-parent="#accordion"
                               >
                                 <div className="accordion-body">
                                   Lorem ipsum dolor sit amet consectetur
@@ -281,7 +306,6 @@ export default function ServiceDetailsPage() {
                               <div
                                 id="faq4"
                                 className="accordion-collapse collapse"
-                                data-bs-parent="#accordion"
                               >
                                 <div className="accordion-body">
                                   Lorem ipsum dolor sit amet consectetur
@@ -302,7 +326,7 @@ export default function ServiceDetailsPage() {
           </section>
 
           {/* Service Section Start */}
-          <section className="service-section fix section-padding">
+          {/* <section className="service-section fix section-padding">
             <div className="container">
               <div className="section-title-area bor-bottom margin-top-40"></div>
               <div className="service-wrapper">
@@ -399,7 +423,7 @@ export default function ServiceDetailsPage() {
                 </ul>
               </div>
             </div>
-          </section>
+          </section> */}
 
           {/* Cta Section Start */}
           <section className="cta-section fix section-padding pt-0 dark-bg-style black-bg">

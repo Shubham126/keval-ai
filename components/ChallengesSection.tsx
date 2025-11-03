@@ -65,14 +65,15 @@ export default function ChallengesSection() {
                       key={index}
                       className="col-lg-6 col-md-6 wow fadeInUp"
                       data-wow-delay={`${0.3 + index * 0.2}s`}
+                      style={{ display: 'flex' }}
                     >
-                      <div className="service-box-items-5">
+                      <div className="service-box-items-5" style={{ height: '100%', width: '100%', display: 'flex', flexDirection: 'column' }}>
                         <span>{challenge.number}</span>
-                        <div className="content">
+                        <div className="content" style={{ flex: 1 }}>
                           <h3>
                             <Link href="#">{challenge.title}</Link>
                           </h3>
-                          <p>{challenge.description}</p>
+                          <p style={{ color: '#000000' }}>{challenge.description}</p>
                         </div>
                       </div>
                     </div>

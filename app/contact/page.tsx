@@ -118,7 +118,7 @@ export default function ContactPage() {
           </div>
 
           {/* Contact Info Section Start */}
-          <section className="contact-info-section fix section-padding">
+          <section className="contact-info-section fix section-padding" style={{ backgroundColor: '#ffffff' }}>
             <div className="container">
               <div className="row g-4">
                 <div
@@ -126,7 +126,7 @@ export default function ContactPage() {
                   data-wow-delay=".3s"
                 >
                   <div className="contact-info-box">
-                    <div className="icon">
+                    <div className="icon" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="30"
@@ -155,7 +155,7 @@ export default function ContactPage() {
                   data-wow-delay=".5s"
                 >
                   <div className="contact-info-box">
-                    <div className="icon">
+                    <div className="icon" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="30"
@@ -197,7 +197,7 @@ export default function ContactPage() {
                   data-wow-delay=".7s"
                 >
                   <div className="contact-info-box">
-                    <div className="icon">
+                    <div className="icon" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="30"
@@ -226,7 +226,7 @@ export default function ContactPage() {
           </section>
 
           {/* Contact Section Start */}
-          <section className="contact-section fix section-padding pt-0">
+          <section className="contact-section fix section-padding pt-0" style={{ backgroundColor: '#ffffff' }}>
             <div className="container">
               <div className="contact-wrapper">
                 <div className="row g-4">
@@ -401,7 +401,8 @@ export default function ContactPage() {
           </section>
 
           {/* Cta Section Start */}
-          <section className="cta-section fix section-padding pt-0 dark-bg-style black-bg">
+          <section className="cta-section fix section-padding pt-0 dark-bg-style black-bg"
+          style={{background: "linear-gradient(to bottom, white 50%, #0d0670 50%)"}}>
             <div className="container">
               <div
                 className="cta-wrapper bg-cover"
@@ -410,31 +411,21 @@ export default function ContactPage() {
                     "url('/assets/keval-image/service/servic-pg-cta.png')",
                 }}
               >
-                <h2 className="wow fadeInUp" data-wow-delay=".3s">
-                  Have an idea in your mind?Let's make something great together
+                <h2 
+                  className="wow fadeInUp" 
+                  data-wow-delay=".3s"
+                  style={{ fontSize: 'clamp(24px, 5vw, 50px)' }}
+                >
+                  Have an idea in your mind?<br />Let's make something great together
                 </h2>
                 <Link
                   href="/contact"
                   className="theme-btn border-white wow fadeInUp"
                   data-wow-delay=".5s"
                 >
-                  <span className="icon-1">
-                    <Image
-                      src="/assets/img/icon/10.svg"
-                      alt="img"
-                      width={20}
-                      height={20}
-                    />
-                  </span>
+                  <span className="icon-1"></span>
                   get in touch
-                  <span className="icon-2">
-                    <Image
-                      src="/assets/img/icon/11.svg"
-                      alt="img"
-                      width={20}
-                      height={20}
-                    />
-                  </span>
+                  <span className="icon-2"></span>
                 </Link>
               </div>
             </div>

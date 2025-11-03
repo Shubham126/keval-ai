@@ -154,7 +154,8 @@ export default function ServicePage() {
           </section>
 
           {/* Cta Section Start */}
-          <section className="cta-section fix section-padding pt-0 dark-bg-style black-bg">
+          <section className="cta-section fix section-padding pt-0 dark-bg-style black-bg"
+          style={{background: "linear-gradient(to bottom, white 50%, #0d0670 50%)"}}>
             <div className="container">
               <div
                 className="cta-wrapper bg-cover"
@@ -166,7 +167,7 @@ export default function ServicePage() {
                 <h2 
                   className="wow fadeInUp" 
                   data-wow-delay=".3s"
-                  style={{ fontSize: 'clamp(24px, 5vw, 56px)' }}
+                  style={{ fontSize: 'clamp(24px, 5vw, 50px)' }}
                 >
                   Have an idea in your mind?<br />Let's make something great together
                 </h2>
