@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import MouseCursor from './MouseCursor';
 
 export default function Header() {
   const [isSticky, setIsSticky] = useState(false);
@@ -173,8 +174,7 @@ export default function Header() {
       ></div>
 
       {/* Mouse Cursor */}
-      <div className="mouse-cursor cursor-outer"></div>
-      <div className="mouse-cursor cursor-inner"></div>
+      <MouseCursor />
     </>
   );
 }

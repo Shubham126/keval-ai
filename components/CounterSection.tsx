@@ -10,23 +10,46 @@ interface CounterProps {
 
 function Counter({ target, suffix = '', duration = 4000 }: CounterProps) {
   const countRef = useRef<HTMLSpanElement>(null);
+  const hasAnimated = useRef(false);
 
   useEffect(() => {
-    if (!countRef.current) return;
+    if (!countRef.current || hasAnimated.current) return;
 
-    let start = 0;
-    const increment = target / (duration / 16); // 60fps
-    const timer = setInterval(() => {
-      start += increment;
-      if (start >= target) {
-        countRef.current!.textContent = target + suffix;
-        clearInterval(timer);
-      } else {
-        countRef.current!.textContent = Math.floor(start) + suffix;
-      }
-    }, 16);
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !hasAnimated.current) {
+            hasAnimated.current = true;
+            
+            let start = 0;
+            const increment = target / (duration / 16); // 60fps
+            
+            const timer = setInterval(() => {
+              start += increment;
+              if (start >= target) {
+                if (countRef.current) {
+                  countRef.current.textContent = target + suffix;
+                }
+                clearInterval(timer);
+              } else {
+                if (countRef.current) {
+                  countRef.current.textContent = Math.floor(start) + suffix;
+                }
+              }
+            }, 16);
 
-    return () => clearInterval(timer);
+            observer.disconnect();
+          }
+        });
+      },
+      { threshold: 0.5 }
+    );
+
+    observer.observe(countRef.current);
+
+    return () => {
+      observer.disconnect();
+    };
   }, [target, suffix, duration]);
 
   return <span className="count" ref={countRef}>0{suffix}</span>;
@@ -50,7 +73,7 @@ export default function CounterSection() {
           <div className="row g-4">
             <div className="col-xl-4 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".3s">
               <div className="counter-box-items">
-                <h2>
+                <h2 style={{ fontSize: 'clamp(48px, 8vw, 72px)', fontWeight: 'bold', lineHeight: '1.2' }}>
                   <Counter target={100} suffix="+" />
                 </h2>
                 <p>Projects completed</p>
@@ -58,7 +81,7 @@ export default function CounterSection() {
             </div>
             <div className="col-xl-4 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".5s">
               <div className="counter-box-items">
-                <h2>
+                <h2 style={{ fontSize: 'clamp(48px, 8vw, 72px)', fontWeight: 'bold', lineHeight: '1.2' }}>
                   <Counter target={99} suffix="%" />
                 </h2>
                 <p>Satisfied customers</p>
@@ -66,7 +89,7 @@ export default function CounterSection() {
             </div>
             <div className="col-xl-4 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".7s">
               <div className="counter-box-items">
-                <h2>
+                <h2 style={{ fontSize: 'clamp(48px, 8vw, 72px)', fontWeight: 'bold', lineHeight: '1.2' }}>
                   <Counter target={80} suffix="k" />
                 </h2>
                 <p>Saved per month</p>

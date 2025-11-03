@@ -31,7 +31,10 @@ const challenges = [
 
 export default function ChallengesSection() {
   return (
-    <section className="service-section-5 fix section-padding">
+    <section 
+      className="service-section-5 fix section-padding"
+      style={{ backgroundColor: '#ffffff' }}
+    >
       <div className="container">
         <div className="service-wrapper-5">
           <div className="row g-4 justify-content-between">

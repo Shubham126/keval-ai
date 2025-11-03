@@ -1,14 +1,24 @@
 'use client';
 
+import { useRef } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay, Pagination } from 'swiper/modules';
-import Link from 'next/link';
+import { Autoplay, Pagination, EffectCards } from 'swiper/modules';
+import type { Swiper as SwiperType } from 'swiper';
 import Image from 'next/image';
+import Link from 'next/link';
 
 import 'swiper/css';
 import 'swiper/css/pagination';
+import 'swiper/css/effect-cards';
 
-const testimonials = [
+interface Testimonial {
+  image: string;
+  name: string;
+  position: string;
+  text: string;
+}
+
+const testimonials: Testimonial[] = [
   {
     image: '/assets/keval-image/testimonal/Dalila-CEO.jpg',
     name: 'A. De Vries',
@@ -30,6 +40,9 @@ const testimonials = [
 ];
 
 export default function TestimonialSection() {
+  const swiperRef = useRef<SwiperType | null>(null);
+  const paginationRef = useRef<HTMLDivElement>(null);
+
   return (
     <section
       className="testimonial-section fix section-padding bg-cover"
@@ -40,6 +53,7 @@ export default function TestimonialSection() {
       <div className="container">
         <div className="testimonial-wrapper">
           <div className="row g-4 align-items-center">
+            {/* Left Content */}
             <div className="col-lg-6">
               <div className="testimonial-content">
                 <div className="section-title">
@@ -48,6 +62,7 @@ export default function TestimonialSection() {
                     Our clients awesome Testimonials
                   </h2>
                 </div>
+
                 <div className="ratting-box wow fadeInUp" data-wow-delay=".5s">
                   <h3>
                     <span className="count">50</span>
@@ -70,16 +85,49 @@ export default function TestimonialSection() {
                 </div>
               </div>
             </div>
+
+            {/* Right Slider */}
             <div className="col-lg-6">
               <Swiper
-                modules={[Autoplay, Pagination]}
+                onSwiper={(swiper) => {
+                  swiperRef.current = swiper;
+                }}
+                modules={[Autoplay, Pagination, EffectCards]}
+                effect="cards"
+                grabCursor={true}
                 spaceBetween={30}
                 slidesPerView={1}
+                loop={true}
+                speed={2000}
                 autoplay={{
-                  delay: 5000,
+                  delay: 4000,
                   disableOnInteraction: false,
                 }}
-                pagination={{ clickable: true }}
+                onSlideChange={(swiper) => {
+                  const dots = paginationRef.current?.querySelectorAll('.dot');
+                  dots?.forEach((dot, index) => {
+                    // Use activeIndex with modulo to handle loop mode correctly
+                    const activeIndex = swiper.activeIndex % testimonials.length;
+                    const dotIndex = parseInt(dot.getAttribute('data-index') || '0');
+                    if (dotIndex === activeIndex) {
+                      dot.classList.add('dot-active');
+                    } else {
+                      dot.classList.remove('dot-active');
+                    }
+                  });
+                }}
+                onInit={(swiper) => {
+                  // Initialize active dot on load
+                  const dots = paginationRef.current?.querySelectorAll('.dot');
+                  const activeIndex = swiper.activeIndex % testimonials.length;
+                  dots?.forEach((dot, index) => {
+                    if (index === activeIndex) {
+                      dot.classList.add('dot-active');
+                    } else {
+                      dot.classList.remove('dot-active');
+                    }
+                  });
+                }}
                 className="testimonial-slider"
               >
                 {testimonials.map((testimonial, index) => (
@@ -107,7 +155,7 @@ export default function TestimonialSection() {
                             viewBox="0 0 27 20"
                             fill="none"
                           >
-                            <g clipPath="url(#clip0_205_1662)">
+                            <g clipPath={`url(#clip0_205_1662${index})`}>
                               <path
                                 d="M26.666 -0.222168V19.7778L16.666 9.77783V-0.222168H26.666Z"
                                 fill="#59D2F3"
@@ -117,6 +165,16 @@ export default function TestimonialSection() {
                                 fill="#59D2F3"
                               />
                             </g>
+                            <defs>
+                              <clipPath id={`clip0_205_1662${index}`}>
+                                <rect
+                                  width="26.6667"
+                                  height="20"
+                                  fill="white"
+                                  transform="matrix(-1 0 0 1 26.666 0)"
+                                />
+                              </clipPath>
+                            </defs>
                           </svg>
                         </div>
                         <span>{testimonial.text}</span>
@@ -125,11 +183,55 @@ export default function TestimonialSection() {
                   </SwiperSlide>
                 ))}
               </Swiper>
+
+              {/* Custom Swiper Pagination Dots */}
+              <div className="swiper-dot" ref={paginationRef}>
+                {testimonials.map((_, index) => (
+                  <div
+                    key={index}
+                    data-index={index}
+                    className={`dot ${index === 0 ? 'dot-active' : ''}`}
+                    onClick={() => {
+                      if (swiperRef.current) {
+                        swiperRef.current.slideToLoop(index);
+                      }
+                    }}
+                  ></div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
       </div>
+
+      {/* Custom Styles for pagination dots */}
+      <style jsx global>{`
+        .swiper-dot {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          gap: 10px;
+          margin-top: 30px;
+        }
+        .swiper-dot .dot {
+          width: 12px;
+          height: 12px;
+          background: rgba(255, 255, 255, 0.3);
+          border-radius: 50%;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          position: relative;
+        }
+        .swiper-dot .dot:hover {
+          background: rgba(255, 255, 255, 0.5);
+        }
+        .swiper-dot .dot.dot-active {
+          background: rgba(255, 255, 255, 1);
+        }
+        .testimonial-slider .swiper-slide {
+          height: auto;
+        }
+      `}</style>
     </section>
   );
 }
-

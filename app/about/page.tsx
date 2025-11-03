@@ -15,27 +15,51 @@ export default function AboutPage() {
     // Initialize counter animations
     if (typeof window !== 'undefined') {
       const initCounters = () => {
-        const counters = document.querySelectorAll('.count');
+        const counters = document.querySelectorAll('.count[data-target]');
         counters.forEach((counter) => {
           const target = parseInt(counter.getAttribute('data-target') || '0');
+          const parentText = counter.parentElement?.textContent || '';
+          
+          // Determine prefix and suffix from parent element
+          let prefix = '';
+          let suffix = '';
+          
+          // Check if parent has '+' before the counter
+          if (parentText.includes('+') && counter.textContent && !counter.textContent.startsWith('+')) {
+            prefix = '+';
+          } else if (counter.textContent && counter.textContent.startsWith('+')) {
+            prefix = '+';
+          }
+          
+          // Check for suffix after counter
+          if (parentText.includes('%')) {
+            suffix = '%';
+          } else if (parentText.includes('M')) {
+            suffix = ' M';
+          }
+          
           const duration = 2000;
           let current = 0;
           const increment = target / (duration / 16);
+          let hasAnimated = false;
 
           const updateCounter = () => {
+            if (hasAnimated) return;
+            
             current += increment;
             if (current < target) {
-              counter.textContent = Math.floor(current).toString();
+              counter.textContent = prefix + Math.floor(current).toString();
               requestAnimationFrame(updateCounter);
             } else {
-              counter.textContent = target.toString();
+              counter.textContent = prefix + target.toString();
+              hasAnimated = true;
             }
           };
 
           const observer = new IntersectionObserver(
             (entries) => {
               entries.forEach((entry) => {
-                if (entry.isIntersecting) {
+                if (entry.isIntersecting && !hasAnimated) {
                   updateCounter();
                   observer.unobserve(entry.target);
                 }
@@ -90,14 +114,22 @@ export default function AboutPage() {
           </div>
 
           {/* About Section Start */}
-          <section className="about-section-2 fix section-padding">
+          <section 
+            className="about-section-2 fix section-padding"
+            style={{ backgroundColor: '#ffffff' }}
+          >
             <div className="container">
-              <div className="about-wrapper-2 style-theme-color">
+              <div className="about-wrapper-2 style-theme-color"
+              >
                 <div className="row g-4">
                   <div className="col-lg-6">
                     <div className="about-content">
                       <h6 className="wow fadeInUp">about us</h6>
-                      <p className="wow fadeInUp" data-wow-delay=".3s">
+                      <p 
+                        className="wow fadeInUp" 
+                        data-wow-delay=".3s"
+                        style={{ color: '#2F4F4F', fontWeight: 'normal' }}
+                      >
                         KevalAI builds practical digital solutions that help
                         product‑driven businesses - sell faster and run smarter.
                         Born to bridge the technology gap, we combine industry
@@ -122,6 +154,21 @@ export default function AboutPage() {
                           Make faster decisions with unified CRM/ERP analytics
                         </li>
                       </ul>
+                      <style jsx>{`
+                        .about-list li {
+                          font-size: 18px !important;
+                        }
+                        @media (min-width: 768px) {
+                          .about-list li {
+                            font-size: 19px !important;
+                          }
+                        }
+                        @media (min-width: 1024px) {
+                          .about-list li {
+                            font-size: 20px !important;
+                          }
+                        }
+                      `}</style>
                       <Link href="/about" className="theme-btn wow fadeInUp" data-wow-delay=".3s">
                         <span className="icon-1">
                           <Image
@@ -145,19 +192,29 @@ export default function AboutPage() {
                   </div>
                   <div className="col-lg-6">
                     <div className="about-content-2">
-                      <h2 className="wow fadeInUp" data-wow-delay=".3s">
+                      <h2 
+                        className="wow fadeInUp about-heading-2" 
+                        data-wow-delay=".3s"
+                      >
                         Comprehensive Digital Solutions for Growing Businesses
                       </h2>
+                      <style jsx>{`
+                        .about-heading-2 {
+                          font-size: clamp(10px, 6vw, 40px) !important;
+                          font-weight: bold !important;
+                          line-height: 1.6 !important;
+                        }
+                      `}</style>
                       <div className="counter-items">
                         <div className="content wow fadeInUp" data-wow-delay=".3s">
-                          <h2>
+                          <h2 style={{ fontSize: 'clamp(48px, 8vw, 72px)', fontWeight: 'normal', lineHeight: '1' }}>
                             <span className="count" data-target="150">+150</span>%
                           </h2>
                           <p>Conversion Rate Increased</p>
                         </div>
                         <div className="content wow fadeInUp" data-wow-delay=".5s">
-                          <h2>
-                            +<span className="count" data-target="20">20</span> M
+                          <h2 style={{ fontSize: 'clamp(48px, 8vw, 72px)', fontWeight: 'normal', lineHeight: '1' }}>
+                            <span className="count" data-target="20">20</span> M
                           </h2>
                           <p>Amount of Investments in 2022</p>
                         </div>

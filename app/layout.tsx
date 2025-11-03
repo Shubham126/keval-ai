@@ -38,37 +38,35 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        {/* jQuery Core */}
-        <Script src="/assets/js/jquery-3.7.1.min.js" strategy="beforeInteractive" />
-        <Script src="/assets/js/viewport.jquery.js" strategy="afterInteractive" />
+        {/* jQuery Core - Only load when needed */}
+        <Script src="/assets/js/jquery-3.7.1.min.js" strategy="lazyOnload" />
         
-        {/* Bootstrap */}
-        <Script src="/assets/js/bootstrap.bundle.min.js" strategy="afterInteractive" />
+        {/* Bootstrap - Load after jQuery */}
+        <Script src="/assets/js/bootstrap.bundle.min.js" strategy="lazyOnload" />
         
-        {/* Parallax */}
-        <Script src="/assets/js/parallax.js" strategy="lazyOnload" />
+        {/* Essential jQuery Plugins - Load together */}
+        <Script src="/assets/js/viewport.jquery.js" strategy="lazyOnload" />
+        <Script src="/assets/js/swiper-bundle.min.js" strategy="lazyOnload" />
         
-        {/* GSAP Scripts */}
+        {/* GSAP Scripts - Load together for animations */}
         <Script src="/assets/js/gsap.js" strategy="lazyOnload" />
-        <Script src="/assets/js/gsap-scroll-to-plugin.js" strategy="lazyOnload" />
-        <Script src="/assets/js/gsap-scroll-smoother.js" strategy="lazyOnload" />
         <Script src="/assets/js/gsap-scroll-trigger.js" strategy="lazyOnload" />
+        <Script src="/assets/js/gsap-scroll-smoother.js" strategy="lazyOnload" />
+        <Script src="/assets/js/gsap-scroll-to-plugin.js" strategy="lazyOnload" />
         <Script src="/assets/js/gsap-split-text.js" strategy="lazyOnload" />
         
-        {/* Chroma */}
+        {/* Non-critical jQuery Plugins - Load last */}
+        <Script src="/assets/js/jquery.nice-select.min.js" strategy="lazyOnload" />
+        <Script src="/assets/js/jquery.waypoints.js" strategy="lazyOnload" />
+        <Script src="/assets/js/jquery.counterup.min.js" strategy="lazyOnload" />
+        <Script src="/assets/js/jquery.meanmenu.min.js" strategy="lazyOnload" />
+        <Script src="/assets/js/jquery.magnific-popup.min.js" strategy="lazyOnload" />
+        <Script src="/assets/js/parallax.js" strategy="lazyOnload" />
         <Script src="/assets/js/chroma.min.js" strategy="lazyOnload" />
         
-        {/* jQuery Plugins */}
-        <Script src="/assets/js/jquery.nice-select.min.js" strategy="afterInteractive" />
-        <Script src="/assets/js/jquery.waypoints.js" strategy="afterInteractive" />
-        <Script src="/assets/js/jquery.counterup.min.js" strategy="afterInteractive" />
-        <Script src="/assets/js/swiper-bundle.min.js" strategy="afterInteractive" />
-        <Script src="/assets/js/jquery.meanmenu.min.js" strategy="afterInteractive" />
-        <Script src="/assets/js/jquery.magnific-popup.min.js" strategy="afterInteractive" />
-        
         {/* Animation Scripts */}
-        <Script src="/assets/js/animation.js" strategy="lazyOnload" />
         <Script src="/assets/js/wow.min.js" strategy="lazyOnload" />
+        <Script src="/assets/js/animation.js" strategy="lazyOnload" />
         <Script src="/assets/js/customer-gsap-animation.js" strategy="lazyOnload" />
         
         {/* Main Script - Must be last */}
