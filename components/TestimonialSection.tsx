@@ -1,14 +1,13 @@
 'use client';
 
-import { useRef, useEffect, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay, Pagination, EffectCards } from 'swiper/modules';
+import { Autoplay, EffectCards } from 'swiper/modules';
 import type { Swiper as SwiperType } from 'swiper';
 import Image from 'next/image';
 import Link from 'next/link';
 
 import 'swiper/css';
-import 'swiper/css/pagination';
 import 'swiper/css/effect-cards';
 
 interface Testimonial {
@@ -23,26 +22,33 @@ const testimonials: Testimonial[] = [
     image: '/assets/keval-image/testimonal/Dalila-CEO.jpg',
     name: 'A. De Vries',
     position: 'Dalila CEO',
-    text: `Working with Keval AI completely transformed our online presence. Their new gem-industry website design not only looks stunning, but also doubled our conversion rate in just a month. Highly recommend their tech + marketing combo!`,
+    text: `Working with Keval AI completely transformed our online presence.`,
   },
   {
     image: '/assets/keval-image/testimonal/Donai-co-founder.jpg',
     name: 'M. Janssens',
     position: 'Donai Co-Founder',
-    text: `We wanted a robust inventory + ERP system tailored for our diamond business. Keval AI delivered it ahead of schedule, seamless integration, and very responsive support. Their niche expertise showed every step of the way.`,
+    text: `We wanted a robust inventory + ERP system tailored for our diamond business.`,
   },
   {
     image: '/assets/keval-image/testimonal/Millenium-Inventory.jpg',
     name: 'L. Bertrand',
     position: 'Millenium Inventory Executive',
-    text: `From MVP development to final launch, Keval AI's team was professional, creative, and detail-oriented. The site is fast, beautiful, and our leads have grown significantly. They truly understand high conversion.`,
+    text: `From MVP development to final launch, Keval AI's team was professional, creative, and detail-oriented.`,
   },
 ];
 
 export default function TestimonialSection() {
   const swiperRef = useRef<SwiperType | null>(null);
-  const paginationRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    // Ensure client-only mount
+    setMounted(true);
+  }, []);
+
+  if (!mounted) return null;
 
   return (
     <section
@@ -90,49 +96,28 @@ export default function TestimonialSection() {
             {/* Right Slider */}
             <div className="col-lg-6">
               <Swiper
-                onSwiper={(swiper) => {
-                  swiperRef.current = swiper;
+                onSwiper={(swiper) => (swiperRef.current = swiper)}
+                onInit={(swiper) => {
+                  // Ensure autoplay starts after initialization
+                  setTimeout(() => {
+                    if (swiper && swiper.autoplay && typeof swiper.autoplay.start === 'function') {
+                      swiper.autoplay.start();
+                    }
+                  }, 100);
+                  // Update active index on init
+                  setActiveIndex(swiper.realIndex);
                 }}
-                modules={[Autoplay, Pagination, EffectCards]}
+                modules={[Autoplay, EffectCards]}
                 effect="cards"
-                grabCursor={true}
-                spaceBetween={30}
+                grabCursor
                 slidesPerView={1}
-                loop={true}
-                speed={2000}
+                loop
+                speed={600}
                 autoplay={{
                   delay: 4000,
                   disableOnInteraction: false,
                 }}
-                onSlideChange={(swiper) => {
-                  // Get the real index in loop mode
-                  const realIndex = swiper.realIndex;
-                  setActiveIndex(realIndex);
-                  
-                  // Update dot classes
-                  const dots = paginationRef.current?.querySelectorAll('.dot');
-                  dots?.forEach((dot, index) => {
-                    if (index === realIndex) {
-                      dot.classList.add('dot-active');
-                    } else {
-                      dot.classList.remove('dot-active');
-                    }
-                  });
-                }}
-                onInit={(swiper) => {
-                  // Initialize active dot on load
-                  const realIndex = swiper.realIndex;
-                  setActiveIndex(realIndex);
-                  
-                  const dots = paginationRef.current?.querySelectorAll('.dot');
-                  dots?.forEach((dot, index) => {
-                    if (index === realIndex) {
-                      dot.classList.add('dot-active');
-                    } else {
-                      dot.classList.remove('dot-active');
-                    }
-                  });
-                }}
+                onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
                 className="testimonial-slider"
               >
                 {testimonials.map((testimonial, index) => (
@@ -160,26 +145,14 @@ export default function TestimonialSection() {
                             viewBox="0 0 27 20"
                             fill="none"
                           >
-                            <g clipPath={`url(#clip0_205_1662${index})`}>
-                              <path
-                                d="M26.666 -0.222168V19.7778L16.666 9.77783V-0.222168H26.666Z"
-                                fill="#59D2F3"
-                              />
-                              <path
-                                d="M10 -0.222168V19.7778L0 9.77783V-0.222168H10Z"
-                                fill="#59D2F3"
-                              />
-                            </g>
-                            <defs>
-                              <clipPath id={`clip0_205_1662${index}`}>
-                                <rect
-                                  width="26.6667"
-                                  height="20"
-                                  fill="white"
-                                  transform="matrix(-1 0 0 1 26.666 0)"
-                                />
-                              </clipPath>
-                            </defs>
+                            <path
+                              d="M26.666 -0.222168V19.7778L16.666 9.77783V-0.222168H26.666Z"
+                              fill="#59D2F3"
+                            />
+                            <path
+                              d="M10 -0.222168V19.7778L0 9.77783V-0.222168H10Z"
+                              fill="#59D2F3"
+                            />
                           </svg>
                         </div>
                         <span>{testimonial.text}</span>
@@ -189,28 +162,17 @@ export default function TestimonialSection() {
                 ))}
               </Swiper>
 
-              {/* Custom Swiper Pagination Dots */}
-              <div className="swiper-dot" ref={paginationRef}>
+              {/* Custom Pagination Dots */}
+              <div className="swiper-dot">
                 {testimonials.map((_, index) => (
                   <div
                     key={index}
-                    data-index={index}
                     className={`dot ${index === activeIndex ? 'dot-active' : ''}`}
                     onClick={() => {
-                      if (swiperRef.current) {
-                        // Use slideToLoop for proper loop mode navigation
-                        swiperRef.current.slideToLoop(index);
-                        setActiveIndex(index);
-                      }
+                      swiperRef.current?.slideToLoop(index);
+                      setActiveIndex(index);
                     }}
-                    onMouseEnter={(e) => {
-                      // Add hover effect for better UX
-                      e.currentTarget.style.transform = 'scale(1.2)';
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.transform = 'scale(1)';
-                    }}
-                  ></div>
+                  />
                 ))}
               </div>
             </div>
@@ -218,13 +180,12 @@ export default function TestimonialSection() {
         </div>
       </div>
 
-      {/* Custom Styles for pagination dots */}
+      {/* Custom Styles */}
       <style jsx global>{`
         .swiper-dot {
           display: flex;
           justify-content: center;
-          align-items: center;
-          gap: 0;
+          gap: 10px;
           margin-top: 30px;
         }
         .swiper-dot .dot {
@@ -234,9 +195,6 @@ export default function TestimonialSection() {
           border-radius: 50%;
           cursor: pointer;
           transition: all 0.3s ease;
-          position: relative;
-          margin: 5px;
-          padding: 5px;
         }
         .swiper-dot .dot:hover {
           background: rgba(255, 255, 255, 0.5);
@@ -244,11 +202,8 @@ export default function TestimonialSection() {
         }
         .swiper-dot .dot.dot-active {
           background: rgba(255, 255, 255, 1);
-          width: 24px;
+          width: 26px;
           border-radius: 6px;
-        }
-        .testimonial-slider .swiper-slide {
-          height: auto;
         }
       `}</style>
     </section>

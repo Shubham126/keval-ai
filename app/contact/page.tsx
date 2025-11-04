@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import Preloader from '@/components/Preloader';
 import BackToTop from '@/components/BackToTop';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -82,7 +81,6 @@ export default function ContactPage() {
 
   return (
     <>
-      <Preloader />
       <Header />
 
       <div id="smooth-wrapper">

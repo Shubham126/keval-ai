@@ -3,7 +3,6 @@
 import { useEffect } from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import Preloader from '@/components/Preloader';
 import BackToTop from '@/components/BackToTop';
 import ChallengesSection from '@/components/ChallengesSection';
 import CounterSection from '@/components/CounterSection';
@@ -78,7 +77,6 @@ export default function AboutPage() {
 
   return (
     <>
-      <Preloader />
       <Header />
 
       <div id="smooth-wrapper">

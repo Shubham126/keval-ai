@@ -1,8 +1,9 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Autoplay } from 'swiper/modules';
+import type { Swiper as SwiperType } from 'swiper';
 import Link from 'next/link';
 import Image from 'next/image';
 
@@ -31,9 +32,42 @@ const projects = [
 ];
 
 export default function ProjectSection() {
+  const swiperRef = useRef<SwiperType | null>(null);
+  const [mounted, setMounted] = useState(false);
+
   useEffect(() => {
+    // Ensure client-only mount
+    setMounted(true);
+
+    // Prevent double initialization from main.js - destroy any existing instances
+    const destroyExistingSliders = () => {
+      const existingSliders = document.querySelectorAll('.project-slider.swiper-initialized');
+      existingSliders.forEach((slider) => {
+        const swiperInstance = (slider as any).swiper;
+        if (swiperInstance && typeof swiperInstance.destroy === 'function') {
+          try {
+            swiperInstance.destroy(true, true);
+          } catch (e) {
+            // Ignore errors during cleanup
+          }
+        }
+      });
+    };
+
+    // Destroy existing sliders immediately
+    destroyExistingSliders();
+
+    // Also check after a delay in case main.js tries to initialize
+    const checkInterval = setInterval(() => {
+      if (swiperRef.current) {
+        // React Swiper is initialized, destroy any jQuery instances
+        destroyExistingSliders();
+      }
+    }, 500);
+
     // Add styles for smooth animations and navigation arrows
     const style = document.createElement('style');
+    style.id = 'project-slider-styles';
     style.textContent = `
       .project-slider {
         overflow: visible !important;
@@ -41,10 +75,14 @@ export default function ProjectSection() {
       .project-slider .swiper-wrapper {
         transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
         will-change: transform !important;
+        transform: translateZ(0) !important;
+        backface-visibility: hidden !important;
       }
       .project-slider .swiper-slide {
-        transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.6s ease !important;
+        transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.25s ease !important;
         will-change: transform, opacity !important;
+        transform: translateZ(0) !important;
+        backface-visibility: hidden !important;
       }
       .project-slider .swiper-slide-active {
         opacity: 1 !important;
@@ -64,6 +102,7 @@ export default function ProjectSection() {
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
         margin-top: 0 !important;
         transition: all 0.3s ease !important;
+        z-index: 10 !important;
       }
       .project-slider .swiper-button-next:hover,
       .project-slider .swiper-button-prev:hover {
@@ -89,19 +128,59 @@ export default function ProjectSection() {
         color: #fff !important;
       }
       .project-box-items-4 {
-        transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        transform: translateZ(0) !important;
+        backface-visibility: hidden !important;
       }
       .project-slider .swiper-slide-active .project-box-items-4 {
-        transform: scale(1.02) !important;
+        transform: scale(1.02) translateZ(0) !important;
       }
     `;
-    document.head.appendChild(style);
+    
+    // Only add style if it doesn't exist
+    if (!document.getElementById('project-slider-styles')) {
+      document.head.appendChild(style);
+    }
+
+    // Ensure Swiper works after full load
+    const ensureSwiperReady = () => {
+      if (swiperRef.current && !swiperRef.current.destroyed) {
+        try {
+          swiperRef.current.update();
+          swiperRef.current.updateSlides();
+          
+          // Start autoplay if it exists and is not running
+          if (swiperRef.current.autoplay) {
+            if (swiperRef.current.autoplay.running === false) {
+              swiperRef.current.autoplay.start();
+            }
+          }
+        } catch (e) {
+          // Ignore errors
+        }
+      }
+    };
+
+    // Wait for full load and ensure Swiper is ready
+    if (document.readyState === 'complete') {
+      setTimeout(ensureSwiperReady, 200);
+    } else {
+      window.addEventListener('load', () => {
+        setTimeout(ensureSwiperReady, 200);
+      });
+    }
+
     return () => {
-      if (document.head.contains(style)) {
-        document.head.removeChild(style);
+      clearInterval(checkInterval);
+      const styleElement = document.getElementById('project-slider-styles');
+      if (styleElement && styleElement.parentNode) {
+        styleElement.parentNode.removeChild(styleElement);
       }
     };
   }, []);
+
+  // Don't render until mounted
+  if (!mounted) return null;
 
   return (
     <section
@@ -121,17 +200,37 @@ export default function ProjectSection() {
         </h3>
 
         <Swiper
+          onSwiper={(swiper) => {
+            swiperRef.current = swiper;
+          }}
+          onInit={(swiper) => {
+            // Ensure autoplay starts after initialization
+            setTimeout(() => {
+              try {
+                if (swiper && swiper.autoplay) {
+                  if (typeof swiper.autoplay.start === 'function') {
+                    swiper.autoplay.start();
+                  }
+                }
+              } catch (e) {
+                // Silently handle errors
+              }
+            }, 150);
+          }}
           modules={[Navigation, Autoplay]}
           spaceBetween={30}
           slidesPerView={1}
           navigation={true}
-          speed={800}
+          speed={500}
           loop={true}
           autoplay={{
             delay: 4000,
             disableOnInteraction: false,
             pauseOnMouseEnter: true,
           }}
+          watchSlidesProgress={true}
+          resistance={true}
+          resistanceRatio={0.85}
           grabCursor={true}
           breakpoints={{
             768: {
@@ -150,11 +249,13 @@ export default function ProjectSection() {
               <div
                 className="project-box-items-4 p-relative"
                 style={{
-                  transition: 'transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)',
+                  transition: 'transform 0.25s cubic-bezier(0.4, 0, 0.2, 1)',
                   overflow: 'hidden',
+                  transform: 'translateZ(0)',
+                  backfaceVisibility: 'hidden',
                 }}
               >
-                <div 
+                <div
                   className="thumb"
                   style={{
                     overflow: 'hidden',
@@ -169,16 +270,17 @@ export default function ProjectSection() {
                     className="w-100"
                     style={{
                       borderRadius: '10px',
-                      transition: 'transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)',
+                      transition: 'transform 0.25s cubic-bezier(0.4, 0, 0.2, 1)',
                       objectFit: 'cover',
+                      transform: 'translateZ(0)',
                     }}
                     onMouseEnter={(e) => {
                       const target = e.currentTarget;
-                      target.style.transform = 'scale(1.05)';
+                      target.style.transform = 'scale(1.05) translateZ(0)';
                     }}
                     onMouseLeave={(e) => {
                       const target = e.currentTarget;
-                      target.style.transform = 'scale(1)';
+                      target.style.transform = 'scale(1) translateZ(0)';
                     }}
                   />
                 </div>
@@ -188,7 +290,7 @@ export default function ProjectSection() {
                   style={{
                     marginTop: '16px',
                     textAlign: 'center',
-                    transition: 'all 0.6s ease',
+                    transition: 'all 0.3s ease',
                   }}
                 >
                   <div className="content">

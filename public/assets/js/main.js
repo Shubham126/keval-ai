@@ -466,14 +466,16 @@
             });
         }
 
-        if($('.project-slider').length > 0) {
+        // Skip if React Swiper already initialized (has swiper-initialized class)
+        if($('.project-slider').length > 0 && !$('.project-slider').hasClass('swiper-initialized')) {
             const projectSlider = new Swiper(".project-slider", {
                 spaceBetween: 30,
-                speed: 2000,
+                speed: 800,
                 loop: true,
                 autoplay: {
-                    delay: 1000,
+                    delay: 4000,
                     disableOnInteraction: false,
+                    pauseOnMouseEnter: true,
                 },
                 breakpoints: {
                     1199: {

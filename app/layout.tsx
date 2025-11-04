@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Script from "next/script";
 import MouseCursor from "@/components/MouseCursor";
+import AppLoader from "@/components/AppLoader";
 // CSS Imports
 import "../public/assets/css/bootstrap.min.css";
 import "../public/assets/css/all.min.css";
@@ -83,7 +84,9 @@ export default function RootLayout({
         
         {/* Main Script - Must be last */}
         <Script src="/assets/js/main.js" strategy="lazyOnload" />
-        {children}
+        <AppLoader>
+          {children}
+        </AppLoader>
       </body>
     </html>
   );

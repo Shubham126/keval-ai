@@ -3,7 +3,6 @@
 import { useEffect } from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import Preloader from '@/components/Preloader';
 import BackToTop from '@/components/BackToTop';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -29,19 +28,19 @@ export default function ServiceDetailsPage() {
                 setTimeout(() => {
                   const targetElement = document.querySelector(targetId);
                   if (targetElement) {
-                      // Ensure content is visible
-                      const targetEl = targetElement as HTMLElement;
-                      const accordionBody = targetEl.querySelector('.accordion-body') as HTMLElement | null;
-                      if (accordionBody) {
-                        accordionBody.style.visibility = 'visible';
-                        accordionBody.style.display = 'block';
-                        accordionBody.style.opacity = '1';
-                      }
+                    // Ensure content is visible
+                    const accordionBody = targetElement.querySelector('.accordion-body');
+                    if (accordionBody && accordionBody instanceof HTMLElement) {
+                      accordionBody.style.visibility = 'visible';
+                      accordionBody.style.display = 'block';
+                      accordionBody.style.visibility = 'visible';
+                      accordionBody.style.display = 'block';
+                      accordionBody.style.opacity = '1';
                     }
+                  }
                 }, 300);
               }
             });
-
             // Handle shown event
             button.addEventListener('shown.bs.collapse', (e) => {
               const targetId = button.getAttribute('data-bs-target');
@@ -73,7 +72,6 @@ export default function ServiceDetailsPage() {
   }, []);
   return (
     <>
-      <Preloader />
       <Header />
 
       <div id="smooth-wrapper">
@@ -493,7 +491,7 @@ export default function ServiceDetailsPage() {
                   data-wow-delay=".3s"
                   style={{ fontSize: 'clamp(24px, 5vw, 50px)' }}
                 >
-                  Have an idea in your mind?<br />Let&apos;s make something great together
+                  Have an idea in your mind?<br />Let's make something great together
                 </h2>
                 <Link
                   href="/contact"
