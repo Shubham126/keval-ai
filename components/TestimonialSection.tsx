@@ -42,33 +42,6 @@ export default function TestimonialSection() {
   const swiperRef = useRef<SwiperType | null>(null);
   const [activeIndex, setActiveIndex] = useState(0);
 
-  // ✅ Ensure autoplay works reliably
-  useEffect(() => {
-    const startAutoplay = () => {
-      const swiper = swiperRef.current;
-      if (swiper && swiper.autoplay && !swiper.destroyed) {
-        try {
-          swiper.autoplay.start();
-        } catch {
-          // fallback retry
-          setTimeout(() => swiper.autoplay?.start?.(), 200);
-        }
-      }
-    };
-
-    // Start autoplay when DOM fully loads
-    if (document.readyState === 'complete') startAutoplay();
-    else window.addEventListener('load', startAutoplay);
-
-    // Check autoplay status every 2s
-    const monitor = setInterval(startAutoplay, 2000);
-
-    return () => {
-      clearInterval(monitor);
-      window.removeEventListener('load', startAutoplay);
-    };
-  }, []);
-
   return (
     <section
       className="testimonial-section fix section-padding bg-cover"
@@ -83,7 +56,11 @@ export default function TestimonialSection() {
               <div className="testimonial-content">
                 <div className="section-title">
                   <h6 className="wow fadeInUp">testimonials</h6>
-                  <h2 className="text-white tp-char-animation">
+                  <h2 className="text-white tp-char-animation"
+                  style = {{
+                    fontSize: '48px',
+                    font: 'bold'
+                  }}>
                     Our clients awesome Testimonials
                   </h2>
                 </div>
@@ -111,20 +88,38 @@ export default function TestimonialSection() {
               </div>
             </div>
 
-            {/* ✅ Swiper Slider */}
+            {/* ✅ Swiper Slider with AUTOPLAY */}
             <div className="col-lg-6">
               <Swiper
                 modules={[Autoplay, EffectCards]}
                 effect="cards"
                 grabCursor
-                loop
-                speed={800}
+                loop={false}
+                speed={600}
                 autoplay={{
-                  delay: 2500,
+                  delay: 3000,
                   disableOnInteraction: false,
+                  waitForTransition: true,
+                  reverseDirection: false,
                 }}
-                onSwiper={(swiper) => (swiperRef.current = swiper)}
-                onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
+                cardsEffect={{
+                  perSlideRotate: 2,
+                  perSlideOffset: 8,
+                  rotate: true,
+                  slideShadows: true,
+                }}
+                onSwiper={(swiper) => {
+                  swiperRef.current = swiper;
+                }}
+                onSlideChange={(swiper) => {
+                  setActiveIndex(swiper.activeIndex);
+                  // Loop back to first slide when reaching the end
+                  if (swiper.activeIndex === testimonials.length - 1) {
+                    setTimeout(() => {
+                      swiper.slideTo(0);
+                    }, 3000);
+                  }
+                }}
                 className="testimonial-slider"
               >
                 {testimonials.map((item, i) => (
@@ -169,12 +164,15 @@ export default function TestimonialSection() {
                 ))}
               </Swiper>
 
+              {/* ✅ Dots */}
               <div className="swiper-dot">
                 {testimonials.map((_, i) => (
                   <div
                     key={i}
                     className={`dot ${i === activeIndex ? 'dot-active' : ''}`}
-                    onClick={() => swiperRef.current?.slideToLoop(i)}
+                    onClick={() => {
+                      swiperRef.current?.slideTo(i);
+                    }}
                   />
                 ))}
               </div>
@@ -182,6 +180,93 @@ export default function TestimonialSection() {
           </div>
         </div>
       </div>
+
+      {/* ✅ Inline Styles */}
+      <style jsx>{`
+        .testimonial-box-items {
+          background: #1e1e1e;
+          border-radius: 20px;
+          padding: 30px;
+          color: #fff;
+          box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+          min-height: 280px;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+        }
+
+        .testi-content {
+          margin-top: 15px;
+          color: #e6f8ff;
+          font-size: 15px;
+          line-height: 1.6;
+        }
+
+        .client-info {
+          display: flex;
+          align-items: center;
+          gap: 15px;
+          margin-bottom: 10px;
+        }
+
+        .client-content h5 {
+          margin: 0;
+          font-size: 16px;
+          color: #fff;
+        }
+
+        .client-content p {
+          margin: 0;
+          color: #9fdfff;
+          font-size: 14px;
+        }
+
+        .icon svg {
+          width: 27px;
+          height: 20px;
+        }
+
+        /* ✅ Dots */
+        .swiper-dot {
+          display: flex;
+          gap: 10px;
+          justify-content: center;
+          margin-top: 20px;
+        }
+
+        .dot {
+          width: 12px;
+          height: 12px;
+          border-radius: 50%;
+          background: #444;
+          cursor: pointer;
+          transition: all 0.3s ease;
+        }
+
+        .dot-active {
+          background: linear-gradient(90deg, #59d2f3, #008cff);
+          transform: scale(1.3);
+          box-shadow: 0 0 10px rgba(89, 210, 243, 0.8);
+        }
+
+        .ratting-box h3 {
+          color: #fff;
+          font-size: 40px;
+          font-weight: 600;
+        }
+
+        .ratting-box .star i {
+          color: #ffd166;
+          margin-right: 4px;
+        }
+
+        @media (max-width: 991px) {
+          .testimonial-box-items {
+            padding: 20px;
+            min-height: auto;
+          }
+        }
+      `}</style>
     </section>
   );
 }
