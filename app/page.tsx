@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import BackToTop from '@/components/BackToTop';
@@ -19,75 +20,24 @@ import FeaturesSection from '@/components/FeaturesSection';
 import CalendlySection from '@/components/CalendlySection';
 
 export default function Home() {
+  const pathname = usePathname();
+
   useEffect(() => {
-    // Re-initialize animations after hydration
-    const initAnimations = () => {
-      // Re-initialize WOW.js
-      if (typeof window !== 'undefined' && (window as any).WOW) {
-        const wow = new (window as any).WOW({
-          boxClass: 'wow',
-          animateClass: 'animated',
-          offset: 0,
-          mobile: true,
-          live: true,
-        });
-        wow.init();
-      }
-
-      // Re-initialize GSAP animations if needed
-      if (typeof window !== 'undefined' && (window as any).gsap) {
-        const gsap = (window as any).gsap;
+    // Re-initialize animations on pathname change
+    setTimeout(() => {
+      if (typeof window !== 'undefined') {
+        // Initialize WOW.js
+        if ((window as any).WOW) {
+          new (window as any).WOW().init();
+        }
         
-        // Re-initialize reveal animations
-        const revealElements = document.querySelectorAll('.tp_reveal_anim');
-        revealElements.forEach((element) => {
-          gsap.fromTo(
-            element,
-            { opacity: 0, y: 50 },
-            {
-              opacity: 1,
-              y: 0,
-              duration: 1,
-              ease: 'power2.out',
-              scrollTrigger: {
-                trigger: element,
-                start: 'top 80%',
-                toggleActions: 'play none none none',
-              },
-            }
-          );
-        });
+        // Initialize custom animations if available
+        if ((window as any).initCustomAnimations) {
+          (window as any).initCustomAnimations();
+        }
       }
-
-      // Re-initialize character animations if SplitText is available
-      if (typeof window !== 'undefined' && (window as any).SplitText) {
-        const charElements = document.querySelectorAll('.tp-char-animation');
-        charElements.forEach((element) => {
-          if (!element.hasAttribute('data-animated')) {
-            element.setAttribute('data-animated', 'true');
-            // GSAP character animation will be handled by customer-gsap-animation.js
-          }
-        });
-      }
-    };
-
-    // Initialize animations immediately if ready, otherwise wait for load
-    let timer: NodeJS.Timeout | null = null;
-    
-    if (document.readyState === 'complete') {
-      // Small delay to ensure scripts are initialized
-      timer = setTimeout(initAnimations, 100);
-    } else {
-      window.addEventListener('load', initAnimations);
-    }
-
-    return () => {
-      if (timer) {
-        clearTimeout(timer);
-      }
-      window.removeEventListener('load', initAnimations);
-    };
-  }, []);
+    }, 300);
+  }, [pathname]);
 
   return (
     <>

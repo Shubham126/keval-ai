@@ -300,7 +300,8 @@
         }
 
         //>> Testimonial-slider Slider Start <<//
-        if($('.testimonial-slider').length > 0) {
+        // Skip if React Swiper already initialized (has swiper-initialized class)
+        if($('.testimonial-slider').length > 0 && !$('.testimonial-slider').hasClass('swiper-initialized')) {
             const testimonialSlider = new Swiper(".testimonial-slider", {
                 spaceBetween: 30,
                 speed: 2000,

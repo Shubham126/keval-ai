@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useState, useEffect } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, EffectCards } from 'swiper/modules';
 import type { Swiper as SwiperType } from 'swiper';
@@ -34,21 +34,40 @@ const testimonials: Testimonial[] = [
     image: '/assets/keval-image/testimonal/Millenium-Inventory.jpg',
     name: 'L. Bertrand',
     position: 'Millenium Inventory Executive',
-    text: `From MVP development to final launch, Keval AI's team was professional, creative, and detail-oriented.`,
+    text: `From MVP development to final launch, Keval AI's team was professional and detail-oriented.`,
   },
 ];
 
 export default function TestimonialSection() {
   const swiperRef = useRef<SwiperType | null>(null);
   const [activeIndex, setActiveIndex] = useState(0);
-  const [mounted, setMounted] = useState(false);
 
+  // ✅ Ensure autoplay works reliably
   useEffect(() => {
-    // Ensure client-only mount
-    setMounted(true);
-  }, []);
+    const startAutoplay = () => {
+      const swiper = swiperRef.current;
+      if (swiper && swiper.autoplay && !swiper.destroyed) {
+        try {
+          swiper.autoplay.start();
+        } catch {
+          // fallback retry
+          setTimeout(() => swiper.autoplay?.start?.(), 200);
+        }
+      }
+    };
 
-  if (!mounted) return null;
+    // Start autoplay when DOM fully loads
+    if (document.readyState === 'complete') startAutoplay();
+    else window.addEventListener('load', startAutoplay);
+
+    // Check autoplay status every 2s
+    const monitor = setInterval(startAutoplay, 2000);
+
+    return () => {
+      clearInterval(monitor);
+      window.removeEventListener('load', startAutoplay);
+    };
+  }, []);
 
   return (
     <section
@@ -60,7 +79,6 @@ export default function TestimonialSection() {
       <div className="container">
         <div className="testimonial-wrapper">
           <div className="row g-4 align-items-center">
-            {/* Left Content */}
             <div className="col-lg-6">
               <div className="testimonial-content">
                 <div className="section-title">
@@ -93,47 +111,36 @@ export default function TestimonialSection() {
               </div>
             </div>
 
-            {/* Right Slider */}
+            {/* ✅ Swiper Slider */}
             <div className="col-lg-6">
               <Swiper
-                onSwiper={(swiper) => (swiperRef.current = swiper)}
-                onInit={(swiper) => {
-                  // Ensure autoplay starts after initialization
-                  setTimeout(() => {
-                    if (swiper && swiper.autoplay && typeof swiper.autoplay.start === 'function') {
-                      swiper.autoplay.start();
-                    }
-                  }, 100);
-                  // Update active index on init
-                  setActiveIndex(swiper.realIndex);
-                }}
                 modules={[Autoplay, EffectCards]}
                 effect="cards"
                 grabCursor
-                slidesPerView={1}
                 loop
-                speed={600}
+                speed={800}
                 autoplay={{
-                  delay: 4000,
+                  delay: 2500,
                   disableOnInteraction: false,
                 }}
+                onSwiper={(swiper) => (swiperRef.current = swiper)}
                 onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
                 className="testimonial-slider"
               >
-                {testimonials.map((testimonial, index) => (
-                  <SwiperSlide key={index}>
+                {testimonials.map((item, i) => (
+                  <SwiperSlide key={i}>
                     <div className="testimonial-box-items">
                       <div className="client-info">
                         <Image
-                          src={testimonial.image}
-                          alt={testimonial.name}
+                          src={item.image}
+                          alt={item.name}
                           width={80}
                           height={80}
                           className="rounded-circle"
                         />
                         <div className="client-content">
-                          <h5>{testimonial.name}</h5>
-                          <p>{testimonial.position}</p>
+                          <h5>{item.name}</h5>
+                          <p>{item.position}</p>
                         </div>
                       </div>
                       <div className="testi-content">
@@ -155,23 +162,19 @@ export default function TestimonialSection() {
                             />
                           </svg>
                         </div>
-                        <span>{testimonial.text}</span>
+                        <span>{item.text}</span>
                       </div>
                     </div>
                   </SwiperSlide>
                 ))}
               </Swiper>
 
-              {/* Custom Pagination Dots */}
               <div className="swiper-dot">
-                {testimonials.map((_, index) => (
+                {testimonials.map((_, i) => (
                   <div
-                    key={index}
-                    className={`dot ${index === activeIndex ? 'dot-active' : ''}`}
-                    onClick={() => {
-                      swiperRef.current?.slideToLoop(index);
-                      setActiveIndex(index);
-                    }}
+                    key={i}
+                    className={`dot ${i === activeIndex ? 'dot-active' : ''}`}
+                    onClick={() => swiperRef.current?.slideToLoop(i)}
                   />
                 ))}
               </div>
@@ -179,33 +182,6 @@ export default function TestimonialSection() {
           </div>
         </div>
       </div>
-
-      {/* Custom Styles */}
-      <style jsx global>{`
-        .swiper-dot {
-          display: flex;
-          justify-content: center;
-          gap: 10px;
-          margin-top: 30px;
-        }
-        .swiper-dot .dot {
-          width: 12px;
-          height: 12px;
-          background: rgba(255, 255, 255, 0.3);
-          border-radius: 50%;
-          cursor: pointer;
-          transition: all 0.3s ease;
-        }
-        .swiper-dot .dot:hover {
-          background: rgba(255, 255, 255, 0.5);
-          transform: scale(1.2);
-        }
-        .swiper-dot .dot.dot-active {
-          background: rgba(255, 255, 255, 1);
-          width: 26px;
-          border-radius: 6px;
-        }
-      `}</style>
     </section>
   );
 }
