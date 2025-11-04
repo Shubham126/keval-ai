@@ -94,7 +94,7 @@ export default function PortfolioDetailsPage() {
                         </p>
                         <h3>Final Result</h3>
                         <p style={{ color: '#000000' }}>
-                          For almost 50 years Leighton Asia, one of the region's
+                          For almost 50 years Leighton Asia, one of the region&apos;s
                           largest and most respected construc companies, has been
                           progressively building for a better future by leveraging
                           international expertise with local intelligence. In that time
@@ -161,7 +161,7 @@ export default function PortfolioDetailsPage() {
                 }}
               >
                 <h2 className="wow fadeInUp" data-wow-delay=".3s">
-                  Have an idea in your mind?Let's make something great together
+                  Have an idea in your mind?Let&apos;s make something great together
                 </h2>
                 <Link
                   href="/contact"

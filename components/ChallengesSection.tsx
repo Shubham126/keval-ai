@@ -5,10 +5,10 @@ import Link from 'next/link';
 const challenges = [
   {
     number: '01',
-    title: "Antwerp's Market Dominance",
+    title: "Antwerp&apos;s Market Dominance",
     description: (
       <>
-        .With 84% control of the global rough diamond trade, Antwerp's
+        .With 84% control of the global rough diamond trade, Antwerp&apos;s
         dominance makes independent merchants vulnerable to market fluctuations
       </>
     ),

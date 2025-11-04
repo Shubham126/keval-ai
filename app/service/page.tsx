@@ -77,7 +77,7 @@ export default function ServicePage() {
                       data-wow-delay="0.3s"
                       style={{ color: '#1a1a1a' }}
                     >
-                      Simplify your stock operations with Keval AI's inventory systems. Track, manage, and optimize efficiently with minimal errors.
+                      Simplify your stock operations with Keval AI&apos;s inventory systems. Track, manage, and optimize efficiently with minimal errors.
                     </p>
                     <div className="content">
                       <h4 className="wow fadeInUp">002</h4>
@@ -105,7 +105,7 @@ export default function ServicePage() {
                       data-wow-delay="0.4s"
                       style={{ color: '#1a1a1a' }}
                     >
-                      Turn ideas into reality quickly with Keval AI's MVP development. Launch scalable prototypes that validate your concept with real users.
+                      Turn ideas into reality quickly with Keval AI&apos;s MVP development. Launch scalable prototypes that validate your concept with real users.
                     </p>
                   </li>
                   <li className="service-list">
@@ -115,7 +115,7 @@ export default function ServicePage() {
                       data-wow-delay="0.3s"
                       style={{ color: '#1a1a1a' }}
                     >
-                      Manage clients, resources, and workflows effortlessly with Keval AI's CRM & ERP solutions. Gain insights and automate business operations.
+                      Manage clients, resources, and workflows effortlessly with Keval AI&apos;s CRM & ERP solutions. Gain insights and automate business operations.
                     </p>
                     <div className="content">
                       <h4 className="wow fadeInUp">004</h4>
@@ -145,7 +145,7 @@ export default function ServicePage() {
                       data-wow-delay="0.3s"
                       style={{ color: '#1a1a1a' }}
                     >
-                      Drive growth with Keval AI's marketing services. Plan, execute, and target the right audience for measurable results.
+                      Drive growth with Keval AI&apos;s marketing services. Plan, execute, and target the right audience for measurable results.
                     </p>
                   </li>
                 </ul>
@@ -169,7 +169,7 @@ export default function ServicePage() {
                   data-wow-delay=".3s"
                   style={{ fontSize: 'clamp(24px, 5vw, 50px)' }}
                 >
-                  Have an idea in your mind?<br />Let's make something great together
+                  Have an idea in your mind?<br />Let&apos;s make something great together
                 </h2>
                 <Link
                   href="/contact"

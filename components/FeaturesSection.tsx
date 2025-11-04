@@ -47,7 +47,7 @@ export default function FeaturesSection() {
                   </h3>
                   <p className="fs-5" style={{ color: '#000000' }}>
                     We offer powerful, flexible solutions for every need, no
-                    matter the complexity. Simply put, we're built to scale.
+                    matter the complexity. Simply put, we&apos;re built to scale.
                     That means more growth for you.
                   </p>
                 </div>

@@ -71,7 +71,7 @@ export default function PortfolioPage() {
                     <div className="content">
                       <p style={{ color: '#000000' }}>MARCH 26, 2025</p>
                       <h3>
-                        <Link href="/portfolio-details" style={{ color: '#8B00FF', fontSize: 'clamp(20px, 2.5vw, 32px)' }}>
+                        <Link href="/portfolio-details" style={{ color: '#0d0670', fontSize: 'clamp(20px, 2.5vw, 32px)' }}>
                           Digital agency bring specialized <br /> knowledge and
                           experience
                         </Link>
@@ -236,7 +236,7 @@ export default function PortfolioPage() {
                 }}
               >
                 <h2 className="wow fadeInUp" data-wow-delay=".3s">
-                  Have an idea in your mind?Let's make something great together
+                  Have an idea in your mind?Let&apos;s make something great together
                 </h2>
                 <Link
                   href="/contact"
