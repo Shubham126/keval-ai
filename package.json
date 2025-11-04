@@ -3,9 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbo",
-    "dev:turbo": "next dev --turbo",
-    "dev:webpack": "next dev",
+    "dev": "node scripts/start-dev.js",
+    "dev:turbo": "npm run dev",
+    "dev:webpack": "node scripts/start-dev.js webpack",
+    "dev:fixed": "next dev --turbo -p 3005",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"

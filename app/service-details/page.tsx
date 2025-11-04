@@ -12,27 +12,62 @@ export default function ServiceDetailsPage() {
   useEffect(() => {
     // Ensure Bootstrap accordion is properly initialized
     if (typeof window !== 'undefined') {
-      // Wait for Bootstrap to load if using CDN
       const initAccordion = () => {
-        const accordionButtons = document.querySelectorAll('.accordion-button[data-bs-toggle="collapse"]');
-        accordionButtons.forEach((button) => {
-          button.addEventListener('shown.bs.collapse', (e) => {
-            // Ensure the accordion stays open after Bootstrap animation
-            const targetId = button.getAttribute('data-bs-target');
-            if (targetId) {
-              const targetElement = document.querySelector(targetId);
-              if (targetElement && !targetElement.classList.contains('show')) {
-                targetElement.classList.add('show');
+        // Wait for Bootstrap to be available
+        const checkBootstrap = () => {
+          if (typeof (window as any).bootstrap === 'undefined') {
+            setTimeout(checkBootstrap, 100);
+            return;
+          }
+
+          const accordionButtons = document.querySelectorAll('.accordion-button[data-bs-toggle="collapse"]');
+          accordionButtons.forEach((button) => {
+            // Handle accordion open
+            button.addEventListener('click', (e) => {
+              const targetId = button.getAttribute('data-bs-target');
+              if (targetId) {
+                setTimeout(() => {
+                  const targetElement = document.querySelector(targetId);
+                  if (targetElement) {
+                      // Ensure content is visible
+                      const targetEl = targetElement as HTMLElement;
+                      const accordionBody = targetEl.querySelector('.accordion-body') as HTMLElement | null;
+                      if (accordionBody) {
+                        accordionBody.style.visibility = 'visible';
+                        accordionBody.style.display = 'block';
+                        accordionBody.style.opacity = '1';
+                      }
+                    }
+                }, 300);
               }
-            }
+            });
+
+            // Handle shown event
+            button.addEventListener('shown.bs.collapse', (e) => {
+              const targetId = button.getAttribute('data-bs-target');
+              if (targetId) {
+                const targetElement = document.querySelector(targetId) as HTMLElement | null;
+                if (targetElement) {
+                  const targetEl = targetElement as HTMLElement;
+                  const accordionBody = targetEl.querySelector('.accordion-body') as HTMLElement | null;
+                  if (accordionBody) {
+                    accordionBody.style.visibility = 'visible';
+                    accordionBody.style.display = 'block';
+                    accordionBody.style.opacity = '1';
+                  }
+                }
+              }
+            });
           });
-        });
+        };
+
+        checkBootstrap();
       };
       
       if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', initAccordion);
       } else {
-        initAccordion();
+        setTimeout(initAccordion, 500);
       }
     }
   }, []);
@@ -202,6 +237,19 @@ export default function ServiceDetailsPage() {
                     <div className="faq-wrapper mt-5">
                       <div className="faq-accordion-items">
                         <div className="faq-accordion">
+                          <style jsx>{`
+                            .accordion-body {
+                              color: #000000 !important;
+                              visibility: visible !important;
+                            }
+                            .accordion-collapse.show .accordion-body {
+                              display: block !important;
+                              opacity: 1 !important;
+                            }
+                            .accordion-collapse:not(.show) .accordion-body {
+                              display: none !important;
+                            }
+                          `}</style>
                           <div className="accordion" id="accordion">
                             <div
                               className="accordion-item mb-3 wow fadeInUp"
@@ -222,8 +270,9 @@ export default function ServiceDetailsPage() {
                               <div
                                 id="faq1"
                                 className="accordion-collapse collapse show"
+                                data-bs-parent="#accordion"
                               >
-                                <div className="accordion-body">
+                                <div className="accordion-body" style={{ color: '#000000', visibility: 'visible', display: 'block' }}>
                                   Lorem ipsum dolor sit amet consectetur
                                   adipisicing elit. Consectetur provident
                                   aspernatur mollitia? Enim a iusto esse maxime
@@ -249,9 +298,10 @@ export default function ServiceDetailsPage() {
                               </h5>
                               <div
                                 id="faq2"
-                                className="accordion-collapse show"
+                                className="accordion-collapse collapse show"
+                                data-bs-parent="#accordion"
                               >
-                                <div className="accordion-body">
+                                <div className="accordion-body" style={{ color: '#000000', visibility: 'visible', display: 'block' }}>
                                   Lorem ipsum dolor sit amet consectetur
                                   adipisicing elit. Consectetur provident
                                   aspernatur mollitia? Enim a iusto esse maxime
@@ -278,8 +328,9 @@ export default function ServiceDetailsPage() {
                               <div
                                 id="faq3"
                                 className="accordion-collapse collapse"
+                                data-bs-parent="#accordion"
                               >
-                                <div className="accordion-body">
+                                <div className="accordion-body" style={{ color: '#000000', visibility: 'visible' }}>
                                   Lorem ipsum dolor sit amet consectetur
                                   adipisicing elit. Consectetur provident
                                   aspernatur mollitia? Enim a iusto esse maxime
@@ -306,8 +357,9 @@ export default function ServiceDetailsPage() {
                               <div
                                 id="faq4"
                                 className="accordion-collapse collapse"
+                                data-bs-parent="#accordion"
                               >
-                                <div className="accordion-body">
+                                <div className="accordion-body" style={{ color: '#000000', visibility: 'visible' }}>
                                   Lorem ipsum dolor sit amet consectetur
                                   adipisicing elit. Consectetur provident
                                   aspernatur mollitia? Enim a iusto esse maxime
@@ -441,7 +493,7 @@ export default function ServiceDetailsPage() {
                   data-wow-delay=".3s"
                   style={{ fontSize: 'clamp(24px, 5vw, 50px)' }}
                 >
-                  Have an idea in your mind?<br />Let's make something great together
+                  Have an idea in your mind?<br />Let&apos;s make something great together
                 </h2>
                 <Link
                   href="/contact"

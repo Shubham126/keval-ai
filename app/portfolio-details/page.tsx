@@ -63,7 +63,7 @@ export default function PortfolioDetailsPage() {
                   <div className="row g-4">
                     <div className="col-xl-8">
                       <div className="details-content">
-                        <h2>
+                        <h2 style={{ color: '#0d0670' }}>
                           Digital agency bring specialized knowledge and
                           experience
                         </h2>

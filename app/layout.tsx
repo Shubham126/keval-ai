@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Script from "next/script";
+import MouseCursor from "@/components/MouseCursor";
 // CSS Imports
 import "../public/assets/css/bootstrap.min.css";
 import "../public/assets/css/all.min.css";
@@ -38,14 +39,25 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        {/* jQuery Core - Only load when needed */}
-        <Script src="/assets/js/jquery-3.7.1.min.js" strategy="lazyOnload" />
+        <MouseCursor />
+        {/* jQuery Core - Load with beforeInteractive to ensure it's available early */}
+        <Script 
+          src="/assets/js/jquery-3.7.1.min.js" 
+          strategy="beforeInteractive"
+        />
         
         {/* Bootstrap - Load after jQuery */}
-        <Script src="/assets/js/bootstrap.bundle.min.js" strategy="lazyOnload" />
+        <Script 
+          src="/assets/js/bootstrap.bundle.min.js" 
+          strategy="lazyOnload"
+        />
         
-        {/* Essential jQuery Plugins - Load together */}
-        <Script src="/assets/js/viewport.jquery.js" strategy="lazyOnload" />
+        {/* Essential jQuery Plugins - Load after page is interactive and jQuery is ready */}
+        <Script 
+          id="viewport-jquery"
+          src="/assets/js/viewport.jquery.js" 
+          strategy="afterInteractive"
+        />
         <Script src="/assets/js/swiper-bundle.min.js" strategy="lazyOnload" />
         
         {/* GSAP Scripts - Load together for animations */}

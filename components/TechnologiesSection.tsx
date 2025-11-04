@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
 import Image from 'next/image';
@@ -30,78 +31,111 @@ const techLogosRow2 = [
 ];
 
 export default function TechnologiesSection() {
+  useEffect(() => {
+    // Add smooth CSS transitions for Swiper slides
+    const style = document.createElement('style');
+    style.textContent = `
+      .gt-brand-wrapper .swiper-wrapper {
+        transition-timing-function: linear !important;
+        will-change: transform;
+      }
+    `;
+    document.head.appendChild(style);
+
+    // ✅ Proper cleanup (TypeScript-safe)
+    return () => {
+      if (document.head.contains(style)) {
+        document.head.removeChild(style);
+      }
+    };
+  }, []);
+
   return (
-    <section 
-      style={{ 
+    <section
+      className="brand-section section-padding pt-0"
+      style={{
         backgroundColor: '#ffffff',
-        padding: '100px 0 0',
-        position: 'relative'
+        overflow: 'hidden', // ✅ Prevents overflow from Swiper rows
       }}
     >
-      <div style={{ position: 'relative' }}>
-        <h3 style={{ 
-          fontSize: 'clamp(24px, 4vw, 36px)',
-          fontWeight: '600',
-          color: '#111',
-          marginBottom: '40px',
-          textAlign: 'center'
-        }}>
+      <div
+        className="brand-wrapper-2 fix"
+        style={{
+          paddingBottom: '40px',
+          position: 'relative',
+          overflow: 'hidden', // ✅ Ensures clean clipping
+        }}
+      >
+        <h3
+          className="heading_text"
+          style={{
+            textAlign: 'center',
+            fontWeight: 600,
+            fontSize: '24px',
+            marginBottom: '25px',
+            color: '#1a1a1a',
+          }}
+        >
           Technologies we use
         </h3>
 
-        <div style={{ width: '100%', overflow: 'hidden' }}>
+        {/* ===== Row 1 ===== */}
+        <div
+          className="gt-brand-wrapper"
+          style={{
+            overflow: 'hidden',
+            padding: '10px 0 10px',
+          }}
+        >
           <Swiper
             modules={[Autoplay]}
             spaceBetween={30}
             slidesPerView={5}
-            speed={5000}
+            speed={4000}
+            loop
+            allowTouchMove={false}
             autoplay={{
-              delay: 100,
-              reverseDirection: false,
+              delay: 0,
               disableOnInteraction: false,
               pauseOnMouseEnter: false,
             }}
-            allowTouchMove={false}
-            watchSlidesProgress={true}
-            loop={true}
-            freeMode={false}
             breakpoints={{
-              320: {
-                slidesPerView: 2,
-              },
-              768: {
-                slidesPerView: 3,
-              },
-              1024: {
-                slidesPerView: 5,
-              },
+              320: { slidesPerView: 2 },
+              768: { slidesPerView: 3 },
+              1024: { slidesPerView: 5 },
             }}
+            className="brand-slider-2"
           >
             {techLogosRow1.map((logo, index) => (
               <SwiperSlide key={index}>
-                <div 
-                  style={{ 
-                    minWidth: '220px',
-                    minHeight: '150px',
+                <div
+                  className="gt-brand-img"
+                  style={{
+                    minWidth: '180px',
+                    height: '120px',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    position: 'relative',
-                    border: '1px solid #e0e0e0',
-                    borderRadius: '50%',
-                    backgroundColor: '#ffffff'
                   }}
                 >
                   <Image
                     src={`/assets/logos/${logo}`}
                     alt={logo}
-                    width={180}
+                    width={150}
                     height={70}
-                    style={{ 
+                    style={{
                       objectFit: 'contain',
-                      maxWidth: '180px',
-                      maxHeight: '70px'
+                      maxWidth: '160px',
+                      maxHeight: '70px',
+                      filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.1))',
+                      transition: 'transform 0.3s ease',
                     }}
+                    onMouseEnter={(e) =>
+                      (e.currentTarget.style.transform = 'scale(1.05)')
+                    }
+                    onMouseLeave={(e) =>
+                      (e.currentTarget.style.transform = 'scale(1)')
+                    }
                   />
                 </div>
               </SwiperSlide>
@@ -109,59 +143,64 @@ export default function TechnologiesSection() {
           </Swiper>
         </div>
 
-        <div style={{ width: '100%', overflow: 'hidden', marginTop: '30px' }}>
+        {/* ===== Row 2 ===== */}
+        <div
+          className="gt-brand-wrapper mt-30"
+          style={{
+            overflow: 'hidden',
+            padding: '10px 0 10px',
+          }}
+        >
           <Swiper
             modules={[Autoplay]}
             spaceBetween={30}
             slidesPerView={5}
-            speed={5000}
+            speed={4000}
+            loop
+            allowTouchMove={false}
             autoplay={{
-              delay: 100,
+              delay: 0,
               reverseDirection: true,
               disableOnInteraction: false,
               pauseOnMouseEnter: false,
             }}
-            allowTouchMove={false}
-            watchSlidesProgress={true}
-            loop={true}
-            freeMode={false}
             breakpoints={{
-              320: {
-                slidesPerView: 2,
-              },
-              768: {
-                slidesPerView: 3,
-              },
-              1024: {
-                slidesPerView: 5,
-              },
+              320: { slidesPerView: 2 },
+              768: { slidesPerView: 3 },
+              1024: { slidesPerView: 5 },
             }}
+            className="brand-slider-3"
           >
             {techLogosRow2.map((logo, index) => (
               <SwiperSlide key={index}>
-                <div 
-                  style={{ 
-                    minWidth: '220px',
-                    minHeight: '150px',
+                <div
+                  className="gt-brand-img"
+                  style={{
+                    minWidth: '180px',
+                    height: '120px',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    position: 'relative',
-                    border: '1px solid #e0e0e0',
-                    borderRadius: '50%',
-                    backgroundColor: '#ffffff'
                   }}
                 >
                   <Image
                     src={`/assets/logos/${logo}`}
                     alt={logo}
-                    width={180}
+                    width={150}
                     height={70}
-                    style={{ 
+                    style={{
                       objectFit: 'contain',
-                      maxWidth: '180px',
-                      maxHeight: '70px'
+                      maxWidth: '160px',
+                      maxHeight: '70px',
+                      filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.1))',
+                      transition: 'transform 0.3s ease',
                     }}
+                    onMouseEnter={(e) =>
+                      (e.currentTarget.style.transform = 'scale(1.05)')
+                    }
+                    onMouseLeave={(e) =>
+                      (e.currentTarget.style.transform = 'scale(1)')
+                    }
                   />
                 </div>
               </SwiperSlide>
@@ -169,6 +208,30 @@ export default function TechnologiesSection() {
           </Swiper>
         </div>
       </div>
+
+      {/* Scoped CSS */}
+      <style jsx>{`
+        .brand-section {
+          position: relative;
+          z-index: 1;
+        }
+        .heading_text {
+          letter-spacing: 0.5px;
+        }
+        .gt-brand-wrapper .swiper {
+          overflow: hidden !important;
+        }
+        .gt-brand-wrapper .swiper-slide {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+        @media (max-width: 768px) {
+          .heading_text {
+            font-size: 20px;
+          }
+        }
+      `}</style>
     </section>
   );
 }

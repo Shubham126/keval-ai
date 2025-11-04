@@ -3,7 +3,6 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import MouseCursor from './MouseCursor';
 
 export default function Header() {
   const [isSticky, setIsSticky] = useState(false);
@@ -171,10 +170,7 @@ export default function Header() {
       <div
         className={`offcanvas__overlay ${isOffcanvasOpen ? 'overlay-open' : ''}`}
         onClick={closeOffcanvas}
-      ></div>
-
-      {/* Mouse Cursor */}
-      <MouseCursor />
+      >      </div>
     </>
   );
 }

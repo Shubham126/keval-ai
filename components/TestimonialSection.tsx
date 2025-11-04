@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination, EffectCards } from 'swiper/modules';
 import type { Swiper as SwiperType } from 'swiper';
@@ -42,6 +42,7 @@ const testimonials: Testimonial[] = [
 export default function TestimonialSection() {
   const swiperRef = useRef<SwiperType | null>(null);
   const paginationRef = useRef<HTMLDivElement>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
 
   return (
     <section
@@ -104,12 +105,14 @@ export default function TestimonialSection() {
                   disableOnInteraction: false,
                 }}
                 onSlideChange={(swiper) => {
+                  // Get the real index in loop mode
+                  const realIndex = swiper.realIndex;
+                  setActiveIndex(realIndex);
+                  
+                  // Update dot classes
                   const dots = paginationRef.current?.querySelectorAll('.dot');
                   dots?.forEach((dot, index) => {
-                    // Use activeIndex with modulo to handle loop mode correctly
-                    const activeIndex = swiper.activeIndex % testimonials.length;
-                    const dotIndex = parseInt(dot.getAttribute('data-index') || '0');
-                    if (dotIndex === activeIndex) {
+                    if (index === realIndex) {
                       dot.classList.add('dot-active');
                     } else {
                       dot.classList.remove('dot-active');
@@ -118,10 +121,12 @@ export default function TestimonialSection() {
                 }}
                 onInit={(swiper) => {
                   // Initialize active dot on load
+                  const realIndex = swiper.realIndex;
+                  setActiveIndex(realIndex);
+                  
                   const dots = paginationRef.current?.querySelectorAll('.dot');
-                  const activeIndex = swiper.activeIndex % testimonials.length;
                   dots?.forEach((dot, index) => {
-                    if (index === activeIndex) {
+                    if (index === realIndex) {
                       dot.classList.add('dot-active');
                     } else {
                       dot.classList.remove('dot-active');
@@ -190,11 +195,20 @@ export default function TestimonialSection() {
                   <div
                     key={index}
                     data-index={index}
-                    className={`dot ${index === 0 ? 'dot-active' : ''}`}
+                    className={`dot ${index === activeIndex ? 'dot-active' : ''}`}
                     onClick={() => {
                       if (swiperRef.current) {
+                        // Use slideToLoop for proper loop mode navigation
                         swiperRef.current.slideToLoop(index);
+                        setActiveIndex(index);
                       }
+                    }}
+                    onMouseEnter={(e) => {
+                      // Add hover effect for better UX
+                      e.currentTarget.style.transform = 'scale(1.2)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.transform = 'scale(1)';
                     }}
                   ></div>
                 ))}
@@ -226,9 +240,12 @@ export default function TestimonialSection() {
         }
         .swiper-dot .dot:hover {
           background: rgba(255, 255, 255, 0.5);
+          transform: scale(1.2);
         }
         .swiper-dot .dot.dot-active {
           background: rgba(255, 255, 255, 1);
+          width: 24px;
+          border-radius: 6px;
         }
         .testimonial-slider .swiper-slide {
           height: auto;
