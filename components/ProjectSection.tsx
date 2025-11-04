@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation } from 'swiper/modules';
+import { Navigation, Autoplay } from 'swiper/modules';
 import Link from 'next/link';
 import Image from 'next/image';
 
@@ -32,9 +32,26 @@ const projects = [
 
 export default function ProjectSection() {
   useEffect(() => {
-    // Add styles for centering navigation arrows
+    // Add styles for smooth animations and navigation arrows
     const style = document.createElement('style');
     style.textContent = `
+      .project-slider {
+        overflow: visible !important;
+      }
+      .project-slider .swiper-wrapper {
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
+        will-change: transform !important;
+      }
+      .project-slider .swiper-slide {
+        transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.6s ease !important;
+        will-change: transform, opacity !important;
+      }
+      .project-slider .swiper-slide-active {
+        opacity: 1 !important;
+      }
+      .project-slider .swiper-slide:not(.swiper-slide-active) {
+        opacity: 0.7 !important;
+      }
       .project-slider .swiper-button-next,
       .project-slider .swiper-button-prev {
         display: flex !important;
@@ -46,6 +63,13 @@ export default function ProjectSection() {
         border-radius: 50% !important;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
         margin-top: 0 !important;
+        transition: all 0.3s ease !important;
+      }
+      .project-slider .swiper-button-next:hover,
+      .project-slider .swiper-button-prev:hover {
+        background: #ff7a00 !important;
+        transform: scale(1.1) !important;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
       }
       .project-slider .swiper-button-next::after,
       .project-slider .swiper-button-prev::after {
@@ -59,6 +83,16 @@ export default function ProjectSection() {
         top: 0 !important;
         left: 0 !important;
         transform: none !important;
+      }
+      .project-slider .swiper-button-next:hover::after,
+      .project-slider .swiper-button-prev:hover::after {
+        color: #fff !important;
+      }
+      .project-box-items-4 {
+        transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1) !important;
+      }
+      .project-slider .swiper-slide-active .project-box-items-4 {
+        transform: scale(1.02) !important;
       }
     `;
     document.head.appendChild(style);
@@ -87,17 +121,26 @@ export default function ProjectSection() {
         </h3>
 
         <Swiper
-          modules={[Navigation]}
+          modules={[Navigation, Autoplay]}
           spaceBetween={30}
           slidesPerView={1}
           navigation={true}
-          speed={2000}
+          speed={800}
+          loop={true}
+          autoplay={{
+            delay: 4000,
+            disableOnInteraction: false,
+            pauseOnMouseEnter: true,
+          }}
+          grabCursor={true}
           breakpoints={{
             768: {
               slidesPerView: 2,
+              spaceBetween: 30,
             },
             1024: {
               slidesPerView: 3,
+              spaceBetween: 30,
             },
           }}
           className="project-slider"
@@ -107,10 +150,17 @@ export default function ProjectSection() {
               <div
                 className="project-box-items-4 p-relative"
                 style={{
-                  transition: 'transform 0.6s ease-in-out',
+                  transition: 'transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)',
+                  overflow: 'hidden',
                 }}
               >
-                <div className="thumb">
+                <div 
+                  className="thumb"
+                  style={{
+                    overflow: 'hidden',
+                    borderRadius: '10px',
+                  }}
+                >
                   <Image
                     src={project.image}
                     alt={project.title}
@@ -119,7 +169,16 @@ export default function ProjectSection() {
                     className="w-100"
                     style={{
                       borderRadius: '10px',
-                      transition: 'transform 0.6s ease-in-out',
+                      transition: 'transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)',
+                      objectFit: 'cover',
+                    }}
+                    onMouseEnter={(e) => {
+                      const target = e.currentTarget;
+                      target.style.transform = 'scale(1.05)';
+                    }}
+                    onMouseLeave={(e) => {
+                      const target = e.currentTarget;
+                      target.style.transform = 'scale(1)';
                     }}
                   />
                 </div>
