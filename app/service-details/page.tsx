@@ -491,7 +491,7 @@ export default function ServiceDetailsPage() {
                   data-wow-delay=".3s"
                   style={{ fontSize: 'clamp(24px, 5vw, 50px)' }}
                 >
-                  Have an idea in your mind?<br />Let's make something great together
+                  Have an idea in your mind?<br />Let&apos;s make something great together
                 </h2>
                 <Link
                   href="/contact"
