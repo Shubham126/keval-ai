@@ -1,8 +1,9 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
+import type { Swiper as SwiperType } from 'swiper';
 import Image from 'next/image';
 
 import 'swiper/css';
@@ -31,6 +32,8 @@ const techLogosRow2 = [
 ];
 
 export default function TechnologiesSection() {
+  const swiperRow2Ref = useRef<SwiperType | null>(null);
+
   useEffect(() => {
     // Add smooth CSS transitions for Swiper slides
     const style = document.createElement('style');
@@ -49,6 +52,7 @@ export default function TechnologiesSection() {
       }
     };
   }, []);
+
 
   return (
     <section
@@ -95,7 +99,7 @@ export default function TechnologiesSection() {
             loop
             allowTouchMove={false}
             autoplay={{
-              delay: 0,
+              delay: 1,
               disableOnInteraction: false,
               pauseOnMouseEnter: false,
             }}
@@ -152,6 +156,23 @@ export default function TechnologiesSection() {
           }}
         >
           <Swiper
+            onSwiper={(swiper) => {
+              swiperRow2Ref.current = swiper;
+              // Force reverse direction by manually controlling the autoplay
+              setTimeout(() => {
+                if (swiper.autoplay) {
+                  // Stop autoplay
+                  swiper.autoplay.stop();
+                  // Update params
+                  const params = swiper.params.autoplay as any;
+                  if (params) {
+                    params.reverseDirection = true;
+                  }
+                  // Restart with reverse
+                  swiper.autoplay.start();
+                }
+              }, 100);
+            }}
             modules={[Autoplay]}
             spaceBetween={30}
             slidesPerView={5}
@@ -159,7 +180,7 @@ export default function TechnologiesSection() {
             loop
             allowTouchMove={false}
             autoplay={{
-              delay: 0,
+              delay: 1,
               reverseDirection: true,
               disableOnInteraction: false,
               pauseOnMouseEnter: false,
