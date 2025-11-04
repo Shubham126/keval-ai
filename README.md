@@ -18,34 +18,6 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-## Project Structure
-
-```
-├── app/                    # Next.js app directory
-│   ├── layout.tsx         # Root layout
-│   ├── page.tsx           # Home page
-│   ├── about/             # About page
-│   ├── contact/            # Contact page
-│   ├── service/           # Service pages
-│   └── portfolio/         # Portfolio pages
-├── components/            # React components
-│   ├── Header.tsx
-│   ├── Footer.tsx
-│   ├── HeroSection.tsx
-│   └── ...
-├── public/               # Static assets
-│   └── assets/          # Images, CSS, JS files
-└── lib/                 # Utility functions
-```
-
-## Features
-
-- Next.js 14 with App Router
-- TypeScript
-- Tailwind CSS
-- Swiper for sliders
-- GSAP for animations
-- Responsive design
 
 ## Build
 
