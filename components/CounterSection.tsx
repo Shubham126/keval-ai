@@ -74,7 +74,7 @@ export default function CounterSection() {
             {/* 01 */}
             <motion.div
               className="col-xl-4 col-lg-6 col-md-6"
-              variants={fadeInUp}
+              variants={fadeInUp()}
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
@@ -91,7 +91,7 @@ export default function CounterSection() {
             {/* 02 */}
             <motion.div
               className="col-xl-4 col-lg-6 col-md-6"
-              variants={fadeInUp}
+              variants={fadeInUp()}
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
@@ -108,7 +108,7 @@ export default function CounterSection() {
             {/* 03 */}
             <motion.div
               className="col-xl-4 col-lg-6 col-md-6"
-              variants={fadeInUp}
+              variants={fadeInUp()}
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
