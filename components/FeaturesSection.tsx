@@ -2,6 +2,8 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
+import { motion } from 'framer-motion';
+import { fadeInUp } from '@/lib/motionVariants';
 
 const features = [
   {
@@ -26,19 +28,31 @@ const features = [
 
 export default function FeaturesSection() {
   return (
-    <section className="service-section-5 weKnow_section fix my-5" style={{ backgroundColor: '#ffffff' }}>
+    <section
+      className="service-section-5 weKnow_section fix my-5"
+      style={{ backgroundColor: '#ffffff' }}
+    >
       <div className="weKnow_section_bg_image">
         <div className="container">
+
+          {/* Top Heading */}
           <div className="row g-4 my-5">
-            <div className="col-lg-12 col-md-12 wow fadeInUp" data-wow-delay=".3s">
+            <motion.div
+              className="col-lg-12 col-md-12"
+              variants={fadeInUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              custom={0.3}
+            >
               <div className="service-box-items-5">
                 <div className="content text-center">
                   <h3 className="fw-bold">
-                    <Link 
+                    <Link
                       href="#"
-                      style={{ 
+                      style={{
                         color: '#00072D',
-                        fontSize: 'clamp(24px, 4vw, 36px)'
+                        fontSize: 'clamp(24px, 4vw, 36px)',
                       }}
                     >
                       Because your unique business needs are <br /> exactly
@@ -52,16 +66,24 @@ export default function FeaturesSection() {
                   </p>
                 </div>
               </div>
-            </div>
+            </motion.div>
           </div>
+
+          {/* Feature Cards */}
           <div className="row g-4">
             {features.map((feature, index) => (
-              <div
+              <motion.div
                 key={index}
-                className="col-lg-4 col-md-6 wow fadeInUp"
-                data-wow-delay=".3s"
+                className="col-lg-4 col-md-6"
+                variants={fadeInUp}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                custom={0.3 + index * 0.15}
               >
                 <div className="service-box-items-5">
+
+                  {/* Image Card */}
                   <div
                     className="card_image image_border"
                     style={{
@@ -82,6 +104,8 @@ export default function FeaturesSection() {
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     />
                   </div>
+
+                  {/* Text Content */}
                   <div className="content pt-3 px-2">
                     <h5>
                       <Link href="#">{feature.title}</Link>
@@ -89,25 +113,34 @@ export default function FeaturesSection() {
                     <p style={{ color: '#000000' }}>{feature.description}</p>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
 
+          {/* Button */}
           <div className="w-100 text-center mt-5">
-            <div className="header-button">
-              <Link
-                href="/about"
-                className="theme-btn rounded-2 text-white border-white"
-              >
-                <span className="icon-1"></span>
-                Learn more
-                <span className="icon-2"></span>
-              </Link>
-            </div>
+            <motion.div
+              variants={fadeInUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              custom={0.5}
+            >
+              <div className="header-button">
+                <Link
+                  href="/about"
+                  className="theme-btn rounded-2 text-white border-white"
+                >
+                  <span className="icon-1"></span>
+                  Learn more
+                  <span className="icon-2"></span>
+                </Link>
+              </div>
+            </motion.div>
           </div>
+
         </div>
       </div>
     </section>
   );
 }
-

@@ -2,6 +2,8 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
+import { motion } from 'framer-motion';
+import { fadeInUp } from '@/lib/motionVariants';
 
 const projects = [
   {
@@ -32,7 +34,7 @@ const projects = [
     titleLink: '#',
     buttonLink: '/portfolio',
   },
-   {
+  {
     image: '/assets/keval-image/portfolio/donai-gems.png',
     category: 'CRM AND ERP',
     title: 'Donai Gems',
@@ -49,15 +51,33 @@ const projects = [
 ];
 
 export default function ProjectSection() {
-  // Duplicate items so the loop looks continuous
   const infiniteProjects = [...projects, ...projects];
 
   return (
     <section className="project-section-4 fix section-padding pt-0">
       <div className="project-wrapper-4">
-        <h3 className="text-center heading_text my-4">Our Recent Work</h3>
 
-        <div className="swiper project-slider">
+        {/* Title */}
+        <motion.h3
+          className="text-center heading_text my-4"
+          variants={fadeInUp(0.35)}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          custom={0.2}
+        >
+          Our Recent Work
+        </motion.h3>
+
+        {/* Slider Container */}
+        <motion.div
+          className="swiper project-slider"
+          variants={fadeInUp(0.35)}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          custom={0.35}
+        >
           <div
             className="swiper-wrapper"
             style={{
@@ -66,12 +86,18 @@ export default function ProjectSection() {
             }}
           >
             {infiniteProjects.map((project, index) => (
-              <div key={index} className="swiper-slide"
-              style={{
-                width: '30%',
-                margin: '5px'
-              }}>
+              <div
+                key={index}
+                className="swiper-slide"
+                style={{
+                  width: '30%',
+                  margin: '5px',
+                  flexShrink: 0,
+                }}
+              >
                 <div className="project-box-items-4 p-relative">
+
+                  {/* Thumbnail */}
                   <div className="thumb">
                     <Image
                       src={project.image}
@@ -86,6 +112,7 @@ export default function ProjectSection() {
                     />
                   </div>
 
+                  {/* Text */}
                   <div className="project-content">
                     <div className="content">
                       <span>{project.category}</span>
@@ -93,40 +120,30 @@ export default function ProjectSection() {
                         <Link href={project.titleLink}>{project.title}</Link>
                       </h3>
                     </div>
+
                     <Link href={project.buttonLink} className="theme-btn2">
                       <span className="icon-1"></span>
                       VIEW PORTFOLIO
                       <span className="icon-2"></span>
                     </Link>
                   </div>
+
                 </div>
               </div>
             ))}
           </div>
-        </div>
+        </motion.div>
       </div>
 
       <style jsx global>{`
         /* Smooth right-to-left movement with pauses */
         @keyframes slidePause {
-          0% {
-            transform: translateX(0);
-          }
-          20% {
-            transform: translateX(0);
-          }
-          40% {
-            transform: translateX(-20%);
-          }
-          60% {
-            transform: translateX(-20%);
-          }
-          80% {
-            transform: translateX(-40%);
-          }
-          100% {
-            transform: translateX(-40%);
-          }
+          0% { transform: translateX(0); }
+          20% { transform: translateX(0); }
+          40% { transform: translateX(-20%); }
+          60% { transform: translateX(-20%); }
+          80% { transform: translateX(-40%); }
+          100% { transform: translateX(-40%); }
         }
 
         .project-slider:hover .swiper-wrapper {

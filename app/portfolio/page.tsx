@@ -5,6 +5,8 @@ import Footer from '@/components/Footer';
 import BackToTop from '@/components/BackToTop';
 import Link from 'next/link';
 import Image from 'next/image';
+import { motion } from 'framer-motion';
+import { fadeInUp } from '../../lib/motionVariants';
 
 export default function PortfolioPage() {
   return (
@@ -13,7 +15,8 @@ export default function PortfolioPage() {
 
       <div id="smooth-wrapper">
         <div id="smooth-content">
-          {/* Breadcrumb-wrapper Start */}
+
+          {/* Breadcrumb-wrapper */}
           <div
             className="breadcrumb-wrapper bg-cover"
             style={{
@@ -22,12 +25,24 @@ export default function PortfolioPage() {
           >
             <div className="container">
               <div className="page-heading">
-                <div className="breadcrumb-sub-title">
-                  <h1 className="wow fadeInUp" data-wow-delay=".3s">
-                    Portfolio
-                  </h1>
-                </div>
-                <ul className="breadcrumb-items wow fadeInUp" data-wow-delay=".5s">
+
+                <motion.div
+                  variants={fadeInUp(0.3)}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ amount: 0.3, once: false }}
+                  className="breadcrumb-sub-title"
+                >
+                  <h1>Portfolio</h1>
+                </motion.div>
+
+                <motion.ul
+                  variants={fadeInUp(0.5)}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ amount: 0.3, once: false }}
+                  className="breadcrumb-items"
+                >
                   <li>
                     <Link href="/">
                       <i className="fa-regular fa-house"></i>
@@ -38,17 +53,26 @@ export default function PortfolioPage() {
                     <i className="fa-solid fa-slash-forward"></i>
                   </li>
                   <li>Portfolio</li>
-                </ul>
+                </motion.ul>
+
               </div>
             </div>
           </div>
 
-          {/* Case Study Section Start */}
+          {/* Case Study Section */}
           <section className="case-study-section-2 fix section-padding" style={{ backgroundColor: '#ffffff' }}>
             <div className="container">
               <div className="row justify-content-between align-items-end">
-                <div className="col-xl-5 col-lg-6 wow fadeInUp" data-wow-delay=".3s">
-                  <div className="case-study-box-items-2 theme-color-1">
+
+                {/* CARD 1 */}
+                <div className="col-xl-5 col-lg-6">
+                  <motion.div
+                    variants={fadeInUp(0.3)}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ amount: 0.3, once: false }}
+                    className="case-study-box-items-2 theme-color-1"
+                  >
                     <div className="thumb">
                       <Image
                         src="/assets/keval-image/portfolio/dalila-1.png"
@@ -57,28 +81,31 @@ export default function PortfolioPage() {
                         height={400}
                         style={{ width: '100%', height: 'auto' }}
                       />
-                      <Link href="/portfolio-details" className="icon" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                        <Image
-                          src="/assets/img/icon/12.svg"
-                          alt="img"
-                          width={50}
-                          height={50}
-                        />
+                      <Link href="/portfolio-details" className="icon" style={{ display:'flex',alignItems:'center',justifyContent:'center' }}>
+                        <Image src="/assets/img/icon/12.svg" alt="img" width={50} height={50} />
                       </Link>
                     </div>
+
                     <div className="content">
                       <p style={{ color: '#000000' }}>MARCH 26, 2025</p>
                       <h3>
-                        <Link href="/portfolio-details" style={{ color: '#0d0670', fontSize: 'clamp(20px, 2.5vw, 32px)' }}>
-                          Digital agency bring specialized <br /> knowledge and
-                          experience
+                        <Link href="/portfolio-details" style={{ color:'#0d0670',fontSize:'clamp(20px,2.5vw,32px)' }}>
+                          Digital agency bring specialized <br /> knowledge and experience
                         </Link>
                       </h3>
                     </div>
-                  </div>
+                  </motion.div>
                 </div>
-                <div className="col-xl-6 col-lg-6 wow fadeInUp" data-wow-delay=".5s">
-                  <div className="case-study-box-items-2 margin-left-20 mt-0 theme-color-1">
+
+                {/* CARD 2 */}
+                <div className="col-xl-6 col-lg-6">
+                  <motion.div
+                    variants={fadeInUp(0.5)}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ amount: 0.3, once: false }}
+                    className="case-study-box-items-2 margin-left-20 mt-0 theme-color-1"
+                  >
                     <div className="thumb">
                       <Image
                         src="/assets/keval-image/portfolio/donai-1.png"
@@ -87,28 +114,31 @@ export default function PortfolioPage() {
                         height={400}
                         style={{ width: '100%', height: 'auto' }}
                       />
-                      <Link href="/portfolio-details" className="icon" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                        <Image
-                          src="/assets/img/icon/12.svg"
-                          alt="img"
-                          width={50}
-                          height={50}
-                        />
+                      <Link href="/portfolio-details" className="icon" style={{ display:'flex',alignItems:'center',justifyContent:'center' }}>
+                        <Image src="/assets/img/icon/12.svg" alt="img" width={50} height={50} />
                       </Link>
                     </div>
+
                     <div className="content">
                       <p style={{ color: '#000000' }}>MARCH 26, 2025</p>
                       <h3>
-                        <Link href="/portfolio-details" style={{ color: '#0d0670', fontSize: 'clamp(20px, 2.5vw, 32px)' }}>
-                          Digital agency bring specialized <br /> knowledge and
-                          experience
+                        <Link href="/portfolio-details" style={{ color:'#0d0670',fontSize:'clamp(20px,2.5vw,32px)' }}>
+                          Digital agency bring specialized <br /> knowledge and experience
                         </Link>
                       </h3>
                     </div>
-                  </div>
+                  </motion.div>
                 </div>
-                <div className="col-lg-12 wow fadeInUp" data-wow-delay=".3s">
-                  <div className="case-study-box-items-2 theme-color-1">
+
+                {/* WIDE CARD */}
+                <div className="col-lg-12">
+                  <motion.div
+                    variants={fadeInUp(0.3)}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ amount: 0.3, once: false }}
+                    className="case-study-box-items-2 theme-color-1"
+                  >
                     <div className="thumb">
                       <Image
                         src="/assets/keval-image/portfolio/dalila-diamonds.png"
@@ -117,30 +147,35 @@ export default function PortfolioPage() {
                         height={400}
                         style={{ width: '100%', height: 'auto' }}
                       />
-                      <Link href="/portfolio-details" className="icon" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                        <Image
-                          src="/assets/img/icon/12.svg"
-                          alt="img"
-                          width={50}
-                          height={50}
-                        />
+                      <Link href="/portfolio-details" className="icon" style={{ display:'flex',alignItems:'center',justifyContent:'center' }}>
+                        <Image src="/assets/img/icon/12.svg" alt="img" width={50} height={50} />
                       </Link>
                     </div>
+
                     <div className="content">
                       <p style={{ color: '#000000' }}>MARCH 26, 2025</p>
                       <h3>
-                        <Link href="/portfolio-details" style={{ color: '#0d0670', fontSize: 'clamp(20px, 2.5vw, 32px)' }}>
-                          Digital agency bring specialized knowledge and
-                          experience
+                        <Link href="/portfolio-details" style={{ color:'#0d0670',fontSize:'clamp(20px,2.5vw,32px)' }}>
+                          Digital agency bring specialized knowledge and experience
                         </Link>
                       </h3>
                     </div>
-                  </div>
+                  </motion.div>
                 </div>
               </div>
+
+              {/* SECOND ROW */}
               <div className="row justify-content-between">
-                <div className="col-xl-5 col-lg-6 wow fadeInUp" data-wow-delay=".3s">
-                  <div className="case-study-box-items-2 theme-color-1">
+
+                {/* CARD 4 (with button) */}
+                <div className="col-xl-5 col-lg-6">
+                  <motion.div
+                    variants={fadeInUp(0.3)}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ amount: 0.3, once: false }}
+                    className="case-study-box-items-2 theme-color-1"
+                  >
                     <div className="thumb">
                       <Image
                         src="/assets/keval-image/portfolio/donai-1.png"
@@ -149,47 +184,41 @@ export default function PortfolioPage() {
                         height={400}
                         style={{ width: '100%', height: 'auto' }}
                       />
-                      <Link href="/portfolio-details" className="icon" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                        <Image
-                          src="/assets/img/icon/12.svg"
-                          alt="img"
-                          width={50}
-                          height={50}
-                        />
+                      <Link href="/portfolio-details" className="icon" style={{ display:'flex',alignItems:'center',justifyContent:'center' }}>
+                        <Image src="/assets/img/icon/12.svg" alt="img" width={50} height={50} />
                       </Link>
                     </div>
+
                     <div className="content">
                       <p style={{ color: '#000000' }}>MARCH 26, 2025</p>
                       <h3>
-                        <Link href="/portfolio-details" style={{ color: '#0d0670', fontSize: 'clamp(20px, 2.5vw, 32px)' }}>
-                          Digital agency bring specialized <br /> knowledge and
-                          experience
+                        <Link href="/portfolio-details" style={{ color:'#0d0670',fontSize:'clamp(20px,2.5vw,32px)' }}>
+                          Digital agency bring specialized <br /> knowledge and experience
                         </Link>
                       </h3>
+
                       <Link href="/portfolio-details" className="theme-btn">
                         <span className="icon-1">
-                          <Image
-                            src="/assets/img/icon/10.svg"
-                            alt="img"
-                            width={20}
-                            height={20}
-                          />
+                          <Image src="/assets/img/icon/10.svg" alt="img" width={20} height={20} />
                         </span>
                         view all projects
                         <span className="icon-2">
-                          <Image
-                            src="/assets/img/icon/11.svg"
-                            alt="img"
-                            width={20}
-                            height={20}
-                          />
+                          <Image src="/assets/img/icon/11.svg" alt="img" width={20} height={20} />
                         </span>
                       </Link>
                     </div>
-                  </div>
+                  </motion.div>
                 </div>
-                <div className="col-xl-6 col-lg-6 wow fadeInUp" data-wow-delay=".5s">
-                  <div className="case-study-box-items-2 margin-left-20 theme-color-1">
+
+                {/* CARD 5 */}
+                <div className="col-xl-6 col-lg-6">
+                  <motion.div
+                    variants={fadeInUp(0.5)}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ amount: 0.3, once: false }}
+                    className="case-study-box-items-2 margin-left-20 theme-color-1"
+                  >
                     <div className="thumb">
                       <Image
                         src="/assets/keval-image/portfolio/dalila-1.png"
@@ -198,72 +227,62 @@ export default function PortfolioPage() {
                         height={400}
                         style={{ width: '100%', height: 'auto' }}
                       />
-                      <Link href="/portfolio-details" className="icon" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                        <Image
-                          src="/assets/img/icon/12.svg"
-                          alt="img"
-                          width={50}
-                          height={50}
-                        />
+                      <Link href="/portfolio-details" className="icon" style={{ display:'flex',alignItems:'center',justifyContent:'center' }}>
+                        <Image src="/assets/img/icon/12.svg" alt="img" width={50} height={50} />
                       </Link>
                     </div>
+
                     <div className="content">
                       <p style={{ color: '#000000' }}>MARCH 26, 2025</p>
                       <h3>
-                        <Link href="/portfolio-details" style={{ color: '#0d0670', fontSize: 'clamp(20px, 2.5vw, 32px)' }}>
-                          Digital agency bring specialized <br /> knowledge and
-                          experience
+                        <Link href="/portfolio-details" style={{ color:'#0d0670',fontSize:'clamp(20px,2.5vw,32px)' }}>
+                          Digital agency bring specialized <br /> knowledge and experience
                         </Link>
                       </h3>
                     </div>
-                  </div>
+                  </motion.div>
                 </div>
+
               </div>
             </div>
           </section>
 
-          {/* Cta Section Start */}
+          {/* CTA Section */}
           <section className="cta-section fix section-padding pt-0 dark-bg-style black-bg"
-          style={{background: "linear-gradient(to bottom, white 50%, black 50%)"}}>
+            style={{background: "linear-gradient(to bottom, white 50%, black 50%)"}}
+          >
             <div className="container">
-              <div
+              <motion.div
+                variants={fadeInUp(0.3)}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ amount:0.3, once:false }}
                 className="cta-wrapper bg-cover"
                 style={{
-                  backgroundImage:
-                    "url('/assets/keval-image/service/servic-pg-cta.png')",
+                  backgroundImage: "url('/assets/keval-image/service/servic-pg-cta.png')",
                 }}
               >
-                <h2 className="wow fadeInUp" data-wow-delay=".3s">
-                  Have an idea in your mind?Let&apos;s make something great together
+                <h2>
+                  Have an idea in your mind? Let&apos;s make something great together
                 </h2>
-                <Link
-                  href="/contact"
-                  className="theme-btn border-white wow fadeInUp"
-                  data-wow-delay=".5s"
+
+                <motion.div
+                  variants={fadeInUp(0.5)}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ amount:0.3, once:false }}
                 >
-                  <span className="icon-1">
-                    <Image
-                      src="/assets/img/icon/10.svg"
-                      alt="img"
-                      width={20}
-                      height={20}
-                    />
-                  </span>
-                  get in touch
-                  <span className="icon-2">
-                    <Image
-                      src="/assets/img/icon/11.svg"
-                      alt="img"
-                      width={20}
-                      height={20}
-                    />
-                  </span>
-                </Link>
-              </div>
+                  <Link href="/contact" className="theme-btn border-white">
+                    <span className="icon-1"></span>
+                    get in touch
+                    <span className="icon-2"></span>
+                  </Link>
+                </motion.div>
+
+              </motion.div>
             </div>
           </section>
 
-          {/* Footer Section Start */}
           <Footer />
         </div>
       </div>
@@ -272,4 +291,3 @@ export default function PortfolioPage() {
     </>
   );
 }
-

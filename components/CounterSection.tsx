@@ -1,6 +1,8 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
+import { motion } from 'framer-motion';
+import { fadeInUp } from '@/lib/motionVariants';
 
 interface CounterProps {
   target: number;
@@ -20,21 +22,18 @@ function Counter({ target, suffix = '', duration = 4000 }: CounterProps) {
         entries.forEach((entry) => {
           if (entry.isIntersecting && !hasAnimated.current) {
             hasAnimated.current = true;
-            
+
             let start = 0;
-            const increment = target / (duration / 16); // 60fps
-            
+            const increment = target / (duration / 16);
+
             const timer = setInterval(() => {
               start += increment;
               if (start >= target) {
-                if (countRef.current) {
-                  countRef.current.textContent = target + suffix;
-                }
+                if (countRef.current) countRef.current.textContent = target + suffix;
                 clearInterval(timer);
               } else {
-                if (countRef.current) {
+                if (countRef.current)
                   countRef.current.textContent = Math.floor(start) + suffix;
-                }
               }
             }, 16);
 
@@ -47,9 +46,7 @@ function Counter({ target, suffix = '', duration = 4000 }: CounterProps) {
 
     observer.observe(countRef.current);
 
-    return () => {
-      observer.disconnect();
-    };
+    return () => observer.disconnect();
   }, [target, suffix, duration]);
 
   return <span className="count" ref={countRef}>0{suffix}</span>;
@@ -65,41 +62,69 @@ export default function CounterSection() {
       }}
     >
       <div className="section-title style-4 title-anim">
-        <h3 className="text-center heading_text" style={{ color: '#000000' }}>
+        <h3 className="text-center heading_text text-black">
           driven by results
         </h3>
       </div>
+
       <div className="container">
         <div className="counter-wrapper-3">
           <div className="row g-4">
-            <div className="col-xl-4 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".3s">
+
+            {/* 01 */}
+            <motion.div
+              className="col-xl-4 col-lg-6 col-md-6"
+              variants={fadeInUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              custom={0.3}
+            >
               <div className="counter-box-items">
-                <h2 style={{ fontSize: 'clamp(48px, 8vw, 72px)', fontWeight: 'bold', lineHeight: '1.2' }}>
+                <h2 className="font-bold leading-tight" style={{ fontSize: 'clamp(48px, 8vw, 72px)' }}>
                   <Counter target={100} suffix="+" />
                 </h2>
                 <p>Projects completed</p>
               </div>
-            </div>
-            <div className="col-xl-4 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".5s">
+            </motion.div>
+
+            {/* 02 */}
+            <motion.div
+              className="col-xl-4 col-lg-6 col-md-6"
+              variants={fadeInUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              custom={0.5}
+            >
               <div className="counter-box-items">
-                <h2 style={{ fontSize: 'clamp(48px, 8vw, 72px)', fontWeight: 'bold', lineHeight: '1.2' }}>
+                <h2 className="font-bold leading-tight" style={{ fontSize: 'clamp(48px, 8vw, 72px)' }}>
                   <Counter target={99} suffix="%" />
                 </h2>
                 <p>Satisfied customers</p>
               </div>
-            </div>
-            <div className="col-xl-4 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".7s">
+            </motion.div>
+
+            {/* 03 */}
+            <motion.div
+              className="col-xl-4 col-lg-6 col-md-6"
+              variants={fadeInUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              custom={0.7}
+            >
               <div className="counter-box-items">
-                <h2 style={{ fontSize: 'clamp(48px, 8vw, 72px)', fontWeight: 'bold', lineHeight: '1.2' }}>
+                <h2 className="font-bold leading-tight" style={{ fontSize: 'clamp(48px, 8vw, 72px)' }}>
                   <Counter target={80} suffix="k" />
                 </h2>
                 <p>Saved per month</p>
               </div>
-            </div>
+            </motion.div>
+
           </div>
         </div>
       </div>
     </section>
   );
 }
-

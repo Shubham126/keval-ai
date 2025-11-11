@@ -4,6 +4,8 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import BackToTop from '@/components/BackToTop';
 import Link from 'next/link';
+import { motion } from 'framer-motion';
+import { fadeInUp } from '../../lib/motionVariants';
 
 export default function ServicePage() {
   return (
@@ -12,7 +14,8 @@ export default function ServicePage() {
 
       <div id="smooth-wrapper">
         <div id="smooth-content">
-          {/* Breadcrumb-wrapper Start */}
+
+          {/* Breadcrumb-wrapper */}
           <div
             className="breadcrumb-wrapper bg-cover"
             style={{
@@ -21,168 +24,277 @@ export default function ServicePage() {
           >
             <div className="container">
               <div className="page-heading">
-                <div className="breadcrumb-sub-title">
-                  <h1 className="wow fadeInUp" data-wow-delay=".3s">
-                    Services
-                  </h1>
-                </div>
-                <ul className="breadcrumb-items wow fadeInUp" data-wow-delay=".5s">
+
+                <motion.div
+                  variants={fadeInUp(0.3)}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ amount: 0.3, once: false }}
+                  className="breadcrumb-sub-title"
+                >
+                  <h1>Services</h1>
+                </motion.div>
+
+                <motion.ul
+                  variants={fadeInUp(0.5)}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ amount: 0.3, once: false }}
+                  className="breadcrumb-items"
+                >
                   <li>
                     <Link href="/">
                       <i className="fa-regular fa-house"></i>
                       Home
                     </Link>
                   </li>
-                  <li>
-                    <i className="fa-solid fa-slash-forward"></i>
-                  </li>
+
+                  <li><i className="fa-solid fa-slash-forward"></i></li>
+
                   <li>Services</li>
-                </ul>
+                </motion.ul>
+
               </div>
             </div>
           </div>
 
-          {/* Service Section Start */}
+          {/* Service Section */}
           <section className="service-section fix section-padding" style={{ backgroundColor: '#ffffff' }}>
             <div className="container">
               <div className="section-title-area bor-bottom margin-top-40"></div>
+
               <div className="service-wrapper">
                 <ul className="style-border">
+
+                  {/* Item 1 */}
                   <li className="service-list">
                     <div className="content">
-                      <h4 className="wow fadeInUp">001</h4>
-                      <h3 className="wow img-custom-anim-left">
+
+                      <motion.h4
+                        variants={fadeInUp(0.1)}
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ amount: 0.3, once: false }}
+                      >
+                        001
+                      </motion.h4>
+
+                      <motion.h3
+                        variants={fadeInUp(0.2)}
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ amount: 0.3, once: false }}
+                      >
                         <Link href="/service-details">
                           HIGH CONVERSION WEBSITE
                         </Link>
-                      </h3>
+                      </motion.h3>
+
                     </div>
-                    <p
-                      className="wow img-custom-anim-right"
-                      data-wow-duration="1.5s"
-                      data-wow-delay="0.4s"
+
+                    <motion.p
+                      variants={fadeInUp(0.4)}
+                      initial="hidden"
+                      whileInView="visible"
+                      viewport={{ amount: 0.3, once: false }}
                       style={{ color: '#1a1a1a' }}
                     >
                       Keval AI creates websites that look great and convert
                       visitors into customers. Fast, user-friendly, and optimized
                       for growth.
-                    </p>
+                    </motion.p>
                   </li>
+
+                  {/* Item 2 */}
                   <li className="service-list">
-                    <p
-                      className="wow img-custom-anim-left"
-                      data-wow-duration="1.5s"
-                      data-wow-delay="0.3s"
+
+                    <motion.p
+                      variants={fadeInUp(0.3)}
+                      initial="hidden"
+                      whileInView="visible"
+                      viewport={{ amount: 0.3, once: false }}
                       style={{ color: '#1a1a1a' }}
                     >
                       Simplify your stock operations with Keval AI&apos;s inventory systems. Track, manage, and optimize efficiently with minimal errors.
-                    </p>
+                    </motion.p>
+
                     <div className="content">
-                      <h4 className="wow fadeInUp">002</h4>
-                      <h3
-                        className="wow img-custom-anim-right"
-                        data-wow-duration="1.5s"
-                        data-wow-delay="0.4s"
+
+                      <motion.h4
+                        variants={fadeInUp(0.1)}
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ amount: 0.3, once: false }}
+                      >
+                        002
+                      </motion.h4>
+
+                      <motion.h3
+                        variants={fadeInUp(0.4)}
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ amount: 0.3, once: false }}
                       >
                         <Link href="/service-details">
                           INVENTORY MANAGEMENT SYSTEMS
                         </Link>
-                      </h3>
+                      </motion.h3>
+
                     </div>
                   </li>
+
+                  {/* Item 3 */}
                   <li className="service-list">
                     <div className="content">
-                      <h4 className="wow fadeInUp">003</h4>
-                      <h3 className="wow img-custom-anim-left">
+
+                      <motion.h4
+                        variants={fadeInUp(0.1)}
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ amount: 0.3, once: false }}
+                      >
+                        003
+                      </motion.h4>
+
+                      <motion.h3
+                        variants={fadeInUp(0.2)}
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ amount: 0.3, once: false }}
+                      >
                         <Link href="/service-details">MVP development</Link>
-                      </h3>
+                      </motion.h3>
+
                     </div>
-                    <p
-                      className="wow img-custom-anim-right"
-                      data-wow-duration="1.5s"
-                      data-wow-delay="0.4s"
+
+                    <motion.p
+                      variants={fadeInUp(0.4)}
+                      initial="hidden"
+                      whileInView="visible"
+                      viewport={{ amount: 0.3, once: false }}
                       style={{ color: '#1a1a1a' }}
                     >
                       Turn ideas into reality quickly with Keval AI&apos;s MVP development. Launch scalable prototypes that validate your concept with real users.
-                    </p>
+                    </motion.p>
                   </li>
+
+                  {/* Item 4 */}
                   <li className="service-list">
-                    <p
-                      className="wow img-custom-anim-left"
-                      data-wow-duration="1.5s"
-                      data-wow-delay="0.3s"
+
+                    <motion.p
+                      variants={fadeInUp(0.3)}
+                      initial="hidden"
+                      whileInView="visible"
+                      viewport={{ amount: 0.3, once: false }}
                       style={{ color: '#1a1a1a' }}
                     >
-                      Manage clients, resources, and workflows effortlessly with Keval AI&apos;s CRM & ERP solutions. Gain insights and automate business operations.
-                    </p>
+                      Manage clients, resources, and workflows effortlessly with Keval AI&apos;s CRM & ERP solutions.
+                    </motion.p>
+
                     <div className="content">
-                      <h4 className="wow fadeInUp">004</h4>
-                      <h3
-                        className="wow img-custom-anim-right"
-                        data-wow-duration="1.5s"
-                        data-wow-delay="0.4s"
+
+                      <motion.h4
+                        variants={fadeInUp(0.1)}
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ amount: 0.3, once: false }}
+                      >
+                        004
+                      </motion.h4>
+
+                      <motion.h3
+                        variants={fadeInUp(0.4)}
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ amount: 0.3, once: false }}
                       >
                         <Link href="/service-details">CRM AND ERP</Link>
-                      </h3>
+                      </motion.h3>
                     </div>
+
                   </li>
+
+                  {/* Item 5 */}
                   <li className="service-list">
                     <div className="content">
-                      <h4 className="wow fadeInUp">005</h4>
-                      <h3
-                        className="wow img-custom-anim-right"
-                        data-wow-duration="1.5s"
-                        data-wow-delay="0.4s"
+
+                      <motion.h4
+                        variants={fadeInUp(0.1)}
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ amount: 0.3, once: false }}
+                      >
+                        005
+                      </motion.h4>
+
+                      <motion.h3
+                        variants={fadeInUp(0.4)}
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ amount: 0.3, once: false }}
                       >
                         <Link href="/service-details">Marketing solutions</Link>
-                      </h3>
+                      </motion.h3>
+
                     </div>
-                    <p
-                      className="wow img-custom-anim-left"
-                      data-wow-duration="1.5s"
-                      data-wow-delay="0.3s"
+
+                    <motion.p
+                      variants={fadeInUp(0.3)}
+                      initial="hidden"
+                      whileInView="visible"
+                      viewport={{ amount: 0.3, once: false }}
                       style={{ color: '#1a1a1a' }}
                     >
                       Drive growth with Keval AI&apos;s marketing services. Plan, execute, and target the right audience for measurable results.
-                    </p>
+                    </motion.p>
+
                   </li>
+
                 </ul>
               </div>
             </div>
           </section>
 
-          {/* Cta Section Start */}
-          <section className="cta-section fix section-padding pt-0 dark-bg-style black-bg"
-          style={{background: "linear-gradient(to bottom, white 50%, #0d0670 50%)"}}>
+          {/* CTA */}
+          <section
+            className="cta-section fix section-padding pt-0 dark-bg-style black-bg"
+            style={{ background: "linear-gradient(to bottom, white 50%, #0d0670 50%)" }}
+          >
             <div className="container">
-              <div
+
+              <motion.div
+                variants={fadeInUp(0.3)}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ amount: 0.3, once: false }}
                 className="cta-wrapper bg-cover"
                 style={{
-                  backgroundImage:
-                    "url('/assets/keval-image/service/servic-pg-cta.png')",
+                  backgroundImage: "url('/assets/keval-image/service/servic-pg-cta.png')",
                 }}
               >
-                <h2 
-                  className="wow fadeInUp" 
-                  data-wow-delay=".3s"
-                  style={{ fontSize: 'clamp(24px, 5vw, 50px)' }}
-                >
-                  Have an idea in your mind?<br />Let&apos;s make something great together
+                <h2 style={{ fontSize: 'clamp(24px, 5vw, 50px)' }}>
+                  Have an idea in your mind?<br />
+                  Let's make something great together
                 </h2>
-                <Link
-                  href="/contact"
-                  className="theme-btn border-white wow fadeInUp"
-                  data-wow-delay=".5s"
+
+                <motion.div
+                  variants={fadeInUp(0.5)}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ amount: 0.3, once: false }}
                 >
-                  <span className="icon-1"></span>
-                  get in touch
-                  <span className="icon-2"></span>
-                </Link>
-              </div>
+                  <Link href="/contact" className="theme-btn border-white">
+                    <span className="icon-1"></span>
+                    get in touch
+                    <span className="icon-2"></span>
+                  </Link>
+                </motion.div>
+
+              </motion.div>
+
             </div>
           </section>
 
-          {/* Footer Section Start */}
           <Footer />
         </div>
       </div>
@@ -191,4 +303,3 @@ export default function ServicePage() {
     </>
   );
 }
-

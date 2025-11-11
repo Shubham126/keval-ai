@@ -3,6 +3,14 @@
 import { useEffect, useRef, useMemo } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { motion } from 'framer-motion';
+import { fadeInUp } from '@/lib/motionVariants'; // your path: '../../lib/motionVariants' also fine
+
+// Adapter: works whether fadeInUp is a Variants object or a (delay)=>Variants function
+const V = (delay = 0) => {
+  const v: any = fadeInUp;
+  return typeof v === 'function' ? v(delay) : v;
+};
 
 export default function HeroSection() {
   const typingRef = useRef<HTMLSpanElement>(null);
@@ -14,65 +22,85 @@ export default function HeroSection() {
     let wordIndex = 0;
     let charIndex = 0;
     let isDeleting = false;
-    let timeoutId: NodeJS.Timeout;
+    let timeoutId: ReturnType<typeof setTimeout>;
 
     const type = () => {
       if (!typingRef.current) return;
-      
       const currentWord = words[wordIndex];
-      
+
       if (isDeleting) {
         if (charIndex > 0) {
           typingRef.current.textContent = currentWord.substring(0, charIndex - 1);
           charIndex--;
-          timeoutId = setTimeout(type, 50); 
+          timeoutId = setTimeout(type, 50);
         } else {
           isDeleting = false;
           wordIndex = (wordIndex + 1) % words.length;
-          timeoutId = setTimeout(type, 500); 
+          timeoutId = setTimeout(type, 500);
         }
       } else {
         if (charIndex < currentWord.length) {
           typingRef.current.textContent = currentWord.substring(0, charIndex + 1);
           charIndex++;
-          timeoutId = setTimeout(type, 80); // Faster typing
+          timeoutId = setTimeout(type, 80);
         } else {
           isDeleting = true;
-          timeoutId = setTimeout(type, 1500); // Shorter display time
+          timeoutId = setTimeout(type, 1500);
         }
       }
     };
 
     type();
-
-    return () => {
-      if (timeoutId) {
-        clearTimeout(timeoutId);
-      }
-    };
+    return () => clearTimeout(timeoutId);
   }, [words]);
 
   return (
     <section
       className="hero-section hero-1 bg-cover"
-      style={{
-        backgroundImage: "url('/assets/keval-image/banners/Home-Banner.jpg')",
-      }}
+      style={{ backgroundImage: "url('/assets/keval-image/banners/Home-Banner.jpg')" }}
     >
       <div className="container-fluid">
         <div className="row align-items-center mt-5">
           <div className="col-xl-7 mt-5">
             <div className="hero-content px-5">
-              <h1 className="wow fadeInUp my-2" data-wow-delay=".3s" style={{ fontSize: 'clamp(2rem, 7vw, 4rem)', fontWeight: 'bold' }}>
-                  Empowering
-                </h1>
-                <h1 className="wow fadeInUp my-2" data-wow-delay=".3s" style={{ fontSize: 'clamp(2rem, 7vw, 4rem)', fontWeight: 'bold'}}>
-                  Diamond Trade with
-                </h1>
-                <h1 className="wow fadeInUp my-2" data-wow-delay=".3s" style={{ fontSize: 'clamp(2rem, 7vw, 4rem)', fontWeight: 'bold'}}>
-                  <strong ref={typingRef}></strong><span>.</span>
-                </h1>
+              <motion.h1
+                variants={V(0.0)}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: false, amount: 0.3 }}
+                className="wow fadeInUp my-2"
+                data-wow-delay=".3s"
+                style={{ fontSize: 'clamp(2rem, 7vw, 4rem)', fontWeight: 'bold' }}
+              >
+                Empowering
+              </motion.h1>
+
+              <motion.h1
+                variants={V(0.1)}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: false, amount: 0.3 }}
+                className="wow fadeInUp my-2"
+                data-wow-delay=".3s"
+                style={{ fontSize: 'clamp(2rem, 7vw, 4rem)', fontWeight: 'bold' }}
+              >
+                Diamond Trade with
+              </motion.h1>
+
+              <motion.h1
+                variants={V(0.2)}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: false, amount: 0.3 }}
+                className="wow fadeInUp my-2"
+                data-wow-delay=".3s"
+                style={{ fontSize: 'clamp(2rem, 7vw, 4rem)', fontWeight: 'bold' }}
+              >
+                <strong ref={typingRef}></strong>
+                <span>.</span>
+              </motion.h1>
             </div>
+
             <div className="px-5 d-flex justify-content-start align-items-center gap-3 mt-4">
               <div className="header-button">
                 <Link href="/about" className="theme-btn2 border-white">
@@ -95,4 +123,3 @@ export default function HeroSection() {
     </section>
   );
 }
-

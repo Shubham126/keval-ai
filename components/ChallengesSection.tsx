@@ -1,6 +1,8 @@
 'use client';
 
 import Link from 'next/link';
+import { motion } from 'framer-motion';
+import { fadeInUp } from '@/lib/motionVariants';
 
 const challenges = [
   {
@@ -32,20 +34,21 @@ const challenges = [
 export default function ChallengesSection() {
   return (
     <section 
-      className="service-section-5 fix section-padding"
-      style={{ backgroundColor: '#ffffff' }}
+      className="service-section-5 fix section-padding bg-white"
     >
       <div className="container">
         <div className="service-wrapper-5">
           <div className="row g-4 justify-content-between">
+
+            {/* Left Column */}
             <div className="col-xl-4 col-lg-4">
               <div className="service-left">
-                <div className="section-title style-4 mb-0 tp_reveal_anim">
-                  <h3 className="heading_text" style={{ textAlign: 'left' }}>
+                <div className="section-title style-4 mb-0">
+                  <h3 className="heading_text text-left">
                     key challenges We <span>address</span>
                   </h3>
                 </div>
-                <div className="header-button">
+                <div className="header-button mt-3">
                   <Link
                     href="/about"
                     className="theme-btn bg-black rounded-2 text-white border-white"
@@ -57,34 +60,44 @@ export default function ChallengesSection() {
                 </div>
               </div>
             </div>
+
+            {/* Right Column */}
             <div className="col-xl-8 col-lg-8">
               <div className="service-right">
                 <div className="row g-4">
+
                   {challenges.map((challenge, index) => (
-                    <div
+                    <motion.div
                       key={index}
-                      className="col-lg-6 col-md-6 wow fadeInUp"
-                      data-wow-delay={`${0.3 + index * 0.2}s`}
-                      style={{ display: 'flex' }}
+                      className="col-lg-6 col-md-6 flex"
+                      variants={fadeInUp}
+                      initial="hidden"
+                      whileInView="visible"
+                      viewport={{ once: true }}
+                      custom={0.3 + index * 0.2} // exact WOW.js delay
                     >
-                      <div className="service-box-items-5" style={{ height: '100%', width: '100%', display: 'flex', flexDirection: 'column' }}>
+                      <div
+                        className="service-box-items-5 flex flex-col w-full h-full"
+                      >
                         <span>{challenge.number}</span>
-                        <div className="content" style={{ flex: 1 }}>
+
+                        <div className="content flex-1">
                           <h3>
                             <Link href="#">{challenge.title}</Link>
                           </h3>
-                          <p style={{ color: '#000000' }}>{challenge.description}</p>
+                          <p className="text-black">{challenge.description}</p>
                         </div>
                       </div>
-                    </div>
+                    </motion.div>
                   ))}
+
                 </div>
               </div>
             </div>
+
           </div>
         </div>
       </div>
     </section>
   );
 }
-

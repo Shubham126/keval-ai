@@ -1,7 +1,8 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* @tailwind base; */
+/* @tailwind components; */
+/* @tailwind utilities; */
 
+/* CSS variables */
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -14,6 +15,7 @@
   }
 }
 
+/* Base styling */
 body {
   color: var(--foreground);
   background: #ffffff !important;
@@ -24,9 +26,6 @@ html {
   background: #ffffff !important;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+.text-balance {
+  text-wrap: balance;
 }
-

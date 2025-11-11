@@ -5,6 +5,8 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
 import type { Swiper as SwiperType } from 'swiper';
 import Image from 'next/image';
+import { motion } from 'framer-motion';
+import { fadeInUp } from '@/lib/motionVariants';
 
 import 'swiper/css';
 
@@ -35,7 +37,6 @@ export default function TechnologiesSection() {
   const swiperRow2Ref = useRef<SwiperType | null>(null);
 
   useEffect(() => {
-    // Add smooth CSS transitions for Swiper slides
     const style = document.createElement('style');
     style.textContent = `
       .gt-brand-wrapper .swiper-wrapper {
@@ -45,7 +46,6 @@ export default function TechnologiesSection() {
     `;
     document.head.appendChild(style);
 
-    // ✅ Proper cleanup (TypeScript-safe)
     return () => {
       if (document.head.contains(style)) {
         document.head.removeChild(style);
@@ -53,13 +53,12 @@ export default function TechnologiesSection() {
     };
   }, []);
 
-
   return (
     <section
       className="brand-section section-padding pt-0"
       style={{
         backgroundColor: '#ffffff',
-        overflow: 'hidden', // ✅ Prevents overflow from Swiper rows
+        overflow: 'hidden',
       }}
     >
       <div
@@ -67,10 +66,15 @@ export default function TechnologiesSection() {
         style={{
           paddingBottom: '40px',
           position: 'relative',
-          overflow: 'hidden', // ✅ Ensures clean clipping
+          overflow: 'hidden',
         }}
       >
-        <h3
+        {/* Heading with Framer Motion */}
+        <motion.h3
+          variants={fadeInUp(0.1)}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
           className="heading_text"
           style={{
             textAlign: 'center',
@@ -81,10 +85,14 @@ export default function TechnologiesSection() {
           }}
         >
           Technologies we use
-        </h3>
+        </motion.h3>
 
-        {/* ===== Row 1 ===== */}
-        <div
+        {/* Row 1 */}
+        <motion.div
+          variants={fadeInUp(0.2)}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
           className="gt-brand-wrapper"
           style={{
             overflow: 'hidden',
@@ -134,21 +142,21 @@ export default function TechnologiesSection() {
                       filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.1))',
                       transition: 'transform 0.3s ease',
                     }}
-                    onMouseEnter={(e) =>
-                      (e.currentTarget.style.transform = 'scale(1.05)')
-                    }
-                    onMouseLeave={(e) =>
-                      (e.currentTarget.style.transform = 'scale(1)')
-                    }
+                    onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.05)')}
+                    onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
                   />
                 </div>
               </SwiperSlide>
             ))}
           </Swiper>
-        </div>
+        </motion.div>
 
-        {/* ===== Row 2 ===== */}
-        <div
+        {/* Row 2 */}
+        <motion.div
+          variants={fadeInUp(0.35)}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
           className="gt-brand-wrapper mt-30"
           style={{
             overflow: 'hidden',
@@ -158,17 +166,11 @@ export default function TechnologiesSection() {
           <Swiper
             onSwiper={(swiper) => {
               swiperRow2Ref.current = swiper;
-              // Force reverse direction by manually controlling the autoplay
               setTimeout(() => {
                 if (swiper.autoplay) {
-                  // Stop autoplay
                   swiper.autoplay.stop();
-                  // Update params
                   const params = swiper.params.autoplay as any;
-                  if (params) {
-                    params.reverseDirection = true;
-                  }
-                  // Restart with reverse
+                  if (params) params.reverseDirection = true;
                   swiper.autoplay.start();
                 }
               }, 100);
@@ -216,21 +218,16 @@ export default function TechnologiesSection() {
                       filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.1))',
                       transition: 'transform 0.3s ease',
                     }}
-                    onMouseEnter={(e) =>
-                      (e.currentTarget.style.transform = 'scale(1.05)')
-                    }
-                    onMouseLeave={(e) =>
-                      (e.currentTarget.style.transform = 'scale(1)')
-                    }
+                    onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.05)')}
+                    onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
                   />
                 </div>
               </SwiperSlide>
             ))}
           </Swiper>
-        </div>
+        </motion.div>
       </div>
 
-      {/* Scoped CSS */}
       <style jsx>{`
         .brand-section {
           position: relative;

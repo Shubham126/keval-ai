@@ -1,12 +1,30 @@
+'use client';
+
 import Link from 'next/link';
 import Image from 'next/image';
+import { motion } from 'framer-motion';
+import { fade } from '@/lib/motionVariants';
 
 export default function Footer() {
   return (
-    <footer className="glass-footer">
+    <motion.footer
+      className="glass-footer"
+      variants={fade}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true }}
+    >
       <div className="footer-wrapper">
-        {/* Logo & Intro */}
-        <div className="footer-brand">
+
+        {/* Column 1: Brand */}
+        <motion.div
+          className="footer-brand"
+          variants={fade}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          transition={{ delay: 0.1 }}
+        >
           <Image
             src="/assets/keval-image/logo/Side Aligned Logo 1/Logo-09.png"
             alt="Keval AI Logo"
@@ -18,70 +36,74 @@ export default function Footer() {
             Designing the future with creativity, intelligence, and purpose.
             Keval-AI blends design and technology into meaningful experiences.
           </p>
-        </div>
+        </motion.div>
 
-        {/* Links */}
-        <div className="footer-nav">
+        {/* Column 2: Navigation */}
+        <motion.div
+          className="footer-nav"
+          variants={fade}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          transition={{ delay: 0.2 }}
+        >
           <div>
             <h4>Explore</h4>
             <ul>
-              <li>
-                <Link href="/about">About</Link>
-              </li>
-              <li>
-                <Link href="/service">Services</Link>
-              </li>
-              <li>
-                <Link href="/portfolio">Portfolio</Link>
-              </li>
-              <li>
-                <Link href="/contact">Contact</Link>
-              </li>
+              <li><Link href="/about">About</Link></li>
+              <li><Link href="/service">Services</Link></li>
+              <li><Link href="/portfolio">Portfolio</Link></li>
+              <li><Link href="/contact">Contact</Link></li>
             </ul>
           </div>
+
           <div>
             <h4>Portfolio</h4>
             <ul>
-              <li>
-                <Link href="#">Dalila Diamonds</Link>
-              </li>
-              <li>
-                <Link href="#">Donai Gems</Link>
-              </li>
-              <li>
-                <Link href="#">Millennium Star</Link>
-              </li>
+              <li><Link href="#">Dalila Diamonds</Link></li>
+              <li><Link href="#">Donai Gems</Link></li>
+              <li><Link href="#">Millennium Star</Link></li>
             </ul>
           </div>
-        </div>
+        </motion.div>
 
-        {/* Newsletter */}
-        <div className="footer-subscribe">
+        {/* Column 3: Subscribe */}
+        <motion.div
+          className="footer-subscribe"
+          variants={fade}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          transition={{ delay: 0.3 }}
+        >
           <h4>Stay in the Loop</h4>
           <p>Subscribe to our newsletter for design insights & AI updates.</p>
+
           <form>
             <input type="email" placeholder="Your email address" required />
             <button type="submit">Join</button>
           </form>
+
           <div className="footer-social">
-            <a href="#">
-              <i className="fab fa-linkedin-in"></i>
-            </a>
-            <a href="#">
-              <i className="fab fa-instagram"></i>
-            </a>
-            <a href="#">
-              <i className="fab fa-twitter"></i>
-            </a>
+            <a href="#"><i className="fab fa-linkedin-in"></i></a>
+            <a href="#"><i className="fab fa-instagram"></i></a>
+            <a href="#"><i className="fab fa-twitter"></i></a>
           </div>
-        </div>
+        </motion.div>
+
       </div>
 
-      {/* Bottom Line */}
-      <div className="footer-bottom">
+      {/* Bottom line */}
+      <motion.div
+        className="footer-bottom"
+        variants={fade}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        transition={{ delay: 0.4 }}
+      >
         <p>© 2025 Keval-AI Design</p>
-      </div>
-    </footer>
+      </motion.div>
+    </motion.footer>
   );
 }
-

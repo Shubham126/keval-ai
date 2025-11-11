@@ -1,48 +1,31 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
+import { ChevronUp } from 'lucide-react';
 
 export default function BackToTop() {
-  const [isVisible, setIsVisible] = useState(false);
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     const toggleVisibility = () => {
-      if (window.scrollY > 250) {
-        setIsVisible(true);
-      } else {
-        setIsVisible(false);
-      }
+      setVisible(window.scrollY > 200);
     };
-
     window.addEventListener('scroll', toggleVisibility);
+
     return () => window.removeEventListener('scroll', toggleVisibility);
   }, []);
 
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth',
-    });
-  };
-
-  if (!isVisible) return null;
-
   return (
-    <button
-      id="back-top"
-      className="back-to-top fixed bottom-8 right-8 z-50 bg-black text-white p-3 rounded-full hover:bg-gray-800 transition-colors"
-      onClick={scrollToTop}
-      style={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        width: '50px',
-        height: '50px',
-        padding: 0,
-      }}
+    <motion.button
+      aria-label="Back to top"
+      onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+      initial={{ opacity: 0, scale: 0 }}
+      animate={visible ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0 }}
+      transition={{ duration: 0.3 }}
+      className="fixed bottom-6 right-6 z-[999] rounded-full bg-[#0d0670] text-white p-3 shadow-lg hover:bg-[#0b055c]"
     >
-      <i className="fa-regular fa-arrow-up" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}></i>
-    </button>
+      <ChevronUp size={22} />
+    </motion.button>
   );
 }
-

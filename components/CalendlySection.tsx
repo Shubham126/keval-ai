@@ -18,29 +18,17 @@ export default function ScheduleSection() {
   }, []);
 
   return (
-    <section style={{ backgroundColor: '#ffffff', padding: '40px 20px' }}>
+    <section className="bg-white py-10 px-5">
       <div className="section-title">
-        <h3 
-          style={{ 
-            textAlign: 'center',
-            marginBottom: '30px',
-            fontSize: '28px',
-            fontWeight: '600',
-            color: '#000000'
-          }}
-        >
+        <h3 className="text-center mb-8 text-[28px] font-semibold text-black">
           Schedule a Meet
         </h3>
       </div>
-      
+
       <div
-        className="calendly-inline-widget"
+        className="calendly-inline-widget rounded-lg"
         data-url="https://calendly.com/kevalai24/30min"
-        style={{
-          minWidth: '320px',
-          height: '700px',
-          borderRadius: '8px'
-        }}
+        style={{ minWidth: '320px', height: '700px' }}
       />
     </section>
   );
