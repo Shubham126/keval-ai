@@ -70,7 +70,7 @@ export default function ChallengesSection() {
                     <motion.div
                       key={index}
                       className="col-lg-6 col-md-6 flex"
-                      variants={fadeInUp}
+                      variants={fadeInUp()}
                       initial="hidden"
                       whileInView="visible"
                       viewport={{ once: true }}
