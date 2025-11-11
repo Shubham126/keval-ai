@@ -39,7 +39,7 @@ export default function FeaturesSection() {
           <div className="row g-4 my-5">
             <motion.div
               className="col-lg-12 col-md-12"
-              variants={fadeInUp}
+              variants={fadeInUp()}
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
@@ -75,7 +75,7 @@ export default function FeaturesSection() {
               <motion.div
                 key={index}
                 className="col-lg-4 col-md-6"
-                variants={fadeInUp}
+                variants={fadeInUp()}
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true }}
@@ -120,7 +120,7 @@ export default function FeaturesSection() {
           {/* Button */}
           <div className="w-100 text-center mt-5">
             <motion.div
-              variants={fadeInUp}
+              variants={fadeInUp()}
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
