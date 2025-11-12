@@ -13,6 +13,7 @@ const inter = Inter({
   display: 'swap',
   preload: true,
   variable: '--font-inter',
+  adjustFontFallback: true,
 });
 
 export const metadata: Metadata = {
@@ -28,12 +29,18 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <head>
+        {/* Preconnect to own domain for faster CSS/JS delivery */}
+        <link rel="preconnect" href="https://keval-ai.netlify.app" />
         {/* Preconnect to external domains */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        {/* DNS prefetch for Google Maps */}
+        {/* Preconnect and DNS prefetch for Google Maps */}
+        <link rel="preconnect" href="https://www.google.com" />
+        <link rel="preconnect" href="https://maps.googleapis.com" />
+        <link rel="preconnect" href="https://maps.gstatic.com" />
         <link rel="dns-prefetch" href="https://www.google.com" />
         <link rel="dns-prefetch" href="https://maps.googleapis.com" />
+        <link rel="dns-prefetch" href="https://maps.gstatic.com" />
         {/* Trusted Types for DOM-based XSS protection */}
         <script
           dangerouslySetInnerHTML={{

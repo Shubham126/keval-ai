@@ -78,29 +78,21 @@ export default function HeroSection() {
       <div className="container mx-auto h-full flex items-center px-0 md:px0 relative z-10">
         <div className="w-full lg:w-1/2">
 
-          {/* Heading line 1 */}
-          <motion.h1
-            variants={V(0.05)}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
+          {/* Heading line 1 - Render immediately for LCP */}
+          <h1
             className="text-white font-bold leading-none mb-3"
             style={{ fontSize: 'clamp(2.5rem, 6vw, 4.2rem)' }}
           >
             Empowering
-          </motion.h1>
+          </h1>
 
-          {/* Heading line 2 */}
-          <motion.h1
-            variants={V(0.1)}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
+          {/* Heading line 2 - LCP element, render immediately without animation */}
+          <h1
             className="text-white font-bold leading-none mb-3"
             style={{ fontSize: 'clamp(2.5rem, 6vw, 4rem)' }}
           >
             Diamond Trade With
-          </motion.h1>
+          </h1>
 
           {/* Typing animation line */}
           <motion.h1
@@ -109,9 +101,12 @@ export default function HeroSection() {
             whileInView="visible"
             viewport={{ once: true }}
             className="text-theme font-bold leading-none mb-8"
-            style={{ fontSize: 'clamp(2.5rem, 6vw, 4.2rem)' }}
+            style={{ 
+              fontSize: 'clamp(2.5rem, 6vw, 4.2rem)',
+              minHeight: 'clamp(2.5rem, 6vw, 4.2rem)',
+            }}
           >
-            <span ref={typingRef}></span>
+            <span ref={typingRef} className="inline-block min-w-[200px]" style={{ minHeight: 'inherit' }}></span>
             <span className="text-theme">.</span>
           </motion.h1>
 

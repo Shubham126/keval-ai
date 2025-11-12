@@ -45,6 +45,7 @@ export default function Header() {
               className={`object-contain transition-all duration-300 ${
                 isSticky ? '' : 'brightness-0 invert'
               }`}
+              style={{ width: 'auto', height: 'auto' }}
               priority
             />
           </Link>

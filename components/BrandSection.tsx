@@ -1,5 +1,6 @@
 'use client';
 
+import { useState, useEffect, useRef } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
 import Image from 'next/image';
@@ -17,6 +18,41 @@ const clientLogos = [
 ];
 
 export default function BrandSection() {
+  const [shouldInitSwiper, setShouldInitSwiper] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    // Defer Swiper initialization to avoid blocking main thread
+    const initSwiper = () => {
+      if ('requestIdleCallback' in window) {
+        (window as any).requestIdleCallback(() => {
+          setShouldInitSwiper(true);
+        }, { timeout: 500 });
+      } else {
+        setTimeout(() => {
+          setShouldInitSwiper(true);
+        }, 100);
+      }
+    };
+
+    // Use IntersectionObserver to only initialize when visible
+    if (containerRef.current) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          if (entries[0].isIntersecting) {
+            initSwiper();
+            observer.disconnect();
+          }
+        },
+        { rootMargin: '100px' }
+      );
+      observer.observe(containerRef.current);
+      return () => observer.disconnect();
+    } else {
+      initSwiper();
+    }
+  }, []);
+
   return (
     <section className="py-24 bg-white w-full">
       
@@ -34,8 +70,9 @@ export default function BrandSection() {
       </motion.h2>
 
       {/* Full-width container */}
-      <div className="w-full px-4 md:px-10 lg:px-20">
+      <div ref={containerRef} className="w-full px-4 md:px-10 lg:px-20">
 
+        {shouldInitSwiper ? (
         <Swiper
           modules={[Autoplay]}
           spaceBetween={60}
@@ -47,6 +84,8 @@ export default function BrandSection() {
           }}
           loop
           allowTouchMove={false}
+          watchSlidesProgress={false}
+          updateOnWindowResize={false}
           breakpoints={{
             320: { slidesPerView: 2, spaceBetween: 20 },
             640: { slidesPerView: 3, spaceBetween: 40 },
@@ -63,17 +102,35 @@ export default function BrandSection() {
                 viewport={{ once: true }}
                 className="flex items-center justify-center py-4"
               >
+                <div className="h-[70px] w-[160px] flex items-center justify-center">
+                  <Image
+                    src={`/assets/keval-image/client-logo/${logo}`}
+                    alt={`Client ${index + 1}`}
+                    width={160}
+                    height={90}
+                    className="object-contain max-h-[70px] max-w-[160px] transition-all duration-300"
+                  />
+                </div>
+              </motion.div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+        ) : (
+          <div className="flex items-center justify-center gap-4 overflow-hidden">
+            {clientLogos.slice(0, 5).map((logo, index) => (
+              <div key={index} className="h-[70px] w-[160px] flex items-center justify-center flex-shrink-0">
                 <Image
                   src={`/assets/keval-image/client-logo/${logo}`}
                   alt={`Client ${index + 1}`}
                   width={160}
                   height={90}
-                  className="object-contain h-[70px] w-auto transition-all duration-300"
+                  className="object-contain max-h-[70px] max-w-[160px]"
+                  loading="lazy"
                 />
-              </motion.div>
-            </SwiperSlide>
-          ))}
-        </Swiper>
+              </div>
+            ))}
+          </div>
+        )}
 
       </div>
     </section>

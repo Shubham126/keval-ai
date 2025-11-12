@@ -1,31 +1,45 @@
 'use client';
 
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ScrollSmoother } from 'gsap/ScrollSmoother';
-
-// Register GSAP plugins (ScrollToPlugin is premium, using native scrollTo instead)
-if (typeof window !== 'undefined') {
-  gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
-}
+// Lazy load GSAP to reduce initial bundle size
+let gsap: any;
+let ScrollTrigger: any;
+let ScrollSmoother: any;
+let gsapLoaded = false;
 
 // Type declarations for global libraries
 declare global {
   interface Window {
-    gsap: typeof gsap;
-    ScrollTrigger: typeof ScrollTrigger;
-    ScrollSmoother: typeof ScrollSmoother;
+    gsap: any;
+    ScrollTrigger: any;
+    ScrollSmoother: any;
     SplitText: any;
     Swiper: any;
     Matter: any;
   }
 }
 
-// Make GSAP available globally for legacy code that might need it
-if (typeof window !== 'undefined') {
-  window.gsap = gsap;
-  window.ScrollTrigger = ScrollTrigger;
-  window.ScrollSmoother = ScrollSmoother;
+// Lazy load GSAP when needed
+async function loadGSAP() {
+  if (gsapLoaded) return { gsap, ScrollTrigger, ScrollSmoother };
+  
+  const gsapModule = await import('gsap');
+  const scrollTriggerModule = await import('gsap/ScrollTrigger');
+  const scrollSmootherModule = await import('gsap/ScrollSmoother');
+  
+  gsap = gsapModule.gsap;
+  ScrollTrigger = scrollTriggerModule.ScrollTrigger;
+  ScrollSmoother = scrollSmootherModule.ScrollSmoother;
+  
+  // Register GSAP plugins
+  if (typeof window !== 'undefined') {
+    gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
+    window.gsap = gsap;
+    window.ScrollTrigger = ScrollTrigger;
+    window.ScrollSmoother = ScrollSmoother;
+  }
+  
+  gsapLoaded = true;
+  return { gsap, ScrollTrigger, ScrollSmoother };
 }
 
 // ============================================================================
@@ -237,16 +251,18 @@ const initializePreloader = () => {
 // GSAP Animations (from customer-gsap-animation.js)
 // ============================================================================
 
-export const initializeGSAPAnimations = () => {
+export const initializeGSAPAnimations = async () => {
   if (typeof window === 'undefined') return;
 
-  // Wait for GSAP to be available
-  if (!gsap || !ScrollTrigger) {
+  // Lazy load GSAP when needed
+  const { gsap: gsapLib, ScrollTrigger: ScrollTriggerLib, ScrollSmoother: ScrollSmootherLib } = await loadGSAP();
+  
+  if (!gsapLib || !ScrollTriggerLib) {
     setTimeout(initializeGSAPAnimations, 100);
     return;
   }
 
-  gsap.config({
+  gsapLib.config({
     nullTargetWarn: false,
   });
 
@@ -259,12 +275,14 @@ export const initializeGSAPAnimations = () => {
       const target = document.querySelector(href);
       if (target) {
         e.preventDefault();
-        const targetTop = (target as HTMLElement).offsetTop - 120;
-        
-        // Use native smooth scroll
-        window.scrollTo({
-          top: targetTop,
-          behavior: 'smooth',
+        // Batch layout read to prevent forced reflow
+        requestAnimationFrame(() => {
+          const targetTop = (target as HTMLElement).offsetTop - 120;
+          // Use native smooth scroll
+          window.scrollTo({
+            top: targetTop,
+            behavior: 'smooth',
+          });
         });
       }
     });
@@ -274,8 +292,8 @@ export const initializeGSAPAnimations = () => {
   const smoothWrapper = document.getElementById('smooth-wrapper');
   const smoothContent = document.getElementById('smooth-content');
   
-  if (smoothWrapper && smoothContent && ScrollSmoother) {
-    ScrollSmoother.create({
+  if (smoothWrapper && smoothContent && ScrollSmootherLib) {
+    ScrollSmootherLib.create({
       wrapper: smoothWrapper,
       content: smoothContent,
       smooth: 2,
@@ -288,9 +306,9 @@ export const initializeGSAPAnimations = () => {
 
   // Character Animation (requires SplitText premium)
   if (window.SplitText) {
-    const charElements = gsap.utils.toArray('.tp-char-animation');
+    const charElements = gsapLib.utils.toArray('.tp-char-animation');
     charElements.forEach((splitTextLine: any) => {
-      const tl = gsap.timeline({
+      const tl = gsapLib.timeline({
         scrollTrigger: {
           trigger: splitTextLine,
           start: 'top 90%',
@@ -302,7 +320,7 @@ export const initializeGSAPAnimations = () => {
       });
 
       const itemSplitted = new window.SplitText(splitTextLine, { type: 'chars, words' });
-      gsap.set(splitTextLine, { perspective: 300 });
+      gsapLib.set(splitTextLine, { perspective: 300 });
       itemSplitted.split({ type: 'chars, words' });
       tl.from(itemSplitted.chars, {
         duration: 1,
@@ -345,15 +363,15 @@ export const initializeGSAPAnimations = () => {
         };
       }
 
-      areveal.anim = gsap.from(areveal.split.chars, animationProps);
+      areveal.anim = gsapLib.from(areveal.split.chars, animationProps);
     });
   }
 
   // Title Animation (requires SplitText premium)
   if (window.SplitText) {
-    const splitTitleLines = gsap.utils.toArray('.title-anim');
+    const splitTitleLines = gsapLib.utils.toArray('.title-anim');
     splitTitleLines.forEach((splitTextLine: any) => {
-      const tl = gsap.timeline({
+      const tl = gsapLib.timeline({
         scrollTrigger: {
           trigger: splitTextLine,
           start: 'top 90%',
@@ -365,7 +383,7 @@ export const initializeGSAPAnimations = () => {
       });
 
       const itemSplitted = new window.SplitText(splitTextLine, { type: 'words, lines' });
-      gsap.set(splitTextLine, { perspective: 300 });
+      gsapLib.set(splitTextLine, { perspective: 300 });
       itemSplitted.split({ type: 'lines' });
       tl.from(itemSplitted.lines, {
         duration: 1,
@@ -380,11 +398,11 @@ export const initializeGSAPAnimations = () => {
   }
 
   // GSAP Parallax
-  gsap.utils.toArray('.gsap__parallax').forEach((container: any) => {
+  gsapLib.utils.toArray('.gsap__parallax').forEach((container: any) => {
     const image = container.querySelector('img');
     if (!image) return;
 
-    const tl = gsap.timeline({
+    const tl = gsapLib.timeline({
       scrollTrigger: {
         trigger: container,
         scrub: 0.5,
@@ -399,39 +417,41 @@ export const initializeGSAPAnimations = () => {
     });
   });
 
-  // Full Image Wrap Pinning
-  const fullImgWrap = document.querySelector('.full-img-wrap');
-  if (fullImgWrap) {
-    ScrollTrigger.create({
-      trigger: fullImgWrap,
-      start: 'top 0',
-      end: 'bottom 0%',
-      pin: '.full-img',
-      pinSpacing: false,
-    });
-  }
+  // Full Image Wrap Pinning - batch ScrollTrigger creation to prevent reflows
+  requestAnimationFrame(() => {
+    const fullImgWrap = document.querySelector('.full-img-wrap');
+    if (fullImgWrap) {
+      ScrollTriggerLib.create({
+        trigger: fullImgWrap,
+        start: 'top 0',
+        end: 'bottom 0%',
+        pin: '.full-img',
+        pinSpacing: false,
+      });
+    }
 
-  const fullImgWrap2 = document.querySelector('.full-img-wrap2');
-  if (fullImgWrap2) {
-    ScrollTrigger.create({
-      trigger: fullImgWrap2,
-      start: 'top 0',
-      end: 'bottom 0%',
-      pin: '.full-img2',
-      pinSpacing: false,
-    });
-  }
+    const fullImgWrap2 = document.querySelector('.full-img-wrap2');
+    if (fullImgWrap2) {
+      ScrollTriggerLib.create({
+        trigger: fullImgWrap2,
+        start: 'top 0',
+        end: 'bottom 0%',
+        pin: '.full-img2',
+        pinSpacing: false,
+      });
+    }
 
-  const fullImgWrap3 = document.querySelector('.full-img-wrap3');
-  if (fullImgWrap3) {
-    ScrollTrigger.create({
-      trigger: fullImgWrap3,
-      start: 'top 0',
-      end: 'bottom 0%',
-      pin: '.full-img3',
-      pinSpacing: false,
-    });
-  }
+    const fullImgWrap3 = document.querySelector('.full-img-wrap3');
+    if (fullImgWrap3) {
+      ScrollTriggerLib.create({
+        trigger: fullImgWrap3,
+        start: 'top 0',
+        end: 'bottom 0%',
+        pin: '.full-img3',
+        pinSpacing: false,
+      });
+    }
+  });
 };
 
 // ============================================================================
@@ -484,9 +504,28 @@ export const initializeMatterSimulation = async () => {
       const Mouse = Matter.Mouse;
       const MouseConstraint = Matter.MouseConstraint;
 
-      const containerWidth = containerElement.clientWidth;
-      const containerHeight = containerElement.clientHeight;
-
+      // Batch layout reads to prevent forced reflow
+      // Use requestAnimationFrame to read layout properties after DOM is stable
+      requestAnimationFrame(() => {
+        const containerWidth = containerElement.clientWidth;
+        const containerHeight = containerElement.clientHeight;
+        
+        if (containerWidth === 0 || containerHeight === 0) {
+          // Retry if dimensions not ready
+          requestAnimationFrame(() => {
+            const retryWidth = containerElement.clientWidth;
+            const retryHeight = containerElement.clientHeight;
+            if (retryWidth > 0 && retryHeight > 0) {
+              initMatterEngine(Matter, Engine, Render, World, Bodies, Events, Mouse, MouseConstraint, retryWidth, retryHeight);
+            }
+          });
+          return;
+        }
+        
+        initMatterEngine(Matter, Engine, Render, World, Bodies, Events, Mouse, MouseConstraint, containerWidth, containerHeight);
+      });
+      
+      function initMatterEngine(Matter: any, Engine: any, Render: any, World: any, Bodies: any, Events: any, Mouse: any, MouseConstraint: any, containerWidth: number, containerHeight: number) {
       // Create engine and world
       const engine = Engine.create();
       const world = engine.world;
@@ -564,6 +603,7 @@ export const initializeMatterSimulation = async () => {
 
       Engine.run(engine);
       Render.run(render);
+      }
     } catch (error) {
       // Only log in development
       if (process.env.NODE_ENV === 'development') {
@@ -571,6 +611,8 @@ export const initializeMatterSimulation = async () => {
       }
     }
   }
+  
+  observer.observe(containerElement);
 };
 
 // ============================================================================

@@ -9,13 +9,15 @@ import ClientOnly from '@/components/ClientOnly';
 import ResetOnRouteChange from '@/components/ResetOnRouteChange';
 import dynamic from 'next/dynamic';
 import HeroSection from '@/components/HeroSection';
-import BrandSection from '@/components/BrandSection';
 import ServicesSection from '@/components/ServicesSection';
 import CounterSection from '@/components/CounterSection';
 import ChallengesSection from '@/components/ChallengesSection';
 import FeaturesSection from '@/components/FeaturesSection';
 
-// Lazy load heavy components with Swiper/GSAP
+// Lazy load heavy components with Swiper/GSAP to reduce critical CSS
+const BrandSection = dynamic(() => import('@/components/BrandSection'), {
+  loading: () => <div className="min-h-[400px]" />,
+});
 const ProjectSection = dynamic(() => import('@/components/ProjectSection'), {
   loading: () => <div className="min-h-[400px]" />,
 });
@@ -45,13 +47,15 @@ export default function Home() {
     const timer = setTimeout(() => {
       initializeAnimations();
       initializeMainScripts();
-      // GSAP animations can wait even longer
+      // GSAP animations can wait even longer - lazy load GSAP when needed
       if (typeof window !== 'undefined' && 'requestIdleCallback' in window) {
-        (window as any).requestIdleCallback(() => {
-          initializeGSAPAnimations();
-        }, { timeout: 1000 });
+        (window as any).requestIdleCallback(async () => {
+          await initializeGSAPAnimations();
+        }, { timeout: 2000 });
       } else {
-        setTimeout(() => initializeGSAPAnimations(), 500);
+        setTimeout(async () => {
+          await initializeGSAPAnimations();
+        }, 1000);
       }
     }, 100);
     
@@ -62,9 +66,7 @@ export default function Home() {
     <>
       <Header />
       <main style={{ backgroundColor: '#ffffff' }}>
-        <ClientOnly>
-          <HeroSection />
-        </ClientOnly>
+        <HeroSection />
         <ClientOnly>
           <BrandSection />
         </ClientOnly>

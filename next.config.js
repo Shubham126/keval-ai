@@ -14,6 +14,12 @@ const nextConfig = {
   },
   compress: true,
   poweredByHeader: false,
+  // Optimize CSS loading
+  swcMinify: true,
+  // Enable experimental features for better CSS optimization
+  experimental: {
+    optimizeCss: false, // Keep false as critters caused build errors
+  },
   // Remove console logs in production
   webpack: (config, { dev, isServer }) => {
     // SVG loader

@@ -20,8 +20,9 @@ export default function Footer() {
                 width={180}
                 height={60}
                 className="object-contain mb-6"
+                style={{ width: 'auto', height: 'auto' }}
               />
-              <p className="text-gray-400 text-[15px] leading-relaxed">
+              <p className="text-gray-400 text-[15px] leading-relaxed min-h-[60px]">
                 Designing the future with creativity, intelligence, and purpose.
                 Keval-AI blends design and technology into meaningful experiences.
               </p>
@@ -60,14 +61,14 @@ export default function Footer() {
               {/* Email Input + Button - Separate containers */}
               <form
                 onSubmit={(e) => e.preventDefault()}
-                className="flex items-center gap-3"
+                className="flex items-center gap-2"
               >
-                <div className="flex-1 max-w-[220px]">
+                <div className="flex-1 max-w-[300px]">
                   <input  
                     type="email"
                     required
                     placeholder="Your email address"
-                    className="w-full bg-[#111315] border border-[#1c1e21] rounded-lg text-gray-300 placeholder-gray-500 px-4 py-3 outline-none focus:ring-1 focus:ring-theme2 transition-all duration-300"
+                    className="w-full bg-[#111315] border border-[#1c1e21] rounded-lg text-gray-300 placeholder-gray-500 text-sm px-1 py-3 outline-none focus:ring-1 focus:ring-theme2 transition-all duration-300"
                   />
                 </div>
                 <div>

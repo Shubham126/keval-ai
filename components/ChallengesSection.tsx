@@ -44,8 +44,9 @@ export default function ChallengesSection() {
                 href="/about"
                 className="inline-block bg-black text-white px-8 py-3 rounded-md font-medium text-base 
                           shadow-sm hover:opacity-90 transition-all"
+                aria-label="Learn more about how we address key challenges"
               >
-                Learn More
+                Learn More About Our Solutions
               </Link>
             </div>
           </div>

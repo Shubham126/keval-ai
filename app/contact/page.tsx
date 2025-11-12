@@ -192,6 +192,7 @@ export default function ContactPage() {
               style={{ border: 0 }}
               allowFullScreen
               referrerPolicy="no-referrer-when-downgrade"
+              title="Google Maps - Office Location"
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2519.478221817852!2d4.351721415746877!3d50.846557979532385!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c3c3802b6c5f2b%3A0x40099ab2f4d8b10!2sBelgium!5e0!3m2!1sen!2sin!4v1699939378007!5m2!1sen!2sin"
             ></iframe>
           </motion.div>
@@ -277,13 +278,14 @@ export default function ContactPage() {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="inline-flex items-center gap-3 bg-theme2 hover:bg-[#ff924f] text-white font-semibold uppercase px-8 py-3 rounded-md transition-all duration-300"
+                  className="theme-btn inline-flex items-center gap-3"
                 >
                   <Image
                     src="/assets/img/icon/10.svg"
                     width={20}
                     height={20}
                     alt="icon"
+                    style={{ width: 'auto', height: 'auto' }}
                   />
                   {isSubmitting ? 'Sending...' : 'Submit Request'}
                   <Image
@@ -291,6 +293,7 @@ export default function ContactPage() {
                     width={20}
                     height={20}
                     alt="icon"
+                    style={{ width: 'auto', height: 'auto' }}
                   />
                 </button>
               </motion.div>

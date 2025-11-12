@@ -23,8 +23,8 @@ export default function ScriptsInitializer() {
         }
       };
       
-      scheduleNonCritical(() => {
-        initializeGSAPAnimations();
+      scheduleNonCritical(async () => {
+        await initializeGSAPAnimations();
       });
       
       // Matter.js simulation can wait even longer
