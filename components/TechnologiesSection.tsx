@@ -80,6 +80,9 @@ export default function TechnologiesSection() {
                   alt={logo}
                   width={150}
                   height={80}
+                  sizes="(max-width: 768px) 100px, 150px"
+                  quality={75}
+                  loading="lazy"
                   className="bubble-image"
                 />
               </div>
@@ -122,6 +125,9 @@ export default function TechnologiesSection() {
                   alt={logo}
                   width={150}
                   height={80}
+                  sizes="(max-width: 768px) 100px, 150px"
+                  quality={75}
+                  loading="lazy"
                   className="bubble-image"
                 />
               </div>

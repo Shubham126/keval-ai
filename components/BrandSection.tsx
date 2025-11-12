@@ -107,7 +107,9 @@ export default function BrandSection() {
                     src={`/assets/keval-image/client-logo/${logo}`}
                     alt={`Client ${index + 1}`}
                     width={160}
-                    height={90}
+                    height={70}
+                    sizes="(max-width: 640px) 80px, (max-width: 1024px) 120px, 160px"
+                    quality={75}
                     className="object-contain max-h-[70px] max-w-[160px] transition-all duration-300"
                   />
                 </div>
@@ -123,7 +125,9 @@ export default function BrandSection() {
                   src={`/assets/keval-image/client-logo/${logo}`}
                   alt={`Client ${index + 1}`}
                   width={160}
-                  height={90}
+                  height={70}
+                  sizes="(max-width: 640px) 80px, (max-width: 1024px) 120px, 160px"
+                  quality={75}
                   className="object-contain max-h-[70px] max-w-[160px]"
                   loading="lazy"
                 />

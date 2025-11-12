@@ -94,8 +94,8 @@ export default function TestimonialSection() {
           alt="Testimonial background"
           fill
           loading="lazy"
-          quality={75}
-          sizes="100vw"
+          quality={70}
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 1920px"
           className="object-cover"
         />
       </div>

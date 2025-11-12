@@ -47,9 +47,11 @@ export function middleware(request: NextRequest) {
   response.headers.set('Content-Security-Policy', cspHeader);
   
   // Permissions Policy (formerly Feature Policy)
+  // Explicitly deny all features we don't use to prevent third-party access
+  // This fixes "Potential permissions policy violation: payment is not allowed"
   response.headers.set(
     'Permissions-Policy',
-    'camera=(), microphone=(), geolocation=(), interest-cohort=()'
+    'camera=(), microphone=(), geolocation=(), interest-cohort=(), payment=(), usb=(), bluetooth=(), magnetometer=(), gyroscope=(), accelerometer=(), ambient-light-sensor=()'
   );
   
   // Referrer Policy

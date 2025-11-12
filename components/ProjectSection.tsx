@@ -86,8 +86,11 @@ export default function ProjectSection() {
                   <Image
                     src={p.image}
                     alt={p.title}
-                    width={800}
-                    height={500}
+                    width={568}
+                    height={265}
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 568px"
+                    quality={75}
+                    loading="lazy"
                     className="w-full h-[240px] object-cover transition-transform duration-700 hover:scale-110"
                   />
                 </div>
