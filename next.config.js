@@ -36,11 +36,20 @@ const nextConfig = {
       use: ['@svgr/webpack'],
     });
 
-    // Target modern browsers - reduce polyfills
-    if (!isServer) {
-      config.resolve.alias = {
-        ...config.resolve.alias,
-      };
+    // Optimize chunk splitting - enhance Next.js defaults
+    if (!isServer && !dev && config.optimization) {
+      // Keep Next.js defaults but ensure better code splitting
+      if (config.optimization.splitChunks) {
+        config.optimization.splitChunks.cacheGroups = {
+          ...config.optimization.splitChunks.cacheGroups,
+          // Ensure large libraries are split properly
+          default: {
+            minChunks: 2,
+            priority: -20,
+            reuseExistingChunk: true,
+          },
+        };
+      }
     }
 
     return config;
