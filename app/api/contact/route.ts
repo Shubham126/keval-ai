@@ -51,11 +51,14 @@ export async function POST(request: NextRequest) {
     // - SendGrid
     // - AWS SES
     // - Resend
-    // For now, we'll log it and return success
+    // For now, we'll return success
     // TODO: Implement actual email sending service
     
-    console.log('Email would be sent to:', recipient);
-    console.log('Email content:', emailContent);
+    // Only log in development
+    if (process.env.NODE_ENV === 'development') {
+      console.log('Email would be sent to:', recipient);
+      console.log('Email content:', emailContent);
+    }
 
     // For production, uncomment and configure one of these:
     // Option 1: Using Nodemailer (install: npm install nodemailer)
@@ -82,7 +85,10 @@ export async function POST(request: NextRequest) {
       { status: 200 }
     );
   } catch (error) {
-    console.error('Error processing contact form:', error);
+    // Only log in development
+    if (process.env.NODE_ENV === 'development') {
+      console.error('Error processing contact form:', error);
+    }
     // Set a 500 (internal server error) response code.
     return NextResponse.json(
       { error: "Oops! Something went wrong and we couldn't send your message." },

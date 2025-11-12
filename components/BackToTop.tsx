@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useScrollPosition } from '@/lib/hooks/useScrollPosition';
+import { ArrowUp } from '@/components/Icons';
 
 /**
  * Back to top button component (replaces jQuery back-to-top)
@@ -30,7 +31,7 @@ export default function BackToTop() {
       className={`back-top ${isScrolled ? 'show' : ''}`}
       aria-label="Back to top"
     >
-      <i className="fa-solid fa-arrow-up"></i>
+      <ArrowUp className="w-5 h-5" />
     </button>
   );
 }

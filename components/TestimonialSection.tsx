@@ -86,13 +86,19 @@ export default function TestimonialSection() {
   }, []);
 
   return (
-    <section
-      className="relative overflow-visible py-20 lg:py-24 bg-cover bg-center"
-      style={{
-        backgroundImage: "url('/assets/img/testimonial/bg.jpg')",
-        backgroundColor: '#000',
-      }}
-    >
+    <section className="relative overflow-visible py-20 lg:py-24 bg-cover bg-center bg-black">
+      {/* Optimized background image */}
+      <div className="absolute inset-0">
+        <Image
+          src="/assets/img/testimonial/bg.jpg"
+          alt="Testimonial background"
+          fill
+          loading="lazy"
+          quality={75}
+          sizes="100vw"
+          className="object-cover"
+        />
+      </div>
       <div className="container mx-auto px-4 lg:px-6">
         <div className="relative z-[2]">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">

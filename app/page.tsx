@@ -7,17 +7,30 @@ import Footer from '@/components/Footer';
 import BackToTop from '@/components/BackToTop';
 import ClientOnly from '@/components/ClientOnly';
 import ResetOnRouteChange from '@/components/ResetOnRouteChange';
+import dynamic from 'next/dynamic';
 import HeroSection from '@/components/HeroSection';
 import BrandSection from '@/components/BrandSection';
-import ProjectSection from '@/components/ProjectSection';
-import TestimonialSection from '@/components/TestimonialSection';
-import TechnologiesSection from '@/components/TechnologiesSection';
 import ServicesSection from '@/components/ServicesSection';
-import MarqueeSection from '@/components/MarqueeSection';
 import CounterSection from '@/components/CounterSection';
 import ChallengesSection from '@/components/ChallengesSection';
 import FeaturesSection from '@/components/FeaturesSection';
-import CalendlySection from '@/components/CalendlySection';
+
+// Lazy load heavy components with Swiper/GSAP
+const ProjectSection = dynamic(() => import('@/components/ProjectSection'), {
+  loading: () => <div className="min-h-[400px]" />,
+});
+const TestimonialSection = dynamic(() => import('@/components/TestimonialSection'), {
+  loading: () => <div className="min-h-[400px]" />,
+});
+const TechnologiesSection = dynamic(() => import('@/components/TechnologiesSection'), {
+  loading: () => <div className="min-h-[400px]" />,
+});
+const MarqueeSection = dynamic(() => import('@/components/MarqueeSection'), {
+  loading: () => null,
+});
+const CalendlySection = dynamic(() => import('@/components/CalendlySection'), {
+  loading: () => <div className="min-h-[400px]" />,
+});
 import {
   initializeMainScripts,
   initializeGSAPAnimations,
@@ -28,12 +41,21 @@ export default function Home() {
   const pathname = usePathname();
 
   useEffect(() => {
-    // Re-initialize animations on pathname change
-    setTimeout(() => {
+    // Defer heavy animations until after initial render
+    const timer = setTimeout(() => {
       initializeAnimations();
       initializeMainScripts();
-      initializeGSAPAnimations();
-    }, 300);
+      // GSAP animations can wait even longer
+      if (typeof window !== 'undefined' && 'requestIdleCallback' in window) {
+        (window as any).requestIdleCallback(() => {
+          initializeGSAPAnimations();
+        }, { timeout: 1000 });
+      } else {
+        setTimeout(() => initializeGSAPAnimations(), 500);
+      }
+    }, 100);
+    
+    return () => clearTimeout(timer);
   }, [pathname]);
 
   return (

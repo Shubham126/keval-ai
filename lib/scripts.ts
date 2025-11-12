@@ -565,7 +565,10 @@ export const initializeMatterSimulation = async () => {
       Engine.run(engine);
       Render.run(render);
     } catch (error) {
-      console.error('Failed to initialize Matter.js simulation:', error);
+      // Only log in development
+      if (process.env.NODE_ENV === 'development') {
+        console.error('Failed to initialize Matter.js simulation:', error);
+      }
     }
   }
 };

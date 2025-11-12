@@ -6,6 +6,7 @@ import BackToTop from '@/components/BackToTop';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { fadeInUp } from '@/lib/motionVariants';
+import { House } from '@/components/Icons';
 
 export default function ServicePage() {
   return (
@@ -44,7 +45,7 @@ export default function ServicePage() {
               >
                 <li>
                   <Link href="/" className="flex items-center gap-2 hover:text-[#FD7E31] transition">
-                    <i className="fa-regular fa-house"></i>
+                    <House className="w-4 h-4" />
                     Home
                   </Link>
                 </li>

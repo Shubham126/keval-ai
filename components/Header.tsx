@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { fade, slideRight } from '@/lib/motionVariants';
+import { ChevronDown, XMark } from '@/components/Icons';
 
 export default function Header() {
   const [isSticky, setIsSticky] = useState(false);
@@ -83,7 +84,7 @@ export default function Header() {
                   }`}
                 >
                   SERVICES
-                  <i className="fa-solid fa-chevron-down text-xs mt-[2px]" />
+                  <ChevronDown className="text-xs mt-[2px] w-3 h-3" />
                 </button>
 
                 <AnimatePresence>
@@ -192,7 +193,7 @@ export default function Header() {
               <div className="flex justify-between items-center mb-6">
                 <h3 className="text-[#0D0670] font-bold text-xl">Keval AI</h3>
                 <button onClick={closeOffcanvas}>
-                  <i className="fa-solid fa-xmark text-2xl text-[#0D0670]" />
+                  <XMark className="text-2xl text-[#0D0670] w-6 h-6" />
                 </button>
               </div>
 

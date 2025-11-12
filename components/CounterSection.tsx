@@ -35,10 +35,7 @@ function Counter({ target, suffix = '', duration = 4 }: CounterProps) {
 /* MAIN SECTION */
 export default function CounterSection() {
   return (
-    <section
-      className="w-full py-24 bg-cover"
-      style={{ backgroundImage: "url('/assets/img/choous-us-bg.jpg')" }}
-    >
+    <section className="w-full py-24 bg-black">
       {/* TITLE */}
       <h2 className="text-center text-white text-4xl font-extrabold tracking-tight mb-16 uppercase">
         Driven by results

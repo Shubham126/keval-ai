@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { fadeInUp } from '@/lib/motionVariants';
+import { ArrowRight } from '@/components/Icons';
 
 const services = [
   {
@@ -107,7 +108,7 @@ export default function ServiceSection() {
             className="theme-btn inline-flex items-center gap-2"
           >
             View All Services
-            <i className="fa-solid fa-arrow-right"></i>
+            <ArrowRight className="w-4 h-4" />
           </Link>
         </motion.div>
       </div>

@@ -151,6 +151,7 @@ export default function ContactPage() {
                     alt="icon" 
                     width={28} 
                     height={28}
+                    loading="lazy"
                     className="brightness-0 invert"
                   />
                 </div>

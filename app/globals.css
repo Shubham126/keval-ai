@@ -285,17 +285,20 @@
 }
 
 @keyframes fadeInDown {
-  from { opacity: 0; transform: translateY(-20px); }
-  to { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; transform: translateY(-20px) translateZ(0); }
+  to { opacity: 1; transform: translateY(0) translateZ(0); }
 }
 
 @keyframes spin-slow {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from { transform: rotate(0deg) translateZ(0); }
+  to { transform: rotate(360deg) translateZ(0); }
 }
 
 .animate-spin-slow {
   animation: spin-slow 8s linear infinite;
+  will-change: transform;
+  backface-visibility: hidden;
+  perspective: 1000px;
 }
 
 /* ============================
@@ -315,9 +318,11 @@
   height: 40px;
   border: 2px solid rgba(255, 255, 255, 0.8);
   border-radius: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%) translateZ(0);
   transition: width 0.3s ease, height 0.3s ease, border-color 0.3s ease, opacity 0.3s ease;
-  will-change: transform, left, top;
+  will-change: transform;
+  backface-visibility: hidden;
+  perspective: 1000px;
 }
 
 .cursor-inner {
@@ -325,9 +330,11 @@
   height: 8px;
   background-color: rgba(255, 255, 255, 0.9);
   border-radius: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%) translateZ(0);
   transition: width 0.3s ease, height 0.3s ease, background-color 0.3s ease, opacity 0.3s ease;
   will-change: transform;
+  backface-visibility: hidden;
+  perspective: 1000px;
 }
 
 .cursor-hover .cursor-outer {

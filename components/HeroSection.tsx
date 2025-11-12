@@ -58,14 +58,22 @@ export default function HeroSection() {
   }, [words]);
 
   return (
-    <section
-      className="relative h-screen w-full flex items-center bg-cover bg-center"
-      style={{
-        backgroundImage: "url('/assets/keval-image/banners/Home-Banner.jpg')",
-      }}
-    >
+    <section className="relative h-screen w-full flex items-center bg-cover bg-center">
+      {/* Optimized background image */}
+      <div className="absolute inset-0">
+        <Image
+          src="/assets/keval-image/banners/Home-Banner.jpg"
+          alt="Hero background"
+          fill
+          priority
+          quality={85}
+          sizes="100vw"
+          className="object-cover"
+          fetchPriority="high"
+        />
+      </div>
       {/* Left Gradient Overlay (for readability) */}
-      <div className="absolute inset-0 bg-gradient-to-r from-[#f68041]/80 via-white/30 to-transparent" />
+      <div className="absolute inset-0 bg-linear-to-r from-[#f68041]/80 via-white/30 to-transparent" />
 
       <div className="container mx-auto h-full flex items-center px-0 md:px0 relative z-10">
         <div className="w-full lg:w-1/2">
@@ -76,7 +84,7 @@ export default function HeroSection() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            className="text-white font-bold leading-[1.0] mb-3"
+            className="text-white font-bold leading-none mb-3"
             style={{ fontSize: 'clamp(2.5rem, 6vw, 4.2rem)' }}
           >
             Empowering
@@ -88,7 +96,7 @@ export default function HeroSection() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            className="text-white font-bold leading-[1.0] mb-3"
+            className="text-white font-bold leading-none mb-3"
             style={{ fontSize: 'clamp(2.5rem, 6vw, 4rem)' }}
           >
             Diamond Trade With
@@ -100,11 +108,11 @@ export default function HeroSection() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            className="text-[#0B2546] font-bold leading-[1.0] mb-8"
+            className="text-theme font-bold leading-none mb-8"
             style={{ fontSize: 'clamp(2.5rem, 6vw, 4.2rem)' }}
           >
             <span ref={typingRef}></span>
-            <span className="text-[#0B2546]">.</span>
+            <span className="text-theme">.</span>
           </motion.h1>
 
           {/* Buttons */}

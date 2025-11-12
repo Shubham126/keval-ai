@@ -280,6 +280,8 @@ export default function AboutPage() {
                     src="/assets/keval-image/miss-viss.jpg"
                     alt="Mission"
                     fill
+                    loading="lazy"
+                    quality={85}
                     sizes="(max-width: 768px) 100vw, 66vw"
                     className="object-cover rounded-2xl"
                   />

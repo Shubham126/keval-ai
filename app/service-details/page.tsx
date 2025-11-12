@@ -8,6 +8,7 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { fadeInUp } from '@/lib/motionVariants';
+import { House, SlashForward, ArrowRightLong, CircleCheck, Plus, Minus } from '@/components/Icons';
 
 export default function ServiceDetailsPage() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
@@ -49,11 +50,11 @@ export default function ServiceDetailsPage() {
                     href="/"
                     className="flex items-center gap-2 hover:text-[#FD7E31] transition-colors"
                   >
-                    <i className="fa-regular fa-house"></i> Home
+                    <House className="w-4 h-4" /> Home
                   </Link>
                 </li>
                 <li>
-                  <i className="fa-solid fa-slash-forward text-sm"></i>
+                  <SlashForward className="text-sm w-3 h-3" />
                 </li>
                 <li className="text-[#FD7E31]">Service Details</li>
               </ul>
@@ -113,11 +114,11 @@ export default function ServiceDetailsPage() {
                             }`}
                           >
                             {service}
-                            <i
-                              className={`fa-regular fa-arrow-right-long ${
+                            <ArrowRightLong
+                              className={`w-5 h-5 ${
                                 i === 0 ? 'text-white' : 'text-[#190B28]'
                               }`}
-                            ></i>
+                            />
                           </Link>
                         </li>
                       ))}
@@ -170,21 +171,21 @@ export default function ServiceDetailsPage() {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <ul className="space-y-3">
                       <li className="flex items-center gap-2 text-[#1A1A1A] text-[15px]">
-                        <i className="fa-solid fa-circle-check text-[#081C3D]"></i>
+                        <CircleCheck className="w-5 h-5 text-[#081C3D] flex-shrink-0" />
                         Various analysis options.
                       </li>
                       <li className="flex items-center gap-2 text-[#1A1A1A] text-[15px]">
-                        <i className="fa-solid fa-circle-check text-[#081C3D]"></i>
+                        <CircleCheck className="w-5 h-5 text-[#081C3D] flex-shrink-0" />
                         Advanced data analysis.
                       </li>
                     </ul>
                     <ul className="space-y-3">
                       <li className="flex items-center gap-2 text-[#1A1A1A] text-[15px]">
-                        <i className="fa-solid fa-circle-check text-[#081C3D]"></i>
+                        <CircleCheck className="w-5 h-5 text-[#081C3D] flex-shrink-0" />
                         Page Load (time, size, requests).
                       </li>
                       <li className="flex items-center gap-2 text-[#1A1A1A] text-[15px]">
-                        <i className="fa-solid fa-circle-check text-[#081C3D]"></i>
+                        <CircleCheck className="w-5 h-5 text-[#081C3D] flex-shrink-0" />
                         Advanced data insights.
                       </li>
                     </ul>
@@ -207,12 +208,8 @@ export default function ServiceDetailsPage() {
                           }`}
                         >
                           {title}
-                          <span>
-                            <i
-                              className={`fa-solid ${
-                                openIndex === i ? 'fa-minus' : 'fa-plus'
-                              } text-[16px]`}
-                            ></i>
+                          <span className="text-[16px]">
+                            {openIndex === i ? <Minus className="w-4 h-4" /> : <Plus className="w-4 h-4" />}
                           </span>
                         </button>
 
