@@ -7,7 +7,7 @@ import BackToTop from '@/components/BackToTop';
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { fadeInUp } from '../../lib/motionVariants';
+import { fadeInUp } from '@/lib/motionVariants';
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -80,346 +80,264 @@ export default function ContactPage() {
     <>
       <Header />
 
-      <div id="smooth-wrapper">
-        <div id="smooth-content">
-          {/* Breadcrumb */}
-          <div
-            className="breadcrumb-wrapper bg-cover"
-            style={{ backgroundImage: "url('/assets/keval-image/about-hero-banner.png')" }}
+      {/* Hero Section */}
+      <section
+        className="relative flex h-[56vh] min-h-[420px] items-center justify-center bg-cover bg-center"
+        style={{
+          backgroundImage: "url('/assets/keval-image/about-hero-banner.png')",
+        }}
+      >
+        <div className="absolute inset-0 bg-black/50" />
+        <div className="relative z-10 text-center">
+          <motion.h1
+            variants={fadeInUp(0.3)}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="text-5xl font-extrabold uppercase text-white tracking-wide"
           >
-            <div className="container">
-              <div className="page-heading">
-
-                <motion.div
-                  variants={fadeInUp(0.3)}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: false, amount: 0.3 }}
-                  className="breadcrumb-sub-title"
-                >
-                  <h1>Contact Us</h1>
-                </motion.div>
-
-                <motion.ul
-                  variants={fadeInUp(0.5)}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: false, amount: 0.3 }}
-                  className="breadcrumb-items"
-                >
-                  <li>
-                    <Link href="/">
-                      <i className="fa-regular fa-house"></i>
-                      Home
-                    </Link>
-                  </li>
-                  <li><i className="fa-solid fa-slash-forward"></i></li>
-                  <li>Contact Us</li>
-                </motion.ul>
-              </div>
-            </div>
-          </div>
-
-          {/* Contact Info Section */}
-          <section className="contact-info-section fix section-padding" style={{ backgroundColor: '#ffffff' }}>
-            <div className="container">
-              <div className="row g-4">
-
-                {/* Box 1 */}
-                <div className="col-xl-4 col-lg-6 col-md-6">
-                  <motion.div
-                    variants={fadeInUp(0.3)}
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: false, amount: 0.3 }}
-                    className="contact-info-box"
-                  >
-                    <div className="icon" style={{ display:'flex',alignItems:'center',justifyContent:'center' }}>
-                      {/* svg unchanged */}
-                      <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="none">
-                        <path d="M20.0084 19.8214C23.2007...Z" fill="white" />
-                      </svg>
-                    </div>
-                    <div className="content">
-                      <h3>Office Address</h3>
-                      <p>Xyz Belgium</p>
-                    </div>
-                  </motion.div>
-                </div>
-
-                {/* Box 2 */}
-                <div className="col-xl-4 col-lg-6 col-md-6">
-                  <motion.div
-                    variants={fadeInUp(0.5)}
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: false, amount: 0.3 }}
-                    className="contact-info-box"
-                  >
-                    <div className="icon" style={{ display:'flex',alignItems:'center',justifyContent:'center' }}>
-                      {/* svg unchanged */}
-                      <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="none">
-                        <path d="M15 0C6.72898...Z" fill="white" />
-                      </svg>
-                    </div>
-                    <div className="content">
-                      <h3>Call Us For Support:</h3>
-                      <p><a href="tel:+32499712725">+32 499 712 725</a></p>
-                    </div>
-                  </motion.div>
-                </div>
-
-                {/* Box 3 */}
-                <div className="col-xl-4 col-lg-6 col-md-6">
-                  <motion.div
-                    variants={fadeInUp(0.7)}
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: false, amount: 0.3 }}
-                    className="contact-info-box"
-                  >
-                    <div className="icon" style={{ display:'flex',alignItems:'center',justifyContent:'center' }}>
-                      {/* svg unchanged */}
-                      <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="none">
-                        <path d="M26.6875 3.31229...Z" fill="white" />
-                      </svg>
-                    </div>
-                    <div className="content">
-                      <h3>Email Us Anytime:</h3>
-                      <p><a href="mailto:kevalai24@gmail.com">kevalai24@gmail.com</a></p>
-                    </div>
-                  </motion.div>
-                </div>
-
-              </div>
-            </div>
-          </section>
-
-          {/* Contact Form & Map */}
-          <section className="contact-section fix section-padding pt-0" style={{ backgroundColor: '#ffffff' }}>
-            <div className="container">
-              <div className="contact-wrapper">
-                <div className="row g-4">
-
-                  {/* Map */}
-                  <div className="col-lg-6">
-                    <motion.div
-                      variants={fadeInUp(0.3)}
-                      initial="hidden"
-                      whileInView="visible"
-                      viewport={{ once:false, amount:0.3 }}
-                      className="map-items"
-                    >
-                      <div className="googpemap">
-                        <iframe
-                          width="100%"
-                          height="450"
-                          loading="lazy"
-                          style={{ border:0 }}
-                          allowFullScreen
-                          referrerPolicy="no-referrer-when-downgrade"
-                          src="https://www.google.com/maps/embed?pb=!1m18..."
-                        />
-                      </div>
-                    </motion.div>
-                  </div>
-
-                  {/* Form */}
-                  <div className="col-lg-6">
-                    <motion.div
-                      variants={fadeInUp(0.3)}
-                      initial="hidden"
-                      whileInView="visible"
-                      viewport={{ once:false, amount:0.3 }}
-                      className="contact-content"
-                    >
-                      <h3>Ready to Get Started?</h3>
-
-                      {submitStatus.type && (
-                        <div
-                          className={`alert ${submitStatus.type === 'success' ? 'alert-success':'alert-danger'}`}
-                          style={{
-                            padding:'15px',marginBottom:'20px',borderRadius:'5px',
-                            backgroundColor: submitStatus.type === 'success' ? '#d4edda' : '#f8d7da',
-                            color: submitStatus.type === 'success' ? '#155724' : '#721c24',
-                            border: `1px solid ${submitStatus.type === 'success' ? '#c3e6cb' : '#f5c6cb'}`
-                          }}
-                        >
-                          {submitStatus.message}
-                        </div>
-                      )}
-
-                      <form onSubmit={handleSubmit} className="contact-form-items" id="contact-form">
-                        <div className="row g-4">
-
-                          <div className="col-lg-6">
-                            <motion.div
-                              variants={fadeInUp(0.3)}
-                              initial="hidden"
-                              whileInView="visible"
-                              viewport={{ once:false, amount:0.3 }}
-                              className="form-clt"
-                            >
-                              <span>First name*</span>
-                              <input
-                                type="text"
-                                name="firstName"
-                                placeholder="Enter Your First Name"
-                                value={formData.firstName}
-                                onChange={handleChange}
-                                required
-                              />
-                            </motion.div>
-                          </div>
-
-                          <div className="col-lg-6">
-                            <motion.div
-                              variants={fadeInUp(0.5)}
-                              initial="hidden"
-                              whileInView="visible"
-                              viewport={{ once:false, amount:0.3 }}
-                              className="form-clt"
-                            >
-                              <span>Last name*</span>
-                              <input
-                                type="text"
-                                name="lastName"
-                                placeholder="Enter Your Last Name"
-                                value={formData.lastName}
-                                onChange={handleChange}
-                                required
-                              />
-                            </motion.div>
-                          </div>
-
-                          <div className="col-lg-6">
-                            <motion.div
-                              variants={fadeInUp(0.3)}
-                              initial="hidden"
-                              whileInView="visible"
-                              viewport={{ once:false, amount:0.3 }}
-                              className="form-clt"
-                            >
-                              <span>Phone Number*</span>
-                              <input
-                                type="tel"
-                                name="phone"
-                                placeholder="Enter Your Phone Number"
-                                value={formData.phone}
-                                onChange={handleChange}
-                                required
-                              />
-                            </motion.div>
-                          </div>
-
-                          <div className="col-lg-6">
-                            <motion.div
-                              variants={fadeInUp(0.5)}
-                              initial="hidden"
-                              whileInView="visible"
-                              viewport={{ once:false, amount:0.3 }}
-                              className="form-clt"
-                            >
-                              <span>Email address*</span>
-                              <input
-                                type="email"
-                                name="email"
-                                placeholder="Enter Your Email address"
-                                value={formData.email}
-                                onChange={handleChange}
-                                required
-                              />
-                            </motion.div>
-                          </div>
-
-                          <div className="col-lg-12">
-                            <motion.div
-                              variants={fadeInUp(0.7)}
-                              initial="hidden"
-                              whileInView="visible"
-                              viewport={{ once:false, amount:0.3 }}
-                              className="form-clt"
-                            >
-                              <span>Message*</span>
-                              <textarea
-                                name="message"
-                                placeholder="Write your message......"
-                                value={formData.message}
-                                onChange={handleChange}
-                                required
-                              />
-                            </motion.div>
-                          </div>
-
-                          <div className="col-lg-7">
-                            <motion.button
-                              variants={fadeInUp(0.9)}
-                              initial="hidden"
-                              whileInView="visible"
-                              viewport={{ once:false, amount:0.3 }}
-                              type="submit"
-                              disabled={isSubmitting}
-                              className="theme-btn"
-                            >
-                              <span className="icon-1">
-                                <Image src="/assets/img/icon/10.svg" alt="i" width={20} height={20} />
-                              </span>
-                              {isSubmitting ? 'Sending...' : 'Submit request'}
-                              <span className="icon-2">
-                                <Image src="/assets/img/icon/11.svg" alt="i" width={20} height={20} />
-                              </span>
-                            </motion.button>
-                          </div>
-
-                        </div>
-                      </form>
-                    </motion.div>
-                  </div>
-
-                </div>
-              </div>
-            </div>
-          </section>
-
-          {/* CTA Section */}
-          <section className="cta-section fix section-padding pt-0 dark-bg-style black-bg"
-            style={{background: "linear-gradient(to bottom, white 50%, #0d0670 50%)"}}
+            Contact Us
+          </motion.h1>
+          <motion.div
+            variants={fadeInUp(0.5)}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="mt-3 flex items-center justify-center gap-3 text-white/80"
           >
-            <div className="container">
+            <Link href="/" className="hover:text-white transition">
+              Home
+            </Link>
+            <span>/</span>
+            <span>Contact Us</span>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Contact Info Section */}
+      <section className="py-24 bg-white">
+        <div className="max-w-[1320px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 px-4">
+          {[
+            {
+              title: 'Office Address',
+              text: 'Xyz Belgium',
+              svg: '/assets/img/icon/location.svg',
+            },
+            {
+              title: 'Call Us For Support:',
+              text: '+32 499 712 725',
+              link: 'tel:+32499712725',
+              svg: '/assets/img/icon/phone.svg',
+            },
+            {
+              title: 'Email Us Anytime:',
+              text: 'kevalai24@gmail.com',
+              link: 'mailto:kevalai24@gmail.com',
+              svg: '/assets/img/icon/mail.svg',
+            },
+          ].map((item, index) => (
+            <motion.div
+              key={index}
+              variants={fadeInUp(index * 0.2)}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              className="rounded-2xl bg-[#f9f9f9] py-12 px-6 text-center shadow-sm hover:shadow-md transition-all duration-300"
+            >
+              <div className="flex justify-center mb-6">
+                <div className="w-16 h-16 rounded-full bg-black flex items-center justify-center">
+                  <Image 
+                    src={item.svg} 
+                    alt="icon" 
+                    width={28} 
+                    height={28}
+                    className="brightness-0 invert"
+                  />
+                </div>
+              </div>
+              <h3 className="text-[#0d0670] text-lg font-semibold uppercase mb-2">
+                {item.title}
+              </h3>
+              {item.link ? (
+                <a
+                  href={item.link}
+                  className="text-gray-600 hover:text-theme2 transition"
+                >
+                  {item.text}
+                </a>
+              ) : (
+                <p className="text-gray-600">{item.text}</p>
+              )}
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* Map + Contact Form */}
+      <section className="bg-white pb-24">
+        <div className="max-w-[1320px] mx-auto px-4 grid lg:grid-cols-2 gap-10 items-start">
+          {/* Map */}
+          <motion.div
+            variants={fadeInUp(0.3)}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: false }}
+            className="rounded-3xl overflow-hidden shadow-sm"
+          >
+            <iframe
+              width="100%"
+              height="650"
+              loading="lazy"
+              style={{ border: 0 }}
+              allowFullScreen
+              referrerPolicy="no-referrer-when-downgrade"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2519.478221817852!2d4.351721415746877!3d50.846557979532385!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c3c3802b6c5f2b%3A0x40099ab2f4d8b10!2sBelgium!5e0!3m2!1sen!2sin!4v1699939378007!5m2!1sen!2sin"
+            ></iframe>
+          </motion.div>
+
+          {/* Contact Form */}
+          <motion.div
+            variants={fadeInUp(0.5)}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: false }}
+            className="bg-[#f9f9f9] rounded-3xl p-10 shadow-sm"
+          >
+            <h3 className="text-[#0d0670] text-3xl font-bold mb-8 uppercase">
+              Ready to Get Started?
+            </h3>
+
+            {submitStatus.type && (
+              <div
+                className={`mb-6 rounded-md px-4 py-3 text-sm ${
+                  submitStatus.type === 'success'
+                    ? 'bg-green-100 text-green-700 border border-green-300'
+                    : 'bg-red-100 text-red-700 border border-red-300'
+                }`}
+              >
+                {submitStatus.message}
+              </div>
+            )}
+
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {[
+                  { label: 'First Name*', name: 'firstName', type: 'text' },
+                  { label: 'Last Name*', name: 'lastName', type: 'text' },
+                  { label: 'Phone Number*', name: 'phone', type: 'tel' },
+                  { label: 'Email Address*', name: 'email', type: 'email' },
+                ].map((field, i) => (
+                  <motion.div
+                    key={i}
+                    variants={fadeInUp(i * 0.2)}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: false }}
+                  >
+                    <label className="block text-[#0d0670] font-medium mb-2">
+                      {field.label}
+                    </label>
+                    <input
+                      type={field.type}
+                      name={field.name}
+                      value={(formData as any)[field.name]}
+                      onChange={handleChange}
+                      required
+                      placeholder={`Enter Your ${field.label.replace('*', '')}`}
+                      className="w-full rounded-md border border-gray-200 bg-white px-4 py-3 text-gray-700 focus:ring-2 focus:ring-theme2 outline-none"
+                    />
+                  </motion.div>
+                ))}
+              </div>
+
+              <motion.div
+                variants={fadeInUp(0.7)}
+                initial="hidden"
+                whileInView="visible"
+              >
+                <label className="block text-[#0d0670] font-medium mb-2">
+                  Message*
+                </label>
+                <textarea
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  required
+                  placeholder="Write your message......"
+                  className="w-full rounded-md border border-gray-200 bg-white px-4 py-3 text-gray-700 focus:ring-2 focus:ring-theme2 outline-none h-40 resize-none"
+                ></textarea>
+              </motion.div>
+
+              <motion.div
+                variants={fadeInUp(0.9)}
+                initial="hidden"
+                whileInView="visible"
+              >
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="inline-flex items-center gap-3 bg-theme2 hover:bg-[#ff924f] text-white font-semibold uppercase px-8 py-3 rounded-md transition-all duration-300"
+                >
+                  <Image
+                    src="/assets/img/icon/10.svg"
+                    width={20}
+                    height={20}
+                    alt="icon"
+                  />
+                  {isSubmitting ? 'Sending...' : 'Submit Request'}
+                  <Image
+                    src="/assets/img/icon/11.svg"
+                    width={20}
+                    height={20}
+                    alt="icon"
+                  />
+                </button>
+              </motion.div>
+            </form>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+<section
+            className="py-24"
+            style={{ background: 'linear-gradient(to bottom, white 50%, black 50%)' }}
+          >
+            <div className="max-w-[1320px] mx-auto px-4">
               <motion.div
                 variants={fadeInUp(0.3)}
                 initial="hidden"
                 whileInView="visible"
-                viewport={{ once:false, amount:0.3 }}
-                className="cta-wrapper bg-cover"
+                viewport={{ once: false }}
+                className="bg-cover rounded-3xl p-16 text-white"
                 style={{
                   backgroundImage: "url('/assets/keval-image/service/servic-pg-cta.png')",
                 }}
               >
-                <h2 style={{ fontSize: 'clamp(24px, 5vw, 50px)' }}>
-                  Have an idea in your mind?<br/>Let&apos;s make something great together
+                <h2 className="text-3xl md:text-5xl font-bold mb-8">
+                  Have an idea in your mind? Let&apos;s make something great together
                 </h2>
 
                 <motion.div
                   variants={fadeInUp(0.5)}
                   initial="hidden"
                   whileInView="visible"
-                  viewport={{ once:false, amount:0.3 }}
                 >
-                  <Link href="/contact" className="theme-btn border-white">
-                    <span className="icon-1"></span>
-                    get in touch
-                    <span className="icon-2"></span>
-                  </Link>
+                  <div className="flex justify-center">
+                    <Link
+                      href="/contact"
+                      className="theme-btn"
+                    >
+                      Get in Touch
+                    </Link>
+                  </div>
+
                 </motion.div>
               </motion.div>
             </div>
           </section>
 
-          <Footer />
-        </div>
-      </div>
-
+      <Footer />
       <BackToTop />
     </>
   );

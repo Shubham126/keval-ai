@@ -18,6 +18,11 @@ import CounterSection from '@/components/CounterSection';
 import ChallengesSection from '@/components/ChallengesSection';
 import FeaturesSection from '@/components/FeaturesSection';
 import CalendlySection from '@/components/CalendlySection';
+import {
+  initializeMainScripts,
+  initializeGSAPAnimations,
+  initializeAnimations,
+} from '@/lib/scripts';
 
 export default function Home() {
   const pathname = usePathname();
@@ -25,17 +30,9 @@ export default function Home() {
   useEffect(() => {
     // Re-initialize animations on pathname change
     setTimeout(() => {
-      if (typeof window !== 'undefined') {
-        // Initialize WOW.js
-        if ((window as any).WOW) {
-          new (window as any).WOW().init();
-        }
-        
-        // Initialize custom animations if available
-        if ((window as any).initCustomAnimations) {
-          (window as any).initCustomAnimations();
-        }
-      }
+      initializeAnimations();
+      initializeMainScripts();
+      initializeGSAPAnimations();
     }, 300);
   }, [pathname]);
 

@@ -6,209 +6,244 @@ import BackToTop from '@/components/BackToTop';
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { fadeInUp } from '../../lib/motionVariants';
+import { fadeInUp } from '@/lib/motionVariants';
 
 export default function PortfolioDetailsPage() {
   return (
     <>
       <Header />
 
-      <div id="smooth-wrapper">
-        <div id="smooth-content">
-
-          {/* Breadcrumb-wrapper */}
-          <div
-            className="breadcrumb-wrapper bg-cover"
-            style={{
-              backgroundImage: "url('/assets/keval-image/about-hero-banner.png')",
-              backgroundColor: '#ffffff'
-            }}
+      {/* ==================== HERO / BREADCRUMB ==================== */}
+      <section
+        className="relative flex h-[56vh] min-h-[420px] items-center justify-center bg-cover bg-center"
+        style={{
+          backgroundImage: "url('/assets/keval-image/about-hero-banner.png')",
+        }}
+      >
+        <div className="absolute inset-0 bg-black/60" />
+        <div className="relative z-10 text-center text-white">
+          <motion.h1
+            variants={fadeInUp(0.2)}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="text-5xl font-extrabold uppercase tracking-wide"
           >
-            <div className="container">
-              <div className="page-heading">
-
-                <motion.div
-                  variants={fadeInUp(0.3)}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ amount: 0.3, once: false }}
-                  className="breadcrumb-sub-title"
-                >
-                  <h1>Portfolio Details</h1>
-                </motion.div>
-
-                <motion.ul
-                  variants={fadeInUp(0.5)}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ amount: 0.3, once: false }}
-                  className="breadcrumb-items"
-                >
-                  <li>
-                    <Link href="/">
-                      <i className="fa-regular fa-house"></i>
-                      Home
-                    </Link>
-                  </li>
-                  <li><i className="fa-solid fa-slash-forward"></i></li>
-                  <li>Portfolio Details</li>
-                </motion.ul>
-
-              </div>
-            </div>
-          </div>
-
-          {/* Project Section */}
-          <section className="project-details-section section-padding" style={{ backgroundColor: '#ffffff' }}>
-            <div className="container">
-              <div className="project-details-wrapper">
-
-                <motion.div
-                  variants={fadeInUp(0.3)}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ amount: 0.3, once: false }}
-                  className="details-image"
-                >
-                  <Image
-                    src="/assets/keval-image/portfolio/dalila-diamonds.png"
-                    alt="img"
-                    width={1200}
-                    height={600}
-                    style={{ width: '100%', height: 'auto' }}
-                  />
-                </motion.div>
-
-                <div className="project-details-items">
-                  <div className="row g-4">
-
-                    {/* LEFT CONTENT */}
-                    <div className="col-xl-8">
-                      <motion.div
-                        variants={fadeInUp(0.4)}
-                        initial="hidden"
-                        whileInView="visible"
-                        viewport={{ amount: 0.3, once: false }}
-                        className="details-content"
-                      >
-                        <h2 style={{ color: '#0d0670' }}>
-                          Digital agency bring specialized knowledge and experience
-                        </h2>
-
-                        <p className="mb-3" style={{ color: '#000000' }}>
-                          Netus lorem rutrum arcu dignissim...
-                        </p>
-
-                        <p className="mb-5" style={{ color: '#000000' }}>
-                          Netus lorem rutrum arcu dignissim...
-                        </p>
-
-                        <h3>Challenge & Solution</h3>
-                        <p className="mb-5" style={{ color: '#000000' }}>
-                          Future, as it seeks to lead the industry...
-                        </p>
-
-                        <h3>Final Result</h3>
-                        <p style={{ color: '#000000' }}>
-                          For almost 50 years Leighton Asia...
-                        </p>
-                      </motion.div>
-                    </div>
-
-                    {/* RIGHT SIDEBAR */}
-                    <div className="col-xl-4 col-lg-5">
-                      <motion.div
-                        variants={fadeInUp(0.5)}
-                        initial="hidden"
-                        whileInView="visible"
-                        viewport={{ amount: 0.3, once: false }}
-                        className="project-information sticky-style"
-                      >
-                        <h3>Project Information</h3>
-
-                        <ul>
-                          <li>
-                            <span className="list-1">Category :</span>
-                            <span className="list-2">Business, Marketing</span>
-                          </li>
-                          <li>
-                            <span className="list-1">Author :</span>
-                            <span className="list-2">Athena Jones</span>
-                          </li>
-                          <li>
-                            <span className="list-1">Tags :</span>
-                            <span className="list-2">Data Masters</span>
-                          </li>
-                          <li>
-                            <span className="list-1">Cost :</span>
-                            <span className="list-2">USD 1,50,499</span>
-                          </li>
-                          <li>
-                            <span className="list-1">Date :</span>
-                            <span className="list-2">25 February, 2025</span>
-                          </li>
-                        </ul>
-
-                        <div className="social-icon d-flex align-items-center">
-                          <a href="#"><i className="fab fa-facebook-f"></i></a>
-                          <a href="#"><i className="fab fa-twitter"></i></a>
-                          <a href="#"><i className="fab fa-vimeo-v"></i></a>
-                          <a href="#"><i className="fab fa-pinterest-p"></i></a>
-                        </div>
-
-                      </motion.div>
-                    </div>
-
-                  </div>
-                </div>
-
-              </div>
-            </div>
-          </section>
-
-          {/* CTA Section */}
-          <section
-            className="cta-section fix section-padding pt-0 dark-bg-style black-bg"
-            style={{ background: "linear-gradient(to bottom, white 50%, black 50%)" }}
+            Portfolio Details
+          </motion.h1>
+          <motion.div
+            variants={fadeInUp(0.3)}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="mt-3 flex items-center justify-center gap-3 text-white/90"
           >
-            <div className="container">
+            <Link href="/" className="hover:text-white transition">
+              Home
+            </Link>
+            <span>/</span>
+            <span>Portfolio Details</span>
+          </motion.div>
+        </div>
+      </section>
+
+{/* ==================== PROJECT DETAILS ==================== */}
+<section className="bg-white py-24">
+  <div className="max-w-[1320px] mx-auto px-4">
+    {/* Project Image */}
+    <motion.div
+      variants={fadeInUp(0.3)}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true }}
+      className="mb-16"
+    >
+      <Image
+        src="/assets/keval-image/portfolio/dalila-diamonds.png"
+        alt="Portfolio Project"
+        width={1200}
+        height={600}
+        className="w-full rounded-lg object-cover shadow-md"
+      />
+    </motion.div>
+
+    {/* TWO COLUMN SECTION */}
+    <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 items-start">
+      {/* LEFT CONTENT */}
+      <motion.div
+        variants={fadeInUp(0.4)}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        className="lg:col-span-2 space-y-10"
+      >
+        <h2 className="text-[#0d0670] text-5xl md:text-5xl font-extrabold leading-tight uppercase">
+          Digital agency bring specialized knowledge and experience
+        </h2>
+
+        <div className="space-y-5 text-black">
+          <p>
+            Netus lorem rutrum arcu dignissim ...
+          </p>
+          <p>
+            Netus lorem rutrum arcu dignissim ...
+          </p>
+        </div>
+
+        <div className="space-y-4">
+          <h3 className="text-[#000000] text-4xl font-semibold uppercase">
+            Challenge & Solution
+          </h3>
+          <p className="text-black">
+            Future, as it seeks to lead the industry ...
+          </p>
+        </div>
+
+        <div className="space-y-4">
+          <h3 className="text-[#000000] text-4xl font-semibold uppercase">
+            Final Result
+          </h3>
+          <p className="text-black">
+            For almost 50 years Leighton Asia ...
+          </p>
+        </div>
+      </motion.div>
+
+      {/* RIGHT SIDEBAR */}
+      <motion.div
+        variants={fadeInUp(0.5)}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        className="bg-black text-white rounded-2xl px-8 py-10 shadow-md self-start"
+      >
+        <h3 className="text-2xl font-bold uppercase mb-6 tracking-wide">
+          Project Information
+        </h3>
+
+        <ul className="space-y-4 text-sm">
+          <li className="flex justify-between border-b border-white/20 pb-2">
+            <span className="font-semibold uppercase tracking-wide">Category :</span>
+            <span className="text-gray-300">Business, Marketing</span>
+          </li>
+          <li className="flex justify-between border-b border-white/20 pb-2">
+            <span className="font-semibold uppercase tracking-wide">Author :</span>
+            <span className="text-gray-300">Athena Jones</span>
+          </li>
+          <li className="flex justify-between border-b border-white/20 pb-2">
+            <span className="font-semibold uppercase tracking-wide">Tags :</span>
+            <span className="text-gray-300">Data Masters</span>
+          </li>
+          <li className="flex justify-between border-b border-white/20 pb-2">
+            <span className="font-semibold uppercase tracking-wide">Cost :</span>
+            <span className="text-gray-300">USD 1,50,499</span>
+          </li>
+          <li className="flex justify-between border-b border-white/20 pb-2">
+            <span className="font-semibold uppercase tracking-wide">Date :</span>
+            <span className="text-gray-300">25 February, 2025</span>
+          </li>
+        </ul>
+
+        {/* Social Icons */}
+        <div className="mt-8 flex items-center justify-start gap-4">
+          <a
+            href="#"
+            className="w-10 h-10 flex items-center justify-center rounded-full bg-[#1A1F36] hover:bg-[#FD7E31] transition border border-white/20"
+          >
+            <Image
+              src="/assets/svg/facebook-svgrepo-com.svg"
+              alt="Facebook"
+              width={20}
+              height={20}
+              className="invert brightness-0 filter transition-all duration-300 hover:invert-0"
+            />
+          </a>
+
+          <a
+            href="#"
+            className="w-10 h-10 flex items-center justify-center rounded-full bg-[#1A1F36] hover:bg-[#FD7E31] transition border border-white/20"
+          >
+            <Image
+              src="/assets/svg/twitter-svgrepo-com.svg"
+              alt="Twitter"
+              width={20}
+              height={20}
+              className="invert brightness-0 filter transition-all duration-300 hover:invert-0"
+            />
+          </a>
+
+          <a
+            href="#"
+            className="w-10 h-10 flex items-center justify-center rounded-full bg-[#1A1F36] hover:bg-[#FD7E31] transition border border-white/20"
+          >
+            <Image
+              src="/assets/svg/instagram-svgrepo-com.svg"
+              alt="Instagram"
+              width={20}
+              height={20}
+              className="invert brightness-0 filter transition-all duration-300 hover:invert-0"
+            />
+          </a>
+
+          <a
+            href="#"
+            className="w-10 h-10 flex items-center justify-center rounded-full bg-[#1A1F36] hover:bg-[#FD7E31] transition border border-white/20"
+          >
+            <Image
+              src="/assets/svg/linkedin-svgrepo-com.svg"
+              alt="LinkedIn"
+              width={20}
+              height={20}
+              className="invert brightness-0 filter transition-all duration-300 hover:invert-0"
+            />
+          </a>
+        </div>
+      </motion.div>
+    </div>
+  </div>
+</section>
+
+
+      {/* ==================== CTA SECTION ==================== */}
+<section
+            className="py-24"
+            style={{ background: 'linear-gradient(to bottom, white 50%, black 50%)' }}
+          >
+            <div className="max-w-[1320px] mx-auto px-4">
               <motion.div
                 variants={fadeInUp(0.3)}
                 initial="hidden"
                 whileInView="visible"
-                viewport={{ amount: 0.3, once: false }}
-                className="cta-wrapper bg-cover"
+                viewport={{ once: false }}
+                className="bg-cover rounded-3xl p-16 text-white"
                 style={{
                   backgroundImage: "url('/assets/keval-image/service/servic-pg-cta.png')",
                 }}
               >
-                <h2>Have an idea in your mind? Let's make something great together</h2>
+                <h2 className="text-3xl md:text-5xl font-bold mb-8">
+                  Have an idea in your mind? Let&apos;s make something great together
+                </h2>
 
                 <motion.div
                   variants={fadeInUp(0.5)}
                   initial="hidden"
                   whileInView="visible"
-                  viewport={{ amount: 0.3, once: false }}
                 >
-                  <Link href="/contact" className="theme-btn border-white">
-                    <span className="icon-1">
-                      <Image src="/assets/img/icon/10.svg" alt="img" width={20} height={20} />
-                    </span>
-                    get in touch
-                    <span className="icon-2">
-                      <Image src="/assets/img/icon/11.svg" alt="img" width={20} height={20} />
-                    </span>
-                  </Link>
-                </motion.div>
+                  <div className="flex justify-center">
+                    <Link
+                      href="/contact"
+                      className="theme-btn"
+                    >
+                      Get in Touch
+                    </Link>
+                  </div>
 
+                </motion.div>
               </motion.div>
             </div>
           </section>
 
-          <Footer />
-        </div>
-      </div>
-
+      <Footer />
       <BackToTop />
     </>
   );

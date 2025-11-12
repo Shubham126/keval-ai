@@ -29,16 +29,16 @@ const features = [
 export default function FeaturesSection() {
   return (
     <section
-      className="service-section-5 weKnow_section fix my-5"
+      className="service-section-5 weKnow_section my-5"
       style={{ backgroundColor: '#ffffff' }}
     >
       <div className="weKnow_section_bg_image">
-        <div className="container">
+        <div className="container max-w-7xl mx-auto px-4">
 
           {/* Top Heading */}
-          <div className="row g-4 my-5">
+          <div className="grid grid-cols-1 gap-4 my-5">
             <motion.div
-              className="col-lg-12 col-md-12"
+              className="col-span-1"
               variants={fadeInUp()}
               initial="hidden"
               whileInView="visible"
@@ -47,11 +47,11 @@ export default function FeaturesSection() {
             >
               <div className="service-box-items-5">
                 <div className="content text-center">
-                  <h3 className="fw-bold">
+                  <h3 className="font-bold">
                     <Link
                       href="#"
+                      className="text-[#00072D] hover:text-theme transition-colors"
                       style={{
-                        color: '#00072D',
                         fontSize: 'clamp(24px, 4vw, 36px)',
                       }}
                     >
@@ -59,7 +59,7 @@ export default function FeaturesSection() {
                       that — yours.
                     </Link>
                   </h3>
-                  <p className="fs-5" style={{ color: '#000000' }}>
+                  <p className="text-lg text-black mt-4">
                     We offer powerful, flexible solutions for every need, no
                     matter the complexity. Simply put, we&apos;re built to scale.
                     That means more growth for you.
@@ -70,11 +70,11 @@ export default function FeaturesSection() {
           </div>
 
           {/* Feature Cards */}
-          <div className="row g-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {features.map((feature, index) => (
               <motion.div
                 key={index}
-                className="col-lg-4 col-md-6"
+                className="col-span-1"
                 variants={fadeInUp()}
                 initial="hidden"
                 whileInView="visible"
@@ -85,14 +85,7 @@ export default function FeaturesSection() {
 
                   {/* Image Card */}
                   <div
-                    className="card_image image_border"
-                    style={{
-                      width: '100%',
-                      height: '375px',
-                      borderRadius: '30px',
-                      overflow: 'hidden',
-                      position: 'relative',
-                    }}
+                    className="card_image image_border w-full h-[375px] rounded-[30px] overflow-hidden relative"
                   >
                     <Image
                       src={feature.image}
@@ -107,10 +100,10 @@ export default function FeaturesSection() {
 
                   {/* Text Content */}
                   <div className="content pt-3 px-2">
-                    <h5>
-                      <Link href="#">{feature.title}</Link>
-                    </h5>
-                    <p style={{ color: '#000000' }}>{feature.description}</p>
+                    <h2 className="text-xl font-bold mb-2">
+                      <Link href="#" className="text-header hover:text-theme transition-colors">{feature.title}</Link>
+                    </h2>
+                    <p className="text-black">{feature.description}</p>
                   </div>
                 </div>
               </motion.div>
@@ -118,7 +111,7 @@ export default function FeaturesSection() {
           </div>
 
           {/* Button */}
-          <div className="w-100 text-center mt-5">
+          <div className="w-full text-center mt-5">
             <motion.div
               variants={fadeInUp()}
               initial="hidden"
@@ -129,7 +122,7 @@ export default function FeaturesSection() {
               <div className="header-button">
                 <Link
                   href="/about"
-                  className="theme-btn rounded-2 text-white border-white"
+                  className="theme-btn rounded-lg text-white border-white"
                 >
                   <span className="icon-1"></span>
                   Learn more

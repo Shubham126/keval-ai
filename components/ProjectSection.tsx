@@ -1,161 +1,121 @@
 'use client';
 
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay } from 'swiper/modules';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { fadeInUp } from '@/lib/motionVariants';
+import 'swiper/css';
 
-const projects = [
+const V = (d = 0) => {
+  const v: any = fadeInUp;
+  return typeof v === 'function' ? v(d) : v;
+};
+
+const baseProjects = [
   {
     image: '/assets/keval-image/portfolio/dalila-diamonds.png',
     category: 'MARKETING',
-    title: 'Dalila Diamonds',
-    titleLink: '#',
+    title: 'DALILA DIAMONDS',
     buttonLink: '/portfolio',
   },
   {
     image: '/assets/keval-image/portfolio/donai-gems.png',
     category: 'CRM AND ERP',
-    title: 'Donai Gems',
-    titleLink: '#',
+    title: 'DONAI GEMS',
     buttonLink: '/portfolio',
   },
   {
     image: '/assets/keval-image/portfolio/millennium-star.jpg',
     category: 'HIGH CONVERSION WEBSITE',
-    title: 'Millenium Star',
-    titleLink: '/portfolio',
-    buttonLink: '#',
-  },
-  {
-    image: '/assets/keval-image/portfolio/dalila-diamonds.png',
-    category: 'MARKETING',
-    title: 'Dalila Diamonds',
-    titleLink: '#',
+    title: 'MILLENIUM STAR',
     buttonLink: '/portfolio',
-  },
-  {
-    image: '/assets/keval-image/portfolio/donai-gems.png',
-    category: 'CRM AND ERP',
-    title: 'Donai Gems',
-    titleLink: '#',
-    buttonLink: '/portfolio',
-  },
-  {
-    image: '/assets/keval-image/portfolio/millennium-star.jpg',
-    category: 'HIGH CONVERSION WEBSITE',
-    title: 'Millenium Star',
-    titleLink: '/portfolio',
-    buttonLink: '#',
   },
 ];
 
-export default function ProjectSection() {
-  const infiniteProjects = [...projects, ...projects];
+// ✅ IMPORTANT — duplicate to enable looping
+const projects = [...baseProjects, ...baseProjects];
 
+export default function ProjectSection() {
   return (
-    <section className="project-section-4 fix section-padding pt-0">
-      <div className="project-wrapper-4">
+    <section className="w-full bg-white py-20">
+      <div className="w-full max-w-[1600px] mx-auto px-4">
 
         {/* Title */}
         <motion.h3
-          className="text-center heading_text my-4"
-          variants={fadeInUp(0.35)}
+          className="text-center text-[44px] md:text-[50px] font-extrabold text-[#1a102c] mb-16"
+          variants={V(0.2)}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          custom={0.2}
         >
-          Our Recent Work
+          OUR RECENT WORK
         </motion.h3>
 
-        {/* Slider Container */}
-        <motion.div
-          className="swiper project-slider"
-          variants={fadeInUp(0.35)}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          custom={0.35}
+        {/* ✅ Swiper with loop + autoplay */}
+        <Swiper
+          modules={[Autoplay]}
+          spaceBetween={40}
+          slidesPerView={2.2}
+          speed={2800}
+          autoplay={{
+            delay: 1800,
+            disableOnInteraction: false,
+          }}
+          loop          // ✅ now it will loop properly
+          allowTouchMove={false}
+          breakpoints={{
+            320: { slidesPerView: 1.1, spaceBetween: 20 },
+            640: { slidesPerView: 1.3, spaceBetween: 30 },
+            1024: { slidesPerView: 2.2, spaceBetween: 40 },
+            1440: { slidesPerView: 3, spaceBetween: 40 },
+          }}
+          className="overflow-hidden w-full"
         >
-          <div
-            className="swiper-wrapper"
-            style={{
-              display: 'flex',
-              animation: 'slidePause 12s ease-in-out infinite',
-            }}
-          >
-            {infiniteProjects.map((project, index) => (
-              <div
-                key={index}
-                className="swiper-slide"
-                style={{
-                  width: '30%',
-                  margin: '5px',
-                  flexShrink: 0,
-                }}
+          {projects.map((p, i) => (
+            <SwiperSlide key={i}>
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.4, delay: (i % 3) * 0.1 }}
+                viewport={{ once: true }}
+                className="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden"
               >
-                <div className="project-box-items-4 p-relative">
+                <div className="overflow-hidden">
+                  <Image
+                    src={p.image}
+                    alt={p.title}
+                    width={800}
+                    height={500}
+                    className="w-full h-[240px] object-cover transition-transform duration-700 hover:scale-110"
+                  />
+                </div>
 
-                  {/* Thumbnail */}
-                  <div className="thumb">
-                    <Image
-                      src={project.image}
-                      alt={project.title}
-                      width={400}
-                      height={260}
-                      style={{
-                        width: '100%',
-                        height: '220px',
-                        objectFit: 'cover',
-                      }}
-                    />
-                  </div>
+                <div className="p-5">
+                  <p className="text-sm text-gray-500 uppercase tracking-wide mb-1">
+                    {p.category}
+                  </p>
 
-                  {/* Text */}
-                  <div className="project-content">
-                    <div className="content">
-                      <span>{project.category}</span>
-                      <h3>
-                        <Link href={project.titleLink}>{project.title}</Link>
-                      </h3>
-                    </div>
+                  <h3 className="text-xl font-bold text-[#1a102c] mb-5">
+                    {p.title}
+                  </h3>
 
-                    <Link href={project.buttonLink} className="theme-btn2">
-                      <span className="icon-1"></span>
+                  <div className="w-full flex justify-end">
+                    <Link
+                      href={p.buttonLink}
+                      className="px-5 py-2.5 bg-[#0B2546] text-white text-sm rounded-md transition-colors hover:bg-[#FD7E31]"
+                    >
                       VIEW PORTFOLIO
-                      <span className="icon-2"></span>
                     </Link>
                   </div>
-
                 </div>
-              </div>
-            ))}
-          </div>
-        </motion.div>
+              </motion.div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+
       </div>
-
-      <style jsx global>{`
-        /* Smooth right-to-left movement with pauses */
-        @keyframes slidePause {
-          0% { transform: translateX(0); }
-          20% { transform: translateX(0); }
-          40% { transform: translateX(-20%); }
-          60% { transform: translateX(-20%); }
-          80% { transform: translateX(-40%); }
-          100% { transform: translateX(-40%); }
-        }
-
-        .project-slider:hover .swiper-wrapper {
-          animation-play-state: paused;
-        }
-
-        @media (max-width: 768px) {
-          .swiper-wrapper {
-            animation-duration: 18s;
-          }
-        }
-      `}</style>
     </section>
   );
 }

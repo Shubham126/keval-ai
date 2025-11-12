@@ -5,8 +5,24 @@ import Footer from '@/components/Footer';
 import BackToTop from '@/components/BackToTop';
 import Link from 'next/link';
 import Image from 'next/image';
+import { motion } from 'framer-motion';
+import { useState } from 'react';
+import { fadeInUp } from '@/lib/motionVariants';
 
 export default function ServiceDetailsPage() {
+  const [openIndex, setOpenIndex] = useState<number | null>(0);
+
+  const faqs = [
+    'Why Is SEO Important For Small Business?',
+    'How Do I Choose The Best SEO Agency?',
+    'Better Security And Faster Server?',
+    'Deployment Within Few Minutes',
+  ];
+
+  const toggleFAQ = (index: number) => {
+    setOpenIndex(openIndex === index ? null : index);
+  };
+
   return (
     <>
       <Header />
@@ -14,198 +30,242 @@ export default function ServiceDetailsPage() {
       <div id="smooth-wrapper">
         <div id="smooth-content">
 
-          {/* Breadcrumb-wrapper Start */}
-          <div
-            className="breadcrumb-wrapper bg-cover"
+          {/* ===== HERO SECTION ===== */}
+          <section
+            className="relative flex h-[56vh] min-h-[420px] items-center justify-center bg-cover bg-center bg-no-repeat"
             style={{
-              backgroundImage: "url('/assets/keval-image/about-hero-banner.png')"
+              backgroundImage: "url('/assets/keval-image/about-hero-banner.png')",
             }}
           >
-            <div className="container">
-              <div className="page-heading">
-                <div className="breadcrumb-sub-title">
-                  <h1 className="wow fadeInUp" data-wow-delay=".3s">
-                    Service Details
-                  </h1>
-                </div>
+            <div className="absolute inset-0 bg-black/60"></div>
+            <div className="relative z-10 container mx-auto px-4 text-center text-white">
+              <h1 className="text-5xl lg:text-6xl font-bold uppercase mb-6 tracking-wide">
+                Service Details
+              </h1>
 
-                <ul className="breadcrumb-items wow fadeInUp" data-wow-delay=".5s">
-                  <li>
-                    <Link href="/">
-                      <i className="fa-regular fa-house"></i>
-                      Home
-                    </Link>
-                  </li>
-                  <li><i className="fa-solid fa-slash-forward"></i></li>
-                  <li>Service Details</li>
-                </ul>
-              </div>
+              <ul className="flex items-center justify-center gap-3 text-base">
+                <li>
+                  <Link
+                    href="/"
+                    className="flex items-center gap-2 hover:text-[#FD7E31] transition-colors"
+                  >
+                    <i className="fa-regular fa-house"></i> Home
+                  </Link>
+                </li>
+                <li>
+                  <i className="fa-solid fa-slash-forward text-sm"></i>
+                </li>
+                <li className="text-[#FD7E31]">Service Details</li>
+              </ul>
             </div>
-          </div>
+          </section>
 
-          {/* Service Details Section Start */}
-          <section className="service-details-section section-padding" style={{ backgroundColor: '#ffffff' }}>
-            <div className="container">
-              <div className="service-details-wrapper">
+          {/* ===== GAP ===== */}
+          <div className="h-20 bg-white"></div>
 
-                {/* Top banner image */}
-                <div className="row">
-                  <div className="col-lg-12">
-                    <div className="details-image">
-                      <Image
-                        src="/assets/keval-image/service/detail-1.jpg"
-                        alt="img"
-                        width={1200}
-                        height={400}
-                        className="w-full h-auto"
-                      />
-                    </div>
+          {/* ===== SECOND IMAGE (WITH MARGINS & ROUNDED EDGES) ===== */}
+          <section className="relative px-4 lg:px-0 mb-20">
+            <motion.div
+              initial={{ scale: 1 }}
+              whileInView={{ scale: 1.03 }}
+              transition={{ duration: 2, ease: 'easeOut' }}
+              viewport={{ once: true }}
+              className="max-w-7xl mx-auto"
+            >
+              <Image
+                src="/assets/keval-image/service/detail-1.jpg"
+                alt="Service Banner"
+                width={1920}
+                height={700}
+                className="w-full h-[70vh] object-cover rounded-2xl shadow-lg"
+                priority
+              />
+            </motion.div>
+          </section>
+
+          {/* ===== MAIN CONTENT ===== */}
+          <section className="bg-white py-20">
+            <div className="max-w-7xl mx-auto px-4 lg:px-6 grid grid-cols-1 lg:grid-cols-3 gap-10">
+
+              {/* Sticky Sidebar */}
+              <aside className="lg:col-span-1">
+                <div className="sticky top-32">
+                  <div className="bg-[#F9F9F9] rounded-2xl p-8 shadow-sm">
+                    <h4 className="text-[22px] font-bold text-[#190B28] uppercase mb-6 border-b-2 border-[#081C3D] inline-block pb-2">
+                      All Services
+                    </h4>
+
+                    <ul className="space-y-4">
+                      {[
+                        'HIGH CONVERSION WEBSITE',
+                        'INVENTORY MANAGEMENT SYSTEMS',
+                        'MVP development',
+                        'CRM AND ERP',
+                        'Marketing solutions',
+                      ].map((service, i) => (
+                        <li key={i}>
+                          <Link
+                            href="/service-details"
+                            className={`flex items-center justify-between px-6 py-4 rounded-md text-[15px] font-semibold transition-all ${
+                              i === 0
+                                ? 'bg-[#081C3D] text-white shadow-md'
+                                : 'bg-white text-[#190B28] hover:bg-[#f0f1f3]'
+                            }`}
+                          >
+                            {service}
+                            <i
+                              className={`fa-regular fa-arrow-right-long ${
+                                i === 0 ? 'text-white' : 'text-[#190B28]'
+                              }`}
+                            ></i>
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </aside>
+
+              {/* Right Main Content */}
+              <div className="lg:col-span-2 space-y-10">
+
+                {/* Section 1 */}
+                <div>
+                  <h2 className="text-[32px] lg:text-[36px] font-bold uppercase text-[#190B28] mb-4">
+                    HIGH CONVERSION WEBSITE
+                  </h2>
+                  <p className="text-[#1A1A1A] text-[16px] leading-relaxed">
+                    Keval AI creates websites that look great and convert visitors into customers.
+                    Fast, user-friendly, and optimized for growth.
+                  </p>
+                </div>
+
+                {/* What We Provide */}
+                <div>
+                  <h3 className="text-[26px] font-bold uppercase text-[#190B28] mb-4">
+                    WHAT WE PROVIDE
+                  </h3>
+                  <p className="text-[#1A1A1A] text-[16px] leading-relaxed mb-6">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet nesciunt earum repellendus.
+                  </p>
+
+                  <Image
+                    src="/assets/keval-image/service/service-detail.jpg"
+                    alt="Service Detail"
+                    width={800}
+                    height={400}
+                    className="rounded-lg w-full h-auto shadow"
+                  />
+                </div>
+
+                {/* Challenge Section */}
+                <div>
+                  <h3 className="text-[26px] font-bold uppercase text-[#190B28] mb-4">
+                    THE CHALLENGE
+                  </h3>
+                  <p className="text-[#1A1A1A] text-[16px] leading-relaxed mb-6">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt sequi blanditiis dolor.
+                  </p>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <ul className="space-y-3">
+                      <li className="flex items-center gap-2 text-[#1A1A1A] text-[15px]">
+                        <i className="fa-solid fa-circle-check text-[#081C3D]"></i>
+                        Various analysis options.
+                      </li>
+                      <li className="flex items-center gap-2 text-[#1A1A1A] text-[15px]">
+                        <i className="fa-solid fa-circle-check text-[#081C3D]"></i>
+                        Advanced data analysis.
+                      </li>
+                    </ul>
+                    <ul className="space-y-3">
+                      <li className="flex items-center gap-2 text-[#1A1A1A] text-[15px]">
+                        <i className="fa-solid fa-circle-check text-[#081C3D]"></i>
+                        Page Load (time, size, requests).
+                      </li>
+                      <li className="flex items-center gap-2 text-[#1A1A1A] text-[15px]">
+                        <i className="fa-solid fa-circle-check text-[#081C3D]"></i>
+                        Advanced data insights.
+                      </li>
+                    </ul>
                   </div>
                 </div>
 
-                <div className="row g-5">
+                {/* FAQ Section */}
+                <div>
+                  <h3 className="text-[26px] font-bold uppercase text-[#190B28] mb-6">
+                    Frequently Asked Questions
+                  </h3>
 
-                  {/* Sidebar */}
-                  <div className="col-12 col-lg-4">
-                    <div className="main-sidebar sticky-style">
-                      <div className="single-sidebar-widget">
-                        <div className="wid-title">
-                          <h4>All Services</h4>
-                        </div>
+                  <div className="space-y-4">
+                    {faqs.map((title, i) => (
+                      <div key={i} className="bg-white border border-[#eee] rounded-md shadow-sm">
+                        <button
+                          onClick={() => toggleFAQ(i)}
+                          className={`w-full flex items-center justify-between px-6 py-4 font-semibold text-left text-[18px] transition ${
+                            openIndex === i ? 'text-[#081C3D]' : 'text-[#190B28]'
+                          }`}
+                        >
+                          {title}
+                          <span>
+                            <i
+                              className={`fa-solid ${
+                                openIndex === i ? 'fa-minus' : 'fa-plus'
+                              } text-[16px]`}
+                            ></i>
+                          </span>
+                        </button>
 
-                        <div className="service-widget-categories">
-                          <ul>
-                            {[
-                              'HIGH CONVERSION WEBSITE',
-                              'INVENTORY MANAGEMENT SYSTEMS',
-                              'MVP development',
-                              'CRM AND ERP',
-                              'Marketing solutions',
-                            ].map((service, index) => (
-                              <li key={index} className={index === 0 ? 'active' : ''}>
-                                <Link href="/service-details">{service}</Link>
-                                <span>
-                                  <i className="fa-regular fa-arrow-right-long"></i>
-                                </span>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Main Content */}
-                  <div className="col-12 col-lg-8">
-                    <div className="service-details-content">
-
-                      <h3>HIGH CONVERSION WEBSITE</h3>
-
-                      <p className="mb-4 text-black">
-                        Keval AI creates websites that look great and convert visitors into customers.
-                        Fast, user-friendly, and optimized for growth.
-                      </p>
-
-                      <h3>What We Provide</h3>
-
-                      <p className="mb-5 text-black">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet nesciunt earum repellendus.
-                      </p>
-
-                      <div className="thumb">
-                        <Image
-                          src="/assets/keval-image/service/service-detail.jpg"
-                          alt="img"
-                          width={800}
-                          height={400}
-                          className="w-full h-auto"
-                        />
-                      </div>
-
-                      <h3>The Challenge</h3>
-
-                      <p className="text-black">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt sequi blanditiis dolor.
-                      </p>
-
-                      <div className="details-list-items">
-                        <ul className="details-list">
-                          <li><i className="fa-solid fa-circle-check"></i> Various analysis options.</li>
-                          <li><i className="fa-solid fa-circle-check"></i> Advanced data analysis.</li>
-                        </ul>
-
-                        <ul className="details-list">
-                          <li><i className="fa-solid fa-circle-check"></i> Page Load (time, size, requests).</li>
-                          <li><i className="fa-solid fa-circle-check"></i> Advanced data insights.</li>
-                        </ul>
-                      </div>
-
-                    </div>
-
-                    {/* FAQ Section */}
-                    <div className="faq-wrapper mt-5">
-                      <div className="accordion" id="accordionFaq">
-
-                        {[
-                          "Why Is SEO Important For Small Business?",
-                          "How do I choose the best SEO Agency?",
-                          "Better Security And Faster Server?",
-                          "Deployment Within Few Minutes"
-                        ].map((title, i) => (
-                          <div className="accordion-item mb-3" key={i}>
-                            <h5 className="accordion-header">
-                              <button
-                                className={`accordion-button ${i === 0 ? '' : 'collapsed'}`}
-                                data-bs-toggle="collapse"
-                                data-bs-target={`#faq-${i}`}
-                              >
-                                {title}
-                              </button>
-                            </h5>
-
-                            <div
-                              id={`faq-${i}`}
-                              className={`accordion-collapse collapse ${i === 0 ? 'show' : ''}`}
-                              data-bs-parent="#accordionFaq"
-                            >
-                              <div className="accordion-body text-black">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                              </div>
-                            </div>
+                        {openIndex === i && (
+                          <div className="px-6 pb-4 text-[#1A1A1A] text-[15px] leading-relaxed bg-[#f9f9f9]">
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                            Eveniet reiciendis magni quis obcaecati modi consequatur.
                           </div>
-                        ))}
-
+                        )}
                       </div>
-                    </div>
-
+                    ))}
                   </div>
                 </div>
               </div>
             </div>
           </section>
 
-          {/* CTA Section */}
-          <section
-            className="cta-section fix section-padding pt-0 dark-bg-style black-bg"
-            style={{ background: "linear-gradient(to bottom, white 50%, #0d0670 50%)" }}
+          {/* ===== CTA SECTION ===== */}
+<section
+            className="py-24"
+            style={{ background: 'linear-gradient(to bottom, white 50%, black 50%)' }}
           >
-            <div className="container">
-              <div
-                className="cta-wrapper bg-cover"
+            <div className="max-w-[1320px] mx-auto px-4">
+              <motion.div
+                variants={fadeInUp(0.3)}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: false }}
+                className="bg-cover rounded-3xl p-16 text-white"
                 style={{
-                  backgroundImage: "url('/assets/keval-image/service/servic-pg-cta.png')"
+                  backgroundImage: "url('/assets/keval-image/service/servic-pg-cta.png')",
                 }}
               >
-                <h2 className="wow fadeInUp" data-wow-delay=".3s">
-                  Have an idea in your mind?<br />Let's make something great together
+                <h2 className="text-3xl md:text-5xl font-bold mb-8">
+                  Have an idea in your mind? Let&apos;s make something great together
                 </h2>
 
-                <Link href="/contact" className="theme-btn border-white wow fadeInUp" data-wow-delay=".5s">
-                  <span className="icon-1"></span>
-                  get in touch
-                  <span className="icon-2"></span>
-                </Link>
-              </div>
+                <motion.div
+                  variants={fadeInUp(0.5)}
+                  initial="hidden"
+                  whileInView="visible"
+                >
+                  <div className="flex justify-center">
+                    <Link
+                      href="/contact"
+                      className="theme-btn"
+                    >
+                      Get in Touch
+                    </Link>
+                  </div>
+
+                </motion.div>
+              </motion.div>
             </div>
           </section>
 

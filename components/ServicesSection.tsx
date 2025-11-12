@@ -1,163 +1,115 @@
 'use client';
 
-import { useState } from 'react';
-import Link from 'next/link';
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 import { fadeInUp } from '@/lib/motionVariants';
-
-// Adapter again so this comp works whether fadeInUp is object or function
-const V = (delay = 0) => {
-  const v: any = fadeInUp;
-  return typeof v === 'function' ? v(delay) : v;
-};
 
 const services = [
   {
-    id: 1,
-    number: '01',
-    titleLines: ['HIGH', 'CONVERSION', 'WEBSITE'],
-    description:
-      'Keval AI creates websites that look great and convert visitors into customers. Fast, user-friendly, and optimized for growth.',
-    features: ['User Friendly', 'Fast Loading', 'Conversion'],
+    id: '001',
+    title: 'HIGH CONVERSION WEBSITE',
+    text: 'Keval AI creates websites that look great and convert visitors into customers. Fast, user-friendly, and optimized for growth.',
   },
   {
-    id: 2,
-    number: '02',
-    titleLines: ['INVENTORY', 'MANAGEMENT', 'SYSTEMS'],
-    description:
-      "Simplify your stock operations with Keval AI's inventory systems. Track, manage, and optimize efficiently with minimal errors.",
-    features: ['Stock Track', 'Auto Update', 'Error Free'],
+    id: '002',
+    title: 'INVENTORY MANAGEMENT SYSTEMS',
+    text: "Simplify your stock operations with Keval AI's inventory systems. Track, manage, and optimize efficiently with minimal errors.",
   },
   {
-    id: 3,
-    number: '03',
-    titleLines: ['MVP', 'development'],
-    description:
-      "Turn ideas into reality quickly with Keval AI's MVP development. Launch scalable prototypes that validate your concept with real users.",
-    features: ['Quick Launch', 'Scalable MVP', 'User Test'],
+    id: '003',
+    title: 'MVP DEVELOPMENT',
+    text: "Turn ideas into reality quickly with Keval AI's MVP development. Launch scalable prototypes that validate your concept with real users.",
   },
   {
-    id: 4,
-    number: '04',
-    titleLines: ['CRM AND', 'ERP'],
-    description:
-      "Manage clients, resources, and workflows effortlessly with Keval AI's CRM & ERP solutions. Gain insights and automate business operations.",
-    features: ['Client Data', 'Workflow', 'Insights'],
+    id: '004',
+    title: 'CRM AND ERP',
+    text: "Manage clients, resources, and workflows effortlessly with Keval AI's CRM & ERP solutions. Gain insights and automate business operations.",
   },
   {
-    id: 5,
-    number: '05',
-    titleLines: ['Marketing', 'solutions'],
-    description:
-      "Drive growth with Keval AI's marketing services. Plan, execute, and target the right audience for measurable results.",
-    features: ['Strategy', 'Campaigns', 'Targeting'],
+    id: '005',
+    title: 'MARKETING SOLUTIONS',
+    text: "Drive growth with Keval AI's marketing services. Plan, execute, and target the right audience for measurable results.",
   },
 ];
 
-export default function ServicesSection() {
-  const [hoveredId, setHoveredId] = useState<number | null>(null);
-
+export default function ServiceSection() {
   return (
-    <section className="service-section-4 section-padding section-bg">
-      <div className="container">
-        <div className="section-title style-4 title-anim">
-          <h3 className="heading_text">Services we offer</h3>
-        </div>
+    <section className="py-20 bg-white">
+      <div className="container mx-auto px-4">
 
-        <div className="service-wrapper-4 mt-4 mt-md-0">
-          <div className="row g-xxl-6 g-4">
-            <div className="service-tabing-wrap Faqs-section position-relative">
-              {services.map((service, i) => {
-                const baseDelay = 0.2 + service.id * 0.2; // preserves your wow delay staggering
-                return (
-                  <motion.div
-                    key={service.id}
-                    variants={V(baseDelay)}
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: false, amount: 0.2 }}
-                    className="accordion-single py-5 bt-border wow fadeInUp"
-                    data-wow-delay={`${baseDelay}s`}
-                  >
-                    <div className="header-area">
-                      <div className="accordion-btn justify-content-between d-flex align-items-center text-start position-relative w-100">
-                        <div className="mtitle-ara style2">
-                          <span className="mtitle d-block mt-6">
-                            <Link href="/service-details" className="white-clr whitehover">
-                              {service.number}.{' '}
-                              {service.titleLines.map((line, idx) => (
-                                <span key={idx}>
-                                  {line}
-                                  {idx < service.titleLines.length - 1 && <br />}
-                                </span>
-                              ))}
-                            </Link>
-                          </span>
-                        </div>
+        {/* Title */}
+        <motion.h2
+          variants={fadeInUp(0.1)}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="text-center text-4xl font-heading font-semibold mb-14"
+        >
+          Our Services
+        </motion.h2>
 
-                        <motion.div
-                          variants={V(baseDelay + 0.1)}
-                          className="hover_text"
-                          onMouseEnter={() => setHoveredId(service.id)}
-                          onMouseLeave={() => setHoveredId(null)}
-                          style={{
-                            color: hoveredId === service.id ? 'rgba(0, 0, 0, 1)' : 'transparent',
-                            flex: 1,
-                            marginLeft: '20px',
-                            padding: '10px',
-                            borderRadius: '4px',
-                            transition: 'background-color 0.3s ease',
-                          }}
-                        >
-                          <p>{service.description}</p>
-                        </motion.div>
+        {/* List */}
+        <ul className="border-t border-border divide-y divide-border">
 
-                        <motion.div
-                          variants={V(baseDelay + 0.15)}
-                          className="d-lg-flex d-none align-items-center gap-xxl-8 gap-4"
-                        >
-                          <ul className="modern-list d-grid gap-2">
-                            {service.features.map((feature, idx) => (
-                              <li key={idx} className="d-flex align-items-center gap-2">
-                                <i className="fas fa-chevron-right"></i> {feature}
-                              </li>
-                            ))}
-                          </ul>
-                        </motion.div>
+          {services.map((service, i) => (
+            <motion.li
+              key={service.id}
+              variants={fadeInUp(0.2 + i * 0.15)}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              className="py-10 grid md:grid-cols-2 gap-10 items-center"
+            >
+              {/* Left Content (for odd items) */}
+              {i % 2 === 0 ? (
+                <>
+                  <div className="space-y-2">
+                    <h4 className="text-theme2 text-2xl font-heading font-semibold">
+                      {service.id}
+                    </h4>
+                    <h3 className="text-header text-3xl font-heading font-bold hover:text-theme transition-colors">
+                      <Link href="/service-details">{service.title}</Link>
+                    </h3>
+                  </div>
 
-                        <motion.div variants={V(baseDelay + 0.2)} className="custom-btn-wrapper">
-                          <div className="header-button">
-                            <Link href="/service-details" className="theme-btn2 border-white">
-                              <span className="icon-1"></span>
-                              Learn more
-                              <span className="icon-2"></span>
-                            </Link>
-                          </div>
-                        </motion.div>
-                      </div>
-                    </div>
-                  </motion.div>
-                );
-              })}
+                  <p className="text-text max-w-lg">{service.text}</p>
+                </>
+              ) : (
+                <>
+                  {/* Right first for even items */}
+                  <p className="text-text max-w-lg">{service.text}</p>
 
-              <motion.div
-                variants={V(0.2)}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: false, amount: 0.2 }}
-                className="text-center"
-              >
-                <div className="header-button">
-                  <Link href="/service" className="theme-btn2 border-white">
-                    <span className="icon-1"></span>
-                    View All Services
-                    <span className="icon-2"></span>
-                  </Link>
-                </div>
-              </motion.div>
-            </div>
-          </div>
-        </div>
+                  <div className="space-y-2 md:text-right md:ml-auto">
+                    <h4 className="text-theme2 text-2xl font-heading font-semibold">
+                      {service.id}
+                    </h4>
+                    <h3 className="text-header text-3xl font-heading font-bold hover:text-theme transition-colors">
+                      <Link href="/service-details">{service.title}</Link>
+                    </h3>
+                  </div>
+                </>
+              )}
+            </motion.li>
+          ))}
+
+        </ul>
+
+        {/* View All Services Button */}
+        <motion.div
+          variants={fadeInUp(0.8)}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="mt-12 text-center"
+        >
+          <Link
+            href="/service"
+            className="theme-btn inline-flex items-center gap-2"
+          >
+            View All Services
+            <i className="fa-solid fa-arrow-right"></i>
+          </Link>
+        </motion.div>
       </div>
     </section>
   );

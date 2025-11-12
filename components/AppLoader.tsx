@@ -10,45 +10,18 @@ export default function AppLoader({ children }: AppLoaderProps) {
   const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
-    const checkScriptsReady = () => {
-      if (typeof window !== 'undefined' && (window as any).jQuery) {
-        return true;
-      }
-      return false;
+    // No jQuery dependency - just wait for page load
+    const handleLoad = () => {
+      setTimeout(() => setIsReady(true), 100);
     };
 
-    if (checkScriptsReady()) {
-      setIsReady(true);
-      return;
+    if (document.readyState === 'complete') {
+      handleLoad();
+    } else {
+      window.addEventListener('load', handleLoad);
     }
 
-    let attempts = 0;
-    const maxAttempts = 50;
-    const checkInterval = 50;
-
-    const checkIntervalId = setInterval(() => {
-      attempts++;
-
-      if (checkScriptsReady()) {
-        clearInterval(checkIntervalId);
-        setTimeout(() => setIsReady(true), 100);
-      } else if (attempts >= maxAttempts) {
-        clearInterval(checkIntervalId);
-        setIsReady(true);
-      }
-    }, checkInterval);
-
-    const handleLoad = () => {
-      if (checkScriptsReady()) {
-        clearInterval(checkIntervalId);
-        setTimeout(() => setIsReady(true), 100);
-      }
-    };
-
-    window.addEventListener('load', handleLoad);
-
     return () => {
-      clearInterval(checkIntervalId);
       window.removeEventListener('load', handleLoad);
     };
   }, []);

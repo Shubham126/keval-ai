@@ -7,94 +7,76 @@ import { fadeInUp } from '@/lib/motionVariants';
 const challenges = [
   {
     number: '01',
-    title: "Antwerp&apos;s Market Dominance",
-    description: (
+    title: (
       <>
-        .With 84% control of the global rough diamond trade, Antwerp&apos;s
-        dominance makes independent merchants vulnerable to market fluctuations
+        ANTWERP'S <br /> MARKET <br /> DOMINANCE
       </>
     ),
+    description:
+      "With 84% control of the global rough diamond trade, Antwerp's dominance makes independent merchants vulnerable to market fluctuations.",
   },
   {
     number: '02',
     title: (
       <>
-        Limited Digital <br /> Presence
+        LIMITED DIGITAL <br /> PRESENCE
       </>
     ),
-    description: (
-      <>
-        Many merchants lack online footprint despite 60% of B2B{' '}
-        <br /> buyers preferring digital engagement, <br /> per McKinsey 2022.
-      </>
-    ),
+    description:
+      'Many merchants lack online footprint despite 60% of B2B buyers preferring digital engagement, per McKinsey 2022.',
   },
 ];
 
 export default function ChallengesSection() {
   return (
-    <section 
-      className="service-section-5 fix section-padding bg-white"
-    >
-      <div className="container">
-        <div className="service-wrapper-5">
-          <div className="row g-4 justify-content-between">
+    <section className="w-full bg-white py-28">
+      <div className="max-w-7xl mx-auto px-6 lg:px-12">
 
-            {/* Left Column */}
-            <div className="col-xl-4 col-lg-4">
-              <div className="service-left">
-                <div className="section-title style-4 mb-0">
-                  <h3 className="heading_text text-left">
-                    key challenges We <span>address</span>
-                  </h3>
-                </div>
-                <div className="header-button mt-3">
-                  <Link
-                    href="/about"
-                    className="theme-btn bg-black rounded-2 text-white border-white"
-                  >
-                    <span className="icon-1"></span>
-                    Learn more
-                    <span className="icon-2"></span>
-                  </Link>
-                </div>
-              </div>
+        {/* LEFT SIDE */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 mb-12">
+          <div className="col-span-1 flex flex-col justify-center">
+            <h2 className="text-[52px] leading-[1.15] font-extrabold text-[#1A102C] uppercase tracking-tight mb-10">
+              Key Challenges <br /> We Address
+            </h2>
+
+            <div className="flex justify-center">
+              <Link
+                href="/about"
+                className="inline-block bg-black text-white px-8 py-3 rounded-md font-medium text-base 
+                          shadow-sm hover:opacity-90 transition-all"
+              >
+                Learn More
+              </Link>
             </div>
+          </div>
 
-            {/* Right Column */}
-            <div className="col-xl-8 col-lg-8">
-              <div className="service-right">
-                <div className="row g-4">
+          {/* RIGHT SIDE CARDS */}
+          <div className="col-span-2 grid grid-cols-1 md:grid-cols-2 gap-8">
+            {challenges.map((item, index) => (
+              <motion.div
+                key={index}
+                variants={fadeInUp(0.1 * (index + 1))}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                className="rounded-[30px] bg-[#F4F4F4] p-10 shadow-sm border border-[#eaeaea]"
+              >
+                {/* NUMBER */}
+                <span className="text-[40px] font-semibold text-[#FD7E31] block mb-4">
+                  {item.number}
+                </span>
 
-                  {challenges.map((challenge, index) => (
-                    <motion.div
-                      key={index}
-                      className="col-lg-6 col-md-6 flex"
-                      variants={fadeInUp()}
-                      initial="hidden"
-                      whileInView="visible"
-                      viewport={{ once: true }}
-                      custom={0.3 + index * 0.2} // exact WOW.js delay
-                    >
-                      <div
-                        className="service-box-items-5 flex flex-col w-full h-full"
-                      >
-                        <span>{challenge.number}</span>
+                {/* TITLE */}
+                <h3 className="text-[32px] leading-[1.2] font-semibold text-[#1A102C] mb-6 uppercase tracking-normal">
+                  {item.title}
+                </h3>
 
-                        <div className="content flex-1">
-                          <h3>
-                            <Link href="#">{challenge.title}</Link>
-                          </h3>
-                          <p className="text-black">{challenge.description}</p>
-                        </div>
-                      </div>
-                    </motion.div>
-                  ))}
-
-                </div>
-              </div>
-            </div>
-
+                {/* DESCRIPTION */}
+                <p className="text-[18px] leading-[1.6] text-[#333]">
+                  {item.description}
+                </p>
+              </motion.div>
+            ))}
           </div>
         </div>
       </div>

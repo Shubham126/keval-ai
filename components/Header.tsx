@@ -9,12 +9,12 @@ import { fade, slideRight } from '@/lib/motionVariants';
 export default function Header() {
   const [isSticky, setIsSticky] = useState(false);
   const [isOffcanvasOpen, setIsOffcanvasOpen] = useState(false);
+  const [isServicesOpen, setIsServicesOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsSticky(window.scrollY > 250);
+      setIsSticky(window.scrollY > 100);
     };
-
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -24,155 +24,186 @@ export default function Header() {
 
   return (
     <>
-      {/* Header */}
+      {/* HEADER */}
       <motion.header
-        id="header-sticky"
-        className={`header-1 ${isSticky ? 'sticky' : ''}`}
+        className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${
+          isSticky ? 'bg-white shadow-md' : 'bg-transparent'
+        }`}
         variants={fade}
         initial="hidden"
         animate="visible"
       >
-        <div className="container-fluid">
-          <div className="mega-menu-wrapper">
-            <div className="header-main">
+        <div className="max-w-[1320px] mx-auto px-6 py-4 flex justify-between items-center">
+          {/* LOGO */}
+          <Link href="/" className="flex items-center gap-2">
+            <Image
+              src="/assets/keval-image/logo/Side Aligned Logo 1/Logo-06.png"
+              alt="Keval AI"
+              width={210}
+              height={75}
+              className={`object-contain transition-all duration-300 ${
+                isSticky ? '' : 'brightness-0 invert'
+              }`}
+              priority
+            />
+          </Link>
 
-              {/* Logo */}
-              <Link href="/">
-                <div className="logo header-logo">
-                  <Image
-                    src="/assets/keval-image/logo/Side Aligned Logo 1/Logo-06.png"
-                    alt="logo-img"
-                    width={150}
-                    height={50}
-                    priority
-                  />
-                </div>
-              </Link>
-
-              {/* Nav */}
-              <div className="mean__menu-wrapper">
-                <div className="main-menu">
-                  <nav id="mobile-menu">
-                    <ul>
-                      <li className="has-dropdown active menu-thumb">
-                        <Link href="/">Home</Link>
-                      </li>
-                      <li className="has-dropdown active d-xl-none">
-                        <Link href="/" className="border-none">Home</Link>
-                      </li>
-                      <li><Link href="/about">About Us</Link></li>
-                      <li>
-                        <Link href="#">Services</Link>
-                        <ul className="submenu">
-                          <li><Link href="/service">Service</Link></li>
-                          <li><Link href="/service-details">Service Details</Link></li>
-                        </ul>
-                      </li>
-                      <li><Link href="/portfolio">Portfolio</Link></li>
-                      <li><Link href="/contact">Contact</Link></li>
-                    </ul>
-                  </nav>
-                </div>
-              </div>
-
-              {/* Right Side Buttons */}
-              <div className="header-right d-flex justify-content-end align-items-center">
-                <div className="header-button">
-                  <Link href="/about" className="theme-btn border-white">
-                    <span className="icon-1"></span>
-                    Book a free consultation
-                    <span className="icon-2"></span>
+          {/* NAV MENU */}
+          <nav className="hidden lg:block">
+            <ul className="flex items-center gap-10 text-[15px] font-bold uppercase tracking-wide">
+              {[
+                { label: 'Home', href: '/' },
+                { label: 'About Us', href: '/about' },
+              ].map((item, idx) => (
+                <li key={idx}>
+                  <Link
+                    href={item.href}
+                    className={`transition-colors duration-300 ${
+                      isSticky
+                        ? 'text-[#0D0670] hover:text-[#FD7E31]'
+                        : 'text-white hover:text-[#FD7E31]'
+                    }`}
+                  >
+                    {item.label}
                   </Link>
-                </div>
+                </li>
+              ))}
 
-                {/* Hamburger */}
-                <div className="header__hamburger d-xl-none my-auto">
-                  <div className="sidebar__toggle" onClick={toggleOffcanvas}>
-                    <div className="header-bar">
-                      <span></span>
-                      <span></span>
-                      <span></span>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              {/* SERVICES DROPDOWN */}
+              <li
+                className="relative group"
+                onMouseEnter={() => setIsServicesOpen(true)}
+                onMouseLeave={() => setIsServicesOpen(false)}
+              >
+                <button
+                  className={`flex items-center gap-1 transition-colors duration-300 ${
+                    isSticky
+                      ? 'text-[#0D0670] hover:text-[#FD7E31]'
+                      : 'text-white hover:text-[#FD7E31]'
+                  }`}
+                >
+                  SERVICES
+                  <i className="fa-solid fa-chevron-down text-xs mt-[2px]" />
+                </button>
 
-            </div>
+                <AnimatePresence>
+                  {isServicesOpen && (
+                    <motion.ul
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 10 }}
+                      transition={{ duration: 0.2 }}
+                      className="absolute left-0 top-full mt-4 w-56 bg-white shadow-lg rounded-md overflow-hidden z-50"
+                    >
+                      <li>
+                        <Link
+                          href="/service"
+                          className="block px-5 py-3 text-[15px] uppercase text-[#0D0670] hover:text-[#FD7E31] transition-all duration-200"
+                        >
+                          SERVICE
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          href="/service-details"
+                          className="block px-5 py-3 text-[15px] uppercase text-[#0D0670] hover:text-[#FD7E31] transition-all duration-200"
+                        >
+                          SERVICE DETAILS
+                        </Link>
+                      </li>
+                    </motion.ul>
+                  )}
+                </AnimatePresence>
+              </li>
+
+              {[
+                { label: 'Portfolio', href: '/portfolio' },
+                { label: 'Contact', href: '/contact' },
+              ].map((item, idx) => (
+                <li key={idx}>
+                  <Link
+                    href={item.href}
+                    className={`transition-colors duration-300 ${
+                      isSticky
+                        ? 'text-[#0D0670] hover:text-[#FD7E31]'
+                        : 'text-white hover:text-[#FD7E31]'
+                    }`}
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+
+          {/* CTA BUTTON */}
+          <div className="hidden lg:block">
+            <Link
+              href="/contact"
+              className="theme-btn"
+            >
+              Book a Free Consultation
+            </Link>
+          </div>
+
+          {/* HAMBURGER */}
+          <div
+            className="lg:hidden flex flex-col gap-[5px] cursor-pointer"
+            onClick={toggleOffcanvas}
+          >
+            <span
+              className={`block w-6 h-[2px] transition-colors duration-300 ${
+                isSticky ? 'bg-[#0D0670]' : 'bg-white'
+              }`}
+            />
+            <span
+              className={`block w-6 h-[2px] transition-colors duration-300 ${
+                isSticky ? 'bg-[#0D0670]' : 'bg-white'
+              }`}
+            />
+            <span
+              className={`block w-6 h-[2px] transition-colors duration-300 ${
+                isSticky ? 'bg-[#0D0670]' : 'bg-white'
+              }`}
+            />
           </div>
         </div>
       </motion.header>
 
-      {/* Offcanvas Drawer */}
+      {/* MOBILE OFFCANVAS */}
       <AnimatePresence>
         {isOffcanvasOpen && (
           <>
             <motion.div
-              className="offcanvas__overlay overlay-open"
+              className="fixed inset-0 bg-black/50 z-40"
               variants={fade}
               initial="hidden"
               animate="visible"
               exit="hidden"
               onClick={closeOffcanvas}
             />
-
             <motion.div
-              className="offcanvas__info info-open fix-area"
+              className="fixed top-0 right-0 w-[75%] sm:w-[60%] md:w-[40%] h-screen bg-white z-50 p-8 shadow-lg overflow-y-auto"
               variants={slideRight}
               initial="hidden"
               animate="visible"
               exit="exit"
             >
-              <div className="offcanvas__wrapper">
-                <div className="offcanvas__content">
-
-                  {/* Top */}
-                  <div className="offcanvas__top mb-5 d-flex justify-content-between align-items-center">
-                    <div className="offcanvas__logo">
-                      <Link href="/"><h4>Keval-Ai</h4></Link>
-                    </div>
-                    <div className="offcanvas__close">
-                      <button onClick={closeOffcanvas}>
-                        <i className="fas fa-times"></i>
-                      </button>
-                    </div>
-                  </div>
-
-                  {/* Content */}
-                  <h3 className="offcanvas-title">About Us</h3>
-                  <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Voluptate vitae expedita rem ad, reiciendis culpa veritatis
-                    animi a cupiditate consectetur!
-                  </p>
-
-                  <div className="social-icon d-flex align-items-center">
-                    <a href="#"><i className="fab fa-facebook-f"></i></a>
-                    <a href="#"><i className="fab fa-twitter"></i></a>
-                    <a href="#"><i className="fab fa-youtube"></i></a>
-                    <a href="#"><i className="fab fa-linkedin-in"></i></a>
-                  </div>
-
-                  <div className="mobile-menu fix mb-3"></div>
-
-                  <div className="offcanvas__contact">
-                    <h3>Information</h3>
-                    <ul className="contact-list">
-                      <li><span>Address:</span> Xyz</li>
-                      <li>
-                        <span>Call Us:</span>
-                        <a href="tel:+00012345688">+000 123 456 88</a>
-                      </li>
-                      <li>
-                        <span>Email:</span>
-                        <a href="mailto:kevalai24@gmail.com">
-                          kevalai24@gmail.com
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-
-                </div>
+              <div className="flex justify-between items-center mb-6">
+                <h3 className="text-[#0D0670] font-bold text-xl">Keval AI</h3>
+                <button onClick={closeOffcanvas}>
+                  <i className="fa-solid fa-xmark text-2xl text-[#0D0670]" />
+                </button>
               </div>
+
+              <ul className="space-y-6 text-lg text-[#0D0670] uppercase font-semibold">
+                <li><Link href="/" onClick={closeOffcanvas}>Home</Link></li>
+                <li><Link href="/about" onClick={closeOffcanvas}>About Us</Link></li>
+                <li><Link href="/service" onClick={closeOffcanvas}>Service</Link></li>
+                <li><Link href="/service-details" onClick={closeOffcanvas}>Service Details</Link></li>
+                <li><Link href="/portfolio" onClick={closeOffcanvas}>Portfolio</Link></li>
+                <li><Link href="/contact" onClick={closeOffcanvas}>Contact</Link></li>
+              </ul>
             </motion.div>
           </>
         )}
