@@ -18,17 +18,10 @@ const nextConfig = {
   poweredByHeader: false,
   // Optimize CSS loading
   swcMinify: true,
-  // Target modern browsers to reduce legacy JavaScript polyfills
-  compiler: {
-    removeConsole: process.env.NODE_ENV === 'production' ? {
-      exclude: ['error', 'warn'],
-    } : false,
-  },
   // Enable experimental features for better CSS optimization
   experimental: {
     optimizeCss: false, // Keep false as critters caused build errors
   },
-  // Remove console logs in production
   webpack: (config, { dev, isServer }) => {
     // SVG loader
     config.module.rules.push({

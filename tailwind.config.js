@@ -8,4 +8,10 @@ module.exports = {
     "./pages/**/*.{js,ts,jsx,tsx}",
     "./lib/**/*.{js,ts,jsx,tsx}",
   ],
+  safelist: [
+    'hero-btn',
+    'hero-btn:hover',
+    'hero-btn::after',
+    'hero-btn:hover::after',
+  ],
 };

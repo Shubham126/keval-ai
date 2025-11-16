@@ -1,64 +1,78 @@
 'use client';
 
-import { useEffect, useRef, useMemo } from 'react';
+import { useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { fadeInUp } from '@/lib/motionVariants';
 
-// Adapter for fadeInUp
-const V = (delay = 0) => {
-  const v: any = fadeInUp;
-  return typeof v === 'function' ? v(delay) : v;
+// fadeInUp animation variant
+const fadeInUpVariant = {
+  hidden: { 
+    opacity: 0, 
+    y: 20 
+  },
+  visible: { 
+    opacity: 1, 
+    y: 0,
+    transition: {
+      duration: 1,
+      delay: 0.3,
+      ease: [0.42, 0, 0.58, 1] as [number, number, number, number],
+    }
+  },
 };
 
 export default function HeroSection() {
   const typingRef = useRef<HTMLSpanElement>(null);
-  const words = useMemo(
-    () => ['AI Solutions', 'Innovation', 'Technology', 'Excellence'],
-    []
-  );
+  const wordIndexRef = useRef(0);
+  const charIndexRef = useRef(0);
+  const isDeletingRef = useRef(false);
+
+  const words = ["CRM Solutions", "Ai Automation", "Digital Solutions", "Trading Platforms"];
 
   useEffect(() => {
     if (!typingRef.current) return;
 
-    let wordIndex = 0;
-    let charIndex = 0;
-    let isDeleting = false;
-    let timeoutId: ReturnType<typeof setTimeout>;
-
     const type = () => {
       if (!typingRef.current) return;
-      const currentWord = words[wordIndex];
 
-      if (isDeleting) {
-        if (charIndex > 0) {
-          typingRef.current.textContent = currentWord.substring(0, charIndex - 1);
-          charIndex--;
-          timeoutId = setTimeout(type, 40);
-        } else {
-          isDeleting = false;
-          wordIndex = (wordIndex + 1) % words.length;
-          timeoutId = setTimeout(type, 500);
-        }
-      } else {
-        if (charIndex < currentWord.length) {
-          typingRef.current.textContent = currentWord.substring(0, charIndex + 1);
-          charIndex++;
-          timeoutId = setTimeout(type, 70);
-        } else {
-          isDeleting = true;
-          timeoutId = setTimeout(type, 1400);
-        }
+      const currentWord = words[wordIndexRef.current];
+
+      if (!isDeletingRef.current && charIndexRef.current < currentWord.length) {
+        // Typing: 150ms per character
+        typingRef.current.textContent = currentWord.substring(0, charIndexRef.current + 1);
+        charIndexRef.current++;
+        setTimeout(type, 150);
+      } else if (!isDeletingRef.current && charIndexRef.current === currentWord.length) {
+        // Delay after typing completes: 150ms
+        setTimeout(() => {
+          isDeletingRef.current = true;
+          type();
+        }, 150);
+      } else if (isDeletingRef.current && charIndexRef.current > 0) {
+        // Erasing: 150ms per character
+        typingRef.current.textContent = currentWord.substring(0, charIndexRef.current - 1);
+        charIndexRef.current--;
+        setTimeout(type, 150);
+      } else if (isDeletingRef.current && charIndexRef.current === 0) {
+        // Delay before next word: 150ms
+        setTimeout(() => {
+          isDeletingRef.current = false;
+          wordIndexRef.current = (wordIndexRef.current + 1) % words.length;
+          charIndexRef.current = 0;
+          type();
+        }, 150);
       }
     };
 
     type();
-    return () => clearTimeout(timeoutId);
   }, [words]);
 
   return (
-    <section className="relative h-screen w-full flex items-center bg-cover bg-center">
+    <section className="relative h-screen w-full bg-cover bg-center pt-[100px] pb-[160px] flex items-center z-[1] 
+      max-[1199px]:pt-[180px] max-[1199px]:pb-[180px]
+      max-[767px]:pt-[150px] max-[767px]:pb-[150px]
+      max-[575px]:pt-[130px] max-[575px]:pb-[130px]">
       {/* Optimized background image */}
       <div className="absolute inset-0">
         <Image
@@ -73,68 +87,100 @@ export default function HeroSection() {
         />
       </div>
       {/* Left Gradient Overlay (for readability) */}
-      <div className="absolute inset-0 bg-linear-to-r from-[#f68041]/80 via-white/30 to-transparent" />
+      <div className="absolute inset-0 bg-linear-to-r from-[#f68041]/80 via-white/30 to-transparent z-[1]" />
 
-      <div className="container mx-auto h-full flex items-center px-0 md:px0 relative z-10">
-        <div className="w-full lg:w-1/2">
+      {/* Container Fluid */}
+      <div className="w-full mx-auto px-[60px] 
+        max-[1600px]:px-[50px]
+        max-[1399px]:px-[40px]
+        max-[1199px]:px-[30px] relative z-[2]">
+        
+        {/* Row */}
+        <div className="flex items-center mt-12">
+          
+          {/* Column Content */}
+          <div className="w-full lg:w-[58.333%] mt-12">
+            
+            {/* Hero Content */}
+            <div className="px-12">
+              
+              {/* Heading line 1 - fadeInUp animation */}
+              <motion.h1
+                variants={fadeInUpVariant}
+                initial="hidden"
+                animate="visible"
+                className="font-heading text-white font-semibold capitalize my-2 leading-[80%]
+                  text-[60px]
+                  max-[1399px]:text-[40px]
+                  max-[1199px]:text-[40px]
+                  max-[991px]:text-[50px] max-[991px]:leading-[90%]
+                  max-[767px]:text-[50px]
+                  max-[575px]:text-[50px] max-[575px]:leading-[100%]"
+                style={{ marginTop: '20px' }}
+              >
+                Empowering
+              </motion.h1>
 
-          {/* Heading line 1 - Render immediately for LCP */}
-          <h1
-            className="text-white font-bold leading-none mb-3"
-            style={{ fontSize: 'clamp(2.5rem, 6vw, 4.2rem)' }}
-          >
-            Empowering
-          </h1>
+              {/* Heading line 2 - fadeInUp animation */}
+              <motion.h1
+                variants={fadeInUpVariant}
+                initial="hidden"
+                animate="visible"
+                className="font-heading text-white font-semibold capitalize my-2 leading-[80%]
+                  text-[60px]
+                  max-[1399px]:text-[40px]
+                  max-[1199px]:text-[40px]
+                  max-[991px]:text-[50px] max-[991px]:leading-[90%]
+                  max-[767px]:text-[50px]
+                  max-[575px]:text-[50px] max-[575px]:leading-[100%]"
+              >
+                Diamond Trade With
+              </motion.h1>
 
-          {/* Heading line 2 - LCP element, render immediately without animation */}
-          <h1
-            className="text-white font-bold leading-none mb-3"
-            style={{ fontSize: 'clamp(2.5rem, 6vw, 4rem)' }}
-          >
-            Diamond Trade With
-          </h1>
+              {/* Typing animation line - fadeInUp animation */}
+              <motion.h1
+                variants={fadeInUpVariant}
+                initial="hidden"
+                animate="visible"
+                className="font-heading font-semibold capitalize my-2 leading-[80%]
+                  text-[60px]
+                  max-[1399px]:text-[40px]
+                  max-[1199px]:text-[40px]
+                  max-[991px]:text-[50px] max-[991px]:leading-[90%]
+                  max-[767px]:text-[50px]
+                  max-[575px]:text-[50px] max-[575px]:leading-[100%]"
+                style={{ minHeight: 'clamp(2.5rem, 6vw, 4.2rem)' }}
+              >
+                <strong className="font-semibold text-[#0B2546]" id="typing-text">
+                  <span ref={typingRef} className="inline-block min-w-[200px]" style={{ minHeight: 'inherit' }}></span>
+                </strong>
+                <span className="text-[#0B2546]">.</span>
+              </motion.h1>
+              {/* Button Container */}
+              <div className="flex justify-start items-center gap-4 mt-2">
+                <Link href="/contact" className="hero-btn">
+                  GET IN TOUCH
+                </Link>
 
-          {/* Typing animation line */}
-          <motion.h1
-            variants={V(0.15)}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            className="text-theme font-bold leading-none mb-8"
-            style={{ 
-              fontSize: 'clamp(2.5rem, 6vw, 4.2rem)',
-              minHeight: 'clamp(2.5rem, 6vw, 4.2rem)',
-            }}
-          >
-            <span ref={typingRef} className="inline-block min-w-[200px]" style={{ minHeight: 'inherit' }}></span>
-            <span className="text-theme">.</span>
-          </motion.h1>
+                <Link href="/portfolio" className="hero-btn">
+                  SEE OUR WORK
+                </Link>
+              </div>
 
-          {/* Buttons */}
-          <div className="flex gap-5 mt-6">
-            <Link href="/contact" className="theme-btn border-white">
-              GET IN TOUCH
-            </Link>
-
-            <Link href="/portfolio" className="theme-btn border-white">
-              SEE OUR WORK
-            </Link>
+            </div>
           </div>
 
-
-        </div>
-
-        {/* Hero Image Right Side */}
-        <div className="hidden lg:block w-1/2 relative">
-          <motion.div
-            variants={V(0.2)}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            className="absolute right-0 top-1/2 -translate-y-1/2"
-          >
-            {/* Hero image can be added here if needed */}
-          </motion.div>
+          {/* Hero Image Right Side */}
+          <div className="hidden lg:block w-[41.667%] relative">
+            <motion.div
+              variants={fadeInUpVariant}
+              initial="hidden"
+              animate="visible"
+              className="absolute right-0 top-1/2 -translate-y-1/2"
+            >
+              {/* Hero image can be added here if needed */}
+            </motion.div>
+          </div>
         </div>
       </div>
     </section>

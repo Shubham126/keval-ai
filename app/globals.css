@@ -220,6 +220,68 @@
   }
 
   /* ============================
+       HERO BUTTON (Dark Blue -> Orange)
+     ============================ */
+  .hero-btn {
+    @apply inline-block align-middle appearance-none border-none outline-none text-white 
+           text-[13px] font-medium py-[15px] px-5 transition-all duration-500 uppercase relative 
+           z-[2] overflow-hidden text-center rounded-[5px] leading-none font-heading 
+           min-w-[160px];
+    background-color: #0B2546 !important;
+    border: 1px solid #0B2546 !important;
+  }
+
+  .hero-btn:hover {
+    border-color: #FD7E31 !important;
+    color: #fff !important;
+  }
+
+  .hero-btn::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    background-color: #FD7E31 !important;
+    clip-path: circle(0% at 50% 50%);
+    transition: all cubic-bezier(0, 0.96, 0.58, 1.1) 0.8s;
+    z-index: -1;
+  }
+
+  .hero-btn:hover::after {
+    clip-path: circle(100% at 50% 50%);
+    transition: all cubic-bezier(0, 0.96, 0.58, 1.1) 0.8s;
+  }
+
+  /* ============================
+       HEADER CTA BUTTON (Orange -> Purple)
+     ============================ */
+  .header-cta-btn {
+    @apply inline-block align-middle appearance-none border-none outline-none bg-theme2 text-white 
+           text-[13px] font-medium py-[15px] px-[20px] transition-all duration-500 uppercase relative 
+           z-[2] overflow-hidden text-center rounded-[5px] leading-none font-heading 
+           border border-theme2 min-w-[160px];
+  }
+
+  .header-cta-btn:hover {
+    @apply border-theme;
+    color: #fff !important;
+  }
+
+  .header-cta-btn::after {
+    content: "";
+    @apply absolute inset-0 w-full;
+    background-color: #0B2546;
+    clip-path: circle(0% at 50% 50%);
+    transition: all cubic-bezier(0, 0.96, 0.58, 1.1) 0.8s;
+    z-index: -1;
+  }
+
+  .header-cta-btn:hover::after {
+    clip-path: circle(100% at 50% 50%);
+    transition: all cubic-bezier(0, 0.96, 0.58, 1.1) 0.8s;
+  }
+
+  /* ============================
         HEADER / NAV
      ============================ */
 

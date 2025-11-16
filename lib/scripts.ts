@@ -139,8 +139,8 @@ const initMain = () => {
   // Mouse Cursor
   initializeMouseCursor();
 
-  // Typewriter Effect
-  initializeTypewriter();
+  // Typewriter Effect - Now handled in HeroSection.tsx component
+  // initializeTypewriter();
 
   // Preloader
   initializePreloader();
@@ -192,43 +192,12 @@ const initializeMouseCursor = () => {
 // Typewriter Effect (No jQuery)
 // ============================================================================
 
+// Typewriter Effect - Now handled in HeroSection.tsx component
+// This function is kept for backward compatibility but disabled
 const initializeTypewriter = () => {
-  const typingElement = document.getElementById('typing-text');
-  if (!typingElement) return;
-
-  const words = [' Trading Platforms', ' CRM Solutions', ' ⁠Ai Automation', ' Digital Solutions'];
-  let index = 0;
-  let letterIndex = 0;
-  let currentWord = words[0];
-  let interval: NodeJS.Timeout | null = null;
-
-  function typeWriter() {
-    if (!typingElement) return;
-    const word = words[index];
-    if (letterIndex < word.length) {
-      typingElement.textContent = (typingElement.textContent || '') + word.charAt(letterIndex);
-      letterIndex++;
-    } else {
-      if (interval) clearInterval(interval);
-      interval = setInterval(eraseText, 150);
-    }
-  }
-
-  function eraseText() {
-    if (!typingElement) return;
-    if (letterIndex >= 0) {
-      const text = currentWord.substring(0, letterIndex);
-      typingElement.textContent = text;
-      letterIndex--;
-    } else {
-      if (interval) clearInterval(interval);
-      index = (index + 1) % words.length;
-      currentWord = words[index];
-      interval = setInterval(typeWriter, 150);
-    }
-  }
-
-  interval = setInterval(typeWriter, 150);
+  // Typing animation is now handled in HeroSection.tsx using React hooks
+  // No action needed here
+  return;
 };
 
 // ============================================================================
