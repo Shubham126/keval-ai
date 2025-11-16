@@ -44,13 +44,13 @@ export default function ProjectSection() {
 
         {/* Title */}
         <motion.h3
-          className="text-center text-[44px] md:text-[50px] font-extrabold text-[#1a102c] mb-16"
+          className="text-center heading_text my-4 mb-10 font-montserrat text-[45px] font-bold text-[var(--header)] uppercase"
           variants={V(0.2)}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
         >
-          OUR RECENT WORK
+          Our Recent Work
         </motion.h3>
 
         {/* ✅ Swiper with loop + autoplay */}

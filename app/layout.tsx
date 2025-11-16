@@ -1,18 +1,32 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Montserrat, Source_Sans_3 } from "next/font/google";
 import AppLoader from "@/components/AppLoader";
 import ScriptsInitializer from "@/components/ScriptsInitializer";
 import ImagePopup from "@/components/ImagePopup";
 import VideoPopup from "@/components/VideoPopup";
+import MouseCursor from "@/components/MouseCursor";
 
 import "./globals.css";
 
-// Optimize font loading with display swap and preload
-const inter = Inter({ 
+// Montserrat for headings, buttons, titles
+const montserrat = Montserrat({
   subsets: ["latin"],
-  display: 'swap',
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  style: ["normal", "italic"],
+  variable: "--font-montserrat",
+  display: "swap",
   preload: true,
-  variable: '--font-inter',
+  adjustFontFallback: true,
+});
+
+// Source Sans 3 for body text
+const sourceSans = Source_Sans_3({
+  subsets: ["latin"],
+  weight: ["200", "300", "400", "500", "600", "700", "800", "900"],
+  style: ["normal", "italic"],
+  variable: "--font-source-sans",
+  display: "swap",
+  preload: true,
   adjustFontFallback: true,
 });
 
@@ -60,13 +74,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           }}
         />
       </head>
-      <body className={`${inter.className} react-app`}>
+      <body className={`${montserrat.variable} ${sourceSans.variable} react-app`}>
         {/* Initialize custom scripts - No jQuery dependencies */}
         <ScriptsInitializer />
         
         {/* Popup handlers (replaces Magnific Popup) */}
         <ImagePopup />
         <VideoPopup />
+        
+        {/* Custom Mouse Cursor */}
+        <MouseCursor />
 
         <AppLoader>{children}</AppLoader>
       </body>

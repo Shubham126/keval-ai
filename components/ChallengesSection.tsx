@@ -1,83 +1,117 @@
 'use client';
 
-import Link from 'next/link';
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 import { fadeInUp } from '@/lib/motionVariants';
 
-const challenges = [
+interface Challenge {
+  id: string;
+  title: string;
+  description: string;
+}
+
+const challenges: Challenge[] = [
   {
-    number: '01',
-    title: (
-      <>
-        ANTWERP'S <br /> MARKET <br /> DOMINANCE
-      </>
-    ),
-    description:
-      "With 84% control of the global rough diamond trade, Antwerp's dominance makes independent merchants vulnerable to market fluctuations.",
+    id: '01',
+    title: "Antwerp's Market Dominance",
+    description: "With 84% control of the global rough diamond trade, Antwerp's dominance makes independent merchants vulnerable to market fluctuations.",
   },
   {
-    number: '02',
-    title: (
-      <>
-        LIMITED DIGITAL <br /> PRESENCE
-      </>
-    ),
-    description:
-      'Many merchants lack online footprint despite 60% of B2B buyers preferring digital engagement, per McKinsey 2022.',
+    id: '02',
+    title: 'Limited Digital Presence',
+    description: "Many merchants lack online footprint despite 60% of B2B buyers preferring digital engagement, per McKinsey 2022.",
   },
 ];
 
 export default function ChallengesSection() {
   return (
-    <section className="w-full bg-white py-28">
-      <div className="max-w-7xl mx-auto px-6 lg:px-12">
+    <section className="py-[120px] md:py-[100px] sm:py-[80px]">
+      <div className="container mx-auto px-4">
+        <div className="service-wrapper-5">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 justify-between">
+            
+            {/* Left Column - Title & Button */}
+            <div className="lg:col-span-4">
+              <div className="service-left">
+                {/* Section Title */}
+                <div className="section-title mb-0">
+                  <motion.h3
+                    variants={fadeInUp(0)}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true }}
+                    className="font-montserrat text-[38px] font-bold text-left text-[#17012C] leading-[1.3] tracking-wide"
+                  >
+                    key challenges We <span>address</span>
+                  </motion.h3>
+                </div>
 
-        {/* LEFT SIDE */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 mb-12">
-          <div className="col-span-1 flex flex-col justify-center">
-            <h2 className="text-[52px] leading-[1.15] font-extrabold text-[#1A102C] uppercase tracking-tight mb-10">
-              Key Challenges <br /> We Address
-            </h2>
-
-            <div className="flex justify-center">
-              <Link
-                href="/about"
-                className="inline-block bg-black text-white px-8 py-3 rounded-md font-medium text-base 
-                          shadow-sm hover:opacity-90 transition-all"
-                aria-label="Learn more about how we address key challenges"
-              >
-                Learn More About Our Solutions
-              </Link>
+                {/* Learn More Button */}
+                <div className="header-button">
+                  <Link
+                    href="/about"
+                    className="header-cta-btn mt-[50px]"
+                  >
+                    Learn more
+                  </Link>
+                </div>
+              </div>
             </div>
-          </div>
 
-          {/* RIGHT SIDE CARDS */}
-          <div className="col-span-2 grid grid-cols-1 md:grid-cols-2 gap-8">
-            {challenges.map((item, index) => (
-              <motion.div
-                key={index}
-                variants={fadeInUp(0.1 * (index + 1))}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                className="rounded-[30px] bg-[#F4F4F4] p-10 shadow-sm border border-[#eaeaea]"
-              >
-                {/* NUMBER */}
-                <span className="text-[40px] font-semibold text-[#FD7E31] block mb-4">
-                  {item.number}
-                </span>
+            {/* Right Column - Challenge Cards */}
+            <div className="lg:col-span-8">
+              <div className="service-right">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {challenges.map((challenge, index) => {
+                    const delay = index === 0 ? 0.3 : 0.5;
+                    return (
+                      <motion.div
+                        key={challenge.id}
+                        variants={fadeInUp(delay)}
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true }}
+                        className="py-[60px] px-[20px] xl:py-[40px] xl:px-[30px] rounded-[12px] bg-[#F1F1F1] 
+                                    flex gap-5 relative xl:flex-wrap"
+                      >
+                        {/* Number with Text Stroke - Consistent styling */}
+                        <span
+                          className="text-[40px] font-medium leading-none transition-all duration-400 ease-in-out flex-shrink-0"
+                          style={{
+                            WebkitTextStrokeWidth: '1px',
+                            WebkitTextStrokeColor: '#FD7E31',
+                            WebkitTextFillColor: 'transparent',
+                            fontFamily: 'inherit',
+                          }}
+                        >
+                          {challenge.id}
+                        </span>
 
-                {/* TITLE */}
-                <h3 className="text-[32px] leading-[1.2] font-semibold text-[#1A102C] mb-6 uppercase tracking-normal">
-                  {item.title}
-                </h3>
-
-                {/* DESCRIPTION */}
-                <p className="text-[18px] leading-[1.6] text-[#333]">
-                  {item.description}
-                </p>
-              </motion.div>
-            ))}
+                        {/* Content */}
+                        <div className="content flex-1">
+                          <h3 className="font-montserrat text-[32px] xl:text-[26px] font-medium leading-none mb-[10px]">
+                            <Link
+                              href="#"
+                              className="text-[#1E1E1E] hover:text-[#0B2546] transition-colors"
+                            >
+                              {challenge.title.split(' ').map((word, i, arr) => (
+                                <span key={i}>
+                                  {word}
+                                  {i < arr.length - 1 && <br />}
+                                </span>
+                              ))}
+                            </Link>
+                          </h3>
+                          <p className="font-source-sans text-base font-normal leading-[30px] text-[#1E1E1E]">
+                            {challenge.description}
+                          </p>
+                        </div>
+                      </motion.div>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

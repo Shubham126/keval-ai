@@ -1,97 +1,94 @@
 'use client';
 
-import { useState } from 'react';
 import { motion } from 'framer-motion';
-import CountUp from 'react-countup';
-import { useIntersectionObserver } from '@/lib/hooks/useIntersectionObserver';
+import Image from 'next/image';
 import { fadeInUp } from '@/lib/motionVariants';
 
-interface CounterProps {
-  target: number;
-  suffix?: string;
-  duration?: number;
+interface Counter {
+  number: string;
+  symbol: string;
+  text: string;
 }
 
-function Counter({ target, suffix = '', duration = 4 }: CounterProps) {
-  const [hasAnimated, setHasAnimated] = useState(false);
-  const ref = useIntersectionObserver<HTMLSpanElement>(() => {
-    if (!hasAnimated) {
-      setHasAnimated(true);
-    }
-  });
+const counters: Counter[] = [
+  {
+    number: '100',
+    symbol: '+',
+    text: 'Projects completed',
+  },
+  {
+    number: '99',
+    symbol: '%',
+    text: 'Satisfied customers',
+  },
+  {
+    number: '80',
+    symbol: 'k',
+    text: 'Saved per month',
+  },
+];
 
-  return (
-    <span className="count" ref={ref}>
-      {hasAnimated ? (
-        <CountUp end={target} duration={duration} suffix={suffix} />
-      ) : (
-        `0${suffix}`
-      )}
-    </span>
-  );
-}
-
-
-/* MAIN SECTION */
 export default function CounterSection() {
   return (
-    <section className="w-full py-24 bg-black">
-      {/* TITLE */}
-      <h2 className="text-center text-white text-4xl font-extrabold tracking-tight mb-16 uppercase">
-        Driven by results
-      </h2>
+    <section className="relative overflow-visible py-12 bg-cover bg-center bg-black">
+      {/* Optimized background image */}
+      <div className="absolute inset-0">
+        <Image
+          src="/assets/img/choous-us-bg.jpg"
+          alt="Counter section background"
+          fill
+          loading="lazy"
+          quality={70}
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 1920px"
+          className="object-cover"
+          unoptimized
+        />
+      </div>
+      
+      <div className="container mx-auto px-4 relative z-[2]">
+        {/* Section Title */}
+        <div className="section-title mb-8">
+          <motion.h3
+            variants={fadeInUp(0)}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="font-montserrat text-[45px] font-bold text-center text-white my-5"
+          >
+            driven by results
+          </motion.h3>
+        </div>
 
-      {/* COUNTER CARDS */}
-      <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-10">
-
-        {/* CARD 1 */}
-        <motion.div
-          variants={fadeInUp(0.2)}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="rounded-[32px] bg-[#2A2A2A] border border-[#3A3A3A] shadow-[0_0_40px_rgba(0,0,0,0.3)] flex flex-col items-center justify-center py-16"
-        >
-          <h3 className="text-white font-bold leading-none text-[88px]">
-            <Counter target={100} suffix="+" />
-          </h3>
-          <p className="text-white uppercase tracking-wide text-lg mt-4">
-            Projects Completed
-          </p>
-        </motion.div>
-
-        {/* CARD 2 */}
-        <motion.div
-          variants={fadeInUp(0.35)}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="rounded-[32px] bg-[#2A2A2A] border border-[#3A3A3A] shadow-[0_0_40px_rgba(0,0,0,0.3)] flex flex-col items-center justify-center py-16"
-        >
-          <h3 className="text-white font-bold leading-none text-[88px]">
-            <Counter target={99} suffix="%" />
-          </h3>
-          <p className="text-white uppercase tracking-wide text-lg mt-4">
-            Satisfied Customers
-          </p>
-        </motion.div>
-
-        {/* CARD 3 */}
-        <motion.div
-          variants={fadeInUp(0.5)}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="rounded-[32px] bg-[#2A2A2A] border border-[#3A3A3A] shadow-[0_0_40px_rgba(0,0,0,0.3)] flex flex-col items-center justify-center py-16"
-        >
-          <h3 className="text-white font-bold leading-none text-[88px]">
-            <Counter target={80} suffix="K" />
-          </h3>
-          <p className="text-white uppercase tracking-wide text-lg mt-4">
-            Saved Per Month
-          </p>
-        </motion.div>
-
+        {/* Counter Boxes */}
+        <div className="counter-wrapper-3 pt-0 xl:pt-[85px] lg:pt-[65px]">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {counters.map((counter, index) => {
+              const delay = index === 0 ? 0.3 : index === 1 ? 0.5 : 0.7;
+              
+              return (
+                <motion.div
+                  key={index}
+                  variants={fadeInUp(delay)}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true }}
+                  className="col-span-1"
+                >
+                  <div className="rounded-[15px] border border-[#434343] bg-[#222] p-[60px]">
+                    <h2 className="font-montserrat text-[52px] xl:text-[70px] md:text-[65px] sm:text-[60px] 
+                                   font-medium leading-[89%] xl:leading-[100%] md:leading-[100%] text-white mb-4">
+                      <span className="count">{counter.number}</span>
+                      {counter.symbol}
+                    </h2>
+                    <p className="font-source-sans text-[18px] font-medium text-white uppercase">
+                      {counter.text}
+                    </p>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </div>
+        </div>
       </div>
     </section>
   );

@@ -69,8 +69,8 @@ export default function ScheduleSection() {
   return (
     <section ref={containerRef} className="bg-white py-10 px-5">
       <div className="section-title">
-        <h3 className="text-center mb-8 text-[28px] font-semibold text-black">
-          Schedule a Meet
+        <h3 className="font-montserrat text-[45px] font-bold text-center mt-5">
+          schedule a meet
         </h3>
       </div>
 

@@ -57,17 +57,15 @@ export default function BrandSection() {
     <section className="py-24 bg-white w-full">
       
       {/* Heading */}
-      <motion.h2
+      <motion.h4
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
         viewport={{ once: true }}
-        className="text-center text-[28px] md:text-[36px] lg:text-[40px] font-bold text-black tracking-wide mb-16 px-4"
+        className="font-montserrat text-[28px] font-semibold text-[var(--header)] text-center mb-[60px] uppercase px-4"
       >
-        WE WORKED WORLDWIDE WITH{" "}
-        <span className="text-theme2 font-extrabold">20+</span>{" "}
-        COMPANIES
-      </motion.h2>
+        We worked worldwide with <span className="text-[var(--theme2)]">20</span><span>+</span> companies
+      </motion.h4>
 
       {/* Full-width container */}
       <div ref={containerRef} className="w-full px-4 md:px-10 lg:px-20">

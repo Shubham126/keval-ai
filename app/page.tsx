@@ -12,7 +12,7 @@ import HeroSection from '@/components/HeroSection';
 import ServicesSection from '@/components/ServicesSection';
 import CounterSection from '@/components/CounterSection';
 import ChallengesSection from '@/components/ChallengesSection';
-import FeaturesSection from '@/components/FeaturesSection';
+import WeKnowSection from '@/components/WeKnowSection';
 
 // Lazy load heavy components with Swiper/GSAP to reduce critical CSS
 const BrandSection = dynamic(() => import('@/components/BrandSection'), {
@@ -90,7 +90,7 @@ export default function Home() {
           <ChallengesSection />
         </ClientOnly>
         <ClientOnly>
-          <FeaturesSection />
+          <WeKnowSection />
         </ClientOnly>
         <ClientOnly>
           <CounterSection />

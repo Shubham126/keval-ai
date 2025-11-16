@@ -136,8 +136,8 @@ const initMain = () => {
     });
   });
 
-  // Mouse Cursor
-  initializeMouseCursor();
+  // Mouse Cursor - Now handled by MouseCursor.tsx React component
+  // initializeMouseCursor(); // Disabled - using React component instead
 
   // Typewriter Effect - Now handled in HeroSection.tsx component
   // initializeTypewriter();
@@ -147,45 +147,16 @@ const initMain = () => {
 };
 
 // ============================================================================
-// Mouse Cursor (No jQuery)
+// Mouse Cursor (No jQuery) - DEPRECATED
 // ============================================================================
+// NOTE: Mouse cursor is now handled by MouseCursor.tsx React component
+// This function is kept for backward compatibility but is disabled
+// The React component uses Framer Motion for smooth animations
 
 const initializeMouseCursor = () => {
-  const cursorInner = document.querySelector('.cursor-inner');
-  const cursorOuter = document.querySelector('.cursor-outer');
-  
-  if (!cursorInner || !cursorOuter) return;
-
-  let click = false;
-
-  window.onmousemove = (e: MouseEvent) => {
-    if (!click) {
-      (cursorOuter as HTMLElement).style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
-      (cursorInner as HTMLElement).style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
-    }
-  };
-
-  const handleMouseEnter = (e: Event) => {
-    cursorInner.classList.add('cursor-hover');
-    cursorOuter.classList.add('cursor-hover');
-  };
-
-  const handleMouseLeave = () => {
-    cursorInner.classList.remove('cursor-hover');
-    cursorOuter.classList.remove('cursor-hover');
-  };
-
-  document.body.addEventListener('mouseenter', handleMouseEnter, true);
-  document.body.addEventListener('mouseleave', handleMouseLeave, true);
-
-  // Handle links and cursor-pointer elements
-  document.querySelectorAll('a, .cursor-pointer').forEach((el) => {
-    el.addEventListener('mouseenter', handleMouseEnter);
-    el.addEventListener('mouseleave', handleMouseLeave);
-  });
-
-  (cursorInner as HTMLElement).style.visibility = 'visible';
-  (cursorOuter as HTMLElement).style.visibility = 'visible';
+  // Mouse cursor is now handled by MouseCursor.tsx React component
+  // No action needed here - the component handles all cursor logic
+  return;
 };
 
 // ============================================================================

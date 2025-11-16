@@ -16,8 +16,10 @@
   --color-testi-bg: #222;
 
   /* Fonts */
-  --font-sans: "Source Sans 3", sans-serif;
-  --font-heading: "Montserrat", sans-serif;
+  --font-sans: var(--font-source-sans), "Source Sans 3", sans-serif;
+  --font-heading: var(--font-montserrat), "Montserrat", sans-serif;
+  --font-montserrat: var(--font-montserrat), "Montserrat", sans-serif;
+  --font-source-sans: var(--font-source-sans), "Source Sans 3", sans-serif;
 
   /* Shadows */
   --shadow-custom: 0px 4px 25px 0px rgba(0, 0, 0, 0.06);
@@ -45,15 +47,40 @@
 
 @layer base {
   body {
-    @apply bg-white text-text font-sans text-base leading-[30px];
-    font-family: "Source Sans 3", sans-serif;
+    @apply bg-white text-text text-base leading-[30px];
+    font-family: var(--font-source-sans), "Source Sans 3", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
     padding: 0;
     margin: 0;
     overflow-x: hidden;
   }
 
+  /* Hide default cursor when custom cursor is active */
+  body.custom-cursor-active,
+  body.custom-cursor-active * {
+    cursor: none !important;
+  }
+
   html {
     @apply bg-white;
+  }
+
+  /* Headings - Montserrat, uppercase */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-montserrat), "Montserrat", sans-serif;
+    text-transform: uppercase;
+    transition: all 0.4s ease-in-out;
+  }
+
+  /* Buttons - Montserrat */
+  button,
+  .theme-btn,
+  .theme-btn2,
+  .hero-btn,
+  .header-cta-btn,
+  .theme-btn-navy {
+    font-family: var(--font-montserrat), "Montserrat", sans-serif;
   }
 
   ul {
@@ -344,17 +371,105 @@
   .main-menu ul li:hover .submenu {
     @apply visible opacity-100 translate-y-0;
   }
+
+  /* ============================
+       BRAND IMAGES & SLIDER
+     ============================ */
+
+  /* Brand image hover transition */
+  .brand-wrapper-2 .gt-brand-img img,
+  .brand-wrapper .gt-brand-img img {
+    transition: all 0.4s ease-in-out;
+  }
+
+  /* Brand slider linear transition */
+  .gt-slide-transtion {
+    transition-timing-function: linear;
+  }
+
+  /* ============================
+       ACCORDION TRANSITIONS
+     ============================ */
+
+  /* Accordion button after pseudo-element */
+  .accordion-single .header-area::after {
+    transition: all 0.3s ease-in-out;
+  }
+
+  /* Accordion items with fadeInUp animation */
+  .accordion-single {
+    animation-fill-mode: both;
+  }
+
+  /* ============================
+       HEADING TEXT
+     ============================ */
+
+  .heading_text {
+    font-family: var(--font-montserrat), "Montserrat", sans-serif;
+    font-size: 45px;
+    font-weight: bold;
+    text-align: center;
+    margin: 20px 0;
+    text-transform: uppercase;
+    transition: all 0.4s ease-in-out;
+  }
+
+  /* ============================
+       BRAND WRAPPER TEXT
+     ============================ */
+
+  .brand-wrapper h4,
+  h4.fs-3 {
+    font-family: var(--font-montserrat), "Montserrat", sans-serif;
+    font-size: 1.75rem; /* 28px */
+    font-weight: 600; /* Semi-bold */
+    color: var(--header); /* #17012C */
+    text-align: center;
+    margin-bottom: 60px;
+    text-transform: uppercase;
+  }
+
+  .brand-wrapper h4 .count,
+  h4.fs-3 .count,
+  h4 span:first-of-type {
+    color: var(--theme2); /* #FD7E31 */
+  }
+
+  .brand-wrapper h4 span:not(.count),
+  h4.fs-3 span:not(.count) {
+    color: var(--header); /* #17012C */
+  }
 }
+
+/* ============================
+     KEYFRAME ANIMATIONS
+   ============================ */
 
 @keyframes fadeInDown {
   from { opacity: 0; transform: translateY(-20px) translateZ(0); }
   to { opacity: 1; transform: translateY(0) translateZ(0); }
 }
 
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 @keyframes spin-slow {
   from { transform: rotate(0deg) translateZ(0); }
   to { transform: rotate(360deg) translateZ(0); }
 }
+
+/* ============================
+     ANIMATION CLASSES
+   ============================ */
 
 .animate-spin-slow {
   animation: spin-slow 8s linear infinite;
@@ -363,51 +478,177 @@
   perspective: 1000px;
 }
 
+/* Fade In Up Animation */
+.animate-fade-in-up {
+  animation: fadeInUp 1s ease-out both;
+}
+
+/* Fade In Up with Delays */
+.animate-fade-in-up-delay-200 {
+  animation: fadeInUp 1s ease-out 0.2s both;
+}
+
+.animate-fade-in-up-delay-400 {
+  animation: fadeInUp 1s ease-out 0.4s both;
+}
+
+.animate-fade-in-up-delay-600 {
+  animation: fadeInUp 1s ease-out 0.6s both;
+}
+
+.animate-fade-in-up-delay-700 {
+  animation: fadeInUp 1s ease-out 0.7s both;
+}
+
+/* ============================
+     TRANSITION CLASSES
+   ============================ */
+
+/* Standard transition - 0.4s ease-in-out (Most Common) */
+.transition-standard {
+  transition: all 0.4s ease-in-out;
+}
+
+/* Button transition - 0.5s ease-in-out */
+.transition-button {
+  transition: all 0.5s ease-in-out;
+}
+
+/* Fast transition - 0.3s ease-in-out */
+.transition-fast {
+  transition: all 0.3s ease-in-out;
+}
+
+/* Linear transition (for sliders) - 0.4s linear */
+.transition-linear {
+  transition: all 0.4s linear;
+}
+
 /* ============================
      MOUSE CURSOR
    ============================ */
 .mouse-cursor {
   position: fixed;
-  top: 0;
   left: 0;
+  top: 0;
   pointer-events: none;
-  z-index: 9999;
+  border-radius: 50%;
+  transform: translateZ(0);
   visibility: hidden;
 }
 
-.cursor-outer {
-  width: 40px;
-  height: 40px;
-  border: 2px solid rgba(255, 255, 255, 0.8);
-  border-radius: 50%;
-  transform: translate(-50%, -50%) translateZ(0);
-  transition: width 0.3s ease, height 0.3s ease, border-color 0.3s ease, opacity 0.3s ease;
-  will-change: transform;
-  backface-visibility: hidden;
-  perspective: 1000px;
-}
-
+/* Cursor Inner (Small Dot) - Base State */
 .cursor-inner {
-  width: 8px;
-  height: 8px;
-  background-color: rgba(255, 255, 255, 0.9);
+  width: 6px;
+  height: 6px;
+  z-index: 10000001;
+  background-color: var(--theme);
+  transition: width 0.3s ease-in-out, 
+              height 0.3s ease-in-out, 
+              margin 0.3s ease-in-out, 
+              opacity 0.3s ease-in-out;
+}
+
+/* Cursor Inner - Hover State */
+.cursor-inner.cursor-hover {
+  margin-left: -35px;
+  margin-top: -35px;
+  width: 70px;
+  height: 70px;
+  background-color: var(--theme);
+  opacity: 0.3;
+}
+
+/* Cursor Outer (Ring) - Base State */
+.cursor-outer {
+  margin-left: -12px;
+  margin-top: -12px;
+  width: 30px;
+  height: 30px;
+  border: 1px solid var(--theme);
+  box-sizing: border-box;
+  z-index: 10000000;
+  opacity: 0.5;
+  transition: all 0.08s ease-out;
+}
+
+/* Cursor Outer - Hover State */
+.cursor-outer.cursor-hover {
+  opacity: 0;
+}
+
+/* ============================
+     BACK TO TOP BUTTON
+   ============================ */
+.back-to-top {
   border-radius: 50%;
-  transform: translate(-50%, -50%) translateZ(0);
-  transition: width 0.3s ease, height 0.3s ease, background-color 0.3s ease, opacity 0.3s ease;
-  will-change: transform;
-  backface-visibility: hidden;
-  perspective: 1000px;
+  background-color: var(--theme);
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
+  color: var(--white);
+  font-size: 18px;
+  position: fixed;
+  display: inline-block;
+  z-index: 999;
+  right: 30px;
+  bottom: 30px;
+  transition: all 0.4s ease-in-out;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px);
 }
 
-.cursor-hover .cursor-outer {
-  width: 60px;
-  height: 60px;
-  border-color: #FD7E31;
-  border-width: 2px;
+.back-to-top:hover {
+  background-color: var(--header);
+  color: var(--white);
 }
 
-.cursor-hover .cursor-inner {
-  width: 0;
-  height: 0;
-  background-color: transparent;
+.back-to-top.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(0);
+}
+
+/* ============================
+     SWIPER PAGINATION DOTS
+   ============================ */
+
+.swiper-dot {
+  margin-top: 50px;
+  text-align: center;
+}
+
+.swiper-dot .dot {
+  display: inline-flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
+}
+
+.swiper-dot .dot .swiper-pagination-bullet {
+  width: 12px;
+  height: 12px;
+  background-color: #555555;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-block;
+  margin: 0 6px;
+  opacity: 1;
+}
+
+.swiper-dot .dot .swiper-pagination-bullet:hover {
+  background-color: #666666;
+}
+
+.swiper-dot .dot .swiper-pagination-bullet-active {
+  background-color: #59D2F3;
+  transform: scale(1.25);
+  box-shadow: 0 0 10px rgba(89, 210, 243, 0.4);
+}
+
+/* Hide pagination bullets beyond the first 3 (for testimonial slider with 6 slides) */
+.swiper-dot .dot .swiper-pagination-bullet:nth-child(n+4) {
+  display: none !important;
 }

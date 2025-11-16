@@ -5,8 +5,12 @@ import Link from 'next/link';
 
 export default function Footer() {
   return (
-    <footer className="bg-[#050505] text-white pt-24 pb-10 relative overflow-hidden">
-      <div className="absolute inset-0 bg-linear-to-t from-[#0A0A0A] via-[#050505] to-[#050505]/90"></div>
+    <footer 
+      className="relative overflow-hidden py-20 px-5 pb-10 text-white"
+      style={{
+        background: 'radial-gradient(circle at top left, #03040a 0%, #0b0d17 100%)'
+      }}
+    >
 
       <div className="relative z-10 max-w-7xl mx-auto px-6">
         <div className="bg-[#0C0C0C]/80 backdrop-blur-md border border-white/5 rounded-2xl p-10 md:p-14 shadow-[0_0_40px_rgba(255,255,255,0.05)]">
@@ -15,7 +19,7 @@ export default function Footer() {
             {/* Logo & Description */}
             <div>
               <Image
-                src="/assets/keval-image/logo/Side Aligned Logo 1/Logo-06.png"
+                src="/assets/keval-image/logo/Side Aligned Logo 1/Logo-09.png"
                 alt="Keval AI"
                 width={180}
                 height={60}
@@ -127,8 +131,8 @@ export default function Footer() {
         </div>
 
         {/* Copyright */}
-        <div className="text-center mt-10 text-gray-500 text-[14px]">
-          © {new Date().getFullYear()} <span className="text-white font-medium">Keval-AI Design</span>
+        <div className="text-center mt-12 text-[#aaa] text-[13px] opacity-80 border-t border-white/8 pt-5">
+          <p>© {new Date().getFullYear()} <span className="text-white font-medium">Keval-AI Design</span></p>
         </div>
       </div>
     </footer>

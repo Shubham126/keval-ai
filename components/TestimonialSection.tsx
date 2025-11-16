@@ -1,14 +1,17 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay, EffectCards } from 'swiper/modules';
+import { Autoplay, EffectCards, Pagination } from 'swiper/modules';
 import type { Swiper as SwiperType } from 'swiper';
 import Image from 'next/image';
 import Link from 'next/link';
+import { motion } from 'framer-motion';
+import { fadeInUp } from '@/lib/motionVariants';
 
 import 'swiper/css';
 import 'swiper/css/effect-cards';
+import 'swiper/css/pagination';
 
 interface Testimonial {
   image: string;
@@ -17,73 +20,66 @@ interface Testimonial {
   text: string;
 }
 
-const testimonials: Testimonial[] = [
+// Base testimonials
+const baseTestimonials: Testimonial[] = [
   {
     image: '/assets/keval-image/testimonal/Dalila-CEO.jpg',
     name: 'A. De Vries',
     position: 'Dalila CEO',
-    text: `Working with Keval AI completely transformed our online presence.`,
+    text: `Working with Keval AI completely transformed our online presence. Their new gem-industry website design not only looks stunning, but also doubled our conversion rate in just a month. Highly recommend their tech + marketing combo!`,
   },
   {
     image: '/assets/keval-image/testimonal/Donai-co-founder.jpg',
     name: 'M. Janssens',
     position: 'Donai Co-Founder',
-    text: `We wanted a robust inventory + ERP system tailored for our diamond business.`,
+    text: `We wanted a robust inventory + ERP system tailored for our diamond business. Keval AI delivered it ahead of schedule, seamless integration, and very responsive support. Their niche expertise showed every step of the way.`,
   },
   {
     image: '/assets/keval-image/testimonal/Millenium-Inventory.jpg',
     name: 'L. Bertrand',
     position: 'Millenium Inventory Executive',
-    text: `From MVP development to final launch, Keval AI's team was professional and detail-oriented.`,
+    text: `From MVP development to final launch, Keval AI's team was professional, creative, and detail-oriented. The site is fast, beautiful, and our leads have grown significantly. They truly understand high conversion.`,
   },
 ];
 
-// SVG Star Component
-const StarIcon = ({ className = "" }: { className?: string }) => (
+// Duplicate for seamless looping with cards effect
+const testimonials = [...baseTestimonials, ...baseTestimonials];
+
+// Quote Icon SVG Component
+const QuoteIcon = () => (
+  <svg width="27" height="20" viewBox="0 0 27 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g clipPath="url(#clip0_205_1662)">
+      <path d="M26.666 -0.222168V19.7778L16.666 9.77783V-0.222168H26.666Z" fill="#59D2F3" />
+      <path d="M10 -0.222168V19.7778L0 9.77783V-0.222168H10Z" fill="#59D2F3" />
+    </g>
+    <defs>
+      <clipPath id="clip0_205_1662">
+        <rect width="27" height="20" fill="white" />
+      </clipPath>
+    </defs>
+  </svg>
+);
+
+// Star Icon SVG Component - Using SVG instead of Font Awesome
+const StarIcon = ({ className = "w-4 h-4" }: { className?: string }) => (
   <svg
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 24 24"
-    fill="currentColor"
     className={className}
+    viewBox="0 0 24 24"
+    fill="#FCD554"
+    xmlns="http://www.w3.org/2000/svg"
   >
-    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+    <path
+      d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"
+      fill="currentColor"
+      stroke="currentColor"
+      strokeWidth="0.5"
+    />
   </svg>
 );
 
 export default function TestimonialSection() {
   const swiperRef = useRef<SwiperType | null>(null);
   const [activeIndex, setActiveIndex] = useState(0);
-
-  // Aggressive infinite loop implementation
-  useEffect(() => {
-    let autoplayInterval: NodeJS.Timeout | null = null;
-
-    const startManualAutoplay = () => {
-      if (autoplayInterval) clearInterval(autoplayInterval);
-      
-      autoplayInterval = setInterval(() => {
-        const swiper = swiperRef.current;
-        if (swiper && !swiper.destroyed) {
-          // Check if we're at the last slide
-          if (swiper.activeIndex >= testimonials.length - 1) {
-            // Reset to first slide
-            swiper.slideTo(0);
-          } else {
-            // Move to next slide
-            swiper.slideNext();
-          }
-        }
-      }, 3000); // 3 seconds delay
-    };
-
-    // Start after a short delay to ensure Swiper is ready
-    const initTimer = setTimeout(startManualAutoplay, 500);
-
-    return () => {
-      clearTimeout(initTimer);
-      if (autoplayInterval) clearInterval(autoplayInterval);
-    };
-  }, []);
 
   return (
     <section className="relative overflow-visible py-20 lg:py-24 bg-cover bg-center bg-black">
@@ -106,153 +102,205 @@ export default function TestimonialSection() {
             {/* ===== LEFT CONTENT ===== */}
             <div className="testimonial-content">
               
-              {/* Section Label */}
-              <h6 className="text-[#FD7E31] uppercase tracking-[1px] text-[13px] font-semibold mb-4 font-heading">
-                TESTIMONIALS
-              </h6>
+              {/* Section Label - "testimonials" */}
+              <motion.h6
+                variants={fadeInUp(0)}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                className="font-montserrat text-[20px] font-normal text-[var(--theme2)] uppercase leading-none inline-block mb-5"
+              >
+                testimonials
+              </motion.h6>
               
-              {/* Main Heading */}
-              <h2 className="text-white text-[38px] lg:text-[48px] xl:text-[52px] leading-[1.1] font-bold font-heading m-0 mb-10">
-                OUR CLIENTS AWESOME<br />TESTIMONIALS
+              {/* Main Heading - "Our clients awesome Testimonials" */}
+              <h2 className="font-montserrat text-[42px] font-medium text-white uppercase leading-[89%] mb-0">
+                Our clients awesome Testimonials
               </h2>
 
-              {/* Rating Section: 50 + SVG Stars */}
-              <div className="mb-12">
-                <h3 className="text-white text-[56px] lg:text-[64px] font-bold m-0 leading-none mb-3">
-                  50
+              {/* Rating Box: 50 + 5 Stars */}
+              <motion.div
+                variants={fadeInUp(0.5)}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                className="inline-flex rounded-[10px] border border-[#323232] bg-black px-[30px] py-[25px] gap-[14px] min-w-[295px] mt-[30px]"
+              >
+                <h3 className="text-white text-[60px] font-normal font-montserrat leading-none m-0">
+                  <span>50</span>
                 </h3>
-                <div className="flex gap-1.5">
-                  {[...Array(5)].map((_, i) => (
-                    <StarIcon 
-                      key={i} 
-                      className="w-[22px] h-[22px] text-[#FFD700]" 
-                    />
-                  ))}
+                <div className="content flex items-center">
+                  <div className="text-[#FCD554] flex gap-1 items-center -mt-6">
+                    {[...Array(5)].map((_, i) => (
+                      <StarIcon key={i} className="w-4 h-4" />
+                    ))}
+                  </div>
                 </div>
-              </div>
+              </motion.div>
 
-              {/* CTA Button - Orange */}
-              <div className="mt-8">
+              {/* CTA Button */}
+              <div className="mt-5">
                 <Link 
                   href="/about" 
-                  className="theme-btn"
+                  className="theme-btn border-white"
                 >
-                  CONNECT WITH US
+                  connect with us
                 </Link>
               </div>
             </div>
 
             {/* ===== RIGHT SIDE - CARDS SLIDER ===== */}
             <div className="relative w-full max-w-[600px] mx-auto lg:ml-auto lg:mr-0">
-              <div className="relative" style={{ paddingBottom: '60px' }}>
-                <Swiper
-                  modules={[EffectCards]}
-                  effect="cards"
-                  grabCursor={true}
-                  loop={false}
-                  speed={800}
-                  allowTouchMove={true}
-                  cardsEffect={{
-                    perSlideOffset: 12,
-                    perSlideRotate: 3,
-                    rotate: true,
-                    slideShadows: true,
-                  }}
-                  onSwiper={(swiper) => {
-                    swiperRef.current = swiper;
-                  }}
-                  onSlideChange={(swiper) => {
-                    setActiveIndex(swiper.activeIndex);
-                  }}
-                  className="testimonial-slider w-full !overflow-visible"
-                  style={{ 
-                    paddingTop: '20px',
-                    paddingBottom: '40px',
-                  }}
-                >
-                  {testimonials.map((item, i) => (
-                    <SwiperSlide key={i} className="!flex !items-center !justify-center">
-                      <article
-                        className="w-full rounded-[24px] p-10 shadow-2xl"
-                        style={{
-                          background: 'linear-gradient(145deg, #2d2d2d 0%, #1a1a1a 100%)',
-                          border: '1px solid rgba(255,255,255,0.08)',
-                          maxWidth: '540px',
-                        }}
+              <Swiper
+                modules={[EffectCards, Autoplay, Pagination]}
+                effect="cards"
+                grabCursor={true}
+                loop={true}
+                speed={2000}
+                spaceBetween={30}
+                allowTouchMove={true}
+                watchSlidesProgress={true}
+                autoplay={{
+                  delay: 1000,
+                  disableOnInteraction: false,
+                  pauseOnMouseEnter: false,
+                }}
+                cardsEffect={{
+                  perSlideOffset: 5, // Reduced for closer cards
+                  perSlideRotate: 1.5, // Reduced rotation for better organization
+                  rotate: true,
+                  slideShadows: true,
+                }}
+                pagination={{
+                  el: '.swiper-dot .dot',
+                  clickable: true,
+                  bulletClass: 'swiper-pagination-bullet',
+                  bulletActiveClass: 'swiper-pagination-bullet-active',
+                  type: 'bullets',
+                  dynamicBullets: false,
+                  dynamicMainBullets: 1,
+                  renderBullet: function (index: number, className: string) {
+                    // Only render 3 bullets (one per original slide)
+                    // Swiper will call this for all 6 slides, but we only render for first 3
+                    if (index >= baseTestimonials.length) {
+                      return '';
+                    }
+                    return '<span class="' + className + '"></span>';
+                  },
+                }}
+                onInit={(swiper) => {
+                  // Ensure only 3 bullets are visible on init
+                  if (swiper.pagination && swiper.pagination.bullets) {
+                    const bullets = swiper.pagination.bullets;
+                    bullets.forEach((bullet: HTMLElement, index: number) => {
+                      if (index >= baseTestimonials.length) {
+                        bullet.style.display = 'none';
+                        bullet.style.visibility = 'hidden';
+                      }
+                    });
+                  }
+                }}
+                onSwiper={(swiper) => {
+                  swiperRef.current = swiper;
+                  
+                  // Limit pagination to only show 3 bullets (one per original slide)
+                  setTimeout(() => {
+                    if (swiper.pagination && swiper.pagination.bullets) {
+                      const bullets = swiper.pagination.bullets;
+                      // Hide bullets beyond the original count
+                      for (let i = baseTestimonials.length; i < bullets.length; i++) {
+                        if (bullets[i]) {
+                          (bullets[i] as HTMLElement).style.display = 'none';
+                        }
+                      }
+                    }
+                    
+                    // Start autoplay after swiper is initialized
+                    if (swiper.autoplay) {
+                      swiper.autoplay.start();
+                    }
+                  }, 200);
+                }}
+                onSlideChange={(swiper) => {
+                  // Update active index for pagination (use realIndex for loop mode)
+                  const realIdx = swiper.realIndex % baseTestimonials.length;
+                  setActiveIndex(realIdx);
+                  
+                  // Ensure pagination shows correct active bullet based on realIndex
+                  if (swiper.pagination && swiper.pagination.bullets) {
+                    const bullets = swiper.pagination.bullets;
+                    bullets.forEach((bullet: HTMLElement, index: number) => {
+                      if (index < baseTestimonials.length) {
+                        // Use realIndex to determine active state
+                        const isActive = index === realIdx;
+                        if (isActive) {
+                          bullet.classList.add('swiper-pagination-bullet-active');
+                        } else {
+                          bullet.classList.remove('swiper-pagination-bullet-active');
+                        }
+                      }
+                    });
+                  }
+                }}
+                className="testimonial-slider w-full !overflow-visible"
+                style={{ 
+                  paddingTop: '20px',
+                  paddingBottom: '40px',
+                  height: 'auto',
+                }}
+              >
+                {testimonials.map((item, i) => {
+                  // Use modulo to get original index for animations
+                  const originalIndex = i % baseTestimonials.length;
+                  return (
+                    <SwiperSlide 
+                      key={i} 
+                      className="!flex !items-center !justify-center !h-auto"
+                    >
+                      <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6, delay: originalIndex * 0.1 }}
+                        className="p-[30px] md:p-[40px] border border-[#434343] bg-[#222] rounded-[15px] ml-0 md:ml-[40px] w-full max-w-[540px]"
                       >
-                        {/* Client Header - Image + Info */}
-                        <div className="flex gap-5 items-center mb-10">
-                          <div className="w-[80px] h-[80px] lg:w-[90px] lg:h-[90px] rounded-full overflow-hidden flex-shrink-0 border-2 border-white/10">
-                            <Image
-                              src={item.image}
-                              alt={item.name}
-                              width={90}
-                              height={90}
-                              className="object-cover w-full h-full"
-                            />
-                          </div>
-                          <div>
-                            <h5 className="m-0 text-[19px] lg:text-[21px] text-white font-bold tracking-wide font-heading uppercase">
+                        {/* Client Info */}
+                        <div className="flex items-center gap-[15px] mb-[30px]">
+                          <Image
+                            src={item.image}
+                            alt={item.name}
+                            width={64}
+                            height={64}
+                            className="rounded-full w-16 h-16 object-cover"
+                          />
+                          <div className="client-content">
+                            <h5 className="font-montserrat text-[20px] font-medium text-white m-0">
                               {item.name}
                             </h5>
-                            <p className="mt-2 mb-0 text-[#a0a0a0] text-[14px]">
+                            <p className="font-source-sans text-base text-white/50 capitalize m-0 mt-1">
                               {item.position}
                             </p>
                           </div>
                         </div>
 
-                        {/* Quote + Text */}
-                        <div className="flex gap-4 items-start">
-                          <div className="flex-shrink-0 mt-1">
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              width="26"
-                              height="20"
-                              viewBox="0 0 27 20"
-                              fill="none"
-                            >
-                              <path
-                                d="M26.666 -0.222168V19.7778L16.666 9.77783V-0.222168H26.666Z"
-                                fill="#59D2F3"
-                              />
-                              <path
-                                d="M10 -0.222168V19.7778L0 9.77783V-0.222168H10Z"
-                                fill="#59D2F3"
-                              />
-                            </svg>
+                        {/* Testimonial Content */}
+                        <div className="flex gap-[15px]">
+                          <div className="icon flex-shrink-0">
+                            <QuoteIcon />
                           </div>
-                          <p className="m-0 text-[17px] lg:text-[18px] leading-[1.65] text-white/95 font-normal italic">
+                          <span className="font-source-sans text-[18px] italic text-white leading-[1.5]">
                             {item.text}
-                          </p>
+                          </span>
                         </div>
-                      </article>
+                      </motion.div>
                     </SwiperSlide>
-                  ))}
+                  );
+                })}
                 </Swiper>
 
-                {/* Dot Navigation - Centered Below Cards */}
-                <div 
-                  className="absolute bottom-0 left-0 right-0 flex gap-3 items-center justify-center z-10" 
-                  role="tablist" 
-                  aria-label="testimonial navigation"
-                >
-                  {testimonials.map((_, i) => (
-                    <button
-                      key={i}
-                      className={`
-                        w-[12px] h-[12px] rounded-full transition-all duration-300 cursor-pointer
-                        ${i === activeIndex 
-                          ? 'bg-[#59D2F3] scale-125 shadow-lg shadow-[#59D2F3]/40' 
-                          : 'bg-[#555555] hover:bg-[#666666]'
-                        }
-                      `}
-                      onClick={() => swiperRef.current?.slideTo(i)}
-                      aria-label={`Go to testimonial ${i + 1}`}
-                      aria-pressed={i === activeIndex}
-                    />
-                  ))}
+                {/* Swiper Pagination - Matching Original HTML Structure */}
+                <div className="swiper-dot mt-[50px] text-center">
+                  <div className="dot"></div>
                 </div>
-              </div>
             </div>
 
           </div>

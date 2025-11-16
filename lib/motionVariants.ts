@@ -1,6 +1,6 @@
 import { Variants } from "framer-motion";
 
-// ✅ function variant (callable)
+// ✅ function variant (callable) - fadeInUp with delay
 export const fadeInUp = (delay: number = 0): Variants => ({
   hidden: { opacity: 0, y: 20 },
   visible: {
@@ -9,7 +9,7 @@ export const fadeInUp = (delay: number = 0): Variants => ({
     transition: {
       duration: 1,
       delay,
-      ease: [0.25, 0.1, 0.25, 1], // easeOut
+      ease: [0.42, 0, 1, 1], // ease-out (matches CSS animation)
     },
   },
 });
@@ -59,6 +59,22 @@ export const fadeInDown: Variants = {
     transition: {
       duration: 0.5,
       ease: [0.42, 0, 0.58, 1], // ease-in-out
+    },
+  },
+};
+
+// fadeInUp static variant (for use without delay)
+export const fadeInUpStatic: Variants = {
+  hidden: {
+    opacity: 0,
+    y: 20,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 1,
+      ease: [0.42, 0, 1, 1], // ease-out (matches CSS animation)
     },
   },
 };
