@@ -110,7 +110,6 @@ export default function Header() {
                   }`}
                 >
                   SERVICES
-                  <ChevronDown className="text-xs mt-[2px] w-3 h-3" />
                 </button>
 
                 <AnimatePresence>

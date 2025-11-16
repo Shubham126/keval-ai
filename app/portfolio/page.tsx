@@ -86,7 +86,7 @@ export default function PortfolioPage() {
                           {/* Rotating circular border */}
                           <div className="absolute inset-0 rounded-full border-2 border-[#FD7E31]/30 animate-spin-slow"></div>
                           {/* Arrow icon - black normally, white on hover, tilts upward on hover */}
-                          <Image 
+                          <img 
                             src="/assets/img/icon/12.svg" 
                             width={28} 
                             height={28} 
@@ -139,7 +139,7 @@ export default function PortfolioPage() {
                           {/* Rotating circular border */}
                           <div className="absolute inset-0 rounded-full border-2 border-[#FD7E31]/30 animate-spin-slow"></div>
                           {/* Arrow icon - black normally, white on hover, tilts upward on hover */}
-                          <Image 
+                          <img 
                             src="/assets/img/icon/12.svg" 
                             width={28} 
                             height={28} 
@@ -250,7 +250,7 @@ export default function PortfolioPage() {
                           {/* Rotating circular border */}
                           <div className="absolute inset-0 rounded-full border-2 border-[#FD7E31]/30 animate-spin-slow"></div>
                           {/* Arrow icon - black normally, white on hover, tilts upward on hover */}
-                          <Image 
+                          <img 
                             src="/assets/img/icon/12.svg" 
                             width={28} 
                             height={28} 
@@ -306,7 +306,7 @@ export default function PortfolioPage() {
                           {/* Rotating circular border */}
                           <div className="absolute inset-0 rounded-full border-2 border-[#FD7E31]/30 animate-spin-slow"></div>
                           {/* Arrow icon - black normally, white on hover, tilts upward on hover */}
-                          <Image 
+                          <img 
                             src="/assets/img/icon/12.svg" 
                             width={28} 
                             height={28} 
@@ -341,9 +341,9 @@ export default function PortfolioPage() {
                   href="/portfolio-details"
                   className="inline-flex items-center gap-2 bg-[#FD7E31] hover:bg-[#ff924f] text-white font-medium uppercase text-sm px-5 py-2.5 rounded-md transition-all duration-300 shadow-sm"
                 >
-                  <Image src="/assets/img/icon/10.svg" width={16} height={16} alt="icon" />
+                  <img src="/assets/img/icon/10.svg" width={16} height={16} alt="icon" />
                   View All Projects
-                  <Image src="/assets/img/icon/11.svg" width={16} height={16} alt="icon" />
+                  <img src="/assets/img/icon/11.svg" width={16} height={16} alt="icon" />
                 </Link>
               </div>
             </div>
@@ -351,42 +351,49 @@ export default function PortfolioPage() {
 
           {/* ✅ CTA SECTION */}
           <section
-            className="py-24"
-            style={{ background: 'linear-gradient(to bottom, white 50%, black 50%)' }}
+          className="relative z-[9] py-[120px] md:py-[100px] sm:py-[80px] pt-0 bg-[#222222]"
+          style={{ background: 'linear-gradient(to bottom, white 50%, black 50%)' }}
           >
-            <div className="max-w-[1320px] mx-auto px-4">
+          {/* Background overlay for dark bottom */}
+          <div className="absolute top-[45%] left-0 right-0 bottom-0 w-full h-full bg-black -z-[1]" />
+
+          <div className="max-w-[1320px] mx-auto px-4">
+            <motion.div
+              variants={fadeInUp(0.3)}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              className="cta-wrapper rounded-3xl p-16 md:p-12 sm:p-10 text-center bg-cover bg-center relative z-[9]"
+              style={{
+                backgroundImage: "url('/assets/keval-image/service/servic-pg-cta.png')",
+              }}
+            >
+              {/* Heading (centered like version #1, font size like version #2) */}
+              <h2 className="font-montserrat text-3xl md:text-5xl font-bold leading-[1.15] text-white mb-8">
+                Have an idea in your mind? Let&apos;s make something great together
+              </h2>
+
+              {/* CTA Button (font + button style from V2, with center alignment from V1) */}
               <motion.div
-                variants={fadeInUp(0.3)}
+                variants={fadeInUp(0.5)}
                 initial="hidden"
                 whileInView="visible"
-                viewport={{ once: false }}
-                className="bg-cover rounded-3xl p-16 text-white"
-                style={{
-                  backgroundImage: "url('/assets/keval-image/service/servic-pg-cta.png')",
-                }}
+                viewport={{ once: true }}
               >
-                <h2 className="text-3xl md:text-5xl font-bold mb-8">
-                  Have an idea in your mind? Let&apos;s make something great together
-                </h2>
-
-                <motion.div
-                  variants={fadeInUp(0.5)}
-                  initial="hidden"
-                  whileInView="visible"
-                >
-                  <div className="flex justify-center">
-                    <Link
-                      href="/contact"
-                      className="theme-btn"
-                    >
-                      Get in Touch
-                    </Link>
-                  </div>
-
-                </motion.div>
+                <div className="flex justify-center">
+                  <Link
+                    href="/contact"
+                    className="header-cta-btn"
+                  >
+                    Get in Touch
+                  </Link>
+                </div>
               </motion.div>
-            </div>
-          </section>
+            </motion.div>
+          </div>
+        </section>
+
+
 
           <Footer />
         </div>

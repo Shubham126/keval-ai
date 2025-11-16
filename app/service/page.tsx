@@ -6,7 +6,6 @@ import BackToTop from '@/components/BackToTop';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { fadeInUp } from '@/lib/motionVariants';
-import { House } from '@/components/Icons';
 
 export default function ServicePage() {
   return (
@@ -18,232 +17,99 @@ export default function ServicePage() {
         <div id="smooth-content">
 
           {/* ===== Breadcrumb Section ===== */}
-          <div
-            className="relative bg-cover bg-center h-[56vh] min-h-[420px] flex flex-col justify-center text-center text-white"
-            style={{
-              backgroundImage: "url('/assets/keval-image/about-hero-banner.png')",
-            }}
-          >
-            <div className="bg-black/50 absolute inset-0"></div>
-            <div className="relative z-10 container mx-auto px-6">
-              <motion.h1
-                variants={fadeInUp(0.3)}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: false, amount: 0.3 }}
-                className="text-5xl md:text-6xl font-extrabold uppercase tracking-wide"
-              >
-                Services
-              </motion.h1>
-
-              <motion.ul
-                variants={fadeInUp(0.5)}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: false, amount: 0.3 }}
-                className="flex items-center justify-center gap-3 mt-4 text-sm uppercase font-medium"
-              >
-                <li>
-                  <Link href="/" className="flex items-center gap-2 hover:text-[#FD7E31] transition">
-                    <House className="w-4 h-4" />
-                    Home
-                  </Link>
-                </li>
-                <li className="text-white/70">/</li>
-                <li>Services</li>
-              </motion.ul>
+          <div className="relative overflow-hidden z-[9]">
+            {/* Background Image with Overlay */}
+            <div
+              className="absolute inset-0 bg-cover bg-center"
+              style={{
+                backgroundImage: "url('/assets/keval-image/about-hero-banner.png')",
+              }}
+            >
+              <div className="absolute inset-0 bg-black/70" />
+            </div>
+            <div className="container mx-auto px-4 relative z-[9]">
+              <div className="page-heading py-[170px] md:py-[140px] text-center">
+                <motion.div
+                  variants={fadeInUp(0.3)}
+                  initial="hidden"
+                  animate="visible"
+                  className="breadcrumb-sub-title"
+                >
+                  <h1 className="font-montserrat text-[64px] sm:text-[44px] font-bold text-white relative z-[9]">
+                    Services
+                  </h1>
+                </motion.div>
+                <motion.ul
+                  variants={fadeInUp(0.5)}
+                  initial="hidden"
+                  animate="visible"
+                  className="inline-flex justify-center items-center gap-[10px] mt-5 sm:mt-[15px]"
+                >
+                  <li className="text-white uppercase font-normal text-base">
+                    <Link href="/" className="flex items-center gap-[10px]">
+                      <i className="fa-regular fa-house" />
+                      Home
+                    </Link>
+                  </li>
+                  <li className="text-white">
+                    <i className="fa-solid fa-slash-forward" />
+                  </li>
+                  <li className="text-white uppercase font-normal text-base">Services</li>
+                </motion.ul>
+              </div>
             </div>
           </div>
 
           {/* ===== Service Section ===== */}
-          <section className="bg-white py-24">
-            <div className="max-w-7xl mx-auto px-6">
-              <ul className="divide-y divide-gray-200">
-                {/* Service 1 */}
-                <li className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 py-12">
-                  <div>
-                    <motion.h4
-                      variants={fadeInUp(0.1)}
-                      initial="hidden"
-                      whileInView="visible"
-                      viewport={{ once: false, amount: 0.3 }}
-                      className="text-[#0D0670] text-lg font-bold tracking-wide mb-2"
-                    >
-                      001
-                    </motion.h4>
-                    <motion.h3
-                      variants={fadeInUp(0.2)}
-                      initial="hidden"
-                      whileInView="visible"
-                      viewport={{ once: false, amount: 0.3 }}
-                      className="text-[#0D0670] text-3xl md:text-4xl font-extrabold uppercase leading-tight"
-                    >
-                      <Link href="/service-details" className="hover:text-[#FD7E31] transition">
-                        High Conversion Website
-                      </Link>
-                    </motion.h3>
-                  </div>
-                  <motion.p
-                    variants={fadeInUp(0.3)}
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: false, amount: 0.3 }}
-                    className="text-gray-700 max-w-xl leading-relaxed"
-                  >
-                    Keval AI creates websites that look great and convert visitors into customers.
-                    Fast, user-friendly, and optimized for growth.
-                  </motion.p>
-                </li>
 
-                {/* Service 2 */}
-                <li className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 py-12">
-                  <motion.p
-                    variants={fadeInUp(0.2)}
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: false, amount: 0.3 }}
-                    className="text-gray-700 max-w-xl leading-relaxed order-2 md:order-1"
-                  >
-                    Simplify your stock operations with Keval AI&apos;s inventory systems. Track,
-                    manage, and optimize efficiently with minimal errors.
-                  </motion.p>
-                  <div className="order-1 md:order-2">
-                    <motion.h4
-                      variants={fadeInUp(0.1)}
-                      initial="hidden"
-                      whileInView="visible"
-                      viewport={{ once: false, amount: 0.3 }}
-                      className="text-[#0D0670] text-lg font-bold tracking-wide mb-2"
-                    >
-                      002
-                    </motion.h4>
-                    <motion.h3
-                      variants={fadeInUp(0.3)}
-                      initial="hidden"
-                      whileInView="visible"
-                      viewport={{ once: false, amount: 0.3 }}
-                      className="text-[#0D0670] text-3xl md:text-4xl font-extrabold uppercase leading-tight"
-                    >
-                      <Link href="/service-details" className="hover:text-[#FD7E31] transition">
-                        Inventory Management Systems
-                      </Link>
-                    </motion.h3>
-                  </div>
-                </li>
+          <section
+          className="relative z-[9] py-[120px] md:py-[100px] sm:py-[80px] pt-0 bg-[#222222]"
+          style={{ background: 'linear-gradient(to bottom, white 50%, black 50%)' }}
+          >
+          {/* Background overlay for dark bottom */}
+          <div className="absolute top-[45%] left-0 right-0 bottom-0 w-full h-full bg-black -z-[1]" />
 
-                {/* Service 3 */}
-                <li className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 py-12">
-                  <div>
-                    <motion.h4
-                      variants={fadeInUp(0.1)}
-                      initial="hidden"
-                      whileInView="visible"
-                      viewport={{ once: false, amount: 0.3 }}
-                      className="text-[#0D0670] text-lg font-bold tracking-wide mb-2"
-                    >
-                      003
-                    </motion.h4>
-                    <motion.h3
-                      variants={fadeInUp(0.3)}
-                      initial="hidden"
-                      whileInView="visible"
-                      viewport={{ once: false, amount: 0.3 }}
-                      className="text-[#0D0670] text-3xl md:text-4xl font-extrabold uppercase leading-tight"
-                    >
-                      <Link href="/service-details" className="hover:text-[#FD7E31] transition">
-                        MVP Development
-                      </Link>
-                    </motion.h3>
-                  </div>
-                  <motion.p
-                    variants={fadeInUp(0.4)}
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: false, amount: 0.3 }}
-                    className="text-gray-700 max-w-xl leading-relaxed"
-                  >
-                    Turn ideas into reality quickly with Keval AI&apos;s MVP development. Launch scalable
-                    prototypes that validate your concept with real users.
-                  </motion.p>
-                </li>
+          <div className="max-w-[1320px] mx-auto px-4">
+            <motion.div
+              variants={fadeInUp(0.3)}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              className="cta-wrapper rounded-3xl p-16 md:p-12 sm:p-10 text-center bg-cover bg-center relative z-[9]"
+              style={{
+                backgroundImage: "url('/assets/keval-image/service/servic-pg-cta.png')",
+              }}
+            >
+              {/* Heading (centered like version #1, font size like version #2) */}
+              <h2 className="font-montserrat text-3xl md:text-5xl font-bold leading-[1.15] text-white mb-8">
+                Have an idea in your mind? Let&apos;s make something great together
+              </h2>
 
-                {/* Service 4 */}
-                <li className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 py-12">
-                  <motion.p
-                    variants={fadeInUp(0.3)}
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: false, amount: 0.3 }}
-                    className="text-gray-700 max-w-xl leading-relaxed order-2 md:order-1"
+              {/* CTA Button (font + button style from V2, with center alignment from V1) */}
+              <motion.div
+                variants={fadeInUp(0.5)}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+              >
+                <div className="flex justify-center">
+                  <Link
+                    href="/contact"
+                    className="header-cta-btn"
                   >
-                    Manage clients, resources, and workflows effortlessly with Keval AI&apos;s CRM & ERP
-                    solutions.
-                  </motion.p>
-                  <div className="order-1 md:order-2">
-                    <motion.h4
-                      variants={fadeInUp(0.1)}
-                      initial="hidden"
-                      whileInView="visible"
-                      viewport={{ once: false, amount: 0.3 }}
-                      className="text-[#0D0670] text-lg font-bold tracking-wide mb-2"
-                    >
-                      004
-                    </motion.h4>
-                    <motion.h3
-                      variants={fadeInUp(0.3)}
-                      initial="hidden"
-                      whileInView="visible"
-                      viewport={{ once: false, amount: 0.3 }}
-                      className="text-[#0D0670] text-3xl md:text-4xl font-extrabold uppercase leading-tight"
-                    >
-                      <Link href="/service-details" className="hover:text-[#FD7E31] transition">
-                        CRM and ERP
-                      </Link>
-                    </motion.h3>
-                  </div>
-                </li>
+                    Get in Touch
+                  </Link>
+                </div>
+              </motion.div>
+            </motion.div>
+          </div>
+        </section>
 
-                {/* Service 5 */}
-                <li className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 py-12">
-                  <div>
-                    <motion.h4
-                      variants={fadeInUp(0.1)}
-                      initial="hidden"
-                      whileInView="visible"
-                      viewport={{ once: false, amount: 0.3 }}
-                      className="text-[#0D0670] text-lg font-bold tracking-wide mb-2"
-                    >
-                      005
-                    </motion.h4>
-                    <motion.h3
-                      variants={fadeInUp(0.3)}
-                      initial="hidden"
-                      whileInView="visible"
-                      viewport={{ once: false, amount: 0.3 }}
-                      className="text-[#0D0670] text-3xl md:text-4xl font-extrabold uppercase leading-tight"
-                    >
-                      <Link href="/service-details" className="hover:text-[#FD7E31] transition">
-                        Marketing Solutions
-                      </Link>
-                    </motion.h3>
-                  </div>
-                  <motion.p
-                    variants={fadeInUp(0.4)}
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: false, amount: 0.3 }}
-                    className="text-gray-700 max-w-xl leading-relaxed"
-                  >
-                    Drive growth with Keval AI&apos;s marketing services. Plan, execute, and target
-                    the right audience for measurable results.
-                  </motion.p>
-                </li>
-              </ul>
-            </div>
-          </section>
+
+
 
           {/* ===== CTA Section ===== */}
-<section
+          <section
             className="py-24"
             style={{ background: 'linear-gradient(to bottom, white 50%, black 50%)' }}
           >
@@ -270,7 +136,7 @@ export default function ServicePage() {
                   <div className="flex justify-center">
                     <Link
                       href="/contact"
-                      className="theme-btn"
+                      className="header-cta-btn"
                     >
                       Get in Touch
                     </Link>
