@@ -420,8 +420,40 @@ export default function ContactPage() {
                             <button
                               type="submit"
                               disabled={isSubmitting}
-                              className="header-cta-btn"
+                              className="header-cta-btn relative overflow-hidden"
                             >
+                              {/* Top-left corner imprint */}
+                              <svg
+                                className="absolute top-0 left-0 w-10 h-10 pointer-events-none p-2"
+                                viewBox="0 0 40 40"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M 2 12 Q 2 2 12 2"
+                                  stroke="#17012C"
+                                  strokeWidth="1.5"
+                                  fill="none"
+                                  strokeLinecap="round"
+                                />
+                              </svg>
+                              
+                              {/* Bottom-right corner imprint */}
+                              <svg
+                                className="absolute bottom-0 right-0 w-10 h-10 pointer-events-none p-2"
+                                viewBox="0 0 40 40"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M 28 38 Q 38 38 38 28"
+                                  stroke="#17012C"
+                                  strokeWidth="1.5"
+                                  fill="none"
+                                  strokeLinecap="round"
+                                />
+                              </svg>
+                              
                               {isSubmitting ? 'Sending...' : 'Submit request'}
                             </button>
                           </motion.div>

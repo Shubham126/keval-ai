@@ -149,11 +149,43 @@ export default function AboutPage() {
             >
               <Link
                 href="/contact"
-                className="inline-block font-montserrat text-[13px] font-medium uppercase 
+                className="relative inline-block font-montserrat text-[13px] font-medium uppercase 
                            text-[#17012C] bg-[#FD7E31] border border-[#17012C] 
-                           px-5 py-[15px] rounded-[5px] leading-none
-                           transition-all duration-500"
+                           px-10 py-[15px] rounded-[5px] leading-none
+                           transition-all duration-500 overflow-hidden"
               >
+                {/* Top-left corner imprint */}
+                <svg
+                  className="absolute top-0 left-0 w-10 h-10 pointer-events-none p-2"
+                  viewBox="0 0 40 40"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M 2 12 Q 2 2 12 2"
+                    stroke="#17012C"
+                    strokeWidth="1.5"
+                    fill="none"
+                    strokeLinecap="round"
+                  />
+                </svg>
+                
+                {/* Bottom-right corner imprint */}
+                <svg
+                  className="absolute bottom-0 right-0 w-10 h-10 pointer-events-none p-2"
+                  viewBox="0 0 40 40"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M 28 38 Q 38 38 38 28"
+                    stroke="#17012C"
+                    strokeWidth="1.5"
+                    fill="none"
+                    strokeLinecap="round"
+                  />
+                </svg>
+                
                 reach out
               </Link>
             </motion.div>
@@ -220,14 +252,14 @@ export default function AboutPage() {
       </section>
 
      {/* MISSION */}
-      <section className="w-full bg-[#151A21] py-20">
+      <section className="w-full bg-[#151A21] pt-20 pb-0">
         <div className="mx-auto w-full max-w-[1400px] px-2 sm:px-4 md:px-6 lg:px-8">
           <motion.h6
             variants={fadeInUp(0)}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            className="font-montserrat text-[20px] font-normal uppercase leading-none mb-5 text-center text-[#FD7E31]"
+            className="font-montserrat text-[20px] font-normal uppercase leading-none mb-0 text-center text-[#FFFFFF]"
           >
             our mission & vission
           </motion.h6>
@@ -246,40 +278,42 @@ export default function AboutPage() {
             You Scale
           </motion.h2>
 
-          {/* Full-width layout */}
-          <div className="mt-12 grid min-h-[420px] grid-cols-1 items-start gap-8 md:grid-cols-12">
-            {/* Left: image card */}
-            <motion.div
-              variants={fadeInUp(0.25)}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              className="md:col-span-7 flex"
-            >
-              <div className="flex w-full flex-col rounded-3xl border-[6px] border-white p-6 shadow-[0_0_40px_rgba(0,0,0,0.15)]">
-                <div className="relative h-[550px] w-full overflow-hidden rounded-2xl sm:h-[650px] md:h-[750px] lg:h-[950px]">
-                  <Image
-                    src="/assets/keval-image/miss-viss.jpg"
-                    alt="Mission"
-                    fill
-                    loading="lazy"
-                    quality={85}
-                    sizes="(max-width: 768px) 100vw, 58vw"
-                    className="object-cover rounded-2xl"
-                  />
+          {/* Full-width layout with sticky scroll effect */}
+          <div className="mt-12 relative min-h-[200vh] pb-0">
+            {/* Sticky container wrapper */}
+            <div className="grid min-h-[100vh] grid-cols-1 items-start gap-8 md:grid-cols-12">
+              {/* Left: image card - shifted left, bigger, and sticky */}
+              <motion.div
+                variants={fadeInUp(0.25)}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                className="md:col-span-7 flex md:-ml-8 md:sticky md:top-20 md:self-start"
+              >
+                <div className="flex w-full flex-col rounded-3xl border-[6px] border-white p-8 shadow-[0_0_40px_rgba(0,0,0,0.15)] scale-105">
+                  <div className="relative h-[550px] w-[85%] mx-auto overflow-hidden rounded-2xl sm:h-[650px] md:h-[750px] lg:h-[950px]">
+                    <Image
+                      src="/assets/keval-image/miss-viss.jpg"
+                      alt="Mission"
+                      fill
+                      loading="lazy"
+                      quality={85}
+                      sizes="(max-width: 768px) 100vw, 48vw"
+                      className="object-cover rounded-2xl"
+                    />
+                  </div>
                 </div>
-              </div>
-            </motion.div>
+              </motion.div>
 
-            {/* Right: content card */}
-            <motion.div
-              variants={fadeInUp(0.35)}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              className="md:col-span-5 flex items-start"
-            >
-              <div className="flex w-full flex-col justify-start rounded-3xl bg-white px-6 sm:px-8 pt-6 pb-4 shadow-sm mt-4 md:mt-0 h-auto">
+              {/* Right: content card - shifted right and bigger */}
+              <motion.div
+                variants={fadeInUp(0.35)}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                className="md:col-span-5 flex items-start md:ml-8"
+              >
+                <div className="flex w-full flex-col justify-start rounded-3xl bg-white px-8 sm:px-10 pt-8 pb-6 shadow-sm mt-4 md:mt-0 h-auto scale-105">
                 {/* Heading */}
                 <motion.h3
                   variants={fadeInUp(0.3)}
@@ -343,6 +377,7 @@ export default function AboutPage() {
                 </ul>
               </div>
             </motion.div>
+            </div>
           </div>
         </div>
       </section>

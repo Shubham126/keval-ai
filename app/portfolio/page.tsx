@@ -80,18 +80,18 @@ export default function PortfolioPage() {
                       {/* rounded floating icon with rotating arrow */}
                       <Link
                         href="/portfolio-details"
-                        className="absolute bottom-4 right-4 w-16 h-16 bg-white rounded-full shadow-lg flex items-center justify-center group hover:scale-110 transition-all duration-300 hover:bg-[#0d0670]"
+                        className="absolute top-4 right-4 w-16 h-16 bg-white rounded-full shadow-lg flex items-center justify-center group hover:scale-110 transition-all duration-300 hover:bg-[#0d0670]"
                       >
                         <div className="relative w-full h-full flex items-center justify-center">
                           {/* Rotating circular border */}
                           <div className="absolute inset-0 rounded-full border-2 border-[#FD7E31]/30 animate-spin-slow"></div>
-                          {/* Arrow icon - black normally, white on hover, tilts upward on hover */}
+                          {/* Arrow icon - black normally, white on hover, starts tilted 45deg up, becomes normal on hover */}
                           <img 
                             src="/assets/img/icon/12.svg" 
                             width={28} 
                             height={28} 
                             alt="icon" 
-                            className="relative z-10 transition-all duration-300 group-hover:rotate-[-45deg] group-hover:brightness-0 group-hover:invert"
+                            className="relative z-10 transition-all duration-300 rotate-[-45deg] group-hover:rotate-0 group-hover:brightness-0 group-hover:invert"
                             style={{ filter: 'brightness(0)' }}
                           />
                         </div>
@@ -133,18 +133,18 @@ export default function PortfolioPage() {
 
                       <Link
                         href="/portfolio-details"
-                        className="absolute bottom-4 right-4 w-16 h-16 bg-white rounded-full shadow-lg flex items-center justify-center group hover:scale-110 transition-all duration-300 hover:bg-[#0d0670]"
+                        className="absolute top-4 right-4 w-16 h-16 bg-white rounded-full shadow-lg flex items-center justify-center group hover:scale-110 transition-all duration-300 hover:bg-[#0d0670]"
                       >
                         <div className="relative w-full h-full flex items-center justify-center">
                           {/* Rotating circular border */}
                           <div className="absolute inset-0 rounded-full border-2 border-[#FD7E31]/30 animate-spin-slow"></div>
-                          {/* Arrow icon - black normally, white on hover, tilts upward on hover */}
+                          {/* Arrow icon - black normally, white on hover, starts tilted 45deg up, becomes normal on hover */}
                           <img 
                             src="/assets/img/icon/12.svg" 
                             width={28} 
                             height={28} 
                             alt="icon" 
-                            className="relative z-10 transition-all duration-300 group-hover:rotate-[-45deg] group-hover:brightness-0 group-hover:invert"
+                            className="relative z-10 transition-all duration-300 rotate-[-45deg] group-hover:rotate-0 group-hover:brightness-0 group-hover:invert"
                             style={{ filter: 'brightness(0)' }}
                           />
                         </div>
@@ -194,14 +194,14 @@ export default function PortfolioPage() {
                         {/* Rotating circular border */}
                         <div className="absolute inset-0 rounded-full border-2 border-[#FD7E31]/30 animate-spin-slow"></div>
                         {/* Arrow icon - black normally, white on hover, tilts upward on hover */}
-                        <Image 
-                          src="/assets/img/icon/12.svg" 
-                          width={28} 
-                          height={28} 
-                          alt="icon" 
-                          className="relative z-10 transition-all duration-300 group-hover:rotate-[-45deg] group-hover:brightness-0 group-hover:invert"
-                          style={{ filter: 'brightness(0)' }}
-                        />
+                        <img 
+                            src="/assets/img/icon/12.svg" 
+                            width={28} 
+                            height={28} 
+                            alt="icon" 
+                            className="relative z-10 transition-all duration-300 group-hover:rotate-[-45deg] group-hover:brightness-0 group-hover:invert"
+                            style={{ filter: 'brightness(0)' }}
+                          />
                       </div>
                     </Link>
                   </div>
@@ -244,18 +244,18 @@ export default function PortfolioPage() {
 
                       <Link
                         href="/portfolio-details"
-                        className="absolute bottom-4 right-4 w-16 h-16 bg-white rounded-full shadow-lg flex items-center justify-center group hover:scale-110 transition-all duration-300 hover:bg-[#0d0670]"
+                        className="absolute top-4 right-4 w-16 h-16 bg-white rounded-full shadow-lg flex items-center justify-center group hover:scale-110 transition-all duration-300 hover:bg-[#0d0670]"
                       >
                         <div className="relative w-full h-full flex items-center justify-center">
                           {/* Rotating circular border */}
                           <div className="absolute inset-0 rounded-full border-2 border-[#FD7E31]/30 animate-spin-slow"></div>
-                          {/* Arrow icon - black normally, white on hover, tilts upward on hover */}
+                          {/* Arrow icon - black normally, white on hover, starts tilted 45deg up, becomes normal on hover */}
                           <img 
                             src="/assets/img/icon/12.svg" 
                             width={28} 
                             height={28} 
                             alt="icon" 
-                            className="relative z-10 transition-all duration-300 group-hover:rotate-[-45deg] group-hover:brightness-0 group-hover:invert"
+                            className="relative z-10 transition-all duration-300 rotate-[-45deg] group-hover:rotate-0 group-hover:brightness-0 group-hover:invert"
                             style={{ filter: 'brightness(0)' }}
                           />
                         </div>
@@ -300,18 +300,18 @@ export default function PortfolioPage() {
 
                       <Link
                         href="/portfolio-details"
-                        className="absolute bottom-4 right-4 w-16 h-16 bg-white rounded-full shadow-lg flex items-center justify-center group hover:scale-110 transition-all duration-300 hover:bg-[#0d0670]"
+                        className="absolute top-4 right-4 w-16 h-16 bg-white rounded-full shadow-lg flex items-center justify-center group hover:scale-110 transition-all duration-300 hover:bg-[#0d0670]"
                       >
                         <div className="relative w-full h-full flex items-center justify-center">
                           {/* Rotating circular border */}
                           <div className="absolute inset-0 rounded-full border-2 border-[#FD7E31]/30 animate-spin-slow"></div>
-                          {/* Arrow icon - black normally, white on hover, tilts upward on hover */}
+                          {/* Arrow icon - black normally, white on hover, starts tilted 45deg up, becomes normal on hover */}
                           <img 
                             src="/assets/img/icon/12.svg" 
                             width={28} 
                             height={28} 
                             alt="icon" 
-                            className="relative z-10 transition-all duration-300 group-hover:rotate-[-45deg] group-hover:brightness-0 group-hover:invert"
+                            className="relative z-10 transition-all duration-300 rotate-[-45deg] group-hover:rotate-0 group-hover:brightness-0 group-hover:invert"
                             style={{ filter: 'brightness(0)' }}
                           />
                         </div>

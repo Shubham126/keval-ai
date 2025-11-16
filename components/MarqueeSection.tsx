@@ -4,11 +4,11 @@ import Link from 'next/link';
 
 export default function MarqueeSection() {
   return (
-    <section className="w-full bg-white py-14 overflow-hidden">
+    <section className="w-full bg-white pt-14 pb-0 overflow-hidden">
       <div className="relative w-full select-none">
 
         {/* OUTER ROUNDED BUBBLE */}
-        <div className="mx-auto w-[96%] bg-white rounded-[80px] shadow-[0px_10px_40px_rgba(0,0,0,0.15)] py-10 px-10 overflow-hidden">
+        <div className="mx-auto w-full bg-white rounded-[80px] rounded-b-none shadow-[0px_10px_40px_rgba(0,0,0,0.15)] py-20 px-10 overflow-hidden">
 
           {/* Marquee */}
           <div className="flex whitespace-nowrap animate-marquee items-center">
@@ -23,14 +23,14 @@ export default function MarqueeSection() {
                     {/* TEXT */}
                     <Link
                       href="/contact"
-                      className="uppercase text-[64px] font-semibold tracking-tight text-black transition-all"
+                      className="uppercase text-[120px] max-[1399px]:text-[100px] max-[1199px]:text-[80px] max-[991px]:text-[60px] max-[767px]:text-[50px] max-[575px]:text-[40px] font-semibold tracking-tight text-black transition-all"
                     >
                       BOOK A CALL
                     </Link>
 
                     {/* GLOW DOT */}
                     <span
-                      className="h-16 w-16 rounded-full bg-[#FF7A1A] shadow-[0_0_40px_20px_rgba(173,255,135,0.45)]"
+                      className="h-24 w-24 max-[1199px]:h-20 max-[1199px]:w-20 max-[767px]:h-16 max-[767px]:w-16 rounded-full bg-[#FF7A1A] shadow-[0_0_60px_30px_rgba(173,255,135,0.45)]"
                     ></span>
 
                   </div>
@@ -60,12 +60,12 @@ export default function MarqueeSection() {
 
         @media (max-width: 768px) {
           .animate-marquee a {
-            font-size: 32px !important;
+            font-size: 40px !important;
           }
           .animate-marquee span {
-            width: 20px !important;
-            height: 20px !important;
-            box-shadow: 0 0 12px 6px rgba(173, 255, 135, 0.45) !important;
+            width: 64px !important;
+            height: 64px !important;
+            box-shadow: 0 0 20px 10px rgba(173, 255, 135, 0.45) !important;
           }
         }
       `}</style>

@@ -39,29 +39,41 @@ export default function HeroSection() {
       const currentWord = words[wordIndexRef.current];
 
       if (!isDeletingRef.current && charIndexRef.current < currentWord.length) {
-        // Typing: 150ms per character
+        // Typing: 200ms per character
         typingRef.current.textContent = currentWord.substring(0, charIndexRef.current + 1);
         charIndexRef.current++;
-        setTimeout(type, 150);
+        setTimeout(type, 200);
       } else if (!isDeletingRef.current && charIndexRef.current === currentWord.length) {
-        // Delay after typing completes: 150ms
+        // Add full stop after typing completes
+        typingRef.current.textContent = currentWord + '.';
+        // Delay after typing completes: 200ms
         setTimeout(() => {
           isDeletingRef.current = true;
+          charIndexRef.current = currentWord.length + 1; // Include full stop in count
           type();
-        }, 150);
+        }, 200);
       } else if (isDeletingRef.current && charIndexRef.current > 0) {
-        // Erasing: 150ms per character
-        typingRef.current.textContent = currentWord.substring(0, charIndexRef.current - 1);
-        charIndexRef.current--;
-        setTimeout(type, 150);
+        // Erasing: 100ms per character (faster deletion)
+        if (charIndexRef.current === currentWord.length + 1) {
+          // First delete the full stop
+          typingRef.current.textContent = currentWord;
+          charIndexRef.current--;
+        } else {
+          // Then delete characters one by one
+          typingRef.current.textContent = currentWord.substring(0, charIndexRef.current - 1);
+          charIndexRef.current--;
+        }
+        setTimeout(type, 100);
       } else if (isDeletingRef.current && charIndexRef.current === 0) {
-        // Delay before next word: 150ms
+        // Clear the text completely before next word
+        typingRef.current.textContent = '';
+        // Delay before next word: 200ms
         setTimeout(() => {
           isDeletingRef.current = false;
           wordIndexRef.current = (wordIndexRef.current + 1) % words.length;
           charIndexRef.current = 0;
           type();
-        }, 150);
+        }, 200);
       }
     };
 
@@ -154,7 +166,6 @@ export default function HeroSection() {
                 <strong className="font-semibold text-[#0B2546]" id="typing-text">
                   <span ref={typingRef} className="inline-block min-w-[200px]" style={{ minHeight: 'inherit' }}></span>
                 </strong>
-                <span className="text-[#0B2546]">.</span>
               </motion.h1>
               {/* Button Container */}
               <div className="flex justify-start items-center gap-4 mt-2">
