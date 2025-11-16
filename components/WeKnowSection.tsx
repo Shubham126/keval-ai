@@ -41,7 +41,7 @@ export default function WeKnowSection() {
       >
         <div className="container mx-auto px-4">
           
-          {/* First Row - Centered Text Box */}
+          {/* First Row - Centered Text (No Container) */}
           <div className="grid grid-cols-1 gap-4 my-12">
             <motion.div
               variants={fadeInUp(0.3)}
@@ -50,7 +50,7 @@ export default function WeKnowSection() {
               viewport={{ once: true }}
               className="col-span-12"
             >
-              <div className="py-[60px] px-5 xl:py-[40px] xl:px-[30px] rounded-[12px] bg-[#F1F1F1]">
+              <div className="py-[60px] px-5 xl:py-[40px] xl:px-[30px]">
                 <div className="content text-center">
                   <h3 className="font-montserrat text-[32px] xl:text-[26px] font-bold leading-none mb-[10px]">
                     <Link href="#" className="text-[#1E1E1E]">
@@ -65,7 +65,7 @@ export default function WeKnowSection() {
             </motion.div>
           </div>
 
-          {/* Second Row - Service Cards */}
+          {/* Second Row - Service Cards (No Container) */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {services.map((service, index) => (
               <motion.div
@@ -76,7 +76,7 @@ export default function WeKnowSection() {
                 viewport={{ once: true }}
                 className="col-span-1 flex"
               >
-                <div className="py-[60px] px-5 xl:py-[40px] xl:px-[30px] rounded-[12px] bg-[#F1F1F1] flex flex-col w-full">
+                <div className="py-[60px] px-5 xl:py-[40px] xl:px-[30px] flex flex-col w-full">
                   
                   {/* Card Image */}
                   <div className="w-full h-[375px] rounded-[30px] overflow-hidden group mb-4 flex-shrink-0">

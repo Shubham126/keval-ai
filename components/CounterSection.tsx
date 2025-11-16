@@ -3,30 +3,65 @@
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { fadeInUp } from '@/lib/motionVariants';
+import { useCounter } from '@/lib/hooks/useCounter';
 
 interface Counter {
-  number: string;
+  number: number;
   symbol: string;
   text: string;
 }
 
 const counters: Counter[] = [
   {
-    number: '100',
+    number: 100,
     symbol: '+',
     text: 'Projects completed',
   },
   {
-    number: '99',
+    number: 99,
     symbol: '%',
     text: 'Satisfied customers',
   },
   {
-    number: '80',
+    number: 80,
     symbol: 'k',
     text: 'Saved per month',
   },
 ];
+
+function CounterCard({ counter, index }: { counter: Counter; index: number }) {
+  const { count, ref } = useCounter({
+    target: counter.number,
+    duration: 2,
+    startFrom: 1,
+  });
+
+  const delay = index === 0 ? 0.3 : index === 1 ? 0.5 : 0.7;
+
+  return (
+    <motion.div
+      variants={fadeInUp(delay)}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true }}
+      className="col-span-1"
+    >
+      <div className="rounded-[15px] border border-[#434343] bg-[#222] p-[60px]">
+        <h2 
+          ref={ref as React.RefObject<HTMLHeadingElement>}
+          className="font-montserrat text-[52px] xl:text-[70px] md:text-[65px] sm:text-[60px] 
+                     font-medium leading-[89%] xl:leading-[100%] md:leading-[100%] text-white mb-4"
+        >
+          <span className="count">{count}</span>
+          {counter.symbol}
+        </h2>
+        <p className="font-source-sans text-[18px] font-medium text-white uppercase">
+          {counter.text}
+        </p>
+      </div>
+    </motion.div>
+  );
+}
 
 export default function CounterSection() {
   return (
@@ -62,31 +97,9 @@ export default function CounterSection() {
         {/* Counter Boxes */}
         <div className="counter-wrapper-3 pt-0 xl:pt-[85px] lg:pt-[65px]">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {counters.map((counter, index) => {
-              const delay = index === 0 ? 0.3 : index === 1 ? 0.5 : 0.7;
-              
-              return (
-                <motion.div
-                  key={index}
-                  variants={fadeInUp(delay)}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true }}
-                  className="col-span-1"
-                >
-                  <div className="rounded-[15px] border border-[#434343] bg-[#222] p-[60px]">
-                    <h2 className="font-montserrat text-[52px] xl:text-[70px] md:text-[65px] sm:text-[60px] 
-                                   font-medium leading-[89%] xl:leading-[100%] md:leading-[100%] text-white mb-4">
-                      <span className="count">{counter.number}</span>
-                      {counter.symbol}
-                    </h2>
-                    <p className="font-source-sans text-[18px] font-medium text-white uppercase">
-                      {counter.text}
-                    </p>
-                  </div>
-                </motion.div>
-              );
-            })}
+            {counters.map((counter, index) => (
+              <CounterCard key={index} counter={counter} index={index} />
+            ))}
           </div>
         </div>
       </div>

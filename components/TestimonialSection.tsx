@@ -42,8 +42,9 @@ const baseTestimonials: Testimonial[] = [
   },
 ];
 
-// Duplicate for seamless looping with cards effect
-const testimonials = [...baseTestimonials, ...baseTestimonials];
+// Duplicate multiple times for seamless looping with cards effect
+// EffectCards needs more slides for proper loop mode (at least 6-9 slides)
+const testimonials = [...baseTestimonials, ...baseTestimonials, ...baseTestimonials];
 
 // Quote Icon SVG Component
 const QuoteIcon = () => (

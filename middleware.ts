@@ -13,6 +13,8 @@ export function middleware(request: NextRequest) {
   // Content Security Policy - protect against XSS attacks
   // Note: 'unsafe-eval' and 'unsafe-inline' are needed for Next.js and some libraries
   // In production, consider tightening these restrictions
+  // Note: CSP violations from browser extensions (e.g., perplexity.ai fonts) are expected
+  // and safe to ignore - they don't affect site functionality
   const cspHeader = `
     default-src 'self';
     script-src 'self' 'unsafe-eval' 'unsafe-inline' https://www.google.com https://maps.googleapis.com https://maps.gstatic.com https://khms0.googleapis.com https://khms1.googleapis.com https://assets.calendly.com;
@@ -49,9 +51,10 @@ export function middleware(request: NextRequest) {
   // Permissions Policy (formerly Feature Policy)
   // Explicitly deny all features we don't use to prevent third-party access
   // This fixes "Potential permissions policy violation: payment is not allowed"
+  // Note: ambient-light-sensor is not a standard Permissions Policy feature, removed to avoid errors
   response.headers.set(
     'Permissions-Policy',
-    'camera=(), microphone=(), geolocation=(), interest-cohort=(), payment=(), usb=(), bluetooth=(), magnetometer=(), gyroscope=(), accelerometer=(), ambient-light-sensor=()'
+    'camera=(), microphone=(), geolocation=(), interest-cohort=(), payment=(), usb=(), bluetooth=(), magnetometer=(), gyroscope=(), accelerometer=()'
   );
   
   // Referrer Policy

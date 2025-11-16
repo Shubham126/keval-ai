@@ -4,7 +4,7 @@ import AppLoader from "@/components/AppLoader";
 import ScriptsInitializer from "@/components/ScriptsInitializer";
 import ImagePopup from "@/components/ImagePopup";
 import VideoPopup from "@/components/VideoPopup";
-import MouseCursor from "@/components/MouseCursor";
+import MouseCursorClientWrapper from "./MouseCursorClientWrapper";
 
 import "./globals.css";
 
@@ -41,13 +41,15 @@ export const viewport = { width: "device-width", initialScale: 1 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         {/* Preconnect to own domain for faster CSS/JS delivery */}
         <link rel="preconnect" href="https://keval-ai.netlify.app" />
+
         {/* Preconnect to external domains */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+
         {/* Preconnect and DNS prefetch for Google Maps */}
         <link rel="preconnect" href="https://www.google.com" />
         <link rel="preconnect" href="https://maps.googleapis.com" />
@@ -55,6 +57,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="dns-prefetch" href="https://www.google.com" />
         <link rel="dns-prefetch" href="https://maps.googleapis.com" />
         <link rel="dns-prefetch" href="https://maps.gstatic.com" />
+
         {/* Trusted Types for DOM-based XSS protection */}
         <script
           dangerouslySetInnerHTML={{
@@ -74,20 +77,92 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           }}
         />
       </head>
-      <body className={`${montserrat.variable} ${sourceSans.variable} react-app`}>
+
+      <body
+        className={`${montserrat.variable} ${sourceSans.variable} react-app`}
+        suppressHydrationWarning
+      >
         {/* Initialize custom scripts - No jQuery dependencies */}
         <ScriptsInitializer />
-        
-        {/* Popup handlers (replaces Magnific Popup) */}
+
+        {/* Popup handlers */}
         <ImagePopup />
         <VideoPopup />
-        
-        {/* Custom Mouse Cursor */}
-        <MouseCursor />
 
+        {/* Custom Mouse Cursor (now safely in client wrapper) */}
+        <MouseCursorClientWrapper />
+
+        {/* App content */}
         <AppLoader>{children}</AppLoader>
+
+        <script
+  dangerouslySetInnerHTML={{
+    __html: `
+      console.log("[RAW CURSOR] injected");
+
+      if (!window.__rawCursorLoaded) {
+        window.__rawCursorLoaded = true;
+        
+        const inner = document.createElement("div");
+        const outer = document.createElement("div");
+
+        inner.id = "raw-cursor-inner";
+        outer.id = "raw-cursor-outer";
+
+        inner.style.width = "6px";
+        inner.style.height = "6px";
+        inner.style.background = "#0B2546";
+        inner.style.borderRadius = "50%";
+        inner.style.transition = "all 0.3s ease-out";
+
+        outer.style.width = "30px";
+        outer.style.height = "30px";
+        outer.style.border = "2px solid #0B2546";
+        outer.style.borderRadius = "50%";
+        outer.style.opacity = "0.5";
+        outer.style.transition = "all 0.1s ease-out";
+
+        document.body.appendChild(inner);
+        document.body.appendChild(outer);
+
+        document.addEventListener("mousemove", (e) => {
+          inner.style.transform = \`translate(\${e.clientX}px,\${e.clientY}px) translate(-50%, -50%)\`;
+          outer.style.transform = \`translate(\${e.clientX}px,\${e.clientY}px) translate(-50%, -50%)\`;
+        });
+
+        document.addEventListener("mouseover", (e) => {
+          const el = e.target;
+          const hover = el.tagName === "A" ||
+                        el.tagName === "BUTTON" ||
+                        el.closest("a") ||
+                        el.closest("button") ||
+                        el.closest('[role="button"]') ||
+                        getComputedStyle(el).cursor === "pointer";
+
+          if (hover) {
+            inner.style.width = "70px";
+            inner.style.height = "70px";
+            inner.style.background = "rgba(11,37,70,0.3)";
+
+            outer.style.width = "80px";
+            outer.style.height = "80px";
+            outer.style.opacity = "0.3";
+          } else {
+            inner.style.width = "6px";
+            inner.style.height = "6px";
+            inner.style.background = "#0B2546";
+
+            outer.style.width = "30px";
+            outer.style.height = "30px";
+            outer.style.opacity = "0.5";
+          }
+        });
+      }
+    `,
+  }}
+></script>
+
       </body>
     </html>
   );
 }
-
