@@ -33,3 +33,19 @@ npm start
 - Some jQuery functionality has been converted to React hooks
 - GSAP animations are initialized on client-side
 
+## ChatFlow AI SDK Integration
+
+The ChatFlow AI SDK is integrated globally across all pages for AI-powered chatbot functionality.
+
+### Test Pages
+
+Test pages are located in the `tests/` folder (excluded from git):
+
+- **Next.js Test Page:** [http://localhost:3000/chatflow-test](http://localhost:3000/chatflow-test) *(Note: Moved to tests folder, may need route adjustment)*
+- **HTML Test Page:** Available at `tests/chatflow-test.html`
+
+### Verification
+
+After running the dev server, you should see a chatbot widget in the bottom-right corner of all pages. Click it to open the chat interface and interact with the AI assistant.
+
+
