@@ -13,6 +13,8 @@ import ServicesSection from '@/components/ServicesSection';
 import CounterSection from '@/components/CounterSection';
 import ChallengesSection from '@/components/ChallengesSection';
 import WeKnowSection from '@/components/WeKnowSection';
+import ChatBot from '@/components/ChatBot';
+
 
 // Lazy load heavy components with Swiper/GSAP to reduce critical CSS
 const BrandSection = dynamic(() => import('@/components/BrandSection'), {
@@ -58,7 +60,7 @@ export default function Home() {
         }, 1000);
       }
     }, 100);
-    
+
     return () => clearTimeout(timer);
   }, [pathname]);
 
@@ -104,6 +106,9 @@ export default function Home() {
       </main>
       <Footer />
       <BackToTop />
+      <ClientOnly>
+        <ChatBot />
+      </ClientOnly>
     </>
   );
 }

@@ -163,13 +163,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           }}
         ></script>
 
-        {/* ChatFlow AI SDK - Global Integration */}
-        <Script
-          src="https://chat-fn.netlify.app/chatbot-sdk.js"
-          data-api-key="saiwk_2988c98fd104b223d8b8a01625d5dbd41b3fa118130cb3793238b6848386dda7"
-          data-preselected-website="keval-ai.netlify.app"
-          strategy="afterInteractive"
-        />
+
 
       </body>
     </html>
