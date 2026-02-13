@@ -21,7 +21,7 @@ export function middleware(request: NextRequest) {
     style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://maps.googleapis.com;
     img-src 'self' data: https: blob:;
     font-src 'self' https://fonts.gstatic.com data:;
-    connect-src 'self' https://www.google.com https://maps.googleapis.com https://maps.gstatic.com https://khms0.googleapis.com https://khms1.googleapis.com https://calendly.com;
+    connect-src 'self' https://www.google.com https://maps.googleapis.com https://maps.gstatic.com https://khms0.googleapis.com https://khms1.googleapis.com https://calendly.com https://chat-backend-12wo.onrender.com;
     frame-src 'self' https://www.google.com https://maps.google.com https://maps.googleapis.com https://calendly.com;
     object-src 'none';
     base-uri 'self';
@@ -33,21 +33,21 @@ export function middleware(request: NextRequest) {
 
   // Cross-Origin-Opener-Policy - origin isolation
   response.headers.set('Cross-Origin-Opener-Policy', 'same-origin');
-  
+
   // Cross-Origin-Embedder-Policy removed - conflicts with Google Maps
   // Google Maps doesn't send Cross-Origin-Resource-Policy header, so COEP blocks it
   // CSP and other headers provide sufficient security without COEP
-  
+
   // Cross-Origin-Resource-Policy - allow cross-origin resources (Google Maps, fonts, etc.)
   response.headers.set('Cross-Origin-Resource-Policy', 'cross-origin');
-  
+
   // X-Frame-Options removed - CSP frame-ancestors handles clickjacking protection
   // X-Frame-Options: DENY conflicts with embedding Google Maps iframe
   // CSP frame-ancestors 'none' prevents our page from being embedded elsewhere
-  
+
   // Content Security Policy
   response.headers.set('Content-Security-Policy', cspHeader);
-  
+
   // Permissions Policy (formerly Feature Policy)
   // Explicitly deny all features we don't use to prevent third-party access
   // This fixes "Potential permissions policy violation: payment is not allowed"
@@ -56,19 +56,19 @@ export function middleware(request: NextRequest) {
     'Permissions-Policy',
     'camera=(), microphone=(), geolocation=(), interest-cohort=(), payment=(), usb=(), bluetooth=(), magnetometer=(), gyroscope=(), accelerometer=()'
   );
-  
+
   // Referrer Policy
   response.headers.set('Referrer-Policy', 'strict-origin-when-cross-origin');
-  
+
   // X-Content-Type-Options
   response.headers.set('X-Content-Type-Options', 'nosniff');
-  
+
   // X-XSS-Protection (legacy but still recommended)
   response.headers.set('X-XSS-Protection', '1; mode=block');
 
   // Cache Control for static assets
-  if (request.nextUrl.pathname.startsWith('/_next/static') || 
-      request.nextUrl.pathname.startsWith('/assets/')) {
+  if (request.nextUrl.pathname.startsWith('/_next/static') ||
+    request.nextUrl.pathname.startsWith('/assets/')) {
     response.headers.set(
       'Cache-Control',
       'public, max-age=31536000, immutable'
